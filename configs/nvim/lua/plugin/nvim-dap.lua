@@ -3,7 +3,7 @@ return {
   enabled = vim.fn.has "win32" == 0,
   dependencies = {
     { "rcarriga/nvim-dap-ui", dependencies = { "nvim-neotest/nvim-nio" } },
-    { "theHamsta/nvim-dap-virtual-text", config = true },
+    { "theHamsta/nvim-dap-virtual-text", opts = {} },
     "jay-babu/mason-nvim-dap.nvim",
   },
   keys = {

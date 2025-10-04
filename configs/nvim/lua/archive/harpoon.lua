@@ -11,5 +11,5 @@ return {
       { "<C-n>", function() harpoon:list():next() end, desc = "Goto next mark" },
     }
   end,
-  config = true,
+  opts = {},
 }

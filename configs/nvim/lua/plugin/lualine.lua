@@ -6,43 +6,42 @@ return {
     "AndreM222/copilot-lualine",
   },
   opts = function()
-    local c = require "core.colors"
     local icons = require("core.icons").lualine
-
+    local c = require("core.palette").catppuccin
     -- ------------------------------------------------------------
     -- themes
     -- ------------------------------------------------------------
     local theme = function()
       return {
         inactive = {
-          a = { fg = c.text, bg = nil, gui = "bold" },
-          b = { fg = c.text, bg = nil },
-          c = { fg = c.text, bg = nil },
+          a = { fg = c.text, bg = c.base, gui = "bold" },
+          b = { fg = c.text, bg = c.base },
+          c = { fg = c.text, bg = c.base },
         },
         visual = {
           a = { fg = c.mantle, bg = c.peach, gui = "bold" },
-          b = { fg = c.peach, bg = nil },
-          c = { fg = c.text, bg = nil },
+          b = { fg = c.peach, bg = c.base },
+          c = { fg = c.text, bg = c.base },
         },
         replace = {
           a = { fg = c.mantle, bg = c.maroon, gui = "bold" },
-          b = { fg = c.maroon, bg = nil },
-          c = { fg = c.text, bg = nil },
+          b = { fg = c.maroon, bg = c.base },
+          c = { fg = c.text, bg = c.base },
         },
         normal = {
           a = { fg = c.mantle, bg = c.blue, gui = "bold" },
-          b = { fg = c.blue, bg = nil },
-          c = { fg = c.text, bg = nil },
+          b = { fg = c.blue, bg = c.base },
+          c = { fg = c.text, bg = c.base },
         },
         insert = {
           a = { fg = c.mantle, bg = c.green, gui = "bold" },
-          b = { fg = c.green, bg = nil },
-          c = { fg = c.text, bg = nil },
+          b = { fg = c.green, bg = c.base },
+          c = { fg = c.text, bg = c.base },
         },
         command = {
           a = { fg = c.mantle, bg = c.yellow, gui = "bold" },
-          b = { fg = c.yellow, bg = nil },
-          c = { fg = c.text, bg = nil },
+          b = { fg = c.yellow, bg = c.base },
+          c = { fg = c.text, bg = c.base },
         },
       }
     end

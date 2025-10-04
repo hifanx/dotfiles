@@ -355,7 +355,7 @@ freetype-load-flags = hinting,force-autohint,monochrome,autohint
 theme = Catppuccin Mocha
 
 # Background color for the window.
-background = #191724
+background = #1E1E2E
 
 # Foreground color for the window.
 foreground =

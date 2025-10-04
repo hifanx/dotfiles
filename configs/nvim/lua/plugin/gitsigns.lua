@@ -41,8 +41,8 @@ return {
       m({ "n", "v" }, "<Leader>gS", function() gs.stage_buffer() end, { desc = "[S]tage Buffer" })
       m("n", "<Leader>gu", function() gs.undo_stage_hunk() end, { desc = "[U]ndo Hunk" })
       -- m("n", "<Leader>gb", function() gs.blame_line() end, { desc = "[B]lame Line" }) -- NOTE: use snacks
-      m("n", "<Leader>gB", function() gs.blame_line { full = true } end, { desc = "[B]lame Buffer" })
-      m("n", "<Leader>gd", function() gs.diffthis() end, { desc = "Git [D]iff" })
+      -- m("n", "<Leader>gB", function() gs.blame_line { full = true } end, { desc = "[B]lame Buffer" }) -- NOTE: conflict with snacks
+      m("n", "<Leader>gD", function() gs.diffthis() end, { desc = "[G]it [D]iff" })
       m("n", "<Leader>gt", function() gs.toggle_current_line_blame() end, { desc = "[T]oggle Line Blame" })
     end,
   },

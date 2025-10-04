@@ -15,14 +15,13 @@ require "core.autocmd"
 -- ESSENTIALS
 ---------------------
 spec "plugin.nvim-treesitter"
-spec "plugin.telescope" -- TODO:
+-- spec "plugin.telescope" -- TODO:
 spec "plugin.which-key"
 spec "plugin.blink" -- TODO:
 spec "plugin.conform"
 spec "plugin.nvim-lint"
 spec "plugin.nvim-lspconfig" -- TODO:
 -- spec "plugin.nvim-dap" -- TODO:
-
 ---------------------
 -- EDITOR
 ---------------------
@@ -45,11 +44,13 @@ spec "plugin.lualine"
 spec "plugin.nvim-colorizer"
 spec "plugin.render-markdown"
 spec "plugin.todo-comments"
-spec "plugin.catppuccin"
-spec "plugin.smear-cursor"
+spec "plugin.catppuccin" -- TODO:
+spec "plugin.smear-cursor" -- animated cursor
 
 -- bootstrap lazy
 require "core.lazy"
 
 -- setup highlights
 require "core.highlights"
+
+vim.cmd [[colorscheme catppuccin]]
