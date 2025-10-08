@@ -4,7 +4,7 @@ return {
   keys = {
     {
       "<Leader>lf",
-      function() require("conform").format { async = true } end,
+      function() require("conform").format { async = true, lsp_fallback = true } end,
       mode = "",
       desc = "[F]ormat buffer",
     },
@@ -30,13 +30,11 @@ return {
       handlebars = { "prettier" },
       sh = { "shfmt" },
       bash = { "shfmt" },
+      zsh = { "shfmt" },
       toml = { "taplo" },
     },
     formatters = {
-      shfmt = { prepend_args = { "-i", "2" } },
-    },
-    default_format_opts = {
-      lsp_format = "fallback",
+      shfmt = { append_args = { "-i", "2" } },
     },
     -- format_on_save = {
     --   timeout_ms = 500,
