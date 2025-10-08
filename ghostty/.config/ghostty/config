@@ -56,10 +56,10 @@
 # font-family-italic = Maple Mono Italic
 # font-family-bold-italic = Maple Mono BoldItalic
 
-font-family = Sarasa Mono SC
-font-family-bold = Sarasa Mono SC Bold
-font-family-italic = Sarasa Mono SC Italic
-font-family-bold-italic = Sarasa Mono SC Bold Italic
+font-family = Sarasa Term SC
+font-family-bold = Sarasa Term SC Bold
+font-family-italic = Sarasa Term SC Italic
+font-family-bold-italic = Sarasa Term SC Bold Italic
 
 # The named font style to use for each of the requested terminal font styles.
 # This looks up the style based on the font style string advertised by the
@@ -720,7 +720,7 @@ cursor-style-blink = true
 
 # The color of the text under the cursor. If this is not set, a default will
 # be chosen.
-cursor-text = #89B4FA
+cursor-text = #11111B
 
 # Enables the ability to move the cursor at prompts by using `alt+click` on
 # Linux and `option+click` on macOS.
