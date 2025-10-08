@@ -30,7 +30,6 @@ return {
       handlebars = { "prettier" },
       sh = { "shfmt" },
       bash = { "shfmt" },
-      zsh = { "shfmt" },
       toml = { "taplo" },
     },
     formatters = {
