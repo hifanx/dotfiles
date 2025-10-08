@@ -1,0 +1,9 @@
+[user]
+	name = hifanx
+	email = 373441770@qq.com
+[core]
+	autocrlf = input
+	quotepath = off
+	editor = nvim
+[color]
+	ui = true

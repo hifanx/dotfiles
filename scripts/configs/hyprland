@@ -1,0 +1,78 @@
+# install this after a minimal arch install
+# basic
+hyprland
+xdg-desktop-portal-hyprland
+polkit-kde-agent
+qt5-wayland
+qt6-wayland
+# intel GPU
+mesa
+vulkan-intel
+# notifications
+dunst
+# brightness control
+brightnessctl
+# volume control
+pamixer
+# audio
+pavucontrol
+# input
+fcitx5-rime
+fcitx5-configtool
+fcitx5-gtk
+fcitx5-qt
+# font
+awesome-terminal-fonts
+cantarell-fonts
+freetype2
+noto-fonts
+noto-fonts-cjk
+noto-fonts-extra
+noto-fonts-emoji
+ttf-bitstream-vera
+ttf-dejavu
+ttf-liberation
+ttf-opensans
+ttf-sarasa-gothic
+ttf-jetbrains-mono-nerd
+# app launcher
+tofi
+# logout
+wlogout
+# theming
+nwg-look
+qt5ct
+qt6ct
+kvantum
+# shell
+zsh
+zsh-autocomplete
+zsh-autosuggestions
+zsh-syntax-highlighting
+zsh-theme-powerlevel10k-git
+eza
+bat
+zoxide
+fzf
+tealdeer
+tmux
+thefuck
+# neovim && prerequisites
+fd
+ripgrep
+lazygit
+tree-sitter-cli
+npm
+nodejs
+wl-clipboard
+neovim-nightly-bin
+# yazi && dependencies
+jq
+7zip
+resvg
+yazi
+# must have
+firefox
+firefox-i18n-zh-cn
+discord_arch_electron
+telegram-desktop

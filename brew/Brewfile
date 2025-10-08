@@ -1,0 +1,124 @@
+tap "buo/cask-upgrade"
+tap "felixkratz/formulae"
+tap "koekeishiya/formulae"
+tap "nikitabobko/tap"
+# Clone of cat(1) with syntax highlighting and Git integration
+brew "bat"
+# Modern, maintained replacement for ls
+brew "eza"
+# Like neofetch, but much faster because written mostly in C
+brew "fastfetch"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# Distributed revision control system
+brew "git"
+# Alternative to top/htop
+brew "glances"
+# GNU Pretty Good Privacy (PGP) package
+brew "gnupg"
+# Tools and libraries to manipulate images in many formats
+brew "imagemagick"
+# Simple terminal UI for git commands
+brew "lazygit"
+# Mac App Store command-line interface
+brew "mas"
+# Incremental parsing library
+brew "tree-sitter"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim", args: ["HEAD"]
+# Platform built on V8 to build network applications
+brew "node"
+# PDF rendering library (based on the xpdf-3.0 code base)
+brew "poppler"
+# Theme for zsh
+brew "powerlevel10k"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# 7-Zip is a file archiver with a high compression ratio
+brew "sevenzip"
+# Very fast implementation of tldr in Rust
+brew "tealdeer"
+# Programmatically correct mistyped console commands
+brew "thefuck"
+# Terminal multiplexer
+brew "tmux", args: ["HEAD"]
+# Display directories as trees (with optional color/HTML output)
+brew "tree"
+# Blazing fast terminal file manager written in Rust, based on async I/O
+brew "yazi", args: ["HEAD"]
+# Shell extension to navigate your filesystem faster
+brew "zoxide"
+# Real-time type-ahead completion for Zsh
+brew "zsh-autocomplete"
+# Fish-like fast/unobtrusive autosuggestions for zsh
+brew "zsh-autosuggestions"
+# Fish shell like syntax highlighting for zsh
+brew "zsh-syntax-highlighting"
+# A window border system for macOS
+brew "felixkratz/formulae/borders"
+# Collection of apps and services for photography, design, video, web, and UX
+cask "adobe-creative-cloud"
+# AeroSpace is an i3-like tiling window manager for macOS
+cask "aerospace"
+# Tool to flash OS images to SD cards & USB drives
+cask "balenaetcher"
+# Tool to remove unnecessary files and folders from disk Chinese edition
+cask "cleanmymac-zh"
+# Voice and text chat software
+cask "discord"
+# Downloads videos from different websites
+cask "downie"
+cask "font-sarasa-gothic"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
+# Java IDE by JetBrains
+cask "intellij-idea"
+# Open-source keystroke visualiser
+cask "keycastr"
+# Provides updates to various Microsoft products
+cask "microsoft-auto-update"
+# Spreadsheet software
+cask "microsoft-excel"
+# OpenJDK distribution from Microsoft
+cask "microsoft-openjdk"
+# Presentation software
+cask "microsoft-powerpoint"
+# Word processor
+cask "microsoft-word"
+# Minimal installer for conda
+cask "miniconda"
+# Media player
+cask "movist-pro"
+# App to write, plan, collaborate, and get organised
+cask "notion"
+# Open-source software for live streaming and screen recording
+cask "obs"
+# Instant messaging tool
+cask "qq"
+# Mesh VPN based on WireGuard
+cask "tailscale-app"
+# Mesh VPN based on WireGuard
+cask "tailscale-app"
+# Messaging app with a focus on speed and security
+cask "telegram"
+# Cloud video conferencing
+cask "tencent-meeting"
+# Unpacks archive files
+cask "the-unarchiver"
+# VPN and WiFi proxy
+cask "thunder"
+# AI image upscaler
+cask "upscayl"
+# Keyboard configurator
+cask "via"
+# Free messaging and calling application
+cask "wechat"
+# Video communication and virtual meeting platform
+cask "zoom"
+mas "Blackmagic Disk Speed Test", id: 425264550
+mas "GIPHY CAPTURE", id: 668208984
+mas "Infuse", id: 1136220934
+mas "Vimlike", id: 1584519802
+mas "Wipr", id: 1662217862

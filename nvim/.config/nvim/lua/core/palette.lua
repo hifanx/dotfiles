@@ -1,0 +1,197 @@
+local M = {}
+
+M.catppuccin = {
+  rosewater = "#F5E0DC",
+  flamingo = "#F2CDCD",
+  pink = "#F5C2E7",
+  mauve = "#CBA6F7",
+  red = "#F38BA8",
+  maroon = "#EBA0AC",
+  peach = "#FAB387",
+  yellow = "#F9E2AF",
+  green = "#A6E3A1",
+  teal = "#94E2D5",
+  sky = "#89DCEB",
+  sapphire = "#74C7EC",
+  blue = "#89B4FA",
+  lavender = "#B4BEFE",
+  text = "#CDD6F4",
+  subtext1 = "#BAC2DE",
+  subtext0 = "#A6ADC8",
+  overlay2 = "#9399B2",
+  overlay1 = "#7F849C",
+  overlay0 = "#6C7086",
+  surface2 = "#585B70",
+  surface1 = "#45475A",
+  surface0 = "#313244",
+  base = "#1E1E2E",
+  mantle = "#181825",
+  crust = "#11111B",
+}
+
+M.rosepine = {
+  base = "#191724", -- rgb(25, 23, 36), hsl(249deg, 22%, 12%)
+  surface = "#1f1d2e", -- rgb(31, 29, 46), hsl(247deg, 23%, 15%)
+  overlay = "#26233a", -- rgb(38, 35, 58), hsl(248deg, 25%, 18%)
+  muted = "#6e6a86", -- rgb(110, 106, 134), hsl(249deg, 12%, 47%)
+  subtle = "#908caa", -- rgb(144, 140, 170), hsl(248deg, 15%, 61%)
+  text = "#e0def4", -- rgb(224, 222, 244), hsl(245deg, 50%, 91%)
+  love = "#eb6f92", -- rgb(235, 111, 146), hsl(343deg, 76%, 68%)
+  gold = "#f6c177", -- rgb(246, 193, 119), hsl(35deg, 88%, 72%)
+  rose = "#ebbcba", -- rgb(235, 188, 186), hsl(2deg, 55%, 83%)
+  pine = "#31748f", -- rgb(49, 116, 143), hsl(197deg, 49%, 38%)
+  foam = "#9ccfd8", -- rgb(156, 207, 216), hsl(189deg, 43%, 73%)
+  iris = "#c4a7e7", -- rgb(196, 167, 231), hsl(267deg, 57%, 78%)
+  highlight_low = "#21202e", -- rgb(33, 32, 46), hsl(244deg, 18%, 15%)
+  highlight_med = "#403d52", -- rgb(64, 61, 82), hsl(249deg, 15%, 28%)
+  highlight_high = "#524f67", -- rgb(82, 79, 103), hsl(248deg, 13%, 36%)
+}
+
+M.onedark = {
+  black = "#282C34",
+  red = "#E06C75",
+  green = "#98C379",
+  yellow = "#E5C07B",
+  blue = "#61AFEF",
+  purple = "#C678DD",
+  cyan = "#56B6C2",
+  gray = "#ABB2BF",
+}
+
+M.kanagawa = {
+  fujiWhite = "#DCD7BA", -- Default foreground
+  oldWhite = "#C8C093", -- Dark foreground (statuslines)
+  sumiInk0 = "#16161D", -- Dark background (statuslines and floating windows)
+  sumiInk1 = "#1F1F28", -- Default background
+  sumiInk2 = "#2A2A37", -- Lighter background (colorcolumn, folds)
+  sumiInk3 = "#363646", -- Lighter background (cursorline)
+  sumiInk4 = "#54546D", -- Darker foreground (line numbers, fold column, non-text characters), float borders
+  waveBlue1 = "#223249", -- Popup background, visual selection background
+  waveBlue2 = "#2D4F67", -- Popup selection background, search background
+  winterGreen = "#2B3328", -- Diff Add (background)
+  winterYellow = "#49443C", -- Diff Change (background)
+  winterRed = "#43242B", -- Diff Deleted (background)
+  winterBlue = "#252535", -- Diff Line (background)
+  autumnGreen = "#76946A", -- Git Add
+  autumnRed = "#C34043", -- Git Delete
+  autumnYellow = "#DCA561", -- Git Change
+  samuraiRed = "#E82424", -- Diagnostic Error
+  roninYellow = "#FF9E3B", -- Diagnostic Warning
+  waveAqua1 = "#6A9589", -- Diagnostic Info
+  dragonBlue = "#658594", -- Diagnostic Hint
+  fujiGray = "#727169", -- Comments
+  springViolet1 = "#938AA9", -- Light foreground
+  oniViolet = "#957FB8", -- Statements and Keywords
+  crystalBlue = "#7E9CD8", -- Functions and Titles
+  springViolet2 = "#9CABCA", -- Brackets and punctuation
+  springBlue = "#7FB4CA", -- Specials and builtin functions
+  lightBlue = "#A3D4D5", -- Not used
+  waveAqua2 = "#7AA89F", -- Types
+  springGreen = "#98BB6C", -- Strings
+  boatYellow1 = "#938056", -- Not used
+  boatYellow2 = "#C0A36E", -- Operators, RegEx
+  carpYellow = "#E6C384", -- Identifiers
+  sakuraPink = "#D27E99", -- Numbers
+  waveRed = "#E46876", -- Standout specials 1 (builtin variables)
+  peachRed = "#FF5D62", -- Standout specials 2 (exception handling, return)
+  surimiOrange = "#FFA066", -- Constants, imports, booleans
+  katanaGray = "#717C7C", -- Deprecated
+}
+
+M.gruvbox = {
+  bg = "#282828",
+  bg0_s = "#32302f",
+  bg0_h = "#1d2021",
+  bg0 = "#282828",
+  bg1 = "#3c3836",
+  bg2 = "#504945",
+  bg3 = "#665c54",
+  bg4 = "#7c6f64",
+  fg = "#ebdbb2",
+  fg0 = "#fbf1c7",
+  fg1 = "#ebdbb2",
+  fg2 = "#d5c4a1",
+  fg3 = "#bdae93",
+  fg4 = "#a89984",
+  red = "#cc241d",
+  green = "#98971a",
+  yellow = "#d79921",
+  blue = "#458588",
+  purple = "#b16286",
+  aqua = "#689d6a",
+  orange = "#d65d0e",
+  gray = "#a89984",
+  silver = "#928374",
+}
+
+M.tokyonight = {
+  bg = "#1a1b26",
+  bg_dark = "#16161e",
+  bg_float = "#16161e",
+  bg_highlight = "#292e42",
+  bg_popup = "#16161e",
+  bg_search = "#3d59a1",
+  bg_sidebar = "#16161e",
+  bg_statusline = "#16161e",
+  bg_visual = "#283457",
+  black = "#15161e",
+  blue = "#7aa2f7",
+  blue0 = "#3d59a1",
+  blue1 = "#2ac3de",
+  blue2 = "#0db9d7",
+  blue5 = "#89ddff",
+  blue6 = "#b4f9f8",
+  blue7 = "#394b70",
+  border = "#15161e",
+  border_highlight = "#27a1b9",
+  comment = "#565f89",
+  cyan = "#7dcfff",
+  dark3 = "#545c7e",
+  dark5 = "#737aa2",
+  delta = {
+    add = "#2c5a66",
+    delete = "#713137",
+  },
+  diff = {
+    add = "#20303b",
+    change = "#1f2231",
+    delete = "#37222c",
+    text = "#394b70",
+  },
+  error = "#db4b4b",
+  fg = "#c0caf5",
+  fg_dark = "#a9b1d6",
+  fg_float = "#c0caf5",
+  fg_gutter = "#3b4261",
+  fg_sidebar = "#a9b1d6",
+  git = {
+    add = "#449dab",
+    change = "#6183bb",
+    delete = "#914c54",
+    ignore = "#545c7e",
+  },
+  gitSigns = {
+    add = "#266d6a",
+    change = "#536c9e",
+    delete = "#b2555b",
+  },
+  green = "#9ece6a",
+  green1 = "#73daca",
+  green2 = "#41a6b5",
+  hint = "#1abc9c",
+  info = "#0db9d7",
+  magenta = "#bb9af7",
+  magenta2 = "#ff007c",
+  none = "NONE",
+  orange = "#ff9e64",
+  purple = "#9d7cd8",
+  red = "#f7768e",
+  red1 = "#db4b4b",
+  teal = "#1abc9c",
+  terminal_black = "#414868",
+  todo = "#7aa2f7",
+  warning = "#e0af68",
+  yellow = "#e0af68",
+}
+
+return M

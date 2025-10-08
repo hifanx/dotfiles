@@ -1,0 +1,4 @@
+[mgr]
+prepend_keymap = [
+  { on = "<C-p>", run = ''' shell 'qlmanage -p "$@"' --confirm ''', desc = "Preview file with macoS system Quick Look" },
+]
