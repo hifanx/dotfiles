@@ -25,15 +25,6 @@ end
 ---| '"openbsd"' # When running on OpenBSD systems
 ---| '"netbsd"'  # When running on NetBSD systems
 ---| 'string'    # The raw system name for other Unix-like systems
----@usage `local os_name = get_os()`
----@usage ```
----if get_os() == "windows" then
----  -- Windows-specific configuration
----  vim.opt.shell = "powershell"
----end
----```
----@example # Basic usage
----  print(get_os()) -- Outputs: "linux", "windows", "macos", etc.
 function M.get_os()
   local uname = vim.loop.os_uname()
   local sysname = uname.sysname:lower()
