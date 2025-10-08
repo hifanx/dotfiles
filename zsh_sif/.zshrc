@@ -1,7 +1,9 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
+# shellcheck disable=SC2296
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  # shellcheck disable=1090
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
@@ -13,21 +15,18 @@ export HOMEBREW_API_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottle
 
 # setup auto-complete, auto-suggestion, syntax-highlight
 export HOMEBREW_PREFIX="/opt/homebrew/"
-source $HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+# shellcheck disable=SC1091
 source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# shellcheck disable=SC1091
 source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# shellcheck disable=SC1091
 source $HOMEBREW_PREFIX/share/powerlevel10k/powerlevel10k.zsh-theme
+# shellcheck disable=SC1091
+source $HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 
-# zsh-autocomplete
-## Make Tab and ShiftTab go to the menu
-bindkey              '^I' menu-select
-bindkey "$terminfo[kcbt]" menu-select
-## Make Tab and ShiftTab change the selection in the menu
-bindkey -M menuselect              '^I'         menu-complete
-bindkey -M menuselect "$terminfo[kcbt]" reverse-menu-complete
-## Make ← and → always move the cursor on the command line
-bindkey -M menuselect  '^[[D' .backward-char  '^[OD' .backward-char
-bindkey -M menuselect  '^[[C'  .forward-char  '^[OC'  .forward-char
+# setup zsh-history-substring-search
+bindkey '^[[A' history-substring-search-up # up arrow
+bindkey '^[[B' history-substring-search-down # down arrow
 
 # clean up $HOME directory
 export LESSHISTFILE=/dev/null # stop .lesshst from generating
@@ -102,6 +101,7 @@ y() {
 }
 
 # fzf
+# shellcheck disable=SC1090
 source <(fzf --zsh)
 
 # zoxide
@@ -114,10 +114,11 @@ export TEALDEER_CONFIG_DIR=$HOME/.config/tealdeer/
 alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 
 # thefuck
-eval $(thefuck --alias)
+eval "$(thefuck --alias)"
 
 # # conda
 # eval "$(conda "shell.$(basename "${SHELL}")" hook)"
 
 # powerlevel10k
+# shellcheck disable=SC1090
 [[ ! -f ~/.config/.p10k.zsh ]] || source ~/.config/.p10k.zsh
