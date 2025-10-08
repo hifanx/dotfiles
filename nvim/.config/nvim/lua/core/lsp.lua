@@ -61,8 +61,9 @@ vim.diagnostic.config {
 -- ╰──────────────────────────────────────────────────────────╯
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+local is_available = require("core.utils").is_available
 
-local has_blink = pcall(require, "blink.cmp")
+local has_blink = is_available "blink.cmp"
 if has_blink then
   capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities({}, false))
 end

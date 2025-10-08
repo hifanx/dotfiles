@@ -51,32 +51,4 @@ end
 
 function M.is_mac() return M.get_os() == "macos" end
 
-function M.on_attach(client)
-  local map = M.map
-  map("n", "gh", vim.diagnostic.open_float, { desc = "[G]oto [H]over Diagnostic" })
-  map({ "n", "v" }, "<Leader>la", vim.lsp.buf.code_action, { desc = "Code [A]ction" })
-  -- map("n", "gd", "<CMD>Telescope lsp_definitions<CR>", { desc = "[G]oto [D]efinition" })
-  -- map("n", "gD", vim.lsp.buf.declaration, { desc = "[G]oto [D]eclaration" })
-  -- map("n", "gi", "<CMD>Telescope lsp_implementations<CR>", { desc = "[G]oto [I]mplementation" })
-  -- map("n", "gr", "<CMD>Telescope lsp_references<CR>", { desc = "[G]oto [R]eferences" })
-  map("n", "<Leader>lh", vim.lsp.buf.signature_help, { desc = "Signature [H]elp" })
-  -- map("n", "gy", "<CMD>Telescope lsp_type_definitions<CR>", { desc = "T[y]pe Definition" })
-  -- map("n", "<leader>ls", "<CMD>Telescope lsp_document_symbols<CR>", { desc = "Document [S]ymbols" })
-  -- map("n", "<leader>lS", "<CMD>Telescope lsp_workspace_symbols<CR>", { desc = "Workspace [S]ymbols" })
-  -- map("n", "<leader>ld", "<CMD>Telescope diagnostics<CR>", { desc = "[D]iagnostics " })
-  if client.supports_method "textDocument/codeLens" then
-    map("n", "<Leader>ll", vim.lsp.codelens.refresh, { desc = "Code[L]ens refresh" })
-    map("n", "<Leader>lL", vim.lsp.codelens.run, { desc = "Code[L]ens run" })
-  end
-  if client.supports_method "textDocument/rename" then
-    map("n", "<Leader>lr", vim.lsp.buf.rename, { desc = "[R]ename" })
-  end
-  -- enable inlay hints
-  if client.supports_method "textDocument/inlayHint" then
-    vim.g.inlay_hints_visible = true
-    vim.lsp.inlay_hint.enable(true)
-    vim.notify(client.name .. " supports inlay hints", vim.log.levels.INFO)
-  end
-end
-
 return M
