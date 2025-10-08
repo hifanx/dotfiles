@@ -75,16 +75,13 @@ export EZA_CONFIG_DIR=$HOME/.config/eza/
 alias v='eza -lag --icons auto --sort name --group-directories-first --no-quotes --no-time'
 alias ll='eza -lag --icons auto --sort name --group-directories-first --no-quotes'
 
-## obsidian
-alias co='cd "$HOME/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Obsidian"'
-
 ## personal aliases
-alias cdd='cd "$HOME/git/dotfiles"'
+alias cdd='cd "$HOME/.dotfiles"'
 alias c="clear"
-alias bu="sudo softwareupdate -ia --verbose; brew bundle -v --file=~/git/dotfiles/configs/brew/Brewfile; brew cu; brew upgrade; brew bundle dump --force --file=~/git/dotfiles/configs/brew/Brewfile --describe; brew autoremove; brew cleanup; brew doctor"
-alias bi="brew bundle --verbose --force cleanup --file=~/git/dotfiles/configs/brew/Brewfile"
-alias bd="brew bundle dump --force --file=~/git/dotfiles/configs/brew/Brewfile --describe" 
-alias unraid="ssh root@10.0.0.5"
+alias bu="sudo softwareupdate -ia --verbose; brew bundle -v --file=~/.dotfiles/brew/Brewfile; brew cu; brew upgrade; brew bundle dump --force --file=~/.dotfiles/brew/Brewfile --describe; brew autoremove; brew cleanup; brew doctor"
+alias bi="brew bundle --verbose --force cleanup --file=~/.dotfiles/brew/Brewfile"
+alias bd="brew bundle dump --force --file=~/.dotfiles/configs/brew/Brewfile --describe" 
+alias lofn="ssh root@10.0.0.5"
 alias heimdall="ssh root@10.0.0.1"
 alias nanna="ssh xuhaifan@10.0.0.12"
 alias baldur="ssh xuhaifan@10.0.0.10"
