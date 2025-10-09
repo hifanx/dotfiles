@@ -1,9 +1,8 @@
+# shellcheck disable=SC2296,SC1090,SC1091
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-# shellcheck disable=SC2296
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  # shellcheck disable=1090
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
@@ -15,13 +14,9 @@ export HOMEBREW_API_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottle
 
 # setup auto-complete, auto-suggestion, syntax-highlight
 export HOMEBREW_PREFIX="/opt/homebrew/"
-# shellcheck disable=SC1091
 source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# shellcheck disable=SC1091
 source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-# shellcheck disable=SC1091
 source $HOMEBREW_PREFIX/share/powerlevel10k/powerlevel10k.zsh-theme
-# shellcheck disable=SC1091
 source $HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 # setup zsh-history-substring-search
@@ -98,7 +93,6 @@ y() {
 }
 
 # fzf
-# shellcheck disable=SC1090
 source <(fzf --zsh)
 
 # zoxide
@@ -113,9 +107,5 @@ alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 # thefuck
 eval "$(thefuck --alias)"
 
-# # conda
-# eval "$(conda "shell.$(basename "${SHELL}")" hook)"
-
 # powerlevel10k
-# shellcheck disable=SC1090
 [[ ! -f ~/.config/.p10k.zsh ]] || source ~/.config/.p10k.zsh

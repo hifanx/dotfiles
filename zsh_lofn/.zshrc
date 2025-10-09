@@ -1,3 +1,4 @@
+# shellcheck disable=SC1073,SC1090,SC1091,SC2296,SC2034
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -10,8 +11,8 @@ export ZSH=/mnt/user/appdata/zsh/.oh-my-zsh
 export HISTFILE=/mnt/user/appdata/zsh/.zsh_history
 if [ ! "$TMUX" = "" ]; then export TERM=xterm-256color; fi
 
-ZSH_THEME="powerlevel10k/powerlevel10k"
-ZSH_DISABLE_COMPFIX=true
+export ZSH_THEME="powerlevel10k/powerlevel10k"
+export ZSH_DISABLE_COMPFIX=true
 zstyle ':omz:update' mode auto      # update automatically without asking
 
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
