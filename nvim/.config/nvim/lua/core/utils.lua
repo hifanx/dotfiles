@@ -19,6 +19,8 @@ local function get_hostname()
   end
 end
 
-function M.is_mac() return M.get_os() == "macos" end
+local function get_os() return vim.loop.os_uname().sysname:lower() end
+
+function M.is_sif() return get_os() == "darwin" and get_hostname() == "sif.lan" end
 
 return M

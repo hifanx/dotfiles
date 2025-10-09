@@ -23,8 +23,8 @@ return {
       "avante_files",
     }
 
-    local is_mac = require("core.utils").is_mac()
-    if is_mac then vim.list_extend(default, ai) end
+    local is_sif = require("core.utils").is_sif()
+    if is_sif then vim.list_extend(default, ai) end
 
     return {
       keymap = {

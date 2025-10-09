@@ -1,6 +1,6 @@
 return {
   "yetone/avante.nvim",
-  enabled = require("core.utils").is_mac(), -- only use on my macbook
+  enabled = require("core.utils").is_sif(), -- only use on my macbook
   build = "make BUILD_FROM_SOURCE=true",
   event = "VeryLazy",
   dependencies = {

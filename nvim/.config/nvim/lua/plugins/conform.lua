@@ -35,9 +35,5 @@ return {
     formatters = {
       shfmt = { append_args = { "-i", "2" } },
     },
-    -- format_on_save = {
-    --   timeout_ms = 500,
-    --   lsp_format = "fallback",
-    -- },
   },
 }
