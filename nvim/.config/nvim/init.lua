@@ -25,7 +25,7 @@ spec "plugins.better-escape"
 spec "plugins.carbon-now" -- screenshot code
 spec "plugins.gitsigns"
 spec "plugins.inc-rename" -- LSP renaming with immediate visual feedback
-spec "plugins.noice" -- used to redirect messages to vim.notify e.g. xx lines written/yanked
+spec "plugins.noice" -- only for redirecting messages to vim.notify e.g. xx lines written/yanked
 spec "plugins.nvim-autopairs"
 spec "plugins.nvim-surround"
 spec "plugins.nvim-ts-autotag"
@@ -39,7 +39,7 @@ spec "plugins.vim-oscyank" -- yank text even from remote
 -- │ ⬇️ UI                                                    │
 -- ╰──────────────────────────────────────────────────────────╯
 spec "plugins.catppuccin"
-spec "plugins.barbecue" -- VS Code like winbar  WARN: REPO ARCHIVED
+spec "plugins.barbecue" -- VS Code like winbar  WARN: REPO ARCHIVED, REMOVE IF FUNC BREAK
 spec "plugins.lualine"
 spec "plugins.nvim-colorizer"
 spec "plugins.render-markdown"
