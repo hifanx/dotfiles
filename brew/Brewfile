@@ -38,6 +38,8 @@ brew "powerlevel10k"
 brew "ripgrep"
 # 7-Zip is a file archiver with a high compression ratio
 brew "sevenzip"
+# Organize software neatly under a single directory tree (e.g. /usr/local)
+brew "stow"
 # Very fast implementation of tldr in Rust
 brew "tealdeer"
 # Programmatically correct mistyped console commands
@@ -54,6 +56,8 @@ brew "zoxide"
 brew "zsh-autocomplete"
 # Fish-like fast/unobtrusive autosuggestions for zsh
 brew "zsh-autosuggestions"
+# Zsh port of Fish shell's history search
+brew "zsh-history-substring-search"
 # Fish shell like syntax highlighting for zsh
 brew "zsh-syntax-highlighting"
 # A window border system for macOS
@@ -87,8 +91,6 @@ cask "microsoft-openjdk"
 cask "microsoft-powerpoint"
 # Word processor
 cask "microsoft-word"
-# Minimal installer for conda
-cask "miniconda"
 # Media player
 cask "movist-pro"
 # App to write, plan, collaborate, and get organised
