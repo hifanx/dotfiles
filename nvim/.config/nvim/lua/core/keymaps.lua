@@ -29,12 +29,6 @@ m("i", "<C-l>", "<Right>", { desc = "Move Right" })
 m("i", "<C-j>", "<Down>", { desc = "Move Down" })
 m("i", "<C-k>", "<Up>", { desc = "Move Up" })
 
--- navigate windows, although plugin present, needed in ssh
-m("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
-m("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
-m("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
-m("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
-
 -- turn the word under cursor to upper case
 m("i", "<C-u>", "<Esc>viwUea", { desc = "Turn Into Upper Case" })
 -- turn the current word into title case
