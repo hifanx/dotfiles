@@ -31,6 +31,3 @@ reveal = [{ run = 'open -R "$1"', desc = "reveal in finder", for = "macos" }]
 play = [
   { run = 'open "$@"', orphan = true, desc = "open with Movist Pro", for = "macos" },
 ]
-
-[log]
-enabled = false
