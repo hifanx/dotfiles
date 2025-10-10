@@ -55,6 +55,7 @@ M.snacks = {
   SnacksPickerCursorLine = { link = "MenuSelected" },
   SnacksPickerListCursorLine = { link = "MenuSelected" },
   SnacksPickerPreviewCursorLine = { link = "MenuSelected" },
+  SnacksPickerToggle = { link = "FloatTitle" },
   SnacksDashboardFooter = { fg = c.green, bg = "none" },
   SnacksDashboardHeader = { fg = c.yellow, bg = "none" },
   SnacksDashboardIcon = { fg = c.lavender, bg = "none" },

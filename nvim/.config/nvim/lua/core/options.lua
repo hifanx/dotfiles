@@ -47,6 +47,8 @@ o.showbreak = "↪ "
 o.list = true -- show invisible characters.
 o.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
+o.termguicolors = true
+
 -- disable some default providers
 g.loaded_node_provider = 0
 g.loaded_python3_provider = 0
