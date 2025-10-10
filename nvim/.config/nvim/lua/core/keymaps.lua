@@ -68,5 +68,5 @@ m("x", "c", '"_c')
 m("x", "p", 'p:let @+=@0<CR>:let @"=@0<CR>', { desc = "Don't Copy Replaced Text" })
 
 -- commenting
-m("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
-m("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
+m("n", "gco", "o<esc>Vcx<esc>:normal gcc<CR>fxa<bs>", { desc = "Add Comment Below" })
+m("n", "gcO", "O<esc>Vcx<esc>:normal gcc<CR>fxa<bs>", { desc = "Add Comment Above" })

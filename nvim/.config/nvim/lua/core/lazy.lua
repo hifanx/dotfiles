@@ -59,4 +59,4 @@ require("lazy").setup {
   },
 }
 
-require("core.utils").map("n", "<leader>hl", "<CMD>Lazy<CR>", { desc = "Lazy" })
+require("core.utils").map("n", "<leader>hl", ":Lazy<CR>", { desc = "Lazy" })
