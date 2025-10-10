@@ -63,19 +63,3 @@ vim.api.nvim_create_autocmd("LspProgress", {
     })
   end,
 })
-
--- ╭──────────────────────────────────────────────────────────╮
--- │ ⬇️ Pangu                                                 │
--- ╰──────────────────────────────────────────────────────────╯
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = { "*.markdown", "*.md", "*.text", "*.txt", "*.wiki", "*.cnx" },
-  desc = "Auto format text files with Pangu if available",
-  callback = function()
-    local ok, err = pcall(function() vim.cmd "PanguAll" end)
-    if ok then
-      vim.notify("Formatted with Pangu", vim.log.levels.INFO, { title = "Pangu" })
-    else
-      vim.notify("You deleted Pangu? Go remove the autocmd" .. err, vim.log.levels.WARN, { title = "Pangu" })
-    end
-  end,
-})
