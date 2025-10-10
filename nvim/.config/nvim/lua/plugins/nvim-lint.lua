@@ -11,7 +11,7 @@ return {
 
     lint.linters.markdownlint.args = { "--disable MD013" }
 
-    vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+    vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
       group = vim.api.nvim_create_augroup("lint", { clear = true }),
       callback = function() lint.try_lint() end,
     })
