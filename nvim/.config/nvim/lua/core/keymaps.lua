@@ -9,10 +9,10 @@ m("n", "<Leader>yy", ":%y+<CR>", { desc = "[Y]ank buffer" })
 m("n", "H", ":bprev<CR>", { desc = "Prev Buffer", noremap = false })
 m("n", "L", ":bnext<CR>", { desc = "Next Buffer", noremap = false })
 
-m("n", "=", [[:vertical resize +5<CR>]]) -- make the window bigger vertically
-m("n", "-", [[:vertical resize -5<CR>]]) -- make the window smaller vertically
-m("n", "+", [[:horizontal resize +2<CR>]]) -- make the window bigger horizontally
-m("n", "_", [[:horizontal resize -2<CR>]]) -- make the window smaller horizontally
+m("n", "=", [[:vertical resize +5<CR>]])
+m("n", "-", [[:vertical resize -5<CR>]])
+m("n", "+", [[:horizontal resize +2<CR>]])
+m("n", "_", [[:horizontal resize -2<CR>]])
 
 -- go to beginning and end
 m("i", "<C-b>", "<ESC>^i", { desc = "Beginning of Line" })

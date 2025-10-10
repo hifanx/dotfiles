@@ -43,9 +43,17 @@ o.shortmess:append "sI"
 o.spelllang = "en_us,en_gb,cjk"
 o.spell = true
 o.wrap = true -- soft wrap lines
+o.breakindent = true -- make wrapped lines continue visually indented
 o.showbreak = "↪ "
 o.list = true -- show invisible characters.
 o.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+o.fillchars = {
+  vert = "┃", -- Vertical split
+  fold = "·", -- Folded line indicator
+  eob = " ", -- Empty lines at the end of buffer
+  diff = "╱", -- Deleted lines in diff view
+  msgsep = "‾", -- Message separator
+}
 
 o.termguicolors = true
 
