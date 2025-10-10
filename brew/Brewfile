@@ -6,10 +6,6 @@ tap "nikitabobko/tap"
 brew "bat"
 # Modern, maintained replacement for ls
 brew "eza"
-# Like neofetch, but much faster because written mostly in C
-brew "fastfetch"
-# Simple, fast and user-friendly alternative to find
-brew "fd"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # Distributed revision control system
@@ -46,14 +42,10 @@ brew "tealdeer"
 brew "thefuck"
 # Terminal multiplexer
 brew "tmux", args: ["HEAD"]
-# Display directories as trees (with optional color/HTML output)
-brew "tree"
 # Blazing fast terminal file manager written in Rust, based on async I/O
 brew "yazi", args: ["HEAD"]
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
-# Real-time type-ahead completion for Zsh
-brew "zsh-autocomplete"
 # Fish-like fast/unobtrusive autosuggestions for zsh
 brew "zsh-autosuggestions"
 # Zsh port of Fish shell's history search
