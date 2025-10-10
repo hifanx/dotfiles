@@ -25,7 +25,7 @@ bindkey '^[[B' history-substring-search-down # down arrow
 
 # clean up $HOME directory
 export LESSHISTFILE=/dev/null # stop .lesshst from generating
-export ZDOTDIR=$HOME/.config/ # move .zcompdump to .config/
+# export ZDOTDIR=$HOME/.config/ # move .zcompdump to .config/
 export HISTFILE=$HOME/.config/.zsh_history # move .zsh_history to .config/
 
 # set EDITOR
