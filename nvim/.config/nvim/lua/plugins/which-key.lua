@@ -3,12 +3,12 @@ return {
   event = "VeryLazy",
   dependencies = "nvim-tree/nvim-web-devicons",
   opts = {
+    preset = "helix",
     icons = {
       mappings = false, --- disable keymap icons from rules
       group = "", -- symbol prepended to a group
       separator = "",
     },
-    disable = { ft = { "TelescopePrompt" } },
     spec = {
       { "<leader>a", group = "[A]vante" },
       { "<leader>b", group = "[B]uffer" },
