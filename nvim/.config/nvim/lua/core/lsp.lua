@@ -1,12 +1,12 @@
 -- ╭──────────────────────────────────────────────────────────╮
--- │ ⬇️ Disable default keybinds                              │
+-- │ ⬇️ disable default keybinds                              │
 -- ╰──────────────────────────────────────────────────────────╯
 for _, bind in ipairs { "grn", "gra", "gri", "grr" } do
   pcall(vim.keymap.del, "n", bind)
 end
 
 -- ╭──────────────────────────────────────────────────────────╮
--- │ ⬇️ Setup keymaps                                         │
+-- │ ⬇️ setup keymaps                                         │
 -- ╰──────────────────────────────────────────────────────────╯
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("lsp_attach", { clear = true }),
@@ -35,7 +35,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 -- ╭──────────────────────────────────────────────────────────╮
--- │ ⬇️ Setup vim.diagnostic.Config                           │
+-- │ ⬇️ setup vim.diagnostic.Config                           │
 -- ╰──────────────────────────────────────────────────────────╯
 vim.diagnostic.config {
   signs = {
@@ -57,7 +57,7 @@ vim.diagnostic.config {
 }
 
 -- ╭──────────────────────────────────────────────────────────╮
--- │ ⬇️ Setup capabilities                                    │
+-- │ ⬇️ server specific capabilities                          │
 -- ╰──────────────────────────────────────────────────────────╯
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -83,7 +83,7 @@ vim.lsp.config("*", {
 })
 
 -- ╭──────────────────────────────────────────────────────────╮
--- │ ⬇️ This is where magic happens                           │
+-- │ ⬇️ this is where magic happens                           │
 -- ╰──────────────────────────────────────────────────────────╯
 
 local servers = {
