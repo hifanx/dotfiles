@@ -39,7 +39,9 @@ return {
           "shellcheck", -- shell linter, used by bash-language-server
         }
 
-        local ensure_installed = {}
+        local ensure_installed = {
+          "tree-sitter-cli",
+        }
         vim.list_extend(ensure_installed, servers)
         vim.list_extend(ensure_installed, formatters)
         vim.list_extend(ensure_installed, linters)
