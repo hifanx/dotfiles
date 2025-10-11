@@ -23,4 +23,17 @@ local function get_os() return vim.loop.os_uname().sysname:lower() end
 
 function M.is_sif() return get_os() == "darwin" and get_hostname() == "sif.lan" end
 
+function M.start_treesitter(ev)
+  local ok, err = pcall(vim.treesitter.start, ev.buf)
+  if ok then
+    vim.notify(string.format("Treesitter started for %s", ev.match), vim.log.levels.WARN, { title = "Treesitter" })
+  else
+    vim.notify(
+      string.format("Treesitter failed for %s: %s", ev.match, err),
+      vim.log.levels.WARN,
+      { title = "Treesitter" }
+    )
+  end
+end
+
 return M

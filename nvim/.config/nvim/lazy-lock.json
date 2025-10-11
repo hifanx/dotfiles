@@ -1,5 +1,5 @@
 {
-  "avante.nvim": { "branch": "main", "commit": "27f650d29575d1429f4d8024a760ccf1a244a630" },
+  "avante.nvim": { "branch": "main", "commit": "7f5213f1fe89205d9bb7dd0af1f7a4d2a8802342" },
   "barbecue": { "branch": "main", "commit": "3e31404f0b93a2c30d151abf0648650ac811c664" },
   "better-escape.nvim": { "branch": "master", "commit": "19a38aab94961016430905ebec30d272a01e9742" },
   "blink-copilot": { "branch": "main", "commit": "5d35fd07fcc148be20442da1bdd2407e03263d7d" },
@@ -24,7 +24,7 @@
   "nvim-lint": { "branch": "master", "commit": "9da1fb942dd0668d5182f9c8dee801b9c190e2bb" },
   "nvim-navic": { "branch": "master", "commit": "f887d794a0f4594882814d7780980a949200a238" },
   "nvim-surround": { "branch": "main", "commit": "75de1782c781961e392efcca57601bf436f4d550" },
-  "nvim-treesitter": { "branch": "main", "commit": "763f1e650b91aa951495e709d61597d1222dba65" },
+  "nvim-treesitter": { "branch": "main", "commit": "4b74045bbe6de587c36b1e96956fa22769b4cdf7" },
   "nvim-ts-autotag": { "branch": "main", "commit": "c4ca798ab95b316a768d51eaaaee48f64a4a46bc" },
   "nvim-web-devicons": { "branch": "master", "commit": "b8221e42cf7287c4dcde81f232f58d7b947c210d" },
   "pangu.vim": { "branch": "master", "commit": "b7210117695dca05d94de1ac2108401f8eff0a2d" },

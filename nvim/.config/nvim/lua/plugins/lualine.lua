@@ -177,7 +177,7 @@ return {
               AvanteInput = " ",
               AvanteTodos = " ",
               AvanteSelectedFiles = " ",
-              checkhealth = "󰀯 "
+              checkhealth = "󰀯 ",
             },
             buffers_color = {
               active = "lualine_b_command",

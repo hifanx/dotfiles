@@ -71,19 +71,7 @@ return {
       group = vim.api.nvim_create_augroup("nvim_treesitter", { clear = true }),
       -- WARN: Do not use "*" here - snacks.nvim is buggy and vim.notify triggers FileType events internally causing infinite callback loops
       pattern = pattern,
-      callback = function(ev)
-        local ok, err = pcall(vim.treesitter.start, ev.buf)
-        if ok then
-          vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-          vim.wo[0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
-        else
-          vim.notify(
-            string.format("Treesitter failed for %s: %s", ev.match, err),
-            vim.log.levels.WARN,
-            { title = "Treesitter" }
-          )
-        end
-      end,
+      callback = function(ev) require("core.utils").start_treesitter(ev) end,
     })
   end,
   opts = {},
