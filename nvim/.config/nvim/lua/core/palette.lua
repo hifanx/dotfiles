@@ -266,10 +266,6 @@ M.github = {
     base = "#bc8cff",
     bright = "#d2a8ff",
   },
-  meta = {
-    light = false,
-    name = "github_dark_default",
-  },
   neutral = {
     emphasis = "#6e7681",
     emphasis_plus = "#6e7681",
