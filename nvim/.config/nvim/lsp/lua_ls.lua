@@ -20,6 +20,12 @@ return {
       completion = {
         callSnippet = "Replace",
       },
+      runtime = { -- NOTE: need this or gd in init.lua for spec won't work
+        version = "LuaJIT",
+        special = {
+          spec = "require",
+        },
+      },
       diagnostics = {
         globals = { "vim", "spec" },
         disable = { "missing-fields" },
