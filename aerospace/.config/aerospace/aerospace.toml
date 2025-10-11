@@ -193,3 +193,7 @@ run = 'layout floating'
 [[on-window-detected]]
 if.app-name-regex-substring = 'finder'
 run = 'layout floating'
+
+[[on-window-detected]]
+if.window-title-regex-substring = '图片和视频'
+run = 'layout floating'
