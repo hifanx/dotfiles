@@ -194,4 +194,129 @@ M.tokyonight = {
   yellow = "#e0af68",
 }
 
+M.github = {
+  accent = {
+    emphasis = "#1f6feb",
+    fg = "#2f81f7",
+    muted = "#1e4273",
+    subtle = "#132339",
+  },
+  attention = {
+    emphasis = "#9e6a03",
+    fg = "#d29922",
+    muted = "#533d11",
+    subtle = "#272215",
+  },
+  black = {
+    base = "#0d1117",
+    bright = "#161b22",
+  },
+  blue = {
+    base = "#58a6ff",
+    bright = "#79c0ff",
+  },
+  border = {
+    default = "#161b22",
+    muted = "#21262d",
+    subtle = "#24282e",
+  },
+  canvas = {
+    default = "#0d1117",
+    inset = "#010409",
+    overlay = "#161b22",
+    subtle = "#161b22",
+  },
+  closed = {
+    emphasis = "#da3633",
+    fg = "#f85149",
+    muted = "#6b2b2b",
+    subtle = "#301b1e",
+  },
+  cyan = {
+    base = "#76e3ea",
+    bright = "#b3f0ff",
+  },
+  danger = {
+    emphasis = "#da3633",
+    fg = "#f85149",
+    muted = "#6b2b2b",
+    subtle = "#25171c",
+  },
+  done = {
+    emphasis = "#8957e5",
+    fg = "#a371f7",
+    muted = "#493771",
+    subtle = "#1c1b2d",
+  },
+  fg = {
+    default = "#e6edf3",
+    muted = "#7d8590",
+    on_emphasis = "#ffffff",
+    subtle = "#6e7681",
+  },
+  gray = {
+    base = "#6e7681",
+    bright = "#6e7681",
+  },
+  green = {
+    base = "#3fb950",
+    bright = "#56d364",
+  },
+  magenta = {
+    base = "#bc8cff",
+    bright = "#d2a8ff",
+  },
+  meta = {
+    light = false,
+    name = "github_dark_default",
+  },
+  neutral = {
+    emphasis = "#6e7681",
+    emphasis_plus = "#6e7681",
+    muted = "#343941",
+    subtle = "#171b22",
+  },
+  open = {
+    emphasis = "#238636",
+    fg = "#3fb950",
+    muted = "#1a4a29",
+    subtle = "#12261e",
+  },
+  orange = "#f0883e",
+  pink = {
+    base = "#f778ba",
+    bright = "#ff9bce",
+  },
+  red = {
+    base = "#ff7b72",
+    bright = "#ffa198",
+  },
+  severe = {
+    emphasis = "#bd561d",
+    fg = "#db6d28",
+    muted = "#5f361e",
+    subtle = "#221a19",
+  },
+  sponsors = {
+    emphasis = "#bf4b8a",
+    fg = "#db61a2",
+    muted = "#5f314f",
+    subtle = "#221925",
+  },
+  success = {
+    emphasis = "#238636",
+    fg = "#3fb950",
+    muted = "#1a4a29",
+    subtle = "#12261e",
+  },
+  white = {
+    base = "#b1bac4",
+    bright = "#b1bac4",
+  },
+  yellow = {
+    base = "#d29922",
+    bright = "#e3b341",
+  },
+}
+
 return M
