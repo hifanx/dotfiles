@@ -32,7 +32,6 @@ spec "plugins.pangu" -- auto format to add a space between cjk and english lette
 spec "plugins.snacks"
 spec "plugins.ts-comments" -- enhance neovim's native comments, neovim natively supports comment now
 spec "plugins.vim-tmux-navigator"
-spec "plugins.vim-oscyank" -- yank text even from remote
 
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ UI                                                    │
