@@ -23,7 +23,7 @@ return {
       "avante_files",
     }
 
-    local is_sif = require("core.utils").is_sif()
+    local is_sif = require("core.utils").is_sif
     if is_sif then vim.list_extend(default, ai) end
 
     return {

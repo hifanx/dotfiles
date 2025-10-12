@@ -1,6 +1,6 @@
 return {
   "yetone/avante.nvim",
-  enabled = require("core.utils").is_sif(), -- only use on my macbook
+  enabled = require("core.utils").is_sif, -- only use on my macbook
   build = vim.fn.has "win32" ~= 0 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
     or "make",
   event = "VeryLazy",

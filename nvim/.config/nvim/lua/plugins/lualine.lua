@@ -84,7 +84,7 @@ return {
       buffer_not_empty = function() return vim.fn.empty(vim.fn.expand "%:t") ~= 1 end,
       hide_in_width = function() return vim.fn.winwidth(0) > 80 end,
       lazy_status = lazy_status.has_updates,
-      is_sif = function() return require("core.utils").is_sif() end,
+      is_sif = function() return require("core.utils").is_sif end,
     }
 
     -- ╭──────────────────────────────────────────────────────────╮
