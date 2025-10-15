@@ -1,45 +1,78 @@
-# shellcheck disable=SC2296,SC1090,SC1091
+# shellcheck disable=SC2296,SC1090,SC1091,SC2086,SC2016,SC2154,SC1087
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then 
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" 
 fi
 
 # setup homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
+export HOMEBREW_PREFIX="/opt/homebrew/"
+# configure mirrors
 export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
 export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
 export HOMEBREW_API_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api"
 
-# setup auto-complete, auto-suggestion, syntax-highlight
-export HOMEBREW_PREFIX="/opt/homebrew/"
-source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $HOMEBREW_PREFIX/share/powerlevel10k/powerlevel10k.zsh-theme
-source $HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+#  NOTE: use zinit because it automatically installs what I need
+#  https://www.youtube.com/watch?v=ud7YxC33Z3w
+#  ice = append args to the install command, aka 'git'
+#  light = zinit's install command, meaning load without reporting/investigating.
+#  Self update: zinit self-update
+#  Plugin update: zinit update
+#  Plugin parallel update: zinit update --parallel
+#  Increase the number of jobs in a concurrent-set to 40: zinit update --parallel 40
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
 
-# setup zsh-history-substring-search
-bindkey '^[[A' history-substring-search-up # up arrow
-bindkey '^[[B' history-substring-search-down # down arrow
+# install plugins
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions # this adds additional completion definitions 
+zinit light marlonrichert/zsh-autocomplete # this adds real-time type-ahead autocompletion
+zinit light zsh-users/zsh-autosuggestions
 
-# clean up $HOME directory
+# clean up $HOME directory, also needed for plugins to work across sessions
 export LESSHISTFILE=/dev/null # stop .lesshst from generating
-# export ZDOTDIR=$HOME/.config/ # move .zcompdump to .config/
-export HISTFILE=$HOME/.config/.zsh_history # move .zsh_history to .config/
+export ZSH_COMPDUMP="$HOME/.cache/zsh/zcompdump-$ZSH_VERSION" # move .zcompdump to cache
+export HISTFILE=$HOME/.cache/zsh/.zsh_history # move .zsh_history to cache
+export HISTSIZE=5000
+export SAVEHIST=$HISTSIZE
+export ISTDUP=erase # erase duplicates
+setopt appendhistory # append rather than writing
+setopt sharehistory # for cross sessions
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
 
-# set EDITOR
+# zsh-autosuggestions
+bindkey '^y' autosuggest-accept
+# needed when: type cd, it only shows commands match that prefix
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+
+# zsh-completions
+# autoload -Uz compinit && compinit # load completions
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' # case insensitive matching
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}" # use color for completions
+
+# zsh-autocomplete
+bindkey              '^I'         menu-complete
+bindkey "$terminfo[kcbt]" reverse-menu-complete
+bindkey              '^I' menu-select
+bindkey "$terminfo[kcbt]" menu-select
+
+
+# general config
 export EDITOR='nvim'
-
-# set $XDG PATHS
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
 
-# homebrew
-export PATH="$PATH:/usr/local/bin"
-export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
-
-# 解决ssh到远程服务器中文乱码
+#  FIX: gibberish for cjk characters
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 

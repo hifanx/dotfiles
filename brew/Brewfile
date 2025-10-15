@@ -4,8 +4,6 @@ tap "koekeishiya/formulae"
 tap "nikitabobko/tap"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# Multi-shell multi-command argument completer
-brew "carapace"
 # Modern, maintained replacement for ls
 brew "eza"
 # Simple, fast and user-friendly alternative to find
@@ -32,8 +30,6 @@ brew "neovim", args: ["HEAD"]
 brew "node"
 # PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
-# Theme for zsh
-brew "powerlevel10k"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # 7-Zip is a file archiver with a high compression ratio
@@ -50,12 +46,6 @@ brew "tmux", args: ["HEAD"]
 brew "yazi", args: ["HEAD"]
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
-# Fish-like fast/unobtrusive autosuggestions for zsh
-brew "zsh-autosuggestions"
-# Zsh port of Fish shell's history search
-brew "zsh-history-substring-search"
-# Fish shell like syntax highlighting for zsh
-brew "zsh-syntax-highlighting"
 # A window border system for macOS
 brew "felixkratz/formulae/borders"
 # Collection of apps and services for photography, design, video, web, and UX
