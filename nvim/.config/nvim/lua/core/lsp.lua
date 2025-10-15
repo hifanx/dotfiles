@@ -44,13 +44,23 @@ vim.diagnostic.config {
       [vim.diagnostic.severity.HINT] = ' ',
       [vim.diagnostic.severity.INFO] = ' ',
     },
+    linehl = {
+      [vim.diagnostic.severity.ERROR] = 'DiagnosticError',
+      [vim.diagnostic.severity.WARN] = 'DiagnosticWarn',
+      [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
+      [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
+    },
+    numhl = {
+      [vim.diagnostic.severity.ERROR] = 'DiagnosticError',
+      [vim.diagnostic.severity.WARN] = 'DiagnosticWarn',
+      [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
+      [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
+    },
   },
-  virtual_text = true,
   update_in_insert = false,
   underline = true,
   severity_sort = true,
   float = {
-    source = true,
     header = '',
   },
 }
