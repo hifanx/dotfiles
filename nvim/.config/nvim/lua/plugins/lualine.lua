@@ -1,10 +1,7 @@
 return {
   'nvim-lualine/lualine.nvim',
   event = { 'BufReadPre', 'BufNewFile' },
-  dependencies = {
-    'nvim-tree/nvim-web-devicons',
-    'AndreM222/copilot-lualine',
-  },
+  dependencies = { 'AndreM222/copilot-lualine' },
   config = function()
     local c = require('core.palette').catppuccin
     -- ╭──────────────────────────────────────────────────────────╮
