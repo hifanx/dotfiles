@@ -82,13 +82,14 @@ return {
         lualine_a = {
           {
             vim_icon,
-            color = { gui = 'bold' },
+          },
+          {
+            'mode',
           },
         },
         lualine_b = {
           {
             'branch',
-            color = { gui = 'bold' },
           },
         },
         lualine_c = {
@@ -206,7 +207,6 @@ return {
         lualine_z = {
           {
             'progress',
-            color = { gui = 'bold' },
           },
         },
       },
