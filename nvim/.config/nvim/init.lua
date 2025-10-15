@@ -45,8 +45,6 @@ spec 'plugins.todo-comments'
 spec 'plugins.smear-cursor' -- animated cursor
 spec 'plugins.mini-icons'
 
--- mini-hipattern
-
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ AI                                                    │
 -- ╰──────────────────────────────────────────────────────────╯
