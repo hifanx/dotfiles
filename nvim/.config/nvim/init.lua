@@ -37,7 +37,6 @@ spec 'plugins.vim-tmux-navigator'
 -- │ ⬇️ UI                                                    │
 -- ╰──────────────────────────────────────────────────────────╯
 spec 'plugins.catppuccin'
-spec 'plugins.barbecue' -- VS Code like winbar  WARN: REPO ARCHIVED, REMOVE IF FUNC BREAK 不要这个了
 spec 'plugins.lualine'
 spec 'plugins.noice' -- only for redirecting messages to vim.notify e.g. xx lines written/yanked
 spec 'plugins.nvim-colorizer'
