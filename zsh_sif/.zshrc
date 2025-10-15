@@ -66,7 +66,6 @@ bindkey "$terminfo[kcbt]" reverse-menu-complete
 bindkey              '^I' menu-select
 bindkey "$terminfo[kcbt]" menu-select
 
-
 # general config
 export EDITOR='nvim'
 export XDG_CONFIG_HOME=$HOME/.config
