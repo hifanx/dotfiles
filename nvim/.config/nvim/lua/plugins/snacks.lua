@@ -68,8 +68,8 @@ return {
     { '<leader>fg', function() Snacks.picker.grep() end, desc = '[G]rep' },
     { '<leader>fw', function() Snacks.picker.grep_word() end, desc = 'Visual selection or word', mode = { 'n', 'x' } },
     -- git
-    { '<Leader>gb', function() Snacks.git.blame_line() end, desc = '[G]it [B]lame Line' },
-    { '<leader>gB', function() Snacks.picker.git_branches() end, desc = '[G]it [B]ranches' },
+    -- { '<Leader>gb', function() Snacks.git.blame_line() end, desc = '[G]it [B]lame Line' },
+    -- { '<leader>gB', function() Snacks.picker.git_branches() end, desc = '[G]it [B]ranches' },
     { '<leader>gl', function() Snacks.picker.git_log() end, desc = '[G]it [L]og' },
     { '<leader>gL', function() Snacks.picker.git_log_line() end, desc = '[G]it [L]og Line' },
     { '<leader>gd', function() Snacks.picker.git_diff() end, desc = '[G]it [D]iff (Hunks)' },

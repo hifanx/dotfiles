@@ -8,7 +8,7 @@
 --     <b>or tag* types</b>        csth1<CR>       <h1>or tag types</h1>
 --     delete(functi*on calls)     dsf             function calls
 return {
-  "kylechui/nvim-surround",
-  event = { "BufReadPre", "BufNewFile" },
-  config = function() require("nvim-surround").setup() end,
+  'kylechui/nvim-surround',
+  event = { 'BufReadPre', 'BufNewFile' },
+  config = function() require('nvim-surround').setup() end,
 }
