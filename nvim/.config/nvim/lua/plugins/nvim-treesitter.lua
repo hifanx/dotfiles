@@ -74,5 +74,5 @@ return {
       callback = function(ev) require("core.utils").start_treesitter(ev) end,
     })
   end,
-  opts = {},
+  config = function() require("nvim-treesitter").setup() end,
 }

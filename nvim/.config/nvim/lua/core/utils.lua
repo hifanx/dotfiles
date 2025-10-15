@@ -13,7 +13,7 @@ local hostname = vim.loop.os_gethostname():lower()
 local os_name = vim.loop.os_uname().sysname:lower()
 
 -- Store as simple boolean
-M.is_sif = (os_name == "darwin" and hostname == "sif.lan")
+M.is_sif = (os_name == "darwin" and hostname == "sif.local")
 M.is_macos = (os_name == "darwin")
 M.is_linux = (os_name == "linux")
 M.hostname = hostname

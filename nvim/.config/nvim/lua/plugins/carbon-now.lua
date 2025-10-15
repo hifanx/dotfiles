@@ -1,8 +1,8 @@
 return {
-  "ellisonleao/carbon-now.nvim",
-  cmd = "CarbonNow",
+  'ellisonleao/carbon-now.nvim',
+  cmd = 'CarbonNow',
   keys = {
-    { "<leader>hc", ":CarbonNow<CR>", mode = { "n", "v" }, desc = "Screenshot code" },
+    { '<leader>hc', ':CarbonNow<CR>', mode = { 'n', 'v' }, desc = 'Screenshot code' },
   },
-  opts = { open_cmd = "open" },
+  config = function() require('carbon-now').setup { open_cmd = 'open' } end,
 }

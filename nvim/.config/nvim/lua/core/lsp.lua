@@ -1,29 +1,29 @@
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ disable default keybinds                              │
 -- ╰──────────────────────────────────────────────────────────╯
-for _, bind in ipairs { "grn", "gra", "gri", "grr" } do
-  pcall(vim.keymap.del, "n", bind)
+for _, bind in ipairs { 'grn', 'gra', 'gri', 'grr' } do
+  pcall(vim.keymap.del, 'n', bind)
 end
 
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ setup keymaps                                         │
 -- ╰──────────────────────────────────────────────────────────╯
-vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("lsp_attach", { clear = true }),
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('lsp_attach', { clear = true }),
   callback = function(event)
-    local m = require("core.utils").map
+    local m = require('core.utils').map
     local client = vim.lsp.get_client_by_id(event.data.client_id)
     if not client then return end
 
-    m("n", "gh", vim.diagnostic.open_float, { desc = "[G]oto [H]over Diagnostic" })
-    m({ "n", "v" }, "<Leader>la", vim.lsp.buf.code_action, { desc = "Code [A]ction" })
-    m("n", "<Leader>lh", vim.lsp.buf.signature_help, { desc = "Signature [H]elp" })
-    m("n", "<leader>li", ":LspInfo<CR>", { desc = "LSP [I]nfo" })
-    m("n", "<Leader>lr", vim.lsp.buf.rename, { desc = "[R]ename" })
+    m('n', 'gh', vim.diagnostic.open_float, { desc = '[G]oto [H]over Diagnostic' })
+    m({ 'n', 'v' }, '<Leader>la', vim.lsp.buf.code_action, { desc = 'Code [A]ction' })
+    m('n', '<Leader>lh', vim.lsp.buf.signature_help, { desc = 'Signature [H]elp' })
+    m('n', '<leader>li', ':LspInfo<CR>', { desc = 'LSP [I]nfo' })
+    m('n', '<Leader>lr', vim.lsp.buf.rename, { desc = '[R]ename' })
 
     if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_codeLens) then
-      m("n", "<Leader>ll", vim.lsp.codelens.refresh, { desc = "Code[L]ens refresh" })
-      m("n", "<Leader>lL", vim.lsp.codelens.run, { desc = "Code[L]ens run" })
+      m('n', '<Leader>ll', vim.lsp.codelens.refresh, { desc = 'Code[L]ens refresh' })
+      m('n', '<Leader>lL', vim.lsp.codelens.run, { desc = 'Code[L]ens run' })
     end
 
     if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint) then
@@ -39,10 +39,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 vim.diagnostic.config {
   signs = {
     text = {
-      [vim.diagnostic.severity.ERROR] = " ",
-      [vim.diagnostic.severity.WARN] = " ",
-      [vim.diagnostic.severity.HINT] = " ",
-      [vim.diagnostic.severity.INFO] = " ",
+      [vim.diagnostic.severity.ERROR] = ' ',
+      [vim.diagnostic.severity.WARN] = ' ',
+      [vim.diagnostic.severity.HINT] = ' ',
+      [vim.diagnostic.severity.INFO] = ' ',
     },
   },
   virtual_text = true,
@@ -51,7 +51,7 @@ vim.diagnostic.config {
   severity_sort = true,
   float = {
     source = true,
-    header = "",
+    header = '',
   },
 }
 
@@ -61,14 +61,14 @@ vim.diagnostic.config {
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-local has_blink = pcall(require, "blink.cmp")
+local has_blink = pcall(require, 'blink.cmp')
 if has_blink then
-  capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities({}, false))
+  capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities({}, false))
 end
 
-local has_markdown_oxide = vim.fn.executable "markdown-oxide" == 1
+local has_markdown_oxide = vim.fn.executable 'markdown-oxide' == 1
 if has_markdown_oxide then
-  capabilities = vim.tbl_deep_extend("force", capabilities, {
+  capabilities = vim.tbl_deep_extend('force', capabilities, {
     workspace = {
       didChangeWatchedFiles = {
         dynamicRegistration = true,
@@ -77,7 +77,7 @@ if has_markdown_oxide then
   })
 end
 
-vim.lsp.config("*", {
+vim.lsp.config('*', {
   capabilities = capabilities,
 })
 
@@ -86,15 +86,15 @@ vim.lsp.config("*", {
 -- ╰──────────────────────────────────────────────────────────╯
 
 local servers = {
-  "cssls",
-  "lua_ls",
-  "bashls",
-  "yamlls",
-  "jsonls",
-  "markdown_oxide",
-  "taplo",
-  "pyright",
-  "docker_language_server",
+  'cssls',
+  'lua_ls',
+  'bashls',
+  'yamlls',
+  'jsonls',
+  'markdown_oxide',
+  'taplo',
+  'pyright',
+  'docker_language_server',
 }
 
 vim.lsp.enable(servers)

@@ -1,14 +1,14 @@
 local o = vim.opt
 local g = vim.g
 
-g.mapleader = " "
-g.gmaplocalleader = ","
+g.mapleader = ' '
+g.gmaplocalleader = ','
 
-o.winborder = "solid"
+o.winborder = 'solid'
 o.undofile = true -- enable persistent undo
 o.number = true -- show numberline
 o.relativenumber = true -- show relative numberline
-o.mouse = "a" -- enable mouse support
+o.mouse = 'a' -- enable mouse support
 o.laststatus = 3 -- global statusline
 o.cmdheight = 1 -- height of the command bar, default: 1
 o.backup = false -- disable backup
@@ -22,37 +22,37 @@ o.hlsearch = true -- highlight search results as you type.
 o.ignorecase = true
 o.smartcase = true
 
-o.signcolumn = "yes" -- always show the sign column
+o.signcolumn = 'yes' -- always show the sign column
 o.updatetime = 200 -- length of time to wait before triggering the plugin
 o.timeoutlen = 250 -- shorten key timeout length for which-key
 
 o.splitbelow = true -- splitting a new window below the current one
 o.splitright = true -- splitting a new window at the right of the current one
-o.splitkeep = "screen"
+o.splitkeep = 'screen'
 
 o.cursorline = true -- highlight the text line of the cursor
-o.clipboard = "unnamedplus" -- connection to the system clipboard
+o.clipboard = 'unnamedplus' -- connection to the system clipboard
 
-o.inccommand = "split" -- preview substitutions live
+o.inccommand = 'split' -- preview substitutions live
 o.expandtab = true -- enable the use of space in tab
 o.shiftwidth = 2 -- number of space inserted for indentation
 o.softtabstop = 2 -- number of spaces that a <Tab> counts for.
 o.tabstop = 2 -- number of space in a tab
 
-o.shortmess:append "sI"
-o.spelllang = "en_us,en_gb,cjk"
+o.shortmess:append 'sI'
+o.spelllang = 'en_us,en_gb,cjk'
 o.spell = true
 o.wrap = true -- soft wrap lines
 o.breakindent = true -- make wrapped lines continue visually indented
-o.showbreak = "↪ "
+o.showbreak = '↪ '
 o.list = true -- show invisible characters.
-o.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+o.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 o.fillchars = {
-  vert = "┃", -- Vertical split
-  fold = "·", -- Folded line indicator
-  eob = " ", -- Empty lines at the end of buffer
-  diff = "╱", -- Deleted lines in diff view
-  msgsep = "‾", -- Message separator
+  vert = '┃', -- Vertical split
+  fold = '·', -- Folded line indicator
+  eob = ' ', -- Empty lines at the end of buffer
+  diff = '╱', -- Deleted lines in diff view
+  msgsep = '‾', -- Message separator
 }
 
 o.termguicolors = true

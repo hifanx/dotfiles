@@ -1,12 +1,14 @@
 -- vim.cmd [[colorscheme catppuccin]]
 return {
-  "catppuccin/nvim",
+  'catppuccin/nvim',
   lazy = false,
   priority = 1000,
-  name = "catppuccin",
-  opts = {
-    flavour = "mocha",
-    transparent_background = false,
-    term_colors = true,
-  },
+  name = 'catppuccin',
+  config = function()
+    require('catppuccin').setup {
+      flavour = 'mocha',
+      transparent_background = false,
+      term_colors = true,
+    }
+  end,
 }
