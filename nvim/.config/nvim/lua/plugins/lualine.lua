@@ -10,57 +10,36 @@ return {
     local theme = function()
       return {
         inactive = {
-          a = { fg = c.text, bg = c.base, gui = 'bold' },
+          a = { fg = c.text, bg = c.base },
           b = { fg = c.text, bg = c.base },
           c = { fg = c.text, bg = c.base },
         },
         visual = {
-          a = { fg = c.mantle, bg = c.peach, gui = 'bold' },
+          a = { fg = c.mantle, bg = c.peach },
           b = { fg = c.peach, bg = c.base },
           c = { fg = c.text, bg = c.base },
         },
         replace = {
-          a = { fg = c.mantle, bg = c.maroon, gui = 'bold' },
+          a = { fg = c.mantle, bg = c.maroon },
           b = { fg = c.maroon, bg = c.base },
           c = { fg = c.text, bg = c.base },
         },
         normal = {
-          a = { fg = c.mantle, bg = c.blue, gui = 'bold' },
+          a = { fg = c.mantle, bg = c.blue },
           b = { fg = c.blue, bg = c.base },
           c = { fg = c.text, bg = c.base },
         },
         insert = {
-          a = { fg = c.mantle, bg = c.green, gui = 'bold' },
+          a = { fg = c.mantle, bg = c.green },
           b = { fg = c.green, bg = c.base },
           c = { fg = c.text, bg = c.base },
         },
         command = {
-          a = { fg = c.mantle, bg = c.yellow, gui = 'bold' },
+          a = { fg = c.mantle, bg = c.yellow },
           b = { fg = c.yellow, bg = c.base },
           c = { fg = c.text, bg = c.base },
         },
       }
-    end
-
-    -- ╭──────────────────────────────────────────────────────────╮
-    -- │ ⬇️ lsp client component                                  │
-    -- ╰──────────────────────────────────────────────────────────╯
-    local lsp = function()
-      local clients = vim.lsp.get_clients()
-      local msg = 'No Active Lsp'
-      if next(clients) == nil then
-        return msg
-      else
-        local co = {}
-        for _, client in ipairs(clients) do
-          if client.name ~= 'copilot' then table.insert(co, client.name) end
-        end
-        if next(co) == nil then
-          return msg
-        else
-          return table.concat(co, '|')
-        end
-      end
     end
 
     -- ╭──────────────────────────────────────────────────────────╮
@@ -152,6 +131,32 @@ return {
             color = { fg = c.peach },
           },
           {
+            'copilot',
+            cond = conditions.is_sif,
+            symbols = {
+              status = {
+                icons = {
+                  enabled = ' ',
+                  sleep = ' ',
+                  disabled = ' ',
+                  warning = ' ',
+                  unknown = ' ',
+                },
+                hl = {
+                  enabled = c.green,
+                  sleep = c.sky,
+                  disabled = c.yellow,
+                  warning = c.peach,
+                  unknown = c.red,
+                },
+              },
+              spinners = require('copilot-lualine.spinners').dots,
+              spinner_color = c.yellow,
+            },
+            show_colors = true,
+            show_loading = true,
+          },
+          {
             'buffers',
             show_filename_only = true,
             hide_filename_extension = true,
@@ -186,38 +191,16 @@ return {
               directory = ' ', -- Text to show when the buffer is a directory
             },
           },
-          {
-            'copilot',
-            cond = conditions.is_sif,
-            symbols = {
-              status = {
-                icons = {
-                  enabled = ' ',
-                  sleep = ' ',
-                  disabled = ' ',
-                  warning = ' ',
-                  unknown = ' ',
-                },
-                hl = {
-                  enabled = c.green,
-                  sleep = c.sky,
-                  disabled = c.yellow,
-                  warning = c.peach,
-                  unknown = c.red,
-                },
-              },
-              spinners = require('copilot-lualine.spinners').dots,
-              spinner_color = c.yellow,
-            },
-            show_colors = true,
-            show_loading = true,
-          },
         },
         lualine_y = {
           {
-            lsp,
+            'lsp_status',
             icon = ' ',
-            color = { gui = 'bold' },
+            symbols = {
+              separator = '',
+            },
+            ignore_lsp = { 'copilot' },
+            show_name = true,
           },
         },
         lualine_z = {
