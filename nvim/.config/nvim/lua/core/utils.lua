@@ -9,14 +9,13 @@ function M.map(mode, lhs, rhs, opts)
 end
 
 -- Compute once using Neovim's native function
-local hostname = vim.loop.os_gethostname():lower()
+local profile = vim.env.NVIM_PROFILE
 local os_name = vim.loop.os_uname().sysname:lower()
 
 -- Store as simple boolean
-M.is_sif = (os_name == 'darwin' and hostname == 'sif.lan')
+M.is_sif = (os_name == 'darwin' and profile == 'sif')
 M.is_macos = (os_name == 'darwin')
 M.is_linux = (os_name == 'linux')
-M.hostname = hostname
 
 function M.start_treesitter(ev)
   local ok, err = pcall(vim.treesitter.start, ev.buf)
