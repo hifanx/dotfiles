@@ -7,7 +7,7 @@ return {
     vim.keymap.set('n', '<leader>.', function() Snacks.scratch() end, { desc = 'Scratch Buffer' })
     vim.keymap.set(
       'n',
-      '<leader>,',
+      '<leader>n',
       function()
         Snacks.win {
           file = vim.fn.stdpath 'config' .. '/tips.md',

@@ -6,7 +6,7 @@ vim.env.PATH = table.concat({ vim.fn.stdpath 'data', 'mason', 'bin' }, sep) .. d
 
 return {
   'williamboman/mason.nvim',
-  event = 'VimEnter',
+  event = 'VeryLazy',
   dependencies = {
     {
       'WhoIsSethDaniel/mason-tool-installer.nvim',

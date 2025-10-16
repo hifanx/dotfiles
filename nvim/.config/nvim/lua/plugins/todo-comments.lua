@@ -5,9 +5,22 @@ return {
   config = function() require('todo-comments').setup() end,
 }
 -- TODO:
--- WARN:
--- FIX:
--- TEST:
 -- INFO:
+-- NOTE:
+-- WARN:
+-- WARNING:
+-- XXX:
+-- FIX:
+-- FIXME:
+-- FIXIT:
+-- ISSUE:
+-- BUG:
+-- TEST:
+-- TESTING:
+-- PASSED:
+-- FAILED:
 -- PERF:
+-- OPTIM:
+-- PERFORMANCE:
+-- OPTIMIZE:
 -- HACK:
