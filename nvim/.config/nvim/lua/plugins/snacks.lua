@@ -135,7 +135,21 @@ return {
  ██████  █████████████████████ ████ █████ █████ ████ ██████ ]],
         },
       },
-      indent = { enabled = true },
+      indent = {
+        enabled = true,
+        indent = {
+          char = '',
+          only_scope = true, -- only show indent guides of the scope
+          only_current = true, -- only show indent guides in the current window
+        },
+        animate = {
+          style = 'up_down',
+          duration = {
+            step = 10, -- ms per step
+            total = 200, -- maximum duration
+          },
+        },
+      },
       input = { enabled = true },
       notifier = {
         enabled = true,
