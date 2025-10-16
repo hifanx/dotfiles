@@ -35,6 +35,7 @@ spec 'plugins.carbon-now' -- screenshot code
 spec 'plugins.inc-rename' -- LSP renaming with immediate visual feedback
 spec 'plugins.vim-tmux-navigator'
 spec 'plugins.which-key'
+spec 'plugins.persistence' -- session manager
 
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ UI                                                    │

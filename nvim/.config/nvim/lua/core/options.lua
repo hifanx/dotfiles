@@ -61,12 +61,23 @@ g.loaded_python3_provider = 0
 g.loaded_perl_provider = 0
 g.loaded_ruby_provider = 0
 
+-- ╭──────────────────────────────────────────────────────────╮
+-- │ ⬇️ Experimental, update when necessary                   │
+-- ╰──────────────────────────────────────────────────────────╯
 require('vim._extui').enable {
-  enable = true, -- Whether to enable or disable the UI.
-  msg = { -- Options related to the message module.
+  enable = true,
+  msg = {
     ---@type 'cmd'|'msg' Where to place regular messages, either in the
     ---cmdline or in a separate ephemeral message window.
-    target = 'cmd',
-    timeout = 4000, -- Time a message is visible in the message window.
+    target = 'msg',
+    timeout = 4000,
   },
 }
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'msg',
+  callback = function()
+    vim.opt_local.winblend = 30
+    vim.opt_local.winhighlight = 'Normal:Normal,FloatBorder:Normal'
+  end,
+})

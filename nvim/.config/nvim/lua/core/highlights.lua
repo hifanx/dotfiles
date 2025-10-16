@@ -11,6 +11,7 @@ M.custom = {
 M.default = {
   FloatBorder = { link = 'BorderInvisibleMantle' },
   FloatTitle = { link = 'TitleUnified' },
+  MsgSeparator = { link = 'NonText' },
 }
 
 M.lsp = {

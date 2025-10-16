@@ -3,15 +3,11 @@ return {
   'folke/snacks.nvim',
   priority = 1000,
   lazy = false,
-  dependencies = {
-    { 'folke/persistence.nvim', opts = {} },
-  },
   init = function()
-    vim.keymap.set('n', '<Leader>.', function() Snacks.scratch() end, { desc = 'Scratch Buffer' })
-
+    vim.keymap.set('n', '<leader>.', function() Snacks.scratch() end, { desc = 'Scratch Buffer' })
     vim.keymap.set(
       'n',
-      '<Leader>,',
+      '<leader>,',
       function()
         Snacks.win {
           file = vim.fn.stdpath 'config' .. '/tips.md',
@@ -26,12 +22,9 @@ return {
           },
         }
       end,
-      { desc = 'Vim Notes' }
+      { desc = 'Vim [N]otes' }
     )
-
-    vim.keymap.set('n', '<leader>n', function() Snacks.notifier.show_history() end, { desc = '[N]otification' })
     vim.keymap.set('n', '<c-/>', function() Snacks.terminal() end, { desc = 'Toggle Terminal' })
-    vim.keymap.set('n', '<c-_>', function() Snacks.terminal() end, { desc = 'which_key_ignore' })
     vim.keymap.set({ 'n', 't' }, ']]', function() Snacks.words.jump(vim.v.count1) end, { desc = 'Next Reference' })
     vim.keymap.set({ 'n', 't' }, '[[', function() Snacks.words.jump(-vim.v.count1) end, { desc = 'Prev Reference' })
     vim.keymap.set('n', '<C-x>', function() Snacks.bufdelete() end, { desc = '[D]elete Buffer' })
@@ -47,10 +40,10 @@ return {
       function() Snacks.picker.lsp_type_definitions() end,
       { desc = '[G]oto T[y]pe Definition' }
     )
-    vim.keymap.set('n', '<Leader>ls', function() Snacks.picker.lsp_symbols() end, { desc = 'LSP [S]ymbols' })
+    vim.keymap.set('n', '<leader>ls', function() Snacks.picker.lsp_symbols() end, { desc = 'LSP [S]ymbols' })
     vim.keymap.set(
       'n',
-      '<Leader>lS',
+      '<leader>lS',
       function() Snacks.picker.lsp_workspace_symbols() end,
       { desc = 'LSP Workspace [S]ymbols' }
     )
@@ -60,7 +53,7 @@ return {
 
     -- Find
     vim.keymap.set('n', '<leader>fh', function() Snacks.picker.help() end, { desc = '[H]elp Pages' })
-    vim.keymap.set('n', '<Leader>fH', function() Snacks.picker.highlights() end, { desc = '[H]ighlights' })
+    vim.keymap.set('n', '<leader>fH', function() Snacks.picker.highlights() end, { desc = '[H]ighlights' })
     vim.keymap.set('n', '<leader>ff', function() Snacks.picker.files() end, { desc = '[F]iles' })
     vim.keymap.set('n', '<leader>fr', function() Snacks.picker.recent() end, { desc = '[R]ecent' })
     vim.keymap.set('n', '<leader>f/', function() Snacks.picker.search_history() end, { desc = 'Search History' })
@@ -96,21 +89,21 @@ return {
     )
 
     -- Git
-    vim.keymap.set('n', '<Leader>gb', function() Snacks.git.blame_line() end, { desc = '[G]it [B]lame Line' })
+    vim.keymap.set('n', '<leader>gb', function() Snacks.git.blame_line() end, { desc = '[G]it [B]lame Line' })
     vim.keymap.set('n', '<leader>gB', function() Snacks.picker.git_branches() end, { desc = '[G]it [B]ranches' })
     vim.keymap.set('n', '<leader>gl', function() Snacks.picker.git_log() end, { desc = '[G]it [L]og' })
     vim.keymap.set('n', '<leader>gL', function() Snacks.picker.git_log_line() end, { desc = '[G]it [L]og Line' })
     vim.keymap.set('n', '<leader>gd', function() Snacks.picker.git_diff() end, { desc = '[G]it [D]iff (Hunks)' })
     vim.keymap.set('n', '<leader>gf', function() Snacks.picker.git_log_file() end, { desc = '[G]it Log [F]ile' })
-    vim.keymap.set({ 'n', 'v' }, '<Leader>go', function() Snacks.gitbrowse() end, { desc = '[O]pen in Browser' })
+    vim.keymap.set({ 'n', 'v' }, '<leader>go', function() Snacks.gitbrowse() end, { desc = '[O]pen in Browser' })
     vim.keymap.set(
       'n',
-      '<Leader>gh',
+      '<leader>gh',
       function() Snacks.lazygit.log_file() end,
       { desc = 'Lazy[g]it Current File [H]istory' }
     )
-    vim.keymap.set('n', '<Leader>gg', function() Snacks.lazygit() end, { desc = 'Lazy[g]it' })
-    vim.keymap.set('n', '<Leader>gl', function() Snacks.lazygit.log() end, { desc = 'Lazy[g]it [L]og' })
+    vim.keymap.set('n', '<leader>gg', function() Snacks.lazygit() end, { desc = 'Lazy[g]it' })
+    vim.keymap.set('n', '<leader>gl', function() Snacks.lazygit.log() end, { desc = 'Lazy[g]it [L]og' })
   end,
   config = function()
     require('snacks').setup {
@@ -142,22 +135,9 @@ return {
           only_scope = true, -- only show indent guides of the scope
           only_current = true, -- only show indent guides in the current window
         },
-        animate = {
-          style = 'up_down',
-          duration = {
-            step = 10, -- ms per step
-            total = 200, -- maximum duration
-          },
-        },
       },
       input = { enabled = true },
-      notifier = {
-        enabled = true,
-        margin = { top = 1, right = 1, bottom = 2 },
-        timeout = 5000, -- default: 3000
-        top_down = false, -- false = down to top
-        style = 'minimal',
-      },
+      notifier = { enabled = false },
       quickfile = { enabled = true },
       statuscolumn = { enabled = true },
       words = { enabled = true },
