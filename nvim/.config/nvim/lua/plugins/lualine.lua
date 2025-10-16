@@ -3,41 +3,41 @@ return {
   event = { 'BufReadPre', 'BufNewFile' },
   dependencies = { 'nvim-mini/mini.icons', 'AndreM222/copilot-lualine' },
   config = function()
-    local c = require('core.palette').catppuccin
     -- ╭──────────────────────────────────────────────────────────╮
     -- │ ⬇️ themes                                                │
     -- ╰──────────────────────────────────────────────────────────╯
+    local c = require('core.palette').catppuccin
     local theme = function()
       return {
         inactive = {
-          a = { fg = c.text, bg = c.base },
-          b = { fg = c.text, bg = c.base },
-          c = { fg = c.text, bg = c.base },
+          a = { fg = c.subtext0, bg = c.base },
+          b = { fg = c.subtext0, bg = c.surface0 },
+          c = { fg = c.subtext0, bg = c.base },
         },
         visual = {
           a = { fg = c.mantle, bg = c.peach },
-          b = { fg = c.peach, bg = c.base },
-          c = { fg = c.text, bg = c.base },
+          b = { fg = c.peach, bg = c.surface0 },
+          c = { fg = c.subtext0, bg = c.base },
         },
         replace = {
           a = { fg = c.mantle, bg = c.maroon },
-          b = { fg = c.maroon, bg = c.base },
-          c = { fg = c.text, bg = c.base },
+          b = { fg = c.maroon, bg = c.surface0 },
+          c = { fg = c.subtext0, bg = c.base },
         },
         normal = {
           a = { fg = c.mantle, bg = c.blue },
-          b = { fg = c.blue, bg = c.base },
-          c = { fg = c.text, bg = c.base },
+          b = { fg = c.blue, bg = c.surface0 },
+          c = { fg = c.subtext0, bg = c.base },
         },
         insert = {
           a = { fg = c.mantle, bg = c.green },
-          b = { fg = c.green, bg = c.base },
-          c = { fg = c.text, bg = c.base },
+          b = { fg = c.green, bg = c.surface0 },
+          c = { fg = c.subtext0, bg = c.base },
         },
         command = {
           a = { fg = c.mantle, bg = c.yellow },
-          b = { fg = c.yellow, bg = c.base },
-          c = { fg = c.text, bg = c.base },
+          b = { fg = c.yellow, bg = c.surface0 },
+          c = { fg = c.subtext0, bg = c.base },
         },
       }
     end
@@ -47,11 +47,6 @@ return {
     -- ╰──────────────────────────────────────────────────────────╯
     local lazy_status = require 'lazy.status'
     local lazy = function() return lazy_status.updates() end
-
-    -- ╭──────────────────────────────────────────────────────────╮
-    -- │ ⬇️ vim component                                         │
-    -- ╰──────────────────────────────────────────────────────────╯
-    local vim_icon = function() return '' end
 
     -- ╭──────────────────────────────────────────────────────────╮
     -- │ ⬇️ conditions for components to show                     │
@@ -67,11 +62,6 @@ return {
     -- │ ⬇️ setup the thing                                       │
     -- ╰──────────────────────────────────────────────────────────╯
     require('lualine').setup {
-      disabled_filetypes = {
-        winbar = {
-          'noice',
-        },
-      },
       options = {
         theme = theme,
         globalstatus = true,
@@ -81,15 +71,14 @@ return {
       sections = {
         lualine_a = {
           {
-            vim_icon,
-          },
-          {
             'mode',
+            icon = '',
           },
         },
         lualine_b = {
           {
             'branch',
+            icon = { ' ' },
           },
         },
         lualine_c = {
