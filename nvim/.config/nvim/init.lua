@@ -11,39 +11,42 @@ require 'core.keymaps'
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ ESSENTIALS                                            │
 -- ╰──────────────────────────────────────────────────────────╯
-spec 'plugins.blink'
-spec 'plugins.conform'
-spec 'plugins.mason'
-spec 'plugins.nvim-lint'
-spec 'plugins.nvim-treesitter'
-spec 'plugins.which-key'
+spec 'plugins.blink' -- completion
+spec 'plugins.conform' -- format
+spec 'plugins.mason' -- auto install lsp, formatter, linter
+spec 'plugins.nvim-lint' -- linting
+spec 'plugins.nvim-treesitter' -- syntax highlighting
+spec 'plugins.snacks' -- to be deleted
 
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ EDITOR                                                │
 -- ╰──────────────────────────────────────────────────────────╯
 spec 'plugins.better-escape'
-spec 'plugins.carbon-now' -- screenshot code
-spec 'plugins.gitsigns'
-spec 'plugins.inc-rename' -- LSP renaming with immediate visual feedback
 spec 'plugins.nvim-autopairs'
 spec 'plugins.nvim-surround'
 spec 'plugins.nvim-ts-autotag'
 spec 'plugins.pangu' -- auto format to add a space between cjk and english letters
-spec 'plugins.snacks'
-spec 'plugins.ts-comments' -- enhance neovim's native comments, neovim natively supports comment now
+spec 'plugins.ts-comments' -- enhance neovim's native comments
+
+-- ╭──────────────────────────────────────────────────────────╮
+-- │ ⬇️ Tools                                                 │
+-- ╰──────────────────────────────────────────────────────────╯
+spec 'plugins.carbon-now' -- screenshot code
+spec 'plugins.inc-rename' -- LSP renaming with immediate visual feedback
 spec 'plugins.vim-tmux-navigator'
+spec 'plugins.which-key'
 
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ UI                                                    │
 -- ╰──────────────────────────────────────────────────────────╯
 spec 'plugins.catppuccin'
+spec 'plugins.gitsigns'
 spec 'plugins.lualine'
-spec 'plugins.noice' -- only for redirecting messages to vim.notify e.g. xx lines written/yanked
+spec 'plugins.mini-icons'
 spec 'plugins.nvim-colorizer'
 spec 'plugins.render-markdown'
-spec 'plugins.todo-comments'
 spec 'plugins.smear-cursor' -- animated cursor
-spec 'plugins.mini-icons'
+spec 'plugins.todo-comments'
 
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ AI                                                    │
