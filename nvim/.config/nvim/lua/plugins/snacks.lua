@@ -130,10 +130,20 @@ return {
       },
       indent = {
         enabled = true,
+        animate = {
+          duration = {
+            step = 20, -- ms per step
+            total = 200, -- maximum duration
+          },
+        },
         indent = {
           char = '',
           only_scope = true, -- only show indent guides of the scope
           only_current = true, -- only show indent guides in the current window
+        },
+        scope = {
+          char = '',
+          only_current = true, -- only show scope in the current window
         },
       },
       input = { enabled = true },
