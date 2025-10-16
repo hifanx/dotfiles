@@ -11,6 +11,7 @@ o.relativenumber = true -- show relative numberline
 o.mouse = 'a' -- enable mouse support
 o.laststatus = 3 -- global statusline
 o.cmdheight = 1 -- height of the command bar, default: 1
+o.ruler = false -- no position info at cmdline
 o.backup = false -- disable backup
 o.showmode = false -- disable showing modes in command line since it's already in the status line
 o.smartindent = true -- do smart autoindenting.
