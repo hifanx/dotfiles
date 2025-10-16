@@ -172,6 +172,7 @@ return {
       },
       styles = {
         scratch = {
+          minimal = true,
           wo = {
             winhighlight = 'Normal:NormalFloat',
           },
