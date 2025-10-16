@@ -8,11 +8,11 @@ return {
     'TmuxNavigatePrevious',
     'TmuxNavigatorProcessList',
   },
-  keys = {
-    { '<C-h>', ':<C-U>TmuxNavigateLeft<CR>' },
-    { '<C-j>', ':<C-U>TmuxNavigateDown<CR>' },
-    { '<C-k>', ':<C-U>TmuxNavigateUp<CR>' },
-    { '<C-l>', ':<C-U>TmuxNavigateRight<CR>' },
-    { '<C-\\>', ':<C-U>TmuxNavigatePrevious<CR>' },
-  },
+  init = function()
+    vim.keymap.set('n', '<C-h>', ':<C-U>TmuxNavigateLeft<CR>')
+    vim.keymap.set('n', '<C-j>', ':<C-U>TmuxNavigateDown<CR>')
+    vim.keymap.set('n', '<C-k>', ':<C-U>TmuxNavigateUp<CR>')
+    vim.keymap.set('n', '<C-l>', ':<C-U>TmuxNavigateRight<CR>')
+    vim.keymap.set('n', '<C-\\>', ':<C-U>TmuxNavigatePrevious<CR>')
+  end,
 }

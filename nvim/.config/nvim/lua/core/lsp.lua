@@ -11,19 +11,17 @@ end
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('lsp_attach', { clear = true }),
   callback = function(event)
-    local m = require('core.utils').map
     local client = vim.lsp.get_client_by_id(event.data.client_id)
     if not client then return end
 
-    m('n', 'gh', vim.diagnostic.open_float, { desc = '[G]oto [H]over Diagnostic' })
-    m({ 'n', 'v' }, '<Leader>la', vim.lsp.buf.code_action, { desc = 'Code [A]ction' })
-    m('n', '<Leader>lh', vim.lsp.buf.signature_help, { desc = 'Signature [H]elp' })
-    m('n', '<leader>li', ':LspInfo<CR>', { desc = 'LSP [I]nfo' })
-    m('n', '<Leader>lr', vim.lsp.buf.rename, { desc = '[R]ename' })
+    vim.keymap.set('n', 'gh', vim.diagnostic.open_float, { desc = '[G]oto [H]over Diagnostic' })
+    vim.keymap.set({ 'n', 'v' }, '<Leader>la', vim.lsp.buf.code_action, { desc = 'Code [A]ction' })
+    vim.keymap.set('n', '<Leader>lh', vim.lsp.buf.signature_help, { desc = 'Signature [H]elp' })
+    vim.keymap.set('n', '<Leader>lr', vim.lsp.buf.rename, { desc = '[R]ename' })
 
     if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_codeLens) then
-      m('n', '<Leader>ll', vim.lsp.codelens.refresh, { desc = 'Code[L]ens refresh' })
-      m('n', '<Leader>lL', vim.lsp.codelens.run, { desc = 'Code[L]ens run' })
+      vim.keymap.set('n', '<Leader>ll', vim.lsp.codelens.refresh, { desc = 'Code[L]ens refresh' })
+      vim.keymap.set('n', '<Leader>lL', vim.lsp.codelens.run, { desc = 'Code[L]ens run' })
     end
 
     if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint) then

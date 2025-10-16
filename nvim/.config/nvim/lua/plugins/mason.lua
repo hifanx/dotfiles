@@ -7,9 +7,6 @@ vim.env.PATH = table.concat({ vim.fn.stdpath 'data', 'mason', 'bin' }, sep) .. d
 return {
   'williamboman/mason.nvim',
   event = 'VimEnter',
-  keys = {
-    { '<leader>hm', ':Mason<CR>', desc = 'Mason' },
-  },
   dependencies = {
     {
       'WhoIsSethDaniel/mason-tool-installer.nvim',
@@ -52,5 +49,6 @@ return {
       end,
     },
   },
+  init = function() vim.keymap.set('n', '<leader>hm', ':Mason<CR>', { desc = 'Mason' }) end,
   config = function() require('mason').setup {} end,
 }

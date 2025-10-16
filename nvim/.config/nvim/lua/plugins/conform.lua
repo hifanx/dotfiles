@@ -1,15 +1,16 @@
 return {
   'stevearc/conform.nvim',
   cmd = { 'ConformInfo' },
-  keys = {
-    {
+  init = function()
+    vim.keymap.set(
+      { 'n', 'v' },
       '<Leader>lf',
       function() require('conform').format { async = true, lsp_fallback = true } end,
-      mode = '',
-      desc = '[F]ormat buffer',
-    },
-    { '<Leader>hI', ':ConformInfo<CR>', mode = 'n', desc = '[C]onform info' },
-  },
+      { desc = '[F]ormat buffer' }
+    )
+    vim.keymap.set('n', '<Leader>hI', ':ConformInfo<CR>', { desc = '[C]onform info' })
+    vim.keymap.set('n', '<leader>hi', ':LspInfo<CR>', { desc = 'LSP [I]nfo' })
+  end,
   config = function()
     require('conform').setup {
       formatters_by_ft = {
