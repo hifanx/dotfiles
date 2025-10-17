@@ -441,7 +441,7 @@ GLOB.new_autocmd(
 )
 
 GLOB.new_autocmd('ColorScheme', nil, function()
-  local M = require 'lua.highlights'
+  local M = require 'highlights'
   for _, group in pairs(M) do
     for name, attrs in pairs(group) do
       vim.api.nvim_set_hl(0, name, attrs)
