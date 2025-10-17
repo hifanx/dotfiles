@@ -1,6 +1,6 @@
 return {
   'yetone/avante.nvim',
-  enabled = require('core.utils').is_sif, -- only use on my macbook
+  enabled = GLOB.is_sif, -- only use on my macbook
   build = vim.fn.has 'win32' ~= 0 and 'powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false'
     or 'make',
   event = 'VeryLazy',
@@ -9,12 +9,12 @@ return {
     'MunifTanjim/nui.nvim',
   },
   config = function()
-    vim.api.nvim_create_autocmd('FileType', {
-      desc = 'Enable treesitter for Avante',
-      group = vim.api.nvim_create_augroup('avante_treesitter)', { clear = true }),
-      pattern = { 'Avante' },
-      callback = function(ev) require('core.utils').start_treesitter(ev) end,
-    })
+    GLOB.new_autocmd(
+      'FileType',
+      { 'Avante' },
+      function(ev) vim.treesitter.start(ev.buf) end,
+      'Start treesitter for Avante'
+    )
     require('avante').setup {
       provider = 'copilot',
       input = {

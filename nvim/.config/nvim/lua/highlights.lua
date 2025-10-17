@@ -1,6 +1,6 @@
 local M = {}
 
-local c = require('core.palette').catppuccin
+local c = require('palette').catppuccin
 
 M.custom = {
   MenuSelected = { fg = c.mantle, bg = c.green },
@@ -63,11 +63,5 @@ M.snacks = {
   SnacksDashboardDesc = { fg = c.lavender, bg = 'none' },
   SnacksDashboardKey = { fg = c.peach, bg = 'none' },
 }
-
-for _, group in pairs(M) do
-  for name, attrs in pairs(group) do
-    vim.api.nvim_set_hl(0, name, attrs)
-  end
-end
 
 return M

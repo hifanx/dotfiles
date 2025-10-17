@@ -1,6 +1,6 @@
 return {
   'zbirenbaum/copilot.lua',
-  enabled = require('core.utils').is_sif, -- only use on my macbook
+  enabled = GLOB.is_sif, -- only use on my macbook
   event = 'InsertEnter',
   cmd = 'Copilot',
   build = ':Copilot auth',

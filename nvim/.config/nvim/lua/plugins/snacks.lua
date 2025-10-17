@@ -129,7 +129,7 @@ return {
         },
       },
       indent = {
-        enabled = true,
+        enabled = false,
         animate = {
           duration = {
             step = 20, -- ms per step
@@ -146,11 +146,11 @@ return {
           only_current = true, -- only show scope in the current window
         },
       },
-      input = { enabled = true },
+      input = { enabled = false },
       notifier = { enabled = false },
-      quickfile = { enabled = true },
+      quickfile = { enabled = false },
       statuscolumn = { enabled = true },
-      words = { enabled = true },
+      words = { enabled = false },
       scope = { enabled = true },
       image = { enabled = false },
       explorer = { enabled = true },
