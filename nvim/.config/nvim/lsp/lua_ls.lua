@@ -20,22 +20,16 @@ return {
       completion = {
         callSnippet = 'Replace',
       },
-      runtime = { -- NOTE: need this or gd in init.lua for spec won't work
-        version = 'LuaJIT',
-        special = {
-          spec = 'require',
-        },
-      },
+      -- NOTE: need this or gd in init.lua for spec won't work
+      runtime = { version = 'LuaJIT', path = vim.split(package.path, ';') },
       diagnostics = {
         globals = { 'vim', 'spec' },
         disable = { 'missing-fields' },
       },
       workspace = {
         checkThirdParty = false,
-        library = {
-          [vim.fn.expand '$VIMRUNTIME/lua'] = true,
-          [vim.fn.stdpath 'config' .. '/lua'] = true,
-        },
+        ignoreSubmodules = true,
+        library = { vim.env.VIMRUNTIME },
       },
     },
   },
