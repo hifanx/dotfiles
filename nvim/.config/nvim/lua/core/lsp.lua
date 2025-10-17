@@ -6,28 +6,60 @@ for _, bind in ipairs { 'grn', 'gra', 'gri', 'grr' } do
 end
 
 -- ╭──────────────────────────────────────────────────────────╮
--- │ ⬇️ setup keymaps                                         │
+-- │ ⬇️ setup lsp attach                                      │
 -- ╰──────────────────────────────────────────────────────────╯
+
+-- Create augroups ONCE outside the callback
+local highlight_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = true })
+local detach_augroup = vim.api.nvim_create_augroup('lsp-detach', { clear = true })
+
 vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('lsp_attach', { clear = true }),
-  callback = function(event)
-    local client = vim.lsp.get_client_by_id(event.data.client_id)
+  group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
     if not client then return end
 
-    vim.keymap.set('n', 'gh', vim.diagnostic.open_float, { desc = '[G]oto [H]over Diagnostic' })
-    vim.keymap.set({ 'n', 'v' }, '<Leader>la', vim.lsp.buf.code_action, { desc = 'Code [A]ction' })
-    vim.keymap.set('n', '<Leader>lh', vim.lsp.buf.signature_help, { desc = 'Signature [H]elp' })
-    vim.keymap.set('n', '<Leader>lr', vim.lsp.buf.rename, { desc = '[R]ename' })
+    -- Buffer-local keymaps (won't duplicate)
+    -- Buffer-local keymaps
+    vim.keymap.set('n', 'gh', vim.diagnostic.open_float, { buffer = ev.buf, desc = '[G]oto [H]over Diagnostic' })
+    vim.keymap.set({ 'n', 'v' }, '<leader>la', vim.lsp.buf.code_action, { buffer = ev.buf, desc = 'Code [A]ction' })
+    vim.keymap.set('n', '<leader>lh', vim.lsp.buf.signature_help, { buffer = ev.buf, desc = 'Signature [H]elp' })
+    vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, { buffer = ev.buf, desc = '[R]ename' })
 
+    -- CodeLens support
     if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_codeLens) then
-      vim.keymap.set('n', '<Leader>ll', vim.lsp.codelens.refresh, { desc = 'Code[L]ens refresh' })
-      vim.keymap.set('n', '<Leader>lL', vim.lsp.codelens.run, { desc = 'Code[L]ens run' })
+      vim.keymap.set('n', '<leader>ll', vim.lsp.codelens.refresh, { buffer = ev.buf, desc = 'Code[L]ens refresh' })
+      vim.keymap.set('n', '<leader>lL', vim.lsp.codelens.run, { buffer = ev.buf, desc = 'Code[L]ens run' })
     end
 
+    -- Inlay hints
     if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint) then
-      vim.g.inlay_hints_visible = true
-      vim.lsp.inlay_hint.enable(true)
+      vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
     end
+
+    -- Document highlight - buffer-specific autocmds
+    if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+      vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+        buffer = ev.buf,
+        group = highlight_augroup,
+        callback = vim.lsp.buf.document_highlight,
+      })
+
+      vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+        buffer = ev.buf,
+        group = highlight_augroup,
+        callback = vim.lsp.buf.clear_references,
+      })
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd('LspDetach', {
+  group = detach_augroup,
+  callback = function(ev)
+    vim.lsp.buf.clear_references()
+    -- Clear only buffer-specific autocmds
+    vim.api.nvim_clear_autocmds { group = highlight_augroup, buffer = ev.buf }
   end,
 })
 
