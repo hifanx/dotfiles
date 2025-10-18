@@ -10,12 +10,12 @@ return {
     'MunifTanjim/nui.nvim',
   },
   config = function()
-    GLOB.new_autocmd(
-      'FileType',
-      { 'Avante' },
-      function(ev) vim.treesitter.start(ev.buf) end,
-      'Start treesitter for Avante'
-    )
+    vim.api.nvim_create_autocmd('FileType', {
+      desc = 'Start treesitter for Avante',
+      pattern = 'Avante',
+      callback = function(ev) vim.treesitter.start(ev.buf) end,
+    })
+
     require('avante').setup({
       provider = 'copilot',
       input = {

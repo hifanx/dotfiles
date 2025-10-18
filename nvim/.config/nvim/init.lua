@@ -6,15 +6,6 @@ local LAZY_PLUGIN_SPEC = {}
 local function spec(item) table.insert(LAZY_PLUGIN_SPEC, { import = item }) end
 
 -- ╭──────────────────────────────────────────────────────────╮
--- │ ⬇️ Abstract autocmd creation                             │
--- ╰──────────────────────────────────────────────────────────╯
-local gr = vim.api.nvim_create_augroup('custom-config', { clear = true })
-function _G.GLOB.new_autocmd(event, pattern, callback, desc)
-  local opts = { group = gr, pattern = pattern, callback = callback, desc = desc }
-  vim.api.nvim_create_autocmd(event, opts)
-end
-
--- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ Namespaced profile                                    │
 -- ╰──────────────────────────────────────────────────────────╯
 local profile = vim.env.NVIM_PROFILE
@@ -58,7 +49,7 @@ o.breakindent = true -- make wrapped lines continue visually indented
 -- special UI symbols
 o.list = true -- show invisible characters.
 o.listchars = 'extends:…,nbsp:␣,precedes:…,tab:> ,trail:·'
-o.fillchars = 'eob: ,fold:╌'
+o.fillchars = 'eob: ,fold:╌,foldclose:,foldopen:'
 
 -- statusline
 o.laststatus = 0 -- never a statusline
@@ -244,10 +235,10 @@ vim.keymap.set(
 -- ╰──────────────────────────────────────────────────────────╯
 spec('plugins.blink') -- completion
 spec('plugins.conform') -- format
-spec('plugins.mason') -- auto install lsp, formatter, linter
+spec('plugins.mason') -- auto install lsp server, formatter, linter
 spec('plugins.nvim-lint') -- linting
 spec('plugins.nvim-treesitter') -- syntax highlighting
-spec('plugins.snacks') -- to be deleted
+spec('plugins.snacks') -- XXX:to be deleted
 
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ EDITOR                                                │
@@ -528,42 +519,43 @@ vim.lsp.enable(servers)
 
 -- autocmd {{{
 
-GLOB.new_autocmd(
-  'TextYankPost',
-  nil,
-  function() vim.hl.on_yank({ higroup = 'IncSearch', timeout = 300 }) end,
-  'Highlight when yanking (copying) text'
-)
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('highlight_yanked_text', { clear = true }),
+  callback = function() vim.hl.on_yank({ higroup = 'IncSearch', timeout = 300 }) end,
+})
 
-GLOB.new_autocmd('ColorScheme', nil, function()
-  local M = require('highlights')
-  for _, group in pairs(M) do
-    for name, attrs in pairs(group) do
-      vim.api.nvim_set_hl(0, name, attrs)
+vim.api.nvim_create_autocmd('ColorScheme', {
+  desc = 'Set highlights after colorscheme loaded',
+  group = vim.api.nvim_create_augroup('highlight_colorscheme', { clear = true }),
+  callback = function()
+    local M = require('highlights')
+    for _, group in pairs(M) do
+      for name, attrs in pairs(group) do
+        vim.api.nvim_set_hl(0, name, attrs)
+      end
     end
-  end
-  vim.notify(
-    'Colorscheme loaded and highlights set',
-    vim.log.levels.INFO,
-    { title = 'Neovim' }
-  )
-end, 'Set highlights after colorscheme loaded')
+    vim.notify(
+      'Colorscheme loaded and highlights set',
+      vim.log.levels.INFO,
+      { title = 'Neovim' }
+    )
+  end,
+})
 
-GLOB.new_autocmd(
-  { 'CursorHold', 'CursorHoldI' },
-  nil,
-  function() vim.diagnostic.open_float(nil, { focus = false }) end,
-  'Show lsp line diagnostics automatically in hover window'
-)
+vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+  desc = 'Show lsp line diagnostics automatically in hover window',
+  group = vim.api.nvim_create_augroup('hover_diagnostics', { clear = true }),
+  callback = function() vim.diagnostic.open_float(nil, { focus = false }) end,
+})
 
 -- Don't auto-wrap comments and don't insert comment leader after hitting 'o'.
 -- Do on `FileType` to always override these changes from filetype plugins.
-GLOB.new_autocmd(
-  'FileType',
-  nil,
-  function() vim.cmd('setlocal formatoptions-=c formatoptions-=o') end,
-  "Proper 'formatoptions'"
-)
+vim.api.nvim_create_autocmd('FileType', {
+  desc = 'Proper "formatoptions"',
+  group = vim.api.nvim_create_augroup('formatoptions', { clear = true }),
+  callback = function() vim.cmd('setlocal formatoptions-=c formatoptions-=o') end,
+})
 
 -- }}}
 

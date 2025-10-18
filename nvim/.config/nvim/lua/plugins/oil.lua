@@ -7,9 +7,11 @@ return {
   init = function() vim.keymap.set('n', '<leader>o', ':Oil<CR>', { desc = '[O]il' }) end,
   config = function()
     require('oil').setup({
-      default_file_explorer = false,
+      default_file_explorer = true,
+      delete_to_trash = true,
       view_options = {
         show_hidden = true,
+        is_always_hidden = function(name, _) return name == '.git' end,
       },
       use_default_keymaps = true,
       -- See :help oil-actions for a list of all available actions

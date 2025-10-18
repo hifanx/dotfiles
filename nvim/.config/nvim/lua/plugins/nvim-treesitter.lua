@@ -48,7 +48,12 @@ return {
     local ts_start = function(ev) vim.treesitter.start(ev.buf) end
 
     -- WARN: Do not use "*" here - snacks.nvim is buggy and vim.notify triggers FileType events internally causing infinite callback loops
-    GLOB.new_autocmd('FileType', filetypes, ts_start, 'Start treesitter')
+    vim.api.nvim_create_autocmd('FileType', {
+      desc = 'Start treesitter',
+      group = vim.api.nvim_create_augroup('start_treesitter', { clear = true }),
+      pattern = filetypes,
+      callback = ts_start,
+    })
   end,
   config = function() require('nvim-treesitter').setup() end,
 }
