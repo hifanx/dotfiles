@@ -26,61 +26,79 @@ _G.GLOB.is_sif = (os_name == 'darwin' and profile == 'sif')
 
 -- options {{{
 
+-- ╭──────────────────────────────────────────────────────────╮
+-- │ ⬇️ Option section                                        │
+-- ╰──────────────────────────────────────────────────────────╯
 local o = vim.opt
 local g = vim.g
 
+-- general
 g.mapleader = ' '
-g.gmaplocalleader = ','
-
-o.winborder = 'solid'
+o.mouse = 'a' -- enable mouse support
 o.undofile = true -- enable persistent undo
+o.clipboard = 'unnamedplus' -- connection to the system clipboard
+o.backup = false -- disable backup
+o.confirm = true -- Confirm to save changes before exiting modified buffer
+o.iskeyword = '@,48-57,_,192-255,-' -- Treat dash as `word` textobject part
+o.termguicolors = true
+
+-- ui
+o.winborder = 'rounded'
+o.cursorline = true -- highlight the text line of the cursor
 o.number = true -- show numberline
 o.relativenumber = true -- show relative numberline
-o.mouse = 'a' -- enable mouse support
-o.laststatus = 3 -- global statusline
-o.cmdheight = 1 -- height of the command bar, default: 1
-o.ruler = false -- no position info at cmdline
-o.backup = false -- disable backup
-o.showmode = false -- disable showing modes in command line since it's already in the status line
-o.smartindent = true -- do smart autoindenting.
-o.confirm = true -- Confirm to save changes before exiting modified buffer
-o.scrolloff = 15 -- minimum number of lines to keep above and below the cursor.
-o.hlsearch = true -- highlight search results as you type.
-
--- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
-o.ignorecase = true
-o.smartcase = true
-
 o.signcolumn = 'yes' -- always show the sign column
-o.updatetime = 200 -- length of time to wait before triggering the plugin
-o.timeoutlen = 250 -- shorten key timeout length for which-key
+o.cmdheight = 1 -- height of the command bar, default: 1
 
-o.splitbelow = true -- splitting a new window below the current one
-o.splitright = true -- splitting a new window at the right of the current one
-o.splitkeep = 'screen'
-
-o.cursorline = true -- highlight the text line of the cursor
-o.clipboard = 'unnamedplus' -- connection to the system clipboard
-
-o.inccommand = 'split' -- preview substitutions live
-o.expandtab = true -- enable the use of space in tab
-o.shiftwidth = 2 -- number of space inserted for indentation
-o.softtabstop = 2 -- number of spaces that a <Tab> counts for.
-o.tabstop = 2 -- number of space in a tab
-
-o.shortmess:append 'sI'
-o.spelllang = 'en_us,en_gb,cjk'
-o.spell = true
+-- wrapping
 o.wrap = true -- soft wrap lines
-o.breakindent = true -- make wrapped lines continue visually indented
 o.showbreak = '↪ '
+o.breakindent = true -- make wrapped lines continue visually indented
+
+-- special UI symbols
 o.list = true -- show invisible characters.
 o.listchars = 'extends:…,nbsp:␣,precedes:…,tab:> ,trail:·'
 o.fillchars = 'eob: ,fold:╌'
 
-o.termguicolors = true
+-- statusline
+o.laststatus = 0 -- never a statusline
+o.ruler = false -- no position info at cmdline
+o.showmode = false -- disable showing modes in command line since it's already in the status line
 
-o.iskeyword = '@,48-57,_,192-255,-' -- Treat dash as `word` textobject part
+-- splitting
+o.splitbelow = true -- splitting a new window below the current one
+o.splitright = true -- splitting a new window at the right of the current one
+o.splitkeep = 'screen'
+
+-- scrolling
+o.scrolloff = 15 -- minimum number of lines to keep above and below the cursor.
+
+-- editing
+o.updatetime = 200 -- length of time to wait before triggering the plugin
+o.timeoutlen = 250 -- shorten key timeout length for which-key
+o.inccommand = 'split' -- preview substitutions live
+
+-- check spell
+o.spell = true
+o.spelllang = 'en_us,en_gb,cjk'
+
+-- indenting
+o.expandtab = true -- convert tabs to spaces
+o.shiftwidth = 2 -- number of space inserted for indentation
+o.softtabstop = 2 -- number of spaces that a <Tab> counts for.
+o.tabstop = 2 -- number of space in a tab
+o.smartindent = true -- do smart auto indenting.
+
+-- searching
+o.ignorecase = true -- ignore case during search
+o.smartcase = true -- respect case if search pattern has upper case
+o.hlsearch = true -- highlight search results as you type.
+
+-- folding
+o.foldmethod = 'marker'
+o.foldmarker = '{{{,}}}' -- this is the default
+o.foldlevel = 0 -- start with all folds closed
+o.foldlevelstart = 0 -- open files with folds closed
 
 -- disable some default providers
 g.loaded_node_provider = 0
@@ -91,7 +109,7 @@ g.loaded_ruby_provider = 0
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ Experimental, update when necessary                   │
 -- ╰──────────────────────────────────────────────────────────╯
-require('vim._extui').enable {
+require('vim._extui').enable({
   enable = true,
   msg = {
     ---@type 'cmd'|'msg' Where to place regular messages, either in the
@@ -99,7 +117,7 @@ require('vim._extui').enable {
     target = 'msg',
     timeout = 4000,
   },
-}
+})
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'msg',
@@ -158,9 +176,24 @@ vim.keymap.set('n', '<Esc>', ':noh<CR>', { desc = 'Clear Highlights' })
 -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
 -- empty mode is same as using : :map
 -- also don't use g[j|k] when in operator pending mode, so it doesn't alter d, y or c behaviour
-vim.keymap.set({ 'n', 'x' }, 'j', 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { desc = 'Move Down', expr = true })
-vim.keymap.set({ 'n', 'x' }, 'k', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { desc = 'Move Up', expr = true })
-vim.keymap.set({ 'n', 'v' }, '<Up>', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { desc = 'Move Up', expr = true })
+vim.keymap.set(
+  { 'n', 'x' },
+  'j',
+  'v:count || mode(1)[0:1] == "no" ? "j" : "gj"',
+  { desc = 'Move Down', expr = true }
+)
+vim.keymap.set(
+  { 'n', 'x' },
+  'k',
+  'v:count || mode(1)[0:1] == "no" ? "k" : "gk"',
+  { desc = 'Move Up', expr = true }
+)
+vim.keymap.set(
+  { 'n', 'v' },
+  '<Up>',
+  'v:count || mode(1)[0:1] == "no" ? "k" : "gk"',
+  { desc = 'Move Up', expr = true }
+)
 vim.keymap.set(
   { 'n', 'v' },
   '<Down>',
@@ -183,67 +216,90 @@ vim.keymap.set('x', 'c', '"_c')
 
 -- Don't copy the replaced text after pasting in visual mode
 -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
-vim.keymap.set('x', 'p', 'p:let @+=@0<CR>:let @"=@0<CR>', { desc = "Don't Copy Replaced Text" })
+vim.keymap.set(
+  'x',
+  'p',
+  'p:let @+=@0<CR>:let @"=@0<CR>',
+  { desc = "Don't Copy Replaced Text" }
+)
 
 -- commenting
-vim.keymap.set('n', 'gco', 'o<esc>Vcx<esc>:normal gcc<CR>fxa<bs>', { desc = 'Add Comment Below' })
-vim.keymap.set('n', 'gcO', 'O<esc>Vcx<esc>:normal gcc<CR>fxa<bs>', { desc = 'Add Comment Above' })
+vim.keymap.set(
+  'n',
+  'gco',
+  'o<esc>Vcx<esc>:normal gcc<CR>fxa<bs>',
+  { desc = 'Add Comment Below' }
+)
+vim.keymap.set(
+  'n',
+  'gcO',
+  'O<esc>Vcx<esc>:normal gcc<CR>fxa<bs>',
+  { desc = 'Add Comment Above' }
+)
 
 -- }}}
 
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ ESSENTIALS                                            │
 -- ╰──────────────────────────────────────────────────────────╯
-spec 'plugins.blink' -- completion
-spec 'plugins.conform' -- format
-spec 'plugins.mason' -- auto install lsp, formatter, linter
-spec 'plugins.nvim-lint' -- linting
-spec 'plugins.nvim-treesitter' -- syntax highlighting
-spec 'plugins.snacks' -- to be deleted
+spec('plugins.blink') -- completion
+spec('plugins.conform') -- format
+spec('plugins.mason') -- auto install lsp, formatter, linter
+spec('plugins.nvim-lint') -- linting
+spec('plugins.nvim-treesitter') -- syntax highlighting
+spec('plugins.snacks') -- to be deleted
 
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ EDITOR                                                │
 -- ╰──────────────────────────────────────────────────────────╯
-spec 'plugins.better-escape'
-spec 'plugins.nvim-autopairs'
-spec 'plugins.nvim-surround'
-spec 'plugins.nvim-ts-autotag'
-spec 'plugins.pangu' -- auto format to add a space between cjk and english letters
-spec 'plugins.ts-comments' -- enhance neovim's native comments
+spec('plugins.better-escape')
+spec('plugins.nvim-autopairs')
+spec('plugins.nvim-surround')
+spec('plugins.nvim-ts-autotag')
+spec('plugins.pangu') -- auto format to add a space between cjk and english letters
+spec('plugins.ts-comments') -- enhance neovim's native comments
 
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ Tools                                                 │
 -- ╰──────────────────────────────────────────────────────────╯
-spec 'plugins.carbon-now' -- screenshot code
-spec 'plugins.inc-rename' -- LSP renaming with immediate visual feedback
-spec 'plugins.vim-tmux-navigator'
-spec 'plugins.which-key'
-spec 'plugins.persistence' -- session manager
+spec('plugins.carbon-now') -- screenshot code
+spec('plugins.inc-rename') -- LSP renaming with immediate visual feedback
+spec('plugins.oil')
+spec('plugins.vim-tmux-navigator')
+spec('plugins.which-key')
+spec('plugins.persistence') -- session manager
 
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ UI                                                    │
 -- ╰──────────────────────────────────────────────────────────╯
-spec 'plugins.catppuccin'
-spec 'plugins.gitsigns'
-spec 'plugins.lualine'
-spec 'plugins.mini-icons'
-spec 'plugins.nvim-colorizer'
-spec 'plugins.render-markdown'
-spec 'plugins.smear-cursor' -- animated cursor
-spec 'plugins.todo-comments'
+spec('plugins.catppuccin')
+spec('plugins.gitsigns')
+spec('plugins.lualine')
+spec('plugins.mini-icons')
+spec('plugins.nvim-colorizer')
+spec('plugins.render-markdown')
+spec('plugins.smear-cursor') -- animated cursor
+spec('plugins.todo-comments')
 
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ AI                                                    │
 -- ╰──────────────────────────────────────────────────────────╯
-spec 'plugins.avante'
-spec 'plugins.copilot'
+spec('plugins.avante')
+spec('plugins.copilot')
 
 -- lazy {{{
 
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
-  local out = vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
+  local out = vim.fn.system({
+    'git',
+    'clone',
+    '--filter=blob:none',
+    '--branch=stable',
+    lazyrepo,
+    lazypath,
+  })
   if vim.v.shell_error ~= 0 then
     vim.api.nvim_echo({
       { 'Failed to clone lazy.nvim:\n', 'ErrorMsg' },
@@ -256,7 +312,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup {
+require('lazy').setup({
   spec = LAZY_PLUGIN_SPEC,
   defaults = { lazy = true, version = false }, -- always use the latest git commit
   checker = { enabled = true, notify = false },
@@ -279,7 +335,7 @@ require('lazy').setup {
     enabled = false,
     hererocks = false,
   },
-}
+})
 
 vim.keymap.set('n', '<leader>hl', ':Lazy<CR>', { desc = 'Lazy' })
 
@@ -290,7 +346,7 @@ vim.keymap.set('n', '<leader>hl', ':Lazy<CR>', { desc = 'Lazy' })
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ disable default keybinds                              │
 -- ╰──────────────────────────────────────────────────────────╯
-for _, bind in ipairs { 'grn', 'gra', 'gri', 'grr' } do
+for _, bind in ipairs({ 'grn', 'gra', 'gri', 'grr' }) do
   pcall(vim.keymap.del, 'n', bind)
 end
 
@@ -299,7 +355,8 @@ end
 -- ╰──────────────────────────────────────────────────────────╯
 
 -- Create augroups ONCE outside the callback
-local highlight_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = true })
+local highlight_augroup =
+  vim.api.nvim_create_augroup('lsp-highlight', { clear = true })
 local detach_augroup = vim.api.nvim_create_augroup('lsp-detach', { clear = true })
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -309,24 +366,63 @@ vim.api.nvim_create_autocmd('LspAttach', {
     if not client then return end
 
     -- Buffer-local keymaps (won't duplicate)
-    vim.keymap.set('n', 'gh', vim.diagnostic.open_float, { buffer = ev.buf, desc = '[G]oto [H]over Diagnostic' })
-    vim.keymap.set({ 'n', 'v' }, '<leader>la', vim.lsp.buf.code_action, { buffer = ev.buf, desc = 'Code [A]ction' })
-    vim.keymap.set('n', '<leader>lh', vim.lsp.buf.signature_help, { buffer = ev.buf, desc = 'Signature [H]elp' })
-    vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, { buffer = ev.buf, desc = '[R]ename' })
+    vim.keymap.set(
+      'n',
+      'gh',
+      vim.diagnostic.open_float,
+      { buffer = ev.buf, desc = '[G]oto [H]over Diagnostic' }
+    )
+    vim.keymap.set(
+      { 'n', 'v' },
+      '<leader>la',
+      vim.lsp.buf.code_action,
+      { buffer = ev.buf, desc = 'Code [A]ction' }
+    )
+    vim.keymap.set(
+      'n',
+      '<leader>lh',
+      vim.lsp.buf.signature_help,
+      { buffer = ev.buf, desc = 'Signature [H]elp' }
+    )
+    vim.keymap.set(
+      'n',
+      '<leader>lr',
+      vim.lsp.buf.rename,
+      { buffer = ev.buf, desc = '[R]ename' }
+    )
 
     -- CodeLens support
-    if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_codeLens) then
-      vim.keymap.set('n', '<leader>ll', vim.lsp.codelens.refresh, { buffer = ev.buf, desc = 'Code[L]ens refresh' })
-      vim.keymap.set('n', '<leader>lL', vim.lsp.codelens.run, { buffer = ev.buf, desc = 'Code[L]ens run' })
+    if
+      client.supports_method(client, vim.lsp.protocol.Methods.textDocument_codeLens)
+    then
+      vim.keymap.set(
+        'n',
+        '<leader>ll',
+        vim.lsp.codelens.refresh,
+        { buffer = ev.buf, desc = 'Code[L]ens refresh' }
+      )
+      vim.keymap.set(
+        'n',
+        '<leader>lL',
+        vim.lsp.codelens.run,
+        { buffer = ev.buf, desc = 'Code[L]ens run' }
+      )
     end
 
     -- Inlay hints
-    if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint) then
+    if
+      client.supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint)
+    then
       vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
     end
 
     -- Document highlight - buffer-specific autocmds
-    if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+    if
+      client.supports_method(
+        client,
+        vim.lsp.protocol.Methods.textDocument_documentHighlight
+      )
+    then
       vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
         buffer = ev.buf,
         group = highlight_augroup,
@@ -347,7 +443,7 @@ vim.api.nvim_create_autocmd('LspDetach', {
   callback = function(ev)
     vim.lsp.buf.clear_references()
     -- Clear only buffer-specific autocmds
-    vim.api.nvim_clear_autocmds { group = highlight_augroup, buffer = ev.buf }
+    vim.api.nvim_clear_autocmds({ group = highlight_augroup, buffer = ev.buf })
   end,
 })
 
@@ -388,10 +484,14 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 local has_blink = pcall(require, 'blink.cmp')
 if has_blink then
-  capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities({}, false))
+  capabilities = vim.tbl_deep_extend(
+    'force',
+    capabilities,
+    require('blink.cmp').get_lsp_capabilities({}, false)
+  )
 end
 
-local has_markdown_oxide = vim.fn.executable 'markdown-oxide' == 1
+local has_markdown_oxide = vim.fn.executable('markdown-oxide') == 1
 if has_markdown_oxide then
   capabilities = vim.tbl_deep_extend('force', capabilities, {
     workspace = {
@@ -431,18 +531,22 @@ vim.lsp.enable(servers)
 GLOB.new_autocmd(
   'TextYankPost',
   nil,
-  function() vim.hl.on_yank { higroup = 'IncSearch', timeout = 300 } end,
+  function() vim.hl.on_yank({ higroup = 'IncSearch', timeout = 300 }) end,
   'Highlight when yanking (copying) text'
 )
 
 GLOB.new_autocmd('ColorScheme', nil, function()
-  local M = require 'highlights'
+  local M = require('highlights')
   for _, group in pairs(M) do
     for name, attrs in pairs(group) do
       vim.api.nvim_set_hl(0, name, attrs)
     end
   end
-  vim.notify('Colorscheme loaded and highlights set', vim.log.levels.INFO, { title = 'Neovim' })
+  vim.notify(
+    'Colorscheme loaded and highlights set',
+    vim.log.levels.INFO,
+    { title = 'Neovim' }
+  )
 end, 'Set highlights after colorscheme loaded')
 
 GLOB.new_autocmd(
@@ -457,7 +561,7 @@ GLOB.new_autocmd(
 GLOB.new_autocmd(
   'FileType',
   nil,
-  function() vim.cmd 'setlocal formatoptions-=c formatoptions-=o' end,
+  function() vim.cmd('setlocal formatoptions-=c formatoptions-=o') end,
   "Proper 'formatoptions'"
 )
 
@@ -466,6 +570,4 @@ GLOB.new_autocmd(
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ SET colorscheme                                       │
 -- ╰──────────────────────────────────────────────────────────╯
-vim.cmd [[colorscheme catppuccin]]
-
--- vim: foldmethod=marker foldlevel=0
+vim.cmd([[colorscheme catppuccin]])
