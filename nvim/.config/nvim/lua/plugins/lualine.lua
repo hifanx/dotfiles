@@ -66,13 +66,9 @@ return {
         mixed = mixed_same_line > 0
       end
       if not mixed then return '' end
-      if mixed_same_line ~= nil and mixed_same_line > 0 then
-        return 'MI:' .. mixed_same_line
-      end
-      local space_indent_cnt =
-        vim.fn.searchcount({ pattern = space_pat, max_count = 1e3 }).total
-      local tab_indent_cnt =
-        vim.fn.searchcount({ pattern = tab_pat, max_count = 1e3 }).total
+      if mixed_same_line ~= nil and mixed_same_line > 0 then return 'MI:' .. mixed_same_line end
+      local space_indent_cnt = vim.fn.searchcount({ pattern = space_pat, max_count = 1e3 }).total
+      local tab_indent_cnt = vim.fn.searchcount({ pattern = tab_pat, max_count = 1e3 }).total
       if space_indent_cnt > tab_indent_cnt then
         return 'MI:' .. tab_indent
       else

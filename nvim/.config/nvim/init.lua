@@ -34,7 +34,7 @@ o.iskeyword = '@,48-57,_,192-255,-' -- Treat dash as `word` textobject part
 o.termguicolors = true
 
 -- ui
-o.winborder = 'rounded'
+o.winborder = 'none'
 o.cursorline = true -- highlight the text line of the cursor
 o.number = true -- show numberline
 o.relativenumber = true -- show relative numberline
@@ -167,24 +167,9 @@ vim.keymap.set('n', '<Esc>', ':noh<CR>', { desc = 'Clear Highlights' })
 -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
 -- empty mode is same as using : :map
 -- also don't use g[j|k] when in operator pending mode, so it doesn't alter d, y or c behaviour
-vim.keymap.set(
-  { 'n', 'x' },
-  'j',
-  'v:count || mode(1)[0:1] == "no" ? "j" : "gj"',
-  { desc = 'Move Down', expr = true }
-)
-vim.keymap.set(
-  { 'n', 'x' },
-  'k',
-  'v:count || mode(1)[0:1] == "no" ? "k" : "gk"',
-  { desc = 'Move Up', expr = true }
-)
-vim.keymap.set(
-  { 'n', 'v' },
-  '<Up>',
-  'v:count || mode(1)[0:1] == "no" ? "k" : "gk"',
-  { desc = 'Move Up', expr = true }
-)
+vim.keymap.set({ 'n', 'x' }, 'j', 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { desc = 'Move Down', expr = true })
+vim.keymap.set({ 'n', 'x' }, 'k', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { desc = 'Move Up', expr = true })
+vim.keymap.set({ 'n', 'v' }, '<Up>', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { desc = 'Move Up', expr = true })
 vim.keymap.set(
   { 'n', 'v' },
   '<Down>',
@@ -207,26 +192,14 @@ vim.keymap.set('x', 'c', '"_c')
 
 -- Don't copy the replaced text after pasting in visual mode
 -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
-vim.keymap.set(
-  'x',
-  'p',
-  'p:let @+=@0<CR>:let @"=@0<CR>',
-  { desc = "Don't Copy Replaced Text" }
-)
+vim.keymap.set('x', 'p', 'p:let @+=@0<CR>:let @"=@0<CR>', { desc = "Don't Copy Replaced Text" })
 
 -- commenting
-vim.keymap.set(
-  'n',
-  'gco',
-  'o<esc>Vcx<esc>:normal gcc<CR>fxa<bs>',
-  { desc = 'Add Comment Below' }
-)
-vim.keymap.set(
-  'n',
-  'gcO',
-  'O<esc>Vcx<esc>:normal gcc<CR>fxa<bs>',
-  { desc = 'Add Comment Above' }
-)
+vim.keymap.set('n', 'gco', 'o<esc>Vcx<esc>:normal gcc<CR>fxa<bs>', { desc = 'Add Comment Below' })
+vim.keymap.set('n', 'gcO', 'O<esc>Vcx<esc>:normal gcc<CR>fxa<bs>', { desc = 'Add Comment Above' })
+
+-- delete buffer
+vim.keymap.set('n', '<C-x>', ':bdelete<CR>', { desc = '[D]elete Buffer' })
 
 -- }}}
 
@@ -254,6 +227,7 @@ spec('plugins.ts-comments') -- enhance neovim's native comments
 -- │ ⬇️ TOOLS                                                 │
 -- ╰──────────────────────────────────────────────────────────╯
 spec('plugins.carbon-now') -- screenshot code
+spec('plugins.fzf-lua')
 spec('plugins.inc-rename') -- LSP renaming with immediate visual feedback
 spec('plugins.oil')
 spec('plugins.vim-tmux-navigator')
@@ -346,8 +320,7 @@ end
 -- ╰──────────────────────────────────────────────────────────╯
 
 -- Create augroups ONCE outside the callback
-local highlight_augroup =
-  vim.api.nvim_create_augroup('lsp-highlight', { clear = true })
+local highlight_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = true })
 local detach_augroup = vim.api.nvim_create_augroup('lsp-detach', { clear = true })
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -357,63 +330,24 @@ vim.api.nvim_create_autocmd('LspAttach', {
     if not client then return end
 
     -- Buffer-local keymaps (won't duplicate)
-    vim.keymap.set(
-      'n',
-      'gh',
-      vim.diagnostic.open_float,
-      { buffer = ev.buf, desc = '[G]oto [H]over Diagnostic' }
-    )
-    vim.keymap.set(
-      { 'n', 'v' },
-      '<leader>la',
-      vim.lsp.buf.code_action,
-      { buffer = ev.buf, desc = 'Code [A]ction' }
-    )
-    vim.keymap.set(
-      'n',
-      '<leader>lh',
-      vim.lsp.buf.signature_help,
-      { buffer = ev.buf, desc = 'Signature [H]elp' }
-    )
-    vim.keymap.set(
-      'n',
-      '<leader>lr',
-      vim.lsp.buf.rename,
-      { buffer = ev.buf, desc = '[R]ename' }
-    )
+    vim.keymap.set('n', 'gh', vim.diagnostic.open_float, { buffer = ev.buf, desc = '[G]oto [H]over Diagnostic' })
+    vim.keymap.set({ 'n', 'v' }, '<leader>la', vim.lsp.buf.code_action, { buffer = ev.buf, desc = 'Code [A]ction' })
+    vim.keymap.set('n', '<leader>lh', vim.lsp.buf.signature_help, { buffer = ev.buf, desc = 'Signature [H]elp' })
+    vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, { buffer = ev.buf, desc = '[R]ename' })
 
     -- CodeLens support
-    if
-      client.supports_method(client, vim.lsp.protocol.Methods.textDocument_codeLens)
-    then
-      vim.keymap.set(
-        'n',
-        '<leader>ll',
-        vim.lsp.codelens.refresh,
-        { buffer = ev.buf, desc = 'Code[L]ens refresh' }
-      )
-      vim.keymap.set(
-        'n',
-        '<leader>lL',
-        vim.lsp.codelens.run,
-        { buffer = ev.buf, desc = 'Code[L]ens run' }
-      )
+    if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_codeLens) then
+      vim.keymap.set('n', '<leader>ll', vim.lsp.codelens.refresh, { buffer = ev.buf, desc = 'Code[L]ens refresh' })
+      vim.keymap.set('n', '<leader>lL', vim.lsp.codelens.run, { buffer = ev.buf, desc = 'Code[L]ens run' })
     end
 
     -- Inlay hints
-    if
-      client.supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint)
-    then
+    if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint) then
       vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
     end
 
     -- Document highlight - buffer-specific autocmds
-    if
-      client.supports_method(
-        client,
-        vim.lsp.protocol.Methods.textDocument_documentHighlight
-      )
-    then
+    if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight) then
       vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
         buffer = ev.buf,
         group = highlight_augroup,
@@ -475,11 +409,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 local has_blink = pcall(require, 'blink.cmp')
 if has_blink then
-  capabilities = vim.tbl_deep_extend(
-    'force',
-    capabilities,
-    require('blink.cmp').get_lsp_capabilities({}, false)
-  )
+  capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities({}, false))
 end
 
 local has_markdown_oxide = vim.fn.executable('markdown-oxide') == 1
@@ -535,11 +465,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
         vim.api.nvim_set_hl(0, name, attrs)
       end
     end
-    vim.notify(
-      'Colorscheme loaded and highlights set',
-      vim.log.levels.INFO,
-      { title = 'Neovim' }
-    )
+    vim.notify('Colorscheme loaded and highlights set', vim.log.levels.INFO, { title = 'Neovim' })
   end,
 })
 
