@@ -3,7 +3,7 @@ return {
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
   ft = { 'markdown', 'Avante' },
   config = function()
-    require('render-markdown').setup {
+    require('render-markdown').setup({
       lsp = { enabled = true },
       file_types = { 'markdown', 'Avante' },
       heading = {
@@ -24,6 +24,6 @@ return {
       pipe_table = { preset = 'heavy', style = 'normal' },
       latex = { enabled = false },
       checkbox = { checked = { scope_highlight = '@markup.strikethrough' } },
-    }
+    })
   end,
 }

@@ -1,7 +1,8 @@
 return {
   'yetone/avante.nvim',
   enabled = GLOB.is_sif, -- only use on my macbook
-  build = vim.fn.has 'win32' ~= 0 and 'powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false'
+  build = vim.fn.has('win32') ~= 0
+      and 'powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false'
     or 'make',
   event = 'VeryLazy',
   dependencies = {
@@ -15,7 +16,7 @@ return {
       function(ev) vim.treesitter.start(ev.buf) end,
       'Start treesitter for Avante'
     )
-    require('avante').setup {
+    require('avante').setup({
       provider = 'copilot',
       input = {
         provider = 'snacks',
@@ -24,6 +25,6 @@ return {
           icon = '',
         },
       },
-    }
+    })
   end,
 }

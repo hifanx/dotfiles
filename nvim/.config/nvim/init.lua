@@ -260,7 +260,7 @@ spec('plugins.pangu') -- auto format to add a space between cjk and english lett
 spec('plugins.ts-comments') -- enhance neovim's native comments
 
 -- ╭──────────────────────────────────────────────────────────╮
--- │ ⬇️ Tools                                                 │
+-- │ ⬇️ TOOLS                                                 │
 -- ╰──────────────────────────────────────────────────────────╯
 spec('plugins.carbon-now') -- screenshot code
 spec('plugins.inc-rename') -- LSP renaming with immediate visual feedback
@@ -568,6 +568,6 @@ GLOB.new_autocmd(
 -- }}}
 
 -- ╭──────────────────────────────────────────────────────────╮
--- │ ⬇️ SET colorscheme                                       │
+-- │ ⬇️ SET COLORSCHEME                                       │
 -- ╰──────────────────────────────────────────────────────────╯
 vim.cmd([[colorscheme catppuccin]])

@@ -48,7 +48,7 @@ return {
     -- ╭──────────────────────────────────────────────────────────╮
     -- │ ⬇️ lazy status component                                 │
     -- ╰──────────────────────────────────────────────────────────╯
-    local lazy_status = require 'lazy.status'
+    local lazy_status = require('lazy.status')
     local lazy = function() return lazy_status.updates() end
 
     -- ╭──────────────────────────────────────────────────────────╮
@@ -66,9 +66,13 @@ return {
         mixed = mixed_same_line > 0
       end
       if not mixed then return '' end
-      if mixed_same_line ~= nil and mixed_same_line > 0 then return 'MI:' .. mixed_same_line end
-      local space_indent_cnt = vim.fn.searchcount({ pattern = space_pat, max_count = 1e3 }).total
-      local tab_indent_cnt = vim.fn.searchcount({ pattern = tab_pat, max_count = 1e3 }).total
+      if mixed_same_line ~= nil and mixed_same_line > 0 then
+        return 'MI:' .. mixed_same_line
+      end
+      local space_indent_cnt =
+        vim.fn.searchcount({ pattern = space_pat, max_count = 1e3 }).total
+      local tab_indent_cnt =
+        vim.fn.searchcount({ pattern = tab_pat, max_count = 1e3 }).total
       if space_indent_cnt > tab_indent_cnt then
         return 'MI:' .. tab_indent
       else
@@ -88,7 +92,7 @@ return {
     -- │ ⬇️ conditions for components to show                     │
     -- ╰──────────────────────────────────────────────────────────╯
     local conditions = {
-      buffer_not_empty = function() return vim.fn.empty(vim.fn.expand '%:t') ~= 1 end,
+      buffer_not_empty = function() return vim.fn.empty(vim.fn.expand('%:t')) ~= 1 end,
       hide_in_width = function() return vim.fn.winwidth(0) > 80 end,
       lazy_status = lazy_status.has_updates,
       is_sif = function() return GLOB.is_sif end,
@@ -97,7 +101,7 @@ return {
     -- ╭──────────────────────────────────────────────────────────╮
     -- │ ⬇️ setup the thing                                       │
     -- ╰──────────────────────────────────────────────────────────╯
-    require('lualine').setup {
+    require('lualine').setup({
       options = {
         theme = theme,
         globalstatus = true,
@@ -225,6 +229,6 @@ return {
           { 'progress' },
         },
       },
-    }
+    })
   end,
 }

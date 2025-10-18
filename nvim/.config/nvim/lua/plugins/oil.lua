@@ -6,7 +6,7 @@ return {
   },
   init = function() vim.keymap.set('n', '<leader>o', ':Oil<CR>', { desc = '[O]il' }) end,
   config = function()
-    require('oil').setup {
+    require('oil').setup({
       default_file_explorer = false,
       view_options = {
         show_hidden = true,
@@ -32,6 +32,6 @@ return {
         ['g.'] = { 'actions.toggle_hidden', mode = 'n' },
         ['g\\'] = { 'actions.toggle_trash', mode = 'n' },
       },
-    }
+    })
   end,
 }

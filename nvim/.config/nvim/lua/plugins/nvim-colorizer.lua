@@ -2,7 +2,7 @@ return {
   'catgoose/nvim-colorizer.lua',
   event = { 'BufReadPre', 'BufNewFile' },
   config = function()
-    require('colorizer').setup {
+    require('colorizer').setup({
       user_default_options = {
         RRGGBBAA = true,
         AARRGGBB = true,
@@ -11,6 +11,6 @@ return {
         mode = 'virtualtext',
         virtualtext = ' ',
       },
-    }
+    })
   end,
 }

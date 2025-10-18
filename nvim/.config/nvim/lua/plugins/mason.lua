@@ -1,8 +1,10 @@
 -- add binaries installed by mason.nvim to path
-local is_windows = vim.fn.has 'win32' ~= 0
+local is_windows = vim.fn.has('win32') ~= 0
 local sep = is_windows and '\\' or '/'
 local delim = is_windows and ';' or ':'
-vim.env.PATH = table.concat({ vim.fn.stdpath 'data', 'mason', 'bin' }, sep) .. delim .. vim.env.PATH
+vim.env.PATH = table.concat({ vim.fn.stdpath('data'), 'mason', 'bin' }, sep)
+  .. delim
+  .. vim.env.PATH
 
 return {
   'williamboman/mason.nvim',
@@ -43,12 +45,14 @@ return {
         vim.list_extend(ensure_installed, formatters)
         vim.list_extend(ensure_installed, linters)
 
-        require('mason-tool-installer').setup {
+        require('mason-tool-installer').setup({
           ensure_installed = ensure_installed,
-        }
+        })
       end,
     },
   },
-  init = function() vim.keymap.set('n', '<leader>hm', ':Mason<CR>', { desc = 'Mason' }) end,
-  config = function() require('mason').setup {} end,
+  init = function()
+    vim.keymap.set('n', '<leader>hm', ':Mason<CR>', { desc = 'Mason' })
+  end,
+  config = function() require('mason').setup({}) end,
 }

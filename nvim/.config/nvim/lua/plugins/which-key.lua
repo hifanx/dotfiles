@@ -2,7 +2,7 @@ return {
   'folke/which-key.nvim',
   event = 'VeryLazy',
   config = function()
-    require('which-key').setup {
+    require('which-key').setup({
       preset = 'helix',
       icons = {
         mappings = false, --- disable keymap icons from rules
@@ -18,6 +18,6 @@ return {
         { '<leader>g', group = '[G]it' },
         { '<leader>l', group = '[L]sp' },
       },
-    }
+    })
   end,
 }

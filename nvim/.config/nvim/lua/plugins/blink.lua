@@ -41,7 +41,7 @@ return {
     local is_sif = GLOB.is_sif
     if is_sif then vim.list_extend(default, ai) end
 
-    require('blink.cmp').setup {
+    require('blink.cmp').setup({
       keymap = {
         preset = 'none',
         ['<C-space>'] = false,
@@ -137,6 +137,6 @@ return {
           auto_show = true,
         },
       },
-    }
+    })
   end,
 }
