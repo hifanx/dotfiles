@@ -9,7 +9,7 @@ local function spec(item) table.insert(LAZY_PLUGIN_SPEC, { import = item }) end
 -- │ ⬇️ Abstract autocmd creation                             │
 -- ╰──────────────────────────────────────────────────────────╯
 local gr = vim.api.nvim_create_augroup('custom-config', { clear = true })
-_G.GLOB.new_autocmd = function(event, pattern, callback, desc)
+function _G.GLOB.new_autocmd(event, pattern, callback, desc)
   local opts = { group = gr, pattern = pattern, callback = callback, desc = desc }
   vim.api.nvim_create_autocmd(event, opts)
 end
@@ -75,13 +75,12 @@ o.wrap = true -- soft wrap lines
 o.breakindent = true -- make wrapped lines continue visually indented
 o.showbreak = '↪ '
 o.list = true -- show invisible characters.
-o.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-o.fillchars = {
-  eob = ' ', -- Empty lines at the end of buffer
-  msgsep = '‾', -- Message separator
-}
+o.listchars = 'extends:…,nbsp:␣,precedes:…,tab:> ,trail:·'
+o.fillchars = 'eob: ,fold:╌'
 
 o.termguicolors = true
+
+o.iskeyword = '@,48-57,_,192-255,-' -- Treat dash as `word` textobject part
 
 -- disable some default providers
 g.loaded_node_provider = 0
@@ -310,7 +309,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     if not client then return end
 
     -- Buffer-local keymaps (won't duplicate)
-    -- Buffer-local keymaps
     vim.keymap.set('n', 'gh', vim.diagnostic.open_float, { buffer = ev.buf, desc = '[G]oto [H]over Diagnostic' })
     vim.keymap.set({ 'n', 'v' }, '<leader>la', vim.lsp.buf.code_action, { buffer = ev.buf, desc = 'Code [A]ction' })
     vim.keymap.set('n', '<leader>lh', vim.lsp.buf.signature_help, { buffer = ev.buf, desc = 'Signature [H]elp' })
@@ -356,19 +354,14 @@ vim.api.nvim_create_autocmd('LspDetach', {
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ setup vim.diagnostic.Config                           │
 -- ╰──────────────────────────────────────────────────────────╯
-vim.diagnostic.config {
+
+local diagnostic_opts = {
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = ' ',
       [vim.diagnostic.severity.WARN] = ' ',
       [vim.diagnostic.severity.HINT] = ' ',
       [vim.diagnostic.severity.INFO] = ' ',
-    },
-    linehl = {
-      [vim.diagnostic.severity.ERROR] = 'DiagnosticError',
-      [vim.diagnostic.severity.WARN] = 'DiagnosticWarn',
-      [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
-      [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
     },
     numhl = {
       [vim.diagnostic.severity.ERROR] = 'DiagnosticError',
@@ -384,6 +377,8 @@ vim.diagnostic.config {
     header = '',
   },
 }
+
+vim.diagnostic.config(diagnostic_opts)
 
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ server specific capabilities                          │
@@ -455,6 +450,15 @@ GLOB.new_autocmd(
   nil,
   function() vim.diagnostic.open_float(nil, { focus = false }) end,
   'Show lsp line diagnostics automatically in hover window'
+)
+
+-- Don't auto-wrap comments and don't insert comment leader after hitting 'o'.
+-- Do on `FileType` to always override these changes from filetype plugins.
+GLOB.new_autocmd(
+  'FileType',
+  nil,
+  function() vim.cmd 'setlocal formatoptions-=c formatoptions-=o' end,
+  "Proper 'formatoptions'"
 )
 
 -- }}}

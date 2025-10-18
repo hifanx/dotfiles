@@ -6,12 +6,14 @@ M.custom = {
   MenuSelected = { fg = c.mantle, bg = c.green },
   BorderInvisibleMantle = { fg = c.mantle, bg = c.mantle },
   TitleUnified = { fg = c.mantle, bg = c.yellow, bold = true },
+  FoldedUnified = { fg = c.mauve, bg = c.base },
 }
 
 M.default = {
   FloatBorder = { link = 'BorderInvisibleMantle' },
   FloatTitle = { link = 'TitleUnified' },
   MsgSeparator = { link = 'NonText' },
+  Folded = { link = 'FoldedUnified' },
 }
 
 M.lsp = {
