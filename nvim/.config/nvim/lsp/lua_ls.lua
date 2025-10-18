@@ -20,8 +20,14 @@ return {
       completion = {
         callSnippet = 'Replace',
       },
-      -- NOTE: need this or gd in init.lua for spec won't work
-      runtime = { version = 'LuaJIT', path = vim.split(package.path, ';') },
+
+      runtime = {
+        version = 'LuaJIT',
+        special = { -- NOTE: need this or gd in init.lua for spec won't work
+          spec = 'require',
+        },
+        path = vim.split(package.path, ';'),
+      },
       diagnostics = {
         globals = { 'vim', 'spec' },
         disable = { 'missing-fields' },
