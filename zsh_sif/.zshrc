@@ -140,5 +140,10 @@ alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 # thefuck
 eval "$(thefuck --alias)"
 
+# secrets
+if [ -f ~/.config/.secrets ]; then
+    source ~/.config/.secrets
+fi
+
 # powerlevel10k
 [[ ! -f ~/.config/.p10k.zsh ]] || source ~/.config/.p10k.zsh
