@@ -5,7 +5,7 @@ local c = require('palette').catppuccin
 M.custom = {
   MenuSelected = { fg = c.mantle, bg = c.green },
   BorderInvisibleMantle = { fg = c.mantle, bg = c.mantle },
-  TitleUnified = { fg = c.mantle, bg = c.yellow, bold = true },
+  TitleUnified = { fg = c.mantle, bg = c.yellow },
   FoldedUnified = { fg = c.mauve, bg = c.base },
 }
 
@@ -14,11 +14,12 @@ M.default = {
   FloatTitle = { link = 'TitleUnified' },
   MsgSeparator = { link = 'NonText' },
   Folded = { link = 'FoldedUnified' },
+  PmenuSel = { link = 'MenuSelected' },
 }
 
 M.lsp = {
-  LspBorder = { link = 'BorderInvisibleMantle' },
-  LspInfoBorder = { link = 'BorderInvisibleMantle' },
+  LspBorder = { link = 'FloatBorder' },
+  LspInfoBorder = { link = 'FloatBorder' },
 }
 
 M.render_markdown = {
@@ -40,7 +41,7 @@ M.render_markdown = {
 
 M.blink = {
   BlinkCmpMenuBorder = { link = 'FloatBorder' },
-  BlinkCmpMenuSelection = { link = 'MenuSelected' },
+  BlinkCmpMenuSelection = { link = 'PmenuSel' },
   BlinkCmpSource = { link = 'DiagnosticWarn' },
 }
 
@@ -55,9 +56,9 @@ M.snacks = {
   SnacksInputBorder = { link = 'FloatBorder' },
   SnacksInputTitle = { link = 'FloatTitle' },
   SnacksInputIcon = { link = 'DiagnosticWarn' },
-  SnacksPickerCursorLine = { link = 'MenuSelected' },
-  SnacksPickerListCursorLine = { link = 'MenuSelected' },
-  SnacksPickerPreviewCursorLine = { link = 'MenuSelected' },
+  SnacksPickerCursorLine = { link = 'PmenuSel' },
+  SnacksPickerListCursorLine = { link = 'PmenuSel' },
+  SnacksPickerPreviewCursorLine = { link = 'PmenuSel' },
   SnacksPickerToggle = { link = 'FloatTitle' },
   SnacksDashboardFooter = { fg = c.green, bg = 'none' },
   SnacksDashboardHeader = { fg = c.yellow, bg = 'none' },

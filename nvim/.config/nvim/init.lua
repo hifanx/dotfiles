@@ -124,12 +124,12 @@ vim.api.nvim_create_autocmd('FileType', {
 
 -- basic
 vim.keymap.set('n', '<C-s>', ':w<CR>', { desc = '[W]rite' })
-vim.keymap.set('n', '<C-q>', ':qa<CR>', { desc = '[Q]uit No Save' })
+vim.keymap.set('n', '<C-q>', ':qa<CR>', { desc = '[Q]uit no save' })
 vim.keymap.set('n', '<C-c>', ':close<CR>', { desc = '[C]lose' })
 vim.keymap.set('n', '<Leader>y', ':%y+<CR>', { desc = '[Y]ank buffer' })
 
-vim.keymap.set('n', 'H', ':bprev<CR>', { desc = 'Prev Buffer', noremap = false })
-vim.keymap.set('n', 'L', ':bnext<CR>', { desc = 'Next Buffer', noremap = false })
+vim.keymap.set('n', 'H', ':bprev<CR>', { desc = 'Prev buffer', noremap = false })
+vim.keymap.set('n', 'L', ':bnext<CR>', { desc = 'Next buffer', noremap = false })
 
 vim.keymap.set('n', '=', [[:vertical resize +5<CR>]])
 vim.keymap.set('n', '-', [[:vertical resize -5<CR>]])
@@ -137,51 +137,51 @@ vim.keymap.set('n', '+', [[:horizontal resize +2<CR>]])
 vim.keymap.set('n', '_', [[:horizontal resize -2<CR>]])
 
 -- go to beginning and end
-vim.keymap.set('i', '<C-b>', '<ESC>^i', { desc = 'Beginning of Line' })
-vim.keymap.set('i', '<C-e>', '<End>', { desc = 'End of Line' })
-vim.keymap.set({ 'n', 'o', 'x' }, 'B', '^', { desc = 'Beginning of Line' })
-vim.keymap.set({ 'n', 'o', 'x' }, 'E', 'g_', { desc = 'End of Line' })
+vim.keymap.set('i', '<C-b>', '<ESC>^i', { desc = 'Beginning of line' })
+vim.keymap.set('i', '<C-e>', '<End>', { desc = 'End of line' })
+vim.keymap.set({ 'n', 'o', 'x' }, 'B', '^', { desc = 'Beginning of line' })
+vim.keymap.set({ 'n', 'o', 'x' }, 'E', 'g_', { desc = 'End of line' })
 
 -- Delete the character to the right of the cursor
 vim.keymap.set('i', '<C-D>', '<DEL>')
 
 -- navigate within insert mode
-vim.keymap.set('i', '<C-h>', '<Left>', { desc = 'Move Left' })
-vim.keymap.set('i', '<C-l>', '<Right>', { desc = 'Move Right' })
-vim.keymap.set('i', '<C-j>', '<Down>', { desc = 'Move Down' })
-vim.keymap.set('i', '<C-k>', '<Up>', { desc = 'Move Up' })
+vim.keymap.set('i', '<C-h>', '<Left>', { desc = 'Move left' })
+vim.keymap.set('i', '<C-l>', '<Right>', { desc = 'Move right' })
+vim.keymap.set('i', '<C-j>', '<Down>', { desc = 'Move down' })
+vim.keymap.set('i', '<C-k>', '<Up>', { desc = 'Move up' })
 
 -- turn the word under cursor to upper case
-vim.keymap.set('i', '<C-u>', '<Esc>viwUea', { desc = 'Turn Into Upper Case' })
+vim.keymap.set('i', '<C-u>', '<Esc>viwUea', { desc = 'Turn into upper case' })
 -- turn the current word into title case
-vim.keymap.set('i', '<C-t>', '<Esc>b~lea', { desc = 'Turn Into Title Case' })
+vim.keymap.set('i', '<C-t>', '<Esc>b~lea', { desc = 'Turn into title case' })
 
 -- window management
-vim.keymap.set('n', '|', '<C-w>v', { desc = 'Split Vertically' })
-vim.keymap.set('n', '\\', '<C-w>s', { desc = 'Split Horizontally' })
+vim.keymap.set('n', '|', '<C-w>v', { desc = 'Split vertically' })
+vim.keymap.set('n', '\\', '<C-w>s', { desc = 'Split horizontally' })
 
 -- clear highlights
-vim.keymap.set('n', '<Esc>', ':noh<CR>', { desc = 'Clear Highlights' })
+vim.keymap.set('n', '<Esc>', ':noh<CR>', { desc = 'Clear highlights' })
 
 -- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
 -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
 -- empty mode is same as using : :map
 -- also don't use g[j|k] when in operator pending mode, so it doesn't alter d, y or c behaviour
-vim.keymap.set({ 'n', 'x' }, 'j', 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { desc = 'Move Down', expr = true })
-vim.keymap.set({ 'n', 'x' }, 'k', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { desc = 'Move Up', expr = true })
-vim.keymap.set({ 'n', 'v' }, '<Up>', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { desc = 'Move Up', expr = true })
+vim.keymap.set({ 'n', 'x' }, 'j', 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { desc = 'Move down', expr = true })
+vim.keymap.set({ 'n', 'x' }, 'k', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { desc = 'Move up', expr = true })
+vim.keymap.set({ 'n', 'v' }, '<Up>', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { desc = 'Move up', expr = true })
 vim.keymap.set(
   { 'n', 'v' },
   '<Down>',
   'v:count || mode(1)[0:1] == "no" ? "j" : "gj"',
-  { desc = 'Move Down', expr = true }
+  { desc = 'Move down', expr = true }
 )
 
 -- Line operation
-vim.keymap.set({ 'x', 'v' }, '<', '<gv', { desc = 'Indent Line' })
-vim.keymap.set({ 'x', 'v' }, '>', '>gv', { desc = 'Indent Line' })
-vim.keymap.set('v', 'J', ":move '>+1<CR>gv-gv", { desc = 'Move Text Down' })
-vim.keymap.set('v', 'K', ":move '<-2<CR>gv-gv", { desc = 'Move Text Up' })
+vim.keymap.set({ 'x', 'v' }, '<', '<gv', { desc = 'Indent line' })
+vim.keymap.set({ 'x', 'v' }, '>', '>gv', { desc = 'Indent line' })
+vim.keymap.set('v', 'J', ":move '>+1<CR>gv-gv", { desc = 'Move text down' })
+vim.keymap.set('v', 'K', ":move '<-2<CR>gv-gv", { desc = 'Move text up' })
 
 -- Change text without putting it into register,
 -- see https://stackoverflow.com/q/54255/6064933
@@ -192,14 +192,14 @@ vim.keymap.set('x', 'c', '"_c')
 
 -- Don't copy the replaced text after pasting in visual mode
 -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
-vim.keymap.set('x', 'p', 'p:let @+=@0<CR>:let @"=@0<CR>', { desc = "Don't Copy Replaced Text" })
+vim.keymap.set('x', 'p', 'p:let @+=@0<CR>:let @"=@0<CR>', { desc = "Don't copy replaced text" })
 
 -- commenting
-vim.keymap.set('n', 'gco', 'o<esc>Vcx<esc>:normal gcc<CR>fxa<bs>', { desc = 'Add Comment Below' })
-vim.keymap.set('n', 'gcO', 'O<esc>Vcx<esc>:normal gcc<CR>fxa<bs>', { desc = 'Add Comment Above' })
+vim.keymap.set('n', 'gco', 'o<esc>Vcx<esc>:normal gcc<CR>fxa<bs>', { desc = 'Add comment below' })
+vim.keymap.set('n', 'gcO', 'O<esc>Vcx<esc>:normal gcc<CR>fxa<bs>', { desc = 'Add comment above' })
 
--- delete buffer
-vim.keymap.set('n', '<C-x>', ':bdelete<CR>', { desc = '[D]elete Buffer' })
+-- lsp info
+vim.keymap.set('n', '<leader>hi', ':LspInfo<CR>', { desc = 'LSP [I]nfo' })
 
 -- }}}
 
@@ -211,7 +211,7 @@ spec('plugins.conform') -- format
 spec('plugins.mason') -- auto install lsp server, formatter, linter
 spec('plugins.nvim-lint') -- linting
 spec('plugins.nvim-treesitter') -- syntax highlighting
-spec('plugins.snacks') -- XXX:to be deleted
+spec('plugins.snacks') -- QoL plugins
 
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ EDITOR                                                │
@@ -227,9 +227,7 @@ spec('plugins.ts-comments') -- enhance neovim's native comments
 -- │ ⬇️ TOOLS                                                 │
 -- ╰──────────────────────────────────────────────────────────╯
 spec('plugins.carbon-now') -- screenshot code
-spec('plugins.fzf-lua')
 spec('plugins.inc-rename') -- LSP renaming with immediate visual feedback
-spec('plugins.oil')
 spec('plugins.vim-tmux-navigator')
 spec('plugins.which-key')
 spec('plugins.persistence') -- session manager
@@ -319,10 +317,6 @@ end
 -- │ ⬇️ setup lsp attach                                      │
 -- ╰──────────────────────────────────────────────────────────╯
 
--- Create augroups ONCE outside the callback
-local highlight_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = true })
-local detach_augroup = vim.api.nvim_create_augroup('lsp-detach', { clear = true })
-
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
   callback = function(ev)
@@ -330,7 +324,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     if not client then return end
 
     -- Buffer-local keymaps (won't duplicate)
-    vim.keymap.set('n', 'gh', vim.diagnostic.open_float, { buffer = ev.buf, desc = '[G]oto [H]over Diagnostic' })
+    vim.keymap.set('n', 'gh', vim.diagnostic.open_float, { buffer = ev.buf, desc = 'LSP [H]over Diagnostic' })
     vim.keymap.set({ 'n', 'v' }, '<leader>la', vim.lsp.buf.code_action, { buffer = ev.buf, desc = 'Code [A]ction' })
     vim.keymap.set('n', '<leader>lh', vim.lsp.buf.signature_help, { buffer = ev.buf, desc = 'Signature [H]elp' })
     vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, { buffer = ev.buf, desc = '[R]ename' })
@@ -343,32 +337,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     -- Inlay hints
     if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint) then
-      vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
+      vim.lsp.inlay_hint.enable()
+      vim.keymap.set(
+        'n',
+        '<leader>li',
+        function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
+        { desc = 'Toggle [I]nlay hint' }
+      )
     end
-
-    -- Document highlight - buffer-specific autocmds
-    if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight) then
-      vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-        buffer = ev.buf,
-        group = highlight_augroup,
-        callback = vim.lsp.buf.document_highlight,
-      })
-
-      vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-        buffer = ev.buf,
-        group = highlight_augroup,
-        callback = vim.lsp.buf.clear_references,
-      })
-    end
-  end,
-})
-
-vim.api.nvim_create_autocmd('LspDetach', {
-  group = detach_augroup,
-  callback = function(ev)
-    vim.lsp.buf.clear_references()
-    -- Clear only buffer-specific autocmds
-    vim.api.nvim_clear_autocmds({ group = highlight_augroup, buffer = ev.buf })
   end,
 })
 
