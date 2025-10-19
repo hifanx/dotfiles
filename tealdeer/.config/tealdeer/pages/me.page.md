@@ -2,9 +2,9 @@
 
 > My custom commands.
 
-- Edit remote files via ssh, use `scp` if Oil.nvim removed
+- Edit remote files via ssh
 
-`nvim oil-ssh://xuhaifan@10.0.0.12//home/xuhaifan/docker/compose.yml`
+`nvim scp://xuhaifan@10.0.0.12//home/xuhaifan/docker/compose.yml`
 
 - Hard link dirs to a new location: first half creates the dirs (DFS), second half links the files
 
