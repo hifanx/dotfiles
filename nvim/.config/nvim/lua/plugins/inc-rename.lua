@@ -1,6 +1,6 @@
 return {
   'smjonas/inc-rename.nvim',
-  event = { 'BufReadPre', 'BufNewFile' },
+  event = { 'LspAttach' },
   init = function()
     vim.keymap.set(
       'n',
