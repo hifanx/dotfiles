@@ -34,7 +34,7 @@ o.iskeyword = '@,48-57,_,192-255,-' -- Treat dash as `word` textobject part
 o.termguicolors = true
 
 -- ui
-o.winborder = 'none'
+o.winborder = 'solid'
 o.cursorline = true -- highlight the text line of the cursor
 o.number = true -- show numberline
 o.relativenumber = true -- show relative numberline
@@ -360,6 +360,12 @@ local diagnostic_opts = {
       [vim.diagnostic.severity.HINT] = ' ',
       [vim.diagnostic.severity.INFO] = ' ',
     },
+    linehl = {
+      [vim.diagnostic.severity.ERROR] = 'DiagnosticError',
+      [vim.diagnostic.severity.WARN] = 'DiagnosticWarn',
+      [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
+      [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
+    },
     numhl = {
       [vim.diagnostic.severity.ERROR] = 'DiagnosticError',
       [vim.diagnostic.severity.WARN] = 'DiagnosticWarn',
@@ -371,6 +377,7 @@ local diagnostic_opts = {
   underline = true,
   severity_sort = true,
   float = {
+    border = 'rounded',
     header = '',
   },
 }

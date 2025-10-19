@@ -4,7 +4,7 @@ local c = require('palette').catppuccin
 
 M.custom = {
   MenuSelected = { fg = c.mantle, bg = c.green },
-  BorderInvisibleMantle = { fg = c.mantle, bg = c.mantle },
+  BorderInvisibleMantle = { fg = c.surface1, bg = c.mantle },
   TitleUnified = { fg = c.mantle, bg = c.yellow },
   FoldedUnified = { fg = c.mauve, bg = c.base },
 }

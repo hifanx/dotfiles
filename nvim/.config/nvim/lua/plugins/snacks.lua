@@ -160,7 +160,10 @@ return {
       words = { enabled = true },
       scope = { enabled = true },
       image = { enabled = false },
-      explorer = { enabled = true },
+      explorer = {
+        enabled = true,
+        replace_netrw = true,
+      },
       picker = {
         enabled = true,
         layout = { preset = 'bottom' },

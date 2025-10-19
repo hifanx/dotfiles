@@ -75,6 +75,16 @@ return {
           ['<C-y>'] = { 'select_and_accept', 'fallback' },
           ['<C-w>'] = { 'show', 'cancel', 'fallback' },
         },
+        completion = {
+          list = {
+            selection = {
+              preselect = false,
+              auto_insert = false,
+            },
+          },
+          menu = { auto_show = true },
+          ghost_text = { enabled = true },
+        },
       },
 
       -- NOTE: Use :BlinkCmp status to view which sources providers are enabled or not enabled
@@ -135,6 +145,12 @@ return {
         documentation = {
           auto_show_delay_ms = 200,
           auto_show = true,
+          window = {
+            border = 'rounded',
+          },
+        },
+        ghost_text = {
+          enabled = true,
         },
       },
     })
