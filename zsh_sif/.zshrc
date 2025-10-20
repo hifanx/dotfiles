@@ -76,7 +76,6 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 # neovim
-export NVIM_PROFILE="sif"
 alias cn="cd ~/.config/nvim"
 alias vi="nvim"
 alias vim="nvim"

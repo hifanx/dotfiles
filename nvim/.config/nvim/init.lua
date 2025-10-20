@@ -8,10 +8,15 @@ local function spec(item) table.insert(LAZY_PLUGIN_SPEC, { import = item }) end
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ Namespaced profile                                    │
 -- ╰──────────────────────────────────────────────────────────╯
-local profile = vim.env.NVIM_PROFILE
+
 local os_name = vim.loop.os_uname().sysname:lower()
+local hostname = vim.loop.os_gethostname()
+
 -- NOTE: computed once on load and called with O(1) operation
-_G.GLOB.is_sif = (os_name == 'darwin' and profile == 'sif')
+_G.GLOB.is_sif = (os_name == 'darwin' and hostname:find('sif') ~= nil)
+_G.GLOB.is_nanna = (os_name == 'linux' and hostname:find('nanna') ~= nil)
+_G.GLOB.is_baldur = (os_name == 'linux' and hostname:find('baldur') ~= nil)
+_G.GLOB.is_lofn = (os_name == 'linux' and hostname:find('lofn') ~= nil)
 
 -- }}}
 
