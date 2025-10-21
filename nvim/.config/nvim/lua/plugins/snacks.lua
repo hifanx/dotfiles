@@ -136,7 +136,7 @@ return {
         },
       },
       indent = {
-        enabled = true,
+        enabled = false,
         animate = {
           duration = {
             step = 20, -- ms per step
@@ -158,7 +158,7 @@ return {
       quickfile = { enabled = true },
       statuscolumn = { enabled = true },
       words = { enabled = true },
-      scope = { enabled = true },
+      scope = { enabled = false },
       image = { enabled = false },
       explorer = {
         enabled = true,

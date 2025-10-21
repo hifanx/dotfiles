@@ -35,6 +35,7 @@ M.render_markdown = {
   RenderMarkdownH4 = { fg = c.green },
   RenderMarkdownH5 = { fg = c.sapphire },
   RenderMarkdownH6 = { fg = c.lavender },
+  RenderMarkdownCode = { bg = c.base },
   RenderMarkdownTableRow = { link = 'DiagnosticWarn' },
   RenderMarkdownTableHead = { link = 'DiagnosticError' },
 }
