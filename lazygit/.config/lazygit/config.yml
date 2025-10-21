@@ -1,0 +1,28 @@
+gui:
+  theme:
+    activeBorderColor:
+      - "#FAB387"
+      - bold
+    inactiveBorderColor:
+      - "#A6ADC8"
+    optionsTextColor:
+      - "#89B4FA"
+    selectedLineBgColor:
+      - "#313244"
+    cherryPickedCommitBgColor:
+      - "#45475A"
+    cherryPickedCommitFgColor:
+      - "#FAB387"
+    unstagedChangesColor:
+      - "#F38BA8"
+    defaultFgColor:
+      - "#CDD6F4"
+    searchingActiveBorderColor:
+      - "#F9E2AF"
+  authorColors:
+    "*": "#B4BEFE"
+  showIcons: true
+  nerdFontsVersion: "3"
+git:
+  paging:
+    externalDiffCommand: difft --color=always --syntax-highlight=on --tab-width=2
