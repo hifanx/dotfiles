@@ -240,7 +240,7 @@ spec('plugins.persistence') -- session manager
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ UI                                                    │
 -- ╰──────────────────────────────────────────────────────────╯
-spec('plugins.catppuccin')
+spec('plugins.colorschemes')
 spec('plugins.gitsigns')
 spec('plugins.lualine')
 spec('plugins.mini-icons')
@@ -364,12 +364,6 @@ local diagnostic_opts = {
       [vim.diagnostic.severity.WARN] = ' ',
       [vim.diagnostic.severity.HINT] = ' ',
       [vim.diagnostic.severity.INFO] = ' ',
-    },
-    linehl = {
-      [vim.diagnostic.severity.ERROR] = 'DiagnosticError',
-      [vim.diagnostic.severity.WARN] = 'DiagnosticWarn',
-      [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
-      [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
     },
     numhl = {
       [vim.diagnostic.severity.ERROR] = 'DiagnosticError',

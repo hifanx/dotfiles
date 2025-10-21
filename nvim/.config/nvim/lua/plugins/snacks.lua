@@ -191,9 +191,6 @@ return {
             winhighlight = 'Normal:NormalFloat',
           },
         },
-        input = {
-          row = 3,
-        },
       },
     })
   end,

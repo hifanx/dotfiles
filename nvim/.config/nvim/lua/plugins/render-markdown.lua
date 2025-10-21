@@ -4,7 +4,6 @@ return {
   ft = { 'markdown', 'Avante' },
   config = function()
     require('render-markdown').setup({
-      lsp = { enabled = true },
       file_types = { 'markdown', 'Avante' },
       heading = {
         sign = false,
