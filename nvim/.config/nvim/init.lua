@@ -395,9 +395,16 @@ vim.diagnostic.config(diagnostic_opts)
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-local has_blink = pcall(require, 'blink.cmp')
+local has_blink = require('lazy.core.config').plugins['blink.cmp'] ~= nil
 if has_blink then
-  capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities({}, false))
+  capabilities = vim.tbl_deep_extend('force', capabilities, {
+    textDocument = {
+      foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true,
+      },
+    },
+  })
 end
 
 local has_markdown_oxide = vim.fn.executable('markdown-oxide') == 1

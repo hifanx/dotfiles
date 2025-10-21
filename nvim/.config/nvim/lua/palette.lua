@@ -1,5 +1,9 @@
 local M = {}
 
+M.custom = {
+  white = '#FFFFFF',
+}
+
 M.catppuccin = {
   rosewater = '#F5E0DC',
   flamingo = '#F2CDCD',
