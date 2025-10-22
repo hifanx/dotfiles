@@ -21,4 +21,11 @@ return {
     priority = 1000,
     config = function() require('ayu').setup({ mirage = true }) end,
   },
+  {
+    -- vim.cmd([[colorscheme nightingale]])
+    'xeind/nightingale.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function() require('nightingale').setup({}) end,
+  },
 }
