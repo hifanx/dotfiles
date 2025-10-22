@@ -23,13 +23,10 @@ return {
 
       runtime = {
         version = 'LuaJIT',
-        special = { -- NOTE: need this or gd in init.lua for spec won't work
-          spec = 'require',
-        },
         path = vim.split(package.path, ';'),
       },
       diagnostics = {
-        globals = { 'vim', 'spec' },
+        globals = { 'vim' },
         disable = { 'missing-fields' },
       },
       workspace = {
