@@ -214,7 +214,6 @@ vim.keymap.set('n', '<leader>hi', ':LspInfo<CR>', { desc = 'LSP [I]nfo' })
 spec('plugins.blink') -- completion
 spec('plugins.conform') -- format
 spec('plugins.mason') -- auto install lsp server, formatter, linter
-spec('plugins.nvim-lint') -- linting
 spec('plugins.nvim-treesitter') -- syntax highlighting
 spec('plugins.snacks') -- QoL plugins
 

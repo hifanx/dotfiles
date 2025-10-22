@@ -31,8 +31,6 @@ return {
         }
 
         local linters = {
-          'markdownlint', -- markdown linter
-          'ruff', -- python linter
           'shellcheck', -- shell linter, used by bash-language-server
         }
 
