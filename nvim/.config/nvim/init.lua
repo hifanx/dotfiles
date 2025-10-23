@@ -206,6 +206,9 @@ vim.keymap.set('n', 'gcO', 'O<esc>Vcx<esc>:normal gcc<CR>fxa<bs>', { desc = 'Add
 -- lsp info
 vim.keymap.set('n', '<leader>hi', ':LspInfo<CR>', { desc = 'LSP [I]nfo' })
 
+-- delete buffer
+vim.keymap.set('n', '<C-x>', ':bdelete<CR>', { desc = 'Delete buffer' })
+
 -- }}}
 
 -- ╭──────────────────────────────────────────────────────────╮
@@ -214,8 +217,8 @@ vim.keymap.set('n', '<leader>hi', ':LspInfo<CR>', { desc = 'LSP [I]nfo' })
 spec('plugins.blink') -- completion
 spec('plugins.conform') -- format
 spec('plugins.mason') -- auto install lsp server, formatter, linter
+spec('plugins.mini')
 spec('plugins.nvim-treesitter') -- syntax highlighting
-spec('plugins.snacks') -- QoL plugins
 
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ EDITOR                                                │
@@ -232,6 +235,8 @@ spec('plugins.ts-comments') -- enhance neovim's native comments
 -- ╰──────────────────────────────────────────────────────────╯
 spec('plugins.carbon-now') -- screenshot code
 spec('plugins.inc-rename') -- LSP renaming with immediate visual feedback
+spec('plugins.oil')
+spec('plugins.nerdy') -- nerdy icons
 spec('plugins.vim-tmux-navigator')
 spec('plugins.which-key')
 spec('plugins.persistence') -- session manager
@@ -242,7 +247,6 @@ spec('plugins.persistence') -- session manager
 spec('plugins.colorschemes')
 spec('plugins.gitsigns')
 spec('plugins.lualine')
-spec('plugins.mini-icons')
 spec('plugins.nvim-colorizer')
 spec('plugins.render-markdown')
 spec('plugins.smear-cursor') -- animated cursor
@@ -320,6 +324,8 @@ end
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ setup lsp attach                                      │
 -- ╰──────────────────────────────────────────────────────────╯
+local highlight_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = true })
+local detach_augroup = vim.api.nvim_create_augroup('lsp-detach', { clear = true })
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
@@ -327,7 +333,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
     if not client then return end
 
-    -- Buffer-local keymaps (won't duplicate)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'LSP [D]efinition' })
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = 'LSP [D]eclaration' })
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, { nowait = true, desc = 'LSP [R]eferences' })
+    vim.keymap.set('n', 'gI', vim.lsp.buf.implementation, { desc = 'LSP [I]mplementation' })
+    vim.keymap.set('n', 'gy', vim.lsp.buf.type_definition, { desc = 'LSP T[y]pe Definition' })
+
     vim.keymap.set('n', 'gh', vim.diagnostic.open_float, { buffer = ev.buf, desc = 'LSP [H]over Diagnostic' })
     vim.keymap.set({ 'n', 'v' }, '<leader>la', vim.lsp.buf.code_action, { buffer = ev.buf, desc = 'Code [A]ction' })
     vim.keymap.set('n', '<leader>lh', vim.lsp.buf.signature_help, { buffer = ev.buf, desc = 'Signature [H]elp' })
@@ -349,6 +360,29 @@ vim.api.nvim_create_autocmd('LspAttach', {
         { desc = 'Toggle [I]nlay hint' }
       )
     end
+
+    -- Document highlight - buffer-specific autocmds
+    if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+      vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+        buffer = ev.buf,
+        group = highlight_augroup,
+        callback = vim.lsp.buf.document_highlight,
+      })
+
+      vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+        buffer = ev.buf,
+        group = highlight_augroup,
+        callback = vim.lsp.buf.clear_references,
+      })
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd('LspDetach', {
+  group = detach_augroup,
+  callback = function(ev)
+    vim.lsp.buf.clear_references()
+    vim.api.nvim_clear_autocmds({ group = highlight_augroup, buffer = ev.buf })
   end,
 })
 
@@ -477,3 +511,4 @@ vim.api.nvim_create_autocmd('FileType', {
 -- │ ⬇️ SET COLORSCHEME                                       │
 -- ╰──────────────────────────────────────────────────────────╯
 vim.cmd([[colorscheme catppuccin]])
+-- vim.cmd([[colorscheme nightingale]])

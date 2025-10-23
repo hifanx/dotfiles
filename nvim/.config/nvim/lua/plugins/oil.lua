@@ -1,6 +1,6 @@
 return {
   'stevearc/oil.nvim',
-  lazy = false,
+  cmd = { 'Oil' },
   dependencies = {
     'benomahony/oil-git.nvim',
   },
