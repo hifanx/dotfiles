@@ -62,7 +62,7 @@ cask "cleanmymac-zh"
 cask "discord"
 # Downloads videos from different websites
 cask "downie"
-cask "font-sarasa-gothic"
+cask "font-maple-mono-cn"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
 # Java IDE by JetBrains
