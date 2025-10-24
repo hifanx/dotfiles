@@ -6,7 +6,7 @@ return {
     { 'saghen/blink.compat', opts = {} },
   },
   version = '*',
-  event = { 'BufReadPre', 'BufNewFile' },
+  event = { 'InsertEnter', 'CmdlineEnter' },
   config = function()
     if pcall(require, 'copilot') then
       vim.api.nvim_create_autocmd('User', {
