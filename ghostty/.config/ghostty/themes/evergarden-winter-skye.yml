@@ -1,0 +1,27 @@
+## name: evergarden winter skye
+## author: comfysage
+## license: GPL-3.0
+## blurb: a comfy colorscheme for cozy morning coding
+
+palette = 0=#374145
+palette = 1=#f57f82
+palette = 2=#cbe3b3
+palette = 3=#f5d098
+palette = 4=#b2caed
+palette = 5=#f3c0e5
+palette = 6=#b3e3ca
+palette = 7=#96b4aa
+palette = 8=#6f8788
+palette = 9=#f57f82
+palette = 10=#cbe3b3
+palette = 11=#f5d098
+palette = 12=#b2caed
+palette = 13=#f3c0e5
+palette = 14=#b3e3ca
+palette = 15=#adc9bc
+background = 1e2528
+foreground = f8f9e8
+cursor-color = b3e6db
+cursor-text = 171c1f
+selection-background = 374145
+selection-foreground = f8f9e8
