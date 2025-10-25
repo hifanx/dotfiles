@@ -14,12 +14,45 @@ local hostname = vim.loop.os_gethostname()
 
 -- NOTE: computed once on load and called with O(1) operation
 _G.GLOB.is_sif = (os_name == 'darwin' and hostname:find('sif') ~= nil)
-_G.GLOB.is_nanna = (os_name == 'linux' and hostname:find('nanna') ~= nil)
-_G.GLOB.is_baldur = (os_name == 'linux' and hostname:find('baldur') ~= nil)
-_G.GLOB.is_lofn = (os_name == 'linux' and hostname:find('lofn') ~= nil)
+
+-- ╭──────────────────────────────────────────────────────────╮
+-- │ ⬇️ Util functions                                        │
+-- ╰──────────────────────────────────────────────────────────╯
+
+---Retrieve a value from a highlight group with fallback warnings
+---@param hl_group string The highlight group name (e.g., "Normal", "Comment")
+---@param attr string The attribute to retrieve ("fg", "bg", "sp", "bold", "italic", etc.)
+---@param fallback any Optional fallback value to return if not found
+---@return any|nil The attribute value or fallback/nil (colors always returned as hex strings)
+function _G.GLOB.get_hl_value(hl_group, attr, fallback)
+  local hl = vim.api.nvim_get_hl(0, { name = hl_group, link = false, create = false })
+
+  if vim.tbl_isempty(hl) then
+    vim.notify(
+      string.format("Trying to retrieve from '%s' but highlight group doesn't exist", hl_group),
+      vim.log.levels.WARN
+    )
+    return fallback
+  end
+
+  if hl[attr] == nil then
+    vim.notify(
+      string.format("Trying to retrieve from '%s' but '%s' doesn't exist", hl_group, attr),
+      vim.log.levels.WARN
+    )
+    return fallback
+  end
+
+  local value = hl[attr]
+
+  -- Always convert color values to hex
+  local color_attrs = { fg = true, bg = true, sp = true }
+  if color_attrs[attr] and type(value) == 'number' then return string.format('#%06x', value) end
+
+  return value
+end
 
 -- }}}
-
 -- options {{{
 
 -- ╭──────────────────────────────────────────────────────────╮
@@ -124,7 +157,6 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 --  }}}
-
 -- mappings {{{
 
 -- basic
@@ -210,6 +242,29 @@ vim.keymap.set('n', '<leader>hi', ':LspInfo<CR>', { desc = 'LSP [I]nfo' })
 vim.keymap.set('n', '<C-x>', ':bdelete<CR>', { desc = 'Delete buffer' })
 
 -- }}}
+-- autocmd {{{
+
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('highlight_yanked_text', { clear = true }),
+  callback = function() vim.hl.on_yank({ higroup = 'IncSearch', timeout = 300 }) end,
+})
+
+vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+  desc = 'Show lsp line diagnostics automatically in hover window',
+  group = vim.api.nvim_create_augroup('hover_diagnostics', { clear = true }),
+  callback = function() vim.diagnostic.open_float(nil, { focus = false }) end,
+})
+
+-- Don't auto-wrap comments and don't insert comment leader after hitting 'o'.
+-- Do on `FileType` to always override these changes from filetype plugins.
+vim.api.nvim_create_autocmd('FileType', {
+  desc = 'Proper "formatoptions"',
+  group = vim.api.nvim_create_augroup('formatoptions', { clear = true }),
+  callback = function() vim.cmd('setlocal formatoptions-=c formatoptions-=o') end,
+})
+
+-- }}}
 
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ ESSENTIALS                                            │
@@ -217,7 +272,7 @@ vim.keymap.set('n', '<C-x>', ':bdelete<CR>', { desc = 'Delete buffer' })
 spec('plugins.blink') -- completion
 spec('plugins.conform') -- format
 spec('plugins.mason') -- auto install lsp server, formatter, linter
-spec('plugins.mini')
+spec('plugins.mini') -- pickers, icons
 spec('plugins.nvim-treesitter') -- syntax highlighting
 
 -- ╭──────────────────────────────────────────────────────────╮
@@ -311,7 +366,6 @@ require('lazy').setup({
 vim.keymap.set('n', '<leader>hl', ':Lazy<CR>', { desc = 'Lazy' })
 
 -- }}}
-
 -- lsp {{{
 
 -- ╭──────────────────────────────────────────────────────────╮
@@ -398,6 +452,12 @@ local diagnostic_opts = {
       [vim.diagnostic.severity.HINT] = ' ',
       [vim.diagnostic.severity.INFO] = ' ',
     },
+    linehl = {
+      [vim.diagnostic.severity.ERROR] = 'DiagnosticError',
+      [vim.diagnostic.severity.WARN] = 'DiagnosticWarn',
+      [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
+      [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
+    },
     numhl = {
       [vim.diagnostic.severity.ERROR] = 'DiagnosticError',
       [vim.diagnostic.severity.WARN] = 'DiagnosticWarn',
@@ -468,47 +528,13 @@ local servers = {
 vim.lsp.enable(servers)
 
 -- }}}
+-- {{{ highlight
 
--- autocmd {{{
-
-vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('highlight_yanked_text', { clear = true }),
-  callback = function() vim.hl.on_yank({ higroup = 'IncSearch', timeout = 300 }) end,
-})
-
-vim.api.nvim_create_autocmd('ColorScheme', {
-  desc = 'Set highlights after colorscheme loaded',
-  group = vim.api.nvim_create_augroup('highlight_colorscheme', { clear = true }),
-  callback = function()
-    local M = require('highlights')
-    for _, group in pairs(M) do
-      for name, attrs in pairs(group) do
-        vim.api.nvim_set_hl(0, name, attrs)
-      end
-    end
-    vim.notify('Colorscheme loaded and highlights set', vim.log.levels.INFO, { title = 'Neovim' })
-  end,
-})
-
-vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-  desc = 'Show lsp line diagnostics automatically in hover window',
-  group = vim.api.nvim_create_augroup('hover_diagnostics', { clear = true }),
-  callback = function() vim.diagnostic.open_float(nil, { focus = false }) end,
-})
-
--- Don't auto-wrap comments and don't insert comment leader after hitting 'o'.
--- Do on `FileType` to always override these changes from filetype plugins.
-vim.api.nvim_create_autocmd('FileType', {
-  desc = 'Proper "formatoptions"',
-  group = vim.api.nvim_create_augroup('formatoptions', { clear = true }),
-  callback = function() vim.cmd('setlocal formatoptions-=c formatoptions-=o') end,
-})
+local groups = require('highlights')
+for _, group in pairs(groups) do
+  for name, attrs in pairs(group) do
+    vim.api.nvim_set_hl(0, name, attrs)
+  end
+end
 
 -- }}}
-
--- ╭──────────────────────────────────────────────────────────╮
--- │ ⬇️ SET COLORSCHEME                                       │
--- ╰──────────────────────────────────────────────────────────╯
-vim.cmd([[colorscheme catppuccin]])
--- vim.cmd([[colorscheme nightingale]])
