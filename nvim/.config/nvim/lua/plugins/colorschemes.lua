@@ -54,14 +54,11 @@ return {
     priority = 1000,
     config = function()
       require('kanagawa').setup({
-        theme = 'wave',
+        theme = 'wave', -- dragon, lotus, wave
         commentStyle = { italic = true },
         keywordStyle = { italic = true },
       })
       -- vim.cmd([[colorscheme kanagawa]])
-      -- vim.cmd([[colorscheme kanagawa-wave]])
-      -- vim.cmd([[colorscheme kanagawa-dragon]])
-      -- vim.cmd([[colorscheme kanagawa-lotus]])
     end,
   },
   {
@@ -135,6 +132,26 @@ return {
         style = 'night',
       })
       -- vim.cmd([[colorscheme tokyonight]])
+    end,
+  },
+  {
+    'rose-pine/neovim',
+    cond = false,
+    name = 'rose-pine',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('rose-pine').setup({
+        variant = 'auto', -- auto, main, moon, or dawn
+        dark_variant = 'main', -- main, moon, or dawn
+
+        styles = {
+          bold = true,
+          italic = true,
+          transparency = false,
+        },
+      })
+      -- vim.cmd([[colorscheme rose-pine]])
     end,
   },
 }
