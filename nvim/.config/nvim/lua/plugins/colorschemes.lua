@@ -10,6 +10,19 @@ return {
         flavour = 'mocha',
         transparent_background = false,
         term_colors = true,
+        styles = {
+          comments = { 'italic' },
+          keywords = { 'italic' },
+        },
+        float = {
+          transparent = true,
+          solid = true,
+        },
+        lsp_styles = {
+          inlay_hints = {
+            background = false,
+          },
+        },
       })
       -- vim.cmd([[colorscheme catppuccin]])
     end,
@@ -110,6 +123,18 @@ return {
         },
       })
       -- vim.cmd([[colorscheme vague]])
+    end,
+  },
+  {
+    'folke/tokyonight.nvim',
+    cond = false,
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('tokyonight').setup({
+        style = 'night',
+      })
+      -- vim.cmd([[colorscheme tokyonight]])
     end,
   },
 }
