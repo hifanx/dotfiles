@@ -7,45 +7,6 @@ return {
   },
   config = function()
     -- ╭──────────────────────────────────────────────────────────╮
-    -- │ ⬇️ themes                                                │
-    -- ╰──────────────────────────────────────────────────────────╯
-    local c = require('palette').catppuccin
-    local theme = function()
-      return {
-        inactive = {
-          a = { fg = c.subtext0, bg = c.base },
-          b = { fg = c.subtext0, bg = c.surface0 },
-          c = { fg = c.subtext0, bg = c.base },
-        },
-        visual = {
-          a = { fg = c.mantle, bg = c.peach },
-          b = { fg = c.peach, bg = c.surface0 },
-          c = { fg = c.subtext0, bg = c.base },
-        },
-        replace = {
-          a = { fg = c.mantle, bg = c.maroon },
-          b = { fg = c.maroon, bg = c.surface0 },
-          c = { fg = c.subtext0, bg = c.base },
-        },
-        normal = {
-          a = { fg = c.mantle, bg = c.blue },
-          b = { fg = c.blue, bg = c.surface0 },
-          c = { fg = c.subtext0, bg = c.base },
-        },
-        insert = {
-          a = { fg = c.mantle, bg = c.green },
-          b = { fg = c.green, bg = c.surface0 },
-          c = { fg = c.subtext0, bg = c.base },
-        },
-        command = {
-          a = { fg = c.mantle, bg = c.yellow },
-          b = { fg = c.yellow, bg = c.surface0 },
-          c = { fg = c.subtext0, bg = c.base },
-        },
-      }
-    end
-
-    -- ╭──────────────────────────────────────────────────────────╮
     -- │ ⬇️ lazy status component                                 │
     -- ╰──────────────────────────────────────────────────────────╯
     local lazy_status = require('lazy.status')
@@ -93,13 +54,25 @@ return {
       lazy_status = lazy_status.has_updates,
       is_sif = function() return GLOB.is_sif end,
     }
-
     -- ╭──────────────────────────────────────────────────────────╮
     -- │ ⬇️ setup the thing                                       │
     -- ╰──────────────────────────────────────────────────────────╯
+
+    local normal_ish = _G.GLOB.get_hl_value('Normal', 'bg')
+    local warn_ish_fg = _G.GLOB.get_hl_value('WarningMsg', 'fg')
+    local ok_ish_fg = _G.GLOB.get_hl_value('OkMsg', 'fg')
+    local stdout_ish_fg = _G.GLOB.get_hl_value('StdoutMsg', 'fg')
+    local err_ish_fg = _G.GLOB.get_hl_value('OkMsg', 'fg')
+
     require('lualine').setup({
       options = {
-        theme = theme,
+        theme = (function() -- make section c normal background, keep everything else 'auto'
+          local theme = require('lualine.themes.' .. vim.g.colors_name)
+          for _, sections in pairs(theme) do
+            if sections.c then sections.c.bg = normal_ish end
+          end
+          return theme
+        end)(),
         globalstatus = true,
         section_separators = { left = '', right = '' },
         component_separators = { left = '', right = '' },
@@ -120,11 +93,6 @@ return {
               modified = ' ',
               removed = ' ',
             },
-            diff_color = {
-              added = { fg = c.green },
-              modified = { fg = c.peach },
-              removed = { fg = c.red },
-            },
           },
           { trailing },
           { indent },
@@ -138,16 +106,14 @@ return {
               info = ' ',
               hint = ' ',
             },
-            diagnostics_color = {
-              color_error = { link = 'DiagnosticError' },
-              color_warn = { link = 'DiagnosticWarn' },
-              color_info = { link = 'DiagnosticInfo' },
-              color_hint = { link = 'DiagnosticHint' },
-            },
           },
         },
         lualine_x = {
-          { lazy, cond = conditions.lazy_status, color = { fg = c.peach } },
+          {
+            lazy,
+            cond = conditions.lazy_status,
+            color = { fg = warn_ish_fg },
+          },
           {
             'copilot',
             cond = conditions.is_sif,
@@ -161,15 +127,14 @@ return {
                   unknown = ' ',
                 },
                 hl = {
-                  enabled = c.green,
-                  sleep = c.sky,
-                  disabled = c.yellow,
-                  warning = c.peach,
-                  unknown = c.red,
+                  enabled = ok_ish_fg,
+                  sleep = stdout_ish_fg,
+                  disabled = stdout_ish_fg,
+                  warning = warn_ish_fg,
+                  unknown = err_ish_fg,
                 },
               },
               spinners = require('copilot-lualine.spinners').dots,
-              spinner_color = c.yellow,
             },
             show_colors = true,
             show_loading = true,
