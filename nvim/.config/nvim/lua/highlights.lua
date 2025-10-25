@@ -5,7 +5,7 @@ local bg_normal = GLOB.get_hl_value('Normal', 'bg')
 -- NOTE: ⬇️ linking logic: plugin => default_hl
 
 M.default_hl = {
-  MsgSeparator = { link = 'NonText' },
+  MsgSeparator = { link = 'WinSeparator' },
   Folded = { link = 'MoreMsg' },
 }
 

@@ -250,12 +250,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function() vim.hl.on_yank({ higroup = 'IncSearch', timeout = 300 }) end,
 })
 
-vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-  desc = 'Show lsp line diagnostics automatically in hover window',
-  group = vim.api.nvim_create_augroup('hover_diagnostics', { clear = true }),
-  callback = function() vim.diagnostic.open_float(nil, { focus = false }) end,
-})
-
 -- Don't auto-wrap comments and don't insert comment leader after hitting 'o'.
 -- Do on `FileType` to always override these changes from filetype plugins.
 vim.api.nvim_create_autocmd('FileType', {
@@ -452,18 +446,15 @@ local diagnostic_opts = {
       [vim.diagnostic.severity.HINT] = ' ',
       [vim.diagnostic.severity.INFO] = ' ',
     },
-    linehl = {
-      [vim.diagnostic.severity.ERROR] = 'DiagnosticError',
-      [vim.diagnostic.severity.WARN] = 'DiagnosticWarn',
-      [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
-      [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
-    },
     numhl = {
       [vim.diagnostic.severity.ERROR] = 'DiagnosticError',
       [vim.diagnostic.severity.WARN] = 'DiagnosticWarn',
       [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
       [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
     },
+  },
+  virtual_text = {
+    virt_text_pos = 'eol_right_align',
   },
   update_in_insert = false,
   underline = true,

@@ -36,7 +36,7 @@ return {
   },
   {
     'rebelot/kanagawa.nvim',
-    -- cond = false,
+    cond = false,
     lazy = false,
     priority = 1000,
     config = function()
@@ -45,7 +45,7 @@ return {
         commentStyle = { italic = true },
         keywordStyle = { italic = true },
       })
-      vim.cmd([[colorscheme kanagawa]])
+      -- vim.cmd([[colorscheme kanagawa]])
       -- vim.cmd([[colorscheme kanagawa-wave]])
       -- vim.cmd([[colorscheme kanagawa-dragon]])
       -- vim.cmd([[colorscheme kanagawa-lotus]])
@@ -83,20 +83,8 @@ return {
     end,
   },
   {
-    'navarasu/onedark.nvim',
-    cond = false,
-    lazy = false,
-    priority = 1000, -- make sure to load this before all the other start plugins
-    config = function()
-      require('onedark').setup({
-        style = 'darker',
-      })
-      -- vim.cmd([[colorscheme onedark]])
-    end,
-  },
-  {
     'everviolet/nvim',
-    cond = false,
+    -- cond = false,
     lazy = false,
     name = 'evergarden',
     priority = 1000,
@@ -107,7 +95,21 @@ return {
           accent = 'skye',
         },
       })
-      -- vim.cmd([[colorscheme evergarden]])
+      vim.cmd([[colorscheme evergarden]])
+    end,
+  },
+  {
+    'vague-theme/vague.nvim',
+    cond = false,
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('vague').setup({
+        style = {
+          keywords = 'italic',
+        },
+      })
+      -- vim.cmd([[colorscheme vague]])
     end,
   },
 }
