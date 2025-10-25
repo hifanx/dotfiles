@@ -1,6 +1,6 @@
 return {
   'stevearc/oil.nvim',
-  cmd = { 'Oil' },
+  lazy = false, -- need this or oil-ssh won't work properly
   dependencies = {
     'benomahony/oil-git.nvim',
   },
