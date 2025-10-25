@@ -54,10 +54,10 @@ return {
       lazy_status = lazy_status.has_updates,
       is_sif = function() return GLOB.is_sif end,
     }
+
     -- ╭──────────────────────────────────────────────────────────╮
     -- │ ⬇️ setup the thing                                       │
     -- ╰──────────────────────────────────────────────────────────╯
-
     local normal_ish = _G.GLOB.get_hl_value('Normal', 'bg')
     local warn_ish_fg = _G.GLOB.get_hl_value('WarningMsg', 'fg')
     local ok_ish_fg = _G.GLOB.get_hl_value('OkMsg', 'fg')
