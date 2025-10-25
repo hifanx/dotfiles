@@ -61,7 +61,7 @@ return {
     local normal_ish = _G.GLOB.get_hl_value('Normal', 'bg')
     local warn_ish_fg = _G.GLOB.get_hl_value('WarningMsg', 'fg')
     local ok_ish_fg = _G.GLOB.get_hl_value('OkMsg', 'fg')
-    local stdout_ish_fg = _G.GLOB.get_hl_value('StdoutMsg', 'fg')
+    local nontext_ish_fg = _G.GLOB.get_hl_value('NonText', 'fg')
     local err_ish_fg = _G.GLOB.get_hl_value('OkMsg', 'fg')
 
     require('lualine').setup({
@@ -128,8 +128,8 @@ return {
                 },
                 hl = {
                   enabled = ok_ish_fg,
-                  sleep = stdout_ish_fg,
-                  disabled = stdout_ish_fg,
+                  sleep = nontext_ish_fg,
+                  disabled = nontext_ish_fg,
                   warning = warn_ish_fg,
                   unknown = err_ish_fg,
                 },
