@@ -21,3 +21,5 @@ macos-titlebar-style = hidden
 term = xterm-256color
 
 auto-update = download
+
+macos-option-as-alt = true
