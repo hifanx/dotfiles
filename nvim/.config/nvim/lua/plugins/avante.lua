@@ -18,7 +18,7 @@ return {
     require('avante').setup({
       provider = 'copilot',
       input = {
-        provider = 'snacks',
+        provider = 'native',
         provider_opts = {
           title = 'Avante Input',
           icon = '',
