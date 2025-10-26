@@ -47,7 +47,7 @@ source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # set EDITOR
-export EDITOR='nvim'
+export EDITOR='vim'
 
 # set $XDG PATHS
 export XDG_CONFIG_HOME=$HOME/.config
@@ -60,11 +60,6 @@ alias c="clear"
 export EZA_CONFIG_DIR=$HOME/.config/eza/
 alias v='eza -lag --icons auto --sort name --group-directories-first --no-quotes --no-time'
 alias ll='eza -lag --icons auto --sort name --group-directories-first --no-quotes'
-
-# neovim
-alias cn="cd ~/.config/nvim"
-alias vi="nvim"
-alias vim="nvim"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
