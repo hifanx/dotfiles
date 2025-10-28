@@ -112,6 +112,7 @@ alias lofn="ssh root@10.0.0.5"
 alias heimdall="ssh root@10.0.0.1"
 alias nanna="ssh xuhaifan@10.0.0.12"
 alias baldur="ssh xuhaifan@10.0.0.10"
+alias co='cd "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian"'
 
 ## yazi
 y() {
