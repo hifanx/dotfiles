@@ -16,7 +16,6 @@ M.render_markdown = {
   RenderMarkdownH4Bg = { bg = bg_normal },
   RenderMarkdownH5Bg = { bg = bg_normal },
   RenderMarkdownH6Bg = { bg = bg_normal },
-  RenderMarkdownCode = { bg = bg_normal },
   RenderMarkdownTableRow = { link = 'DiagnosticWarn' },
   RenderMarkdownTableHead = { link = 'DiagnosticError' },
 }

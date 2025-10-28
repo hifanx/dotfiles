@@ -70,6 +70,7 @@ o.backup = false -- disable backup
 o.confirm = true -- Confirm to save changes before exiting modified buffer
 o.iskeyword = '@,48-57,_,192-255,-' -- Treat dash as `word` textobject part
 o.termguicolors = true
+o.autoread = true
 
 -- ui
 o.winborder = 'solid'
