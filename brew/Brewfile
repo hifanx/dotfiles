@@ -54,6 +54,8 @@ brew "felixkratz/formulae/borders"
 cask "adobe-creative-cloud"
 # AeroSpace is an i3-like tiling window manager for macOS
 cask "aerospace"
+# Application launcher and productivity software
+cask "alfred"
 # Tool to flash OS images to SD cards & USB drives
 cask "balenaetcher"
 # Tool to remove unnecessary files and folders from disk Chinese edition
@@ -83,6 +85,8 @@ cask "microsoft-word"
 cask "movist-pro"
 # Open-source software for live streaming and screen recording
 cask "obs"
+# Knowledge base that works on top of a local folder of plain text Markdown files
+cask "obsidian"
 # Instant messaging tool
 cask "qq"
 # Mesh VPN based on WireGuard
