@@ -1,5 +1,7 @@
 -- bootstrap {{{
 
+local start_time = vim.loop.hrtime()
+
 _G.GLOB = {}
 
 local LAZY_PLUGIN_SPEC = {}
@@ -305,7 +307,6 @@ spec('plugins.todo-comments')
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ AI                                                    │
 -- ╰──────────────────────────────────────────────────────────╯
-spec('plugins.avante')
 spec('plugins.copilot')
 
 -- lazy {{{
@@ -528,5 +529,17 @@ for _, group in pairs(groups) do
     vim.api.nvim_set_hl(0, name, attrs)
   end
 end
+
+-- }}}
+-- {{{ startup timer
+
+local end_time = vim.loop.hrtime()
+local elapsed_ms = (end_time - start_time) / 1000000 -- Convert nanoseconds to milliseconds
+
+-- vim.notify(string.format('Neovim startup time: %.2f ms', elapsed_ms), vim.log.levels.INFO)
+vim.defer_fn(
+  function() vim.notify(string.format('Neovim startup time: %.2f ms', elapsed_ms), vim.log.levels.INFO) end,
+  0
+)
 
 -- }}}
