@@ -140,6 +140,10 @@ alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 # thefuck
 eval "$(thefuck --alias)"
 
+# opencode
+export BUN_INSTALL="$HOME/.local/share/"
+export BUN_INSTALL_CACHE_DIR="$HOME/.local/share/"
+
 # secrets
 if [ -f ~/.config/.secrets ]; then
     source ~/.config/.secrets
