@@ -283,7 +283,6 @@ spec('plugins.ts-comments') -- enhance neovim's native comments
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ TOOLS                                                 │
 -- ╰──────────────────────────────────────────────────────────╯
-spec('plugins.carbon-now') -- screenshot code
 spec('plugins.inc-rename') -- LSP renaming with immediate visual feedback
 spec('plugins.oil')
 spec('plugins.nerdy') -- nerdy icons
