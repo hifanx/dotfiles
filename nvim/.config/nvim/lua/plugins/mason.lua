@@ -11,38 +11,27 @@ return {
     {
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       config = function()
-        local servers = {
-          'css-lsp',
-          'lua-language-server',
-          'yaml-language-server',
-          'json-lsp',
-          'markdown-oxide',
-          'taplo', -- toml
-          'pyright',
-          'docker-language-server',
-          'bash-language-server',
-        }
-
-        local formatters = {
-          'stylua', -- lua formatter
-          'prettier', -- prettier formatter
-          'shfmt', -- shell formatter
-          'black', -- python formatter
-        }
-
-        local linters = {
-          'shellcheck', -- shell linter, used by bash-language-server
-        }
-
-        local ensure_installed = {
-          'tree-sitter-cli',
-        }
-        vim.list_extend(ensure_installed, servers)
-        vim.list_extend(ensure_installed, formatters)
-        vim.list_extend(ensure_installed, linters)
-
         require('mason-tool-installer').setup({
-          ensure_installed = ensure_installed,
+          ensure_installed = {
+            'tree-sitter-cli',
+            -- LSP servers
+            'css-lsp',
+            'lua-language-server',
+            'yaml-language-server',
+            'json-lsp',
+            'markdown-oxide',
+            'taplo',
+            'pyright',
+            'docker-language-server',
+            'bash-language-server',
+            -- Formatters
+            'stylua',
+            'prettier',
+            'shfmt',
+            'black',
+            -- Linters
+            'shellcheck',
+          },
         })
       end,
     },
