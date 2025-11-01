@@ -15,7 +15,6 @@ return {
           keywords = { 'italic' },
         },
         float = {
-          transparent = true,
           solid = true,
         },
         lsp_styles = {
@@ -25,26 +24,6 @@ return {
         },
       })
       -- vim.cmd([[colorscheme catppuccin]])
-    end,
-  },
-  {
-    'Shatur/neovim-ayu',
-    cond = false,
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require('ayu').setup({ mirage = true })
-      -- vim.cmd([[colorscheme ayu]])
-    end,
-  },
-  {
-    'xeind/nightingale.nvim',
-    cond = false,
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require('nightingale').setup({})
-      -- vim.cmd([[colorscheme nightingale]])
     end,
   },
   {
@@ -59,18 +38,6 @@ return {
         keywordStyle = { italic = true },
       })
       -- vim.cmd([[colorscheme kanagawa]])
-    end,
-  },
-  {
-    'EdenEast/nightfox.nvim',
-    cond = false,
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require('nightfox').setup({})
-      -- vim.cmd([[colorscheme nightfox]])
-      -- vim.cmd([[colorscheme duskfox]])
-      -- vim.cmd([[colorscheme carbonfox]])
     end,
   },
   {
@@ -144,7 +111,6 @@ return {
       require('rose-pine').setup({
         variant = 'auto', -- auto, main, moon, or dawn
         dark_variant = 'main', -- main, moon, or dawn
-
         styles = {
           bold = true,
           italic = true,

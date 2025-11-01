@@ -90,7 +90,7 @@ o.breakindent = true -- make wrapped lines continue visually indented
 -- special UI symbols
 o.list = true -- show invisible characters.
 o.listchars = 'extends:…,nbsp:␣,precedes:…,tab:> ,trail:·'
-o.fillchars = 'eob: ,fold:╌,foldclose:,foldopen:'
+o.fillchars = 'eob: ,fold:,foldclose:,foldopen:'
 
 -- statusline
 o.laststatus = 0 -- never a statusline
@@ -533,7 +533,6 @@ end
 local end_time = vim.loop.hrtime()
 local elapsed_ms = (end_time - start_time) / 1000000 -- Convert nanoseconds to milliseconds
 
--- vim.notify(string.format('Neovim startup time: %.2f ms', elapsed_ms), vim.log.levels.INFO)
 vim.defer_fn(
   function() vim.notify(string.format('Neovim startup time: %.2f ms', elapsed_ms), vim.log.levels.INFO) end,
   0
