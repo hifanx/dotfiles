@@ -12,16 +12,16 @@ sort_translit = false
 linemode = "size"
 show_hidden = true
 show_symlink = true
-scrolloff = 5
+scrolloff = 15
 mouse_events = ["click", "scroll"]
 title_format = "Yazi: {cwd}"
 
 [preview]
 wrap = "no"
 tab_size = 2
-# max_width = 1800
-# max_height = 2500
-cache_dir = ""
+max_width = 1800
+max_height = 2500
+cache_dir = "$HOME/.cache/yazi/preview"
 image_delay = 0
 image_filter = "triangle"
 image_quality = 75
