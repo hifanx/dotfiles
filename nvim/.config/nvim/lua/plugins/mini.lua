@@ -31,11 +31,6 @@ return {
     end,
     config = function()
       require('mini.pick').setup({
-        window = {
-          config = {
-            border = 'rounded',
-          },
-        },
         -- NOTE: commented out because they are defaults
         mappings = {
           -- caret_left = '<Left>',
