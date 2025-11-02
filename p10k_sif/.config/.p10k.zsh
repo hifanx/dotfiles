@@ -189,11 +189,11 @@
   #################################[ os_icon: os identifier ]##################################
   # OS identifier color.
   typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=0
-  typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=3
+  typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=11
 
   # Custom icon.
   # typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='⭐'
-  typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='󰀵 '
+  typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION=' '
 
   ################################[ prompt_char: prompt symbol ]################################
   # Green prompt symbol if the last command succeeded.
@@ -226,7 +226,7 @@
   typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=7
   # Color of the anchor directory segments. Anchor segments are never shortened. The first
   # segment is always an anchor.
-  typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=39
+  typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=32
   # Display anchor directory segments in bold.
   typeset -g POWERLEVEL9K_DIR_ANCHOR_BOLD=true
   # Don't shorten directories that contain any of these files. They are anchors.
@@ -355,7 +355,7 @@
   #####################################[ vcs: git status ]######################################
 
   # Github icon.
-  typeset -g POWERLEVEL9K_VCS_GIT_GITHUB_ICON=' '
+  typeset -g POWERLEVEL9K_VCS_GIT_GITHUB_ICON=''
   # Branch icon. Set this parameter to '\UE0A0 ' for the popular Powerline branch icon.
   typeset -g POWERLEVEL9K_VCS_BRANCH_ICON=''
 
