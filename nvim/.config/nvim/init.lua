@@ -90,7 +90,7 @@ o.breakindent = true -- make wrapped lines continue visually indented
 -- special UI symbols
 o.list = true -- show invisible characters.
 o.listchars = 'extends:…,nbsp:␣,precedes:…,tab:> ,trail:·'
-o.fillchars = 'eob: ,fold:,foldclose:,foldopen:'
+o.fillchars = 'eob: ,fold:┄,foldclose:,foldopen:'
 
 -- statusline
 o.laststatus = 0 -- never a statusline

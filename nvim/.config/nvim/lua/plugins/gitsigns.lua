@@ -56,7 +56,7 @@ return {
         vim.keymap.set('n', '<Leader>gu', function() gs.undo_stage_hunk() end, { desc = '[U]ndo hunk' })
         vim.keymap.set('n', '<Leader>gb', function() gs.blame_line() end, { desc = '[B]lame line' })
         vim.keymap.set('n', '<Leader>gB', function() gs.blame_line({ full = true }) end, { desc = '[B]lame buffer' })
-        vim.keymap.set('n', '<Leader>gD', function() gs.diffthis() end, { desc = '[G]it [D]iff' })
+        vim.keymap.set('n', '<Leader>gd', function() gs.diffthis() end, { desc = '[G]it [D]iff' })
         vim.keymap.set(
           'n',
           '<Leader>gt',

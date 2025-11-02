@@ -20,6 +20,14 @@ return {
       vim.keymap.set('n', '<leader>fk', ':Pick keymaps<CR>', { desc = '[K]eymaps' })
       vim.keymap.set('n', '<leader>fm', ':Pick marks<CR>', { desc = '[M]arks' })
       vim.keymap.set('n', '<leader>fo', ':Pick options<CR>', { desc = '[O]ptions' })
+      vim.keymap.set('n', '<leader>fb', ':Pick buf_lines<CR>', { desc = '[B]uffer lines' })
+      vim.keymap.set('n', '<leader>fd', ':Pick diagnostic<CR>', { desc = '[D]iagnostics' })
+      vim.keymap.set('n', '<leader>e', ':Pick explorer<CR>', { desc = '[E]xplorer' })
+      vim.keymap.set('n', '<leader>gc', ':Pick git_commits<CR>', { desc = '[G]it [c]ommits' })
+      vim.keymap.set('n', '<leader>gh', ':Pick git_hunks<CR>', { desc = '[G]it [h]unks' })
+      vim.keymap.set('n', '<leader>fq', ':Pick list scope="quickfix"<CR>', { desc = '[Q]ickfix' })
+      vim.keymap.set('n', '<leader>fl', ':Pick list scope="location-list"<CR>', { desc = '[L]oclist' })
+      vim.keymap.set('n', '<leader>fj', ':Pick list scope="jumplist"<CR>', { desc = '[J]umplist' })
     end,
     config = function()
       require('mini.pick').setup({
