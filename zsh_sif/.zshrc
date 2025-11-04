@@ -140,6 +140,13 @@ alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 # thefuck
 eval "$(thefuck --alias)"
 
+# npm
+export NPM_CONFIG_PREFIX="$HOME/.local/share/npm"
+export NPM_CONFIG_CACHE="$HOME/.cache/npm"
+export NPM_CONFIG_TMP="$HOME/.cache/npm/tmp"
+export NODE_PATH="$NPM_CONFIG_PREFIX/lib/node_modules"
+export PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
+
 # opencode
 export BUN_INSTALL="$HOME/.local/share/"
 export BUN_INSTALL_CACHE_DIR="$HOME/.local/share/"
