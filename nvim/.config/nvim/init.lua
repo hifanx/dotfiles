@@ -298,7 +298,6 @@ spec('plugins.gitsigns')
 spec('plugins.lualine')
 spec('plugins.nvim-colorizer')
 spec('plugins.render-markdown')
-spec('plugins.smear-cursor') -- animated cursor
 spec('plugins.todo-comments')
 
 -- ╭──────────────────────────────────────────────────────────╮
