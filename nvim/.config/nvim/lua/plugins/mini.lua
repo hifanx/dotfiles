@@ -71,4 +71,9 @@ return {
       MiniIcons.mock_nvim_web_devicons()
     end,
   },
+  {
+    'nvim-mini/mini.ai',
+    event = { 'BufReadPre', 'BufNewFile' },
+    config = function() require('mini.ai').setup() end,
+  },
 }
