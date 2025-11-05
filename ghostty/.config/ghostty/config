@@ -28,4 +28,4 @@ auto-update = download
 macos-option-as-alt = true
 
 custom-shader-animation = true
-custom-shader = "shaders/cursor_warp.glsl"
+custom-shader = "shaders/cursor_frozen.glsl"
