@@ -4,8 +4,7 @@ font-feature = calt,cv06,ss09
 
 font-size = 20
 
-# theme = evergarden-winter-skye.yml
-theme = Kanagawa Wave
+theme = evergarden-winter-skye.yml
 
 cursor-style = block
 cursor-style-blink = true
