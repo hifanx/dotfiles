@@ -42,7 +42,7 @@ return {
           -- choose_marked = '<M-CR>',
           -- delete_char = '<BS>',
           -- delete_char_right = '<Del>',
-          -- delete_left = '<C-u>',
+          delete_left = '',
           -- delete_word = '<C-w>',
           -- mark = '<C-x>',
           -- mark_all = '<C-a>',
