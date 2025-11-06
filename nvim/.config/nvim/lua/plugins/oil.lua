@@ -35,27 +35,5 @@ return {
         ['g\\'] = { 'actions.toggle_trash', mode = 'n' },
       },
     })
-
-    -- HACK: force yamlls to attach when oil-ssh into remote yaml files
-    --  yamlls doesn't automatically attach because oil-ssh uses a custom URI scheme and can't find the root dir
-    vim.api.nvim_create_autocmd('FileType', {
-      pattern = 'yaml',
-      callback = function(args)
-        local bufnr = args.buf
-        local uri = vim.uri_from_bufnr(bufnr)
-
-        -- Check if this is an oil-ssh buffer
-        if uri:match('^oil%-ssh://') then
-          -- Manually start LSP for this buffer
-          vim.lsp.start({
-            name = 'yamlls',
-            cmd = { 'yaml-language-server', '--stdio' },
-            root_dir = vim.fn.getcwd(),
-          }, {
-            bufnr = bufnr,
-          })
-        end
-      end,
-    })
   end,
 }
