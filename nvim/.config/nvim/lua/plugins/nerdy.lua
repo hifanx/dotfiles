@@ -1,9 +1,6 @@
 return {
   '2kabhishek/nerdy.nvim',
   cmd = 'Nerdy',
-  dependencies = {
-    'nvim-mini/mini.pick',
-  },
   config = function()
     require('nerdy').setup({
       max_recents = 30, -- Configure recent icons limit
