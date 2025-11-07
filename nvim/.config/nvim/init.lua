@@ -309,7 +309,6 @@ spec('plugins.nvim-treesitter') -- syntax highlighting
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ EDITOR                                                │
 -- ╰──────────────────────────────────────────────────────────╯
-spec('plugins.better-escape')
 spec('plugins.nvim-surround')
 spec('plugins.pangu') -- auto format to add a space between cjk and english letters
 spec('plugins.ts-comments') -- enhance neovim's native comments
