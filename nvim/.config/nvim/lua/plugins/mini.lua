@@ -45,5 +45,8 @@ return {
 
     -- mini.ai: Extended textobjects
     require('mini.ai').setup()
+
+    -- mini.surround: Surround text objects
+    require('mini.surround').setup()
   end,
 }
