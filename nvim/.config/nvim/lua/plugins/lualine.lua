@@ -2,7 +2,6 @@ return {
   'nvim-lualine/lualine.nvim',
   event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
-    'nvim-mini/mini.icons',
     'AndreM222/copilot-lualine',
   },
   config = function()
