@@ -7,7 +7,7 @@ return {
     vim.keymap.set('n', '<leader>fg', ':Pick grep_live<CR>', { desc = '[G]rep live' })
     vim.keymap.set('n', '<leader>fh', ':Pick help<CR>', { desc = '[H]elp' })
     vim.keymap.set('n', '<leader>fH', ':Pick hl_groups<CR>', { desc = '[H]ighlights' })
-    vim.keymap.set('n', '<leader><space>', ':Pick resume<CR>', { desc = '[H]elp' })
+    vim.keymap.set('n', '<leader><space>', ':Pick resume<CR>', { desc = 'Resume' })
     vim.keymap.set('n', '<leader>fi', ':Nerdy<CR>', { desc = '[I]con' })
     vim.keymap.set('n', '<leader>fc', ':Pick commands<CR>', { desc = '[C]ommands' })
     vim.keymap.set('n', '<leader>fC', ':Pick colorschemes<CR>', { desc = '[C]olorschemes' })
@@ -108,6 +108,63 @@ return {
           neigh_pattern = '[^\\][^%a]',
           register = { cr = false },
         },
+      },
+    })
+
+    -- mini.clue: Keybinding hints
+    local miniclue = require('mini.clue')
+    miniclue.setup({
+      window = {
+        -- Show window immediately
+        delay = 250,
+        config = {
+          -- Compute window width automatically
+          width = 'auto',
+          -- Use double-line border
+          border = 'double',
+        },
+      },
+      triggers = {
+        -- Leader triggers
+        { mode = 'n', keys = '<Leader>' },
+        { mode = 'x', keys = '<Leader>' },
+        -- `[` and `]` keys
+        { mode = 'n', keys = '[' },
+        { mode = 'n', keys = ']' },
+        -- Built-in completion
+        { mode = 'i', keys = '<C-x>' },
+        -- `g` key
+        { mode = 'n', keys = 'g' },
+        { mode = 'x', keys = 'g' },
+        -- Marks
+        { mode = 'n', keys = "'" },
+        { mode = 'n', keys = '`' },
+        { mode = 'x', keys = "'" },
+        { mode = 'x', keys = '`' },
+        -- Registers
+        { mode = 'n', keys = '"' },
+        { mode = 'x', keys = '"' },
+        { mode = 'i', keys = '<C-r>' },
+        { mode = 'c', keys = '<C-r>' },
+        -- Window commands
+        { mode = 'n', keys = '<C-w>' },
+        -- `z` key
+        { mode = 'n', keys = 'z' },
+        { mode = 'x', keys = 'z' },
+      },
+      clues = {
+        -- Enhance this by adding descriptions for <Leader> mapping groups
+        miniclue.gen_clues.square_brackets(),
+        miniclue.gen_clues.builtin_completion(),
+        miniclue.gen_clues.g(),
+        miniclue.gen_clues.marks(),
+        miniclue.gen_clues.registers(),
+        miniclue.gen_clues.windows(),
+        miniclue.gen_clues.z(),
+        { mode = 'n', keys = '<Leader>f', desc = '[F]ind' },
+        { mode = 'n', keys = '<Leader>g', desc = '[G]it' },
+        { mode = 'n', keys = '<Leader>h', desc = '[H]elper' },
+        { mode = 'n', keys = '<Leader>l', desc = '[L]sp' },
       },
     })
   end,

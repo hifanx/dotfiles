@@ -317,7 +317,6 @@ spec('plugins.inc-rename') -- LSP renaming with immediate visual feedback
 spec('plugins.oil')
 spec('plugins.nerdy') -- nerdy icons
 spec('plugins.vim-tmux-navigator')
-spec('plugins.which-key')
 spec('plugins.persistence') -- session manager
 
 -- ╭──────────────────────────────────────────────────────────╮
