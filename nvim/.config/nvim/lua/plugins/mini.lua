@@ -1,8 +1,7 @@
 return {
   'nvim-mini/mini.nvim',
-  cmd = { 'Pick' },
+  event = { 'VeryLazy' },
   init = function()
-    -- Picker keymaps
     vim.keymap.set('n', '<leader>ff', ':Pick files<CR>', { desc = '[F]iles' })
     vim.keymap.set('n', '<leader>fg', ':Pick grep_live<CR>', { desc = '[G]rep live' })
     vim.keymap.set('n', '<leader>fh', ':Pick help<CR>', { desc = '[H]elp' })
@@ -22,9 +21,9 @@ return {
     vim.keymap.set('n', '<leader>fq', ':Pick list scope="quickfix"<CR>', { desc = '[Q]ickfix' })
     vim.keymap.set('n', '<leader>fl', ':Pick list scope="location-list"<CR>', { desc = '[L]oclist' })
     vim.keymap.set('n', '<leader>fj', ':Pick list scope="jumplist"<CR>', { desc = '[J]umplist' })
+    vim.keymap.set('n', '<leader>fr', ':Pick registers<CR>', { desc = '[R]egisters' })
   end,
   config = function()
-    -- mini.pick: Fuzzy finder
     require('mini.pick').setup({
       mappings = {
         delete_left = '',
@@ -34,16 +33,10 @@ return {
         scroll_up = '<C-u>',
       },
     })
-
-    -- mini.extra: Extra functionality for mini.pick
     require('mini.extra').setup()
-
-    -- mini.icons: Icon provider
     require('mini.icons').setup()
     ---@diagnostic disable-next-line: undefined-global
     MiniIcons.mock_nvim_web_devicons()
-
-    -- mini.ai: Extended textobjects
     require('mini.ai').setup()
 
     -- mini.surround: Surround text objects
@@ -60,12 +53,8 @@ return {
     --
     -- COMMON CHARS: ( ) [ ] { } < > " ' ` t (tag)
     require('mini.surround').setup()
-
-    -- mini.pairs: Auto-pairs
     require('mini.pairs').setup({
       modes = { command = true },
-
-      -- Better control on whether to pair the symbol or not
       mappings = {
         ['('] = {
           action = 'open',
@@ -85,11 +74,9 @@ return {
           neigh_pattern = '[^\\][^%w]', -- ✅ Don't pair before word chars
           register = { cr = false },
         },
-
         [')'] = { action = 'close', pair = '()', register = { cr = false } },
         [']'] = { action = 'close', pair = '[]', register = { cr = false } },
         ['}'] = { action = 'close', pair = '{}', register = { cr = false } },
-
         ['"'] = {
           action = 'closeopen',
           pair = '""',
@@ -110,50 +97,32 @@ return {
         },
       },
     })
-
-    -- mini.clue: Keybinding hints
     local miniclue = require('mini.clue')
     miniclue.setup({
       window = {
-        -- Show window immediately
         delay = 250,
-        config = {
-          -- Compute window width automatically
-          width = 'auto',
-          -- Use double-line border
-          border = 'double',
-        },
       },
       triggers = {
-        -- Leader triggers
         { mode = 'n', keys = '<Leader>' },
         { mode = 'x', keys = '<Leader>' },
-        -- `[` and `]` keys
         { mode = 'n', keys = '[' },
         { mode = 'n', keys = ']' },
-        -- Built-in completion
         { mode = 'i', keys = '<C-x>' },
-        -- `g` key
         { mode = 'n', keys = 'g' },
         { mode = 'x', keys = 'g' },
-        -- Marks
         { mode = 'n', keys = "'" },
         { mode = 'n', keys = '`' },
         { mode = 'x', keys = "'" },
         { mode = 'x', keys = '`' },
-        -- Registers
         { mode = 'n', keys = '"' },
         { mode = 'x', keys = '"' },
         { mode = 'i', keys = '<C-r>' },
         { mode = 'c', keys = '<C-r>' },
-        -- Window commands
         { mode = 'n', keys = '<C-w>' },
-        -- `z` key
         { mode = 'n', keys = 'z' },
         { mode = 'x', keys = 'z' },
       },
       clues = {
-        -- Enhance this by adding descriptions for <Leader> mapping groups
         miniclue.gen_clues.square_brackets(),
         miniclue.gen_clues.builtin_completion(),
         miniclue.gen_clues.g(),

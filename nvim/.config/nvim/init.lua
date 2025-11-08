@@ -301,7 +301,7 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
 spec('plugins.blink') -- completion
 spec('plugins.conform') -- format
 spec('plugins.mason') -- auto install lsp server, formatter, linter
-spec('plugins.mini') -- pickers, icons
+spec('plugins.mini') -- pickers, icons and more
 spec('plugins.nvim-treesitter') -- syntax highlighting
 
 -- ╭──────────────────────────────────────────────────────────╮
