@@ -48,5 +48,64 @@ return {
 
     -- mini.surround: Surround text objects
     require('mini.surround').setup()
+
+    -- mini.pairs: Auto-pairs
+    require('mini.pairs').setup({
+      modes = { command = true },
+
+      -- Skip autopair when next character is one of these
+      skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
+
+      -- Skip autopair when the cursor is inside these treesitter nodes
+      skip_ts = { 'string' },
+
+      -- Skip autopair when next character is closing pair
+      skip_unbalanced = true,
+
+      -- Better control on whether to pair the symbol or not
+      mappings = {
+        ['('] = {
+          action = 'open',
+          pair = '()',
+          neigh_pattern = '[^\\][^%w]', -- ✅ Don't pair before word chars
+          register = { cr = false },
+        },
+        ['['] = {
+          action = 'open',
+          pair = '[]',
+          neigh_pattern = '[^\\][^%w]', -- ✅ Don't pair before word chars
+          register = { cr = false },
+        },
+        ['{'] = {
+          action = 'open',
+          pair = '{}',
+          neigh_pattern = '[^\\][^%w]', -- ✅ Don't pair before word chars
+          register = { cr = false },
+        },
+
+        [')'] = { action = 'close', pair = '()', register = { cr = false } },
+        [']'] = { action = 'close', pair = '[]', register = { cr = false } },
+        ['}'] = { action = 'close', pair = '{}', register = { cr = false } },
+
+        ['"'] = {
+          action = 'closeopen',
+          pair = '""',
+          neigh_pattern = '[^\\][^%a]', -- Don't pair before letters
+          register = { cr = false },
+        },
+        ["'"] = {
+          action = 'closeopen',
+          pair = "''",
+          neigh_pattern = '[^%a\\][^%a]', -- Don't pair after/before letters
+          register = { cr = false },
+        },
+        ['`'] = {
+          action = 'closeopen',
+          pair = '``',
+          neigh_pattern = '[^\\][^%a]',
+          register = { cr = false },
+        },
+      },
+    })
   end,
 }

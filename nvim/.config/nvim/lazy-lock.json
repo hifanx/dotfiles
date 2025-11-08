@@ -20,7 +20,6 @@
   "mini.nvim": { "branch": "main", "commit": "42dbeaafb081a569b060b3b11101ca676a8f1193" },
   "nerdy.nvim": { "branch": "main", "commit": "f6ba335405d3070f90aea5e35eca4a08dec3851f" },
   "nvim-colorizer.lua": { "branch": "master", "commit": "81e676d3203c9eb6e4c0ccf1eba1679296ef923f" },
-  "nvim-surround": { "branch": "main", "commit": "fcfa7e02323d57bfacc3a141f8a74498e1522064" },
   "nvim-treesitter": { "branch": "main", "commit": "5eca61b32a5ce298f55ecdfd48511977f5c37f77" },
   "oil-git.nvim": { "branch": "main", "commit": "d1f27a5982df35b70fb842aa6bbfac10735c7265" },
   "oil.nvim": { "branch": "master", "commit": "7e1cd7703ff2924d7038476dcbc04b950203b902" },
