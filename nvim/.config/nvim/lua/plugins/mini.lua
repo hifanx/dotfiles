@@ -47,20 +47,23 @@ return {
     require('mini.ai').setup()
 
     -- mini.surround: Surround text objects
+    -- NORMAL MODE:
+    --   sa{motion}{char} - Add surround          | saiw"    | word  -> "word"
+    --   sd{char}         - Delete surround       | sd"      | "word" -> word
+    --   sr{old}{new}     - Replace surround      | sr"'     | "word" -> 'word'
+    --   sf{char}         - Find right surround   | sf)      | moves to next )
+    --   sF{char}         - Find left surround    | sF(      | moves to prev (
+    --   sh               - Highlight surround    | sh"      | highlights ""
+    --
+    -- VISUAL MODE:
+    --   sa{char}         - Add surround to sel   | V,sa"    | word -> "word"
+    --
+    -- COMMON CHARS: ( ) [ ] { } < > " ' ` t (tag)
     require('mini.surround').setup()
 
     -- mini.pairs: Auto-pairs
     require('mini.pairs').setup({
       modes = { command = true },
-
-      -- Skip autopair when next character is one of these
-      skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
-
-      -- Skip autopair when the cursor is inside these treesitter nodes
-      skip_ts = { 'string' },
-
-      -- Skip autopair when next character is closing pair
-      skip_unbalanced = true,
 
       -- Better control on whether to pair the symbol or not
       mappings = {
