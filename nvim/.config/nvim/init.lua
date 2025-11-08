@@ -296,7 +296,7 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
 -- }}}
 
 -- ╭──────────────────────────────────────────────────────────╮
--- │ ⬇️ ESSENTIALS                                            │
+-- │ ⬇️ EDITOR                                                │
 -- ╰──────────────────────────────────────────────────────────╯
 spec('plugins.blink') -- completion
 spec('plugins.conform') -- format
@@ -305,19 +305,15 @@ spec('plugins.mini') -- pickers, icons and more
 spec('plugins.nvim-treesitter') -- syntax highlighting
 
 -- ╭──────────────────────────────────────────────────────────╮
--- │ ⬇️ EDITOR                                                │
--- ╰──────────────────────────────────────────────────────────╯
-spec('plugins.pangu') -- auto format to add a space between cjk and english letters
-spec('plugins.ts-comments') -- enhance neovim's native comments
-
--- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ TOOLS                                                 │
 -- ╰──────────────────────────────────────────────────────────╯
 spec('plugins.inc-rename') -- LSP renaming with immediate visual feedback
 spec('plugins.oil')
 spec('plugins.nerdy') -- nerdy icons
-spec('plugins.vim-tmux-navigator')
+spec('plugins.pangu') -- auto format to add a space between cjk and english letters
 spec('plugins.persistence') -- session manager
+spec('plugins.ts-comments') -- enhance neovim's native comments
+spec('plugins.vim-tmux-navigator')
 
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ UI                                                    │
