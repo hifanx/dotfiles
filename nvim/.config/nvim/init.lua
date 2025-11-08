@@ -163,8 +163,6 @@ vim.api.nvim_create_autocmd('FileType', {
 -- mappings {{{
 
 -- basic
-vim.keymap.set('n', '<C-s>', ':w<CR>', { desc = '[W]rite' })
-vim.keymap.set('n', '<C-q>', ':qa<CR>', { desc = '[Q]uit no save' })
 vim.keymap.set('n', '<C-c>', ':close<CR>', { desc = '[C]lose' })
 vim.keymap.set('n', '<Leader>y', ':%y+<CR>', { desc = '[Y]ank buffer' })
 
