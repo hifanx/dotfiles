@@ -65,11 +65,27 @@ return {
 
     require('lualine').setup({
       options = {
-        theme = (function() -- make section c normal background, keep everything else 'auto'
-          local theme = require('lualine.themes.' .. vim.g.colors_name)
+        theme = (function()
+          local theme
+
+          -- Try to load colorscheme-specific theme first (mimics 'auto' behavior)
+          if vim.g.colors_name then
+            local color_name = vim.g.colors_name
+            -- Handle base16 colorschemes
+            if color_name:sub(1, 6) == 'base16' then color_name = 'base16' end
+
+            local ok, loaded_theme = pcall(require, 'lualine.themes.' .. color_name)
+            if ok and loaded_theme then theme = loaded_theme end
+          end
+
+          -- Fallback to auto-generated theme if colorscheme theme doesn't exist
+          if not theme then theme = require('lualine.themes.auto') end
+
+          -- Override section c background for all modes
           for _, sections in pairs(theme) do
             if sections.c then sections.c.bg = normal_ish end
           end
+
           return theme
         end)(),
         globalstatus = true,
