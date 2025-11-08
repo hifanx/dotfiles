@@ -3,7 +3,6 @@ return {
   dependencies = {
     'rafamadriz/friendly-snippets',
     'fang2hou/blink-copilot',
-    { 'saghen/blink.compat', opts = {} },
   },
   version = '*',
   event = { 'InsertEnter', 'CmdlineEnter' },
@@ -32,10 +31,6 @@ return {
 
     local ai = {
       'copilot',
-      'avante_commands',
-      'avante_mentions',
-      'avante_shortcuts',
-      'avante_files',
     }
 
     local is_sif = GLOB.is_sif
@@ -104,30 +99,6 @@ return {
             -- Path completion from cwd instead of current buffer's directory
             opts = { get_cwd = function(_) return vim.fn.getcwd() end },
           },
-          avante_commands = {
-            name = 'avante_commands',
-            module = 'blink.compat.source',
-            score_offset = 10,
-            opts = {},
-          },
-          avante_mentions = {
-            name = 'avante_mentions',
-            module = 'blink.compat.source',
-            score_offset = 20,
-            opts = {},
-          },
-          avante_shortcuts = {
-            name = 'avante_shortcuts',
-            module = 'blink.compat.source',
-            score_offset = 30,
-            opts = {},
-          },
-          avante_files = {
-            name = 'avante_files',
-            module = 'blink.compat.source',
-            score_offset = 40,
-            opts = {},
-          },
         },
       },
       completion = {
@@ -143,7 +114,7 @@ return {
           },
         },
         documentation = {
-          auto_show_delay_ms = 200,
+          auto_show_delay_ms = 0,
           auto_show = true,
           window = {
             border = 'rounded',
