@@ -4,7 +4,7 @@ return {
   ft = { 'markdown' },
   config = function()
     require('render-markdown').setup({
-      file_types = { 'markdown', 'Avante' },
+      file_types = { 'markdown' },
       heading = {
         sign = false,
         position = 'overlay',
