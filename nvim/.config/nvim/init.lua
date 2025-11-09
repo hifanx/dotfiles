@@ -388,7 +388,7 @@ vim.keymap.set('n', '<leader>hl', ':Lazy<CR>', { desc = 'Lazy' })
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ disable default keybinds                              │
 -- ╰──────────────────────────────────────────────────────────╯
-for _, bind in ipairs({ 'grn', 'gra', 'gri', 'grr' }) do
+for _, bind in ipairs({ 'grn', 'gra', 'gri', 'grr', 'grt' }) do
   pcall(vim.keymap.del, 'n', bind)
 end
 
