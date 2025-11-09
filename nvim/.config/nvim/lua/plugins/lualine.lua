@@ -143,7 +143,7 @@ return {
                 },
                 hl = {
                   enabled = ok_ish_fg,
-                  sleep = nontext_ish_fg,
+                  sleep = ok_ish_fg,
                   disabled = nontext_ish_fg,
                   warning = warn_ish_fg,
                   unknown = err_ish_fg,
