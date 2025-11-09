@@ -162,21 +162,14 @@ return {
             mode = 0, -- 0: Shows buffer name 1: Shows buffer index 2: Shows buffer name + buffer index 3: Shows buffer number 4: Shows buffer name + buffer number
             max_length = vim.o.columns * 2 / 3,
             filetype_names = {
-              TelescopePrompt = ' ',
               snacks_dashboard = ' ',
               snacks_input = ' ',
               snacks_notif_history = ' ',
-              snacks_picker_list = ' ',
+              snacks_picker_list = ' ',
               snacks_picker_input = ' ',
-              fzf = ' ',
-              NvimTree = ' ',
               lazy = '󰒲 ',
               help = '',
               mason = ' ',
-              Avante = ' ',
-              AvanteInput = ' ',
-              AvanteTodos = ' ',
-              AvanteSelectedFiles = ' ',
               checkhealth = '󰀯 ',
             },
             buffers_color = {
