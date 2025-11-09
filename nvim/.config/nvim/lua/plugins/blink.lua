@@ -53,10 +53,6 @@ return {
         ['<C-r>'] = { 'show_signature', 'hide_signature', 'fallback' },
       },
 
-      appearance = {
-        nerd_font_variant = 'mono',
-      },
-
       cmdline = {
         keymap = {
           preset = 'none',
@@ -78,7 +74,6 @@ return {
             },
           },
           menu = { auto_show = true },
-          ghost_text = { enabled = true },
         },
       },
 
