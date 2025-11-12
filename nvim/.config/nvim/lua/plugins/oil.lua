@@ -1,9 +1,6 @@
 return {
   'stevearc/oil.nvim',
   lazy = false, -- need this or oil-ssh won't work properly
-  dependencies = {
-    'benomahony/oil-git.nvim',
-  },
   init = function() vim.keymap.set('n', '<leader>o', ':Oil<CR>', { desc = '[O]il' }) end,
   config = function()
     require('oil').setup({

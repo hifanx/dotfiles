@@ -28,7 +28,7 @@ return {
   },
   {
     'rebelot/kanagawa.nvim',
-    cond = false,
+    -- cond = false,
     lazy = false,
     priority = 1000,
     config = function()
@@ -37,7 +37,7 @@ return {
         commentStyle = { italic = true },
         keywordStyle = { italic = true },
       })
-      -- vim.cmd([[colorscheme kanagawa]])
+      vim.cmd([[colorscheme kanagawa]])
     end,
   },
   {
@@ -62,7 +62,7 @@ return {
   },
   {
     'everviolet/nvim',
-    -- cond = false,
+    cond = false,
     lazy = false,
     name = 'evergarden',
     priority = 1000,
@@ -73,7 +73,7 @@ return {
           accent = 'skye',
         },
       })
-      vim.cmd([[colorscheme evergarden]])
+      -- vim.cmd([[colorscheme evergarden]])
     end,
   },
   {
