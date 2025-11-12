@@ -1,0 +1,38 @@
+# Type: summary
+# Add "!" after type: feat!: breaking change description
+# No more than 50 chars. #### 50 chars is here:  #
+
+# Remember blank line between title and body.
+
+# Body: Explain *what* and *why* (not *how*). Include task ID (Jira issue).
+# Wrap at 72 chars. ################################## which is here:  #
+
+# Add "BREAKING CHANGE:" in the footer to indicate breaking changes
+# At the end: Include Co-authored-by for all contributors. 
+# Include at least one empty line before it. Format: 
+# Co-authored-by: name <user@users.noreply.github.com>
+
+# How to Write a Git Commit Message:
+# https://chris.beams.io/posts/git-commit/
+#
+# 1. Separate subject from body with a blank line
+# 2. Limit the subject line to 50 characters
+# 3. Capitalize the subject line
+# 4. Do not end the subject line with a period
+# 5. Use the imperative mood in the subject line
+# 6. Wrap the body at 72 characters
+# 7. Use the body to explain what and why vs. how
+#
+# ==================== CONVENTIONAL COMMIT TYPES ====================
+#
+# feat: new feature for the user or a new capability
+# fix: bug fix for the user (not a build script fix)
+# docs: changes to documentation only
+# style: formatting, missing semicolons, etc (no code change)
+# refactor: refactoring production code (no behavior change)
+# perf: code changes that improve performance
+# test: adding or updating tests (no production code change)
+# build: changes to build system or external dependencies
+# ci: changes to CI configuration files and scripts
+# chore: updating grunt tasks, dependencies, etc (no production code change)
+# revert: reverting a previous commit
