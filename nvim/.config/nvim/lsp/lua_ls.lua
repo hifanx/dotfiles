@@ -20,7 +20,6 @@ return {
       completion = {
         callSnippet = 'Replace',
       },
-
       runtime = {
         version = 'LuaJIT',
         path = vim.split(package.path, ';'),
@@ -33,6 +32,9 @@ return {
         checkThirdParty = false,
         ignoreSubmodules = true,
         library = { vim.env.VIMRUNTIME },
+      },
+      hint = {
+        enable = true,
       },
     },
   },

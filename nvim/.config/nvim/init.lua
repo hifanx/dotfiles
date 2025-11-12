@@ -532,7 +532,7 @@ local servers = {
   'jsonls',
   'markdown_oxide',
   'taplo',
-  'pyright',
+  'basedpyright',
   'docker_language_server',
 }
 
