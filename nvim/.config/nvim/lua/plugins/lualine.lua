@@ -59,33 +59,28 @@ return {
     -- ╰──────────────────────────────────────────────────────────╯
     local normal_ish = _G.GLOB.get_hl_value('Normal', 'bg')
     local warn_ish_fg = _G.GLOB.get_hl_value('WarningMsg', 'fg')
-    local ok_ish_fg = _G.GLOB.get_hl_value('OkMsg', 'fg')
+    local ok_ish_fg = _G.GLOB.get_hl_value('DiagnosticOk', 'fg')
     local nontext_ish_fg = _G.GLOB.get_hl_value('NonText', 'fg')
-    local err_ish_fg = _G.GLOB.get_hl_value('OkMsg', 'fg')
+    local err_ish_fg = _G.GLOB.get_hl_value('DiagnosticError', 'fg')
 
     require('lualine').setup({
       options = {
         theme = (function()
           local theme
-
           -- Try to load colorscheme-specific theme first (mimics 'auto' behavior)
           if vim.g.colors_name then
             local color_name = vim.g.colors_name
             -- Handle base16 colorschemes
             if color_name:sub(1, 6) == 'base16' then color_name = 'base16' end
-
             local ok, loaded_theme = pcall(require, 'lualine.themes.' .. color_name)
             if ok and loaded_theme then theme = loaded_theme end
           end
-
           -- Fallback to auto-generated theme if colorscheme theme doesn't exist
           if not theme then theme = require('lualine.themes.auto') end
-
           -- Override section c background for all modes
           for _, sections in pairs(theme) do
             if sections.c then sections.c.bg = normal_ish end
           end
-
           return theme
         end)(),
         globalstatus = true,
@@ -94,10 +89,14 @@ return {
       },
       sections = {
         lualine_a = {
-          { 'mode', icon = '' },
+          {
+            'mode',
+            fmt = function(str) return str:sub(1, 1) end,
+            color = { gui = 'bold' },
+          },
         },
         lualine_b = {
-          { 'branch', icon = { ' ' } },
+          { 'branch', icon = { '' } },
         },
         lualine_c = {
           {
@@ -162,11 +161,6 @@ return {
             mode = 0, -- 0: Shows buffer name 1: Shows buffer index 2: Shows buffer name + buffer index 3: Shows buffer number 4: Shows buffer name + buffer number
             max_length = vim.o.columns * 2 / 3,
             filetype_names = {
-              snacks_dashboard = ' ',
-              snacks_input = ' ',
-              snacks_notif_history = ' ',
-              snacks_picker_list = ' ',
-              snacks_picker_input = ' ',
               lazy = '󰒲 ',
               help = '',
               mason = ' ',
@@ -195,7 +189,7 @@ return {
           },
         },
         lualine_z = {
-          { 'progress' },
+          { 'progress', color = { gui = 'bold' } },
         },
       },
     })

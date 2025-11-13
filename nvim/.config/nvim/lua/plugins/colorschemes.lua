@@ -28,7 +28,7 @@ return {
   },
   {
     'rebelot/kanagawa.nvim',
-    -- cond = false,
+    cond = false,
     lazy = false,
     priority = 1000,
     config = function()
@@ -37,7 +37,7 @@ return {
         commentStyle = { italic = true },
         keywordStyle = { italic = true },
       })
-      vim.cmd([[colorscheme kanagawa]])
+      -- vim.cmd([[colorscheme kanagawa]])
     end,
   },
   {
@@ -104,7 +104,7 @@ return {
   },
   {
     'rose-pine/neovim',
-    cond = false,
+    -- cond = false,
     name = 'rose-pine',
     lazy = false,
     priority = 1000,
@@ -118,21 +118,7 @@ return {
           transparency = false,
         },
       })
-      -- vim.cmd([[colorscheme rose-pine]])
+      vim.cmd([[colorscheme rose-pine]])
     end,
-  },
-  {
-    'sainnhe/everforest',
-    cond = false,
-    lazy = false,
-    priority = 1000,
-    -- config = function()
-    --   vim.g.everforest_background = 'hard'
-    --   vim.g.everforest_enable_italic = true
-    --   vim.g.everforest_float_style = 'dim'
-    --   vim.g.everforest_diagnostic_text_highlight = true
-    --   vim.g.everforest_diagnostic_virtual_text = 'colored'
-    --   vim.cmd([[color everforest]])
-    -- end,
   },
 }

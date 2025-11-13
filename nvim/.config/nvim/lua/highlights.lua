@@ -1,7 +1,7 @@
 local M = {}
 
 local bg_normal = GLOB.get_hl_value('Normal', 'bg')
-local bg_ok = GLOB.get_hl_value('OkMsg', 'fg')
+local bg_ok = GLOB.get_hl_value('DiagnosticOk', 'fg')
 
 -- NOTE: ⬇️ linking logic: plugin => default_hl
 
@@ -9,6 +9,7 @@ M.default_hl = {
   MsgSeparator = { link = 'WinSeparator' },
   Folded = { link = 'MoreMsg' },
   PmenuSel = { fg = bg_normal, bg = bg_ok },
+  MsgArea = { link = 'Normal' },
 }
 
 M.render_markdown = {
