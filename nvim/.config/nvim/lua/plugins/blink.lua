@@ -40,7 +40,7 @@ return {
       keymap = {
         preset = 'none',
         ['<C-space>'] = false,
-        ['<C-w>'] = { 'show', 'cancel', 'fallback' },
+        ['<C-e>'] = { 'show', 'cancel', 'fallback' },
         ['<C-y>'] = { 'select_and_accept', 'fallback' },
         ['<Up>'] = { 'select_prev', 'fallback' },
         ['<Down>'] = { 'select_next', 'fallback' },

@@ -174,12 +174,6 @@ vim.keymap.set('n', '-', [[:vertical resize -5<CR>]])
 vim.keymap.set('n', '+', [[:horizontal resize +2<CR>]])
 vim.keymap.set('n', '_', [[:horizontal resize -2<CR>]])
 
--- go to beginning and end
-vim.keymap.set('i', '<C-b>', '<ESC>^i', { desc = 'Beginning of line' })
-vim.keymap.set('i', '<C-e>', '<End>', { desc = 'End of line' })
-vim.keymap.set({ 'n', 'o', 'x' }, 'B', '^', { desc = 'Beginning of line' })
-vim.keymap.set({ 'n', 'o', 'x' }, 'E', 'g_', { desc = 'End of line' })
-
 -- Delete the character to the right of the cursor
 vim.keymap.set('i', '<C-D>', '<DEL>')
 
@@ -420,7 +414,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     -- Inlay hints
     if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint) then
-      vim.lsp.inlay_hint.enable()
       vim.keymap.set(
         'n',
         '<leader>li',
