@@ -1,17 +1,18 @@
 font-family = Maple Mono CN
-
 font-feature = calt,cv06,ss09
+font-size = 18
 
-font-size = 20
+# theme = evergarden-winter-skye.yml
+theme = Rose Pine
 
-theme = evergarden-winter-skye.yml
+adjust-cell-height = 10
 
 cursor-style = block
 cursor-style-blink = true
-cursor-color = b3e6db
+# cursor-color = b3e6db
 # cursor-text = 171c1f
 
-background-opacity = 0.9
+background-opacity = 0.8
 background-blur = true
 
 window-padding-balance = true
