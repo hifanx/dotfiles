@@ -12,7 +12,7 @@ return {
     local lazy = function() return lazy_status.updates() end
 
     -- ╭──────────────────────────────────────────────────────────╮
-    -- │ ⬇️ Mixed indent component                                │
+    -- │ ⬇️ mixed indent component                                │
     -- ╰──────────────────────────────────────────────────────────╯
     local indent = function()
       local space_pat = [[\v^ +]]
@@ -37,7 +37,7 @@ return {
     end
 
     -- ╭──────────────────────────────────────────────────────────╮
-    -- │ ⬇️ Trailing white spaces component                       │
+    -- │ ⬇️ trailing white spaces component                       │
     -- ╰──────────────────────────────────────────────────────────╯
     local trailing = function()
       local space = vim.fn.search([[\s\+$]], 'nwc')
@@ -112,13 +112,26 @@ return {
           { indent },
           { function() return '%=' end },
           {
-            'diagnostics',
-            sources = { 'nvim_diagnostic' },
+            'buffers',
+            show_filename_only = true,
+            hide_filename_extension = true,
+            show_modified_status = true,
+            mode = 0, -- 0: Shows buffer name 1: Shows buffer index 2: Shows buffer name + buffer index 3: Shows buffer number 4: Shows buffer name + buffer number
+            max_length = vim.o.columns * 2 / 3,
+            filetype_names = {
+              lazy = '󰒲 ',
+              help = '',
+              mason = ' ',
+              checkhealth = '󰀯 ',
+            },
+            buffers_color = {
+              active = 'lualine_b_visual',
+              inactive = 'lualine_c_inactive',
+            },
             symbols = {
-              error = ' ',
-              warn = ' ',
-              info = ' ',
-              hint = ' ',
+              modified = '',
+              alternate_file = '', -- Text to show to identify the alternate file
+              directory = ' ', -- Text to show when the buffer is a directory
             },
           },
         },
@@ -154,26 +167,13 @@ return {
             show_loading = true,
           },
           {
-            'buffers',
-            show_filename_only = true,
-            hide_filename_extension = true,
-            show_modified_status = true,
-            mode = 0, -- 0: Shows buffer name 1: Shows buffer index 2: Shows buffer name + buffer index 3: Shows buffer number 4: Shows buffer name + buffer number
-            max_length = vim.o.columns * 2 / 3,
-            filetype_names = {
-              lazy = '󰒲 ',
-              help = '',
-              mason = ' ',
-              checkhealth = '󰀯 ',
-            },
-            buffers_color = {
-              active = 'lualine_b_visual',
-              inactive = 'lualine_c_inactive',
-            },
+            'diagnostics',
+            sources = { 'nvim_diagnostic' },
             symbols = {
-              modified = '',
-              alternate_file = '', -- Text to show to identify the alternate file
-              directory = ' ', -- Text to show when the buffer is a directory
+              error = ' ',
+              warn = ' ',
+              info = ' ',
+              hint = ' ',
             },
           },
         },
