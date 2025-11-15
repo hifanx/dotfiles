@@ -148,8 +148,8 @@ export NODE_PATH="$NPM_CONFIG_PREFIX/lib/node_modules"
 export PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
 
 # opencode
-export BUN_INSTALL="$HOME/.local/share/"
-export BUN_INSTALL_CACHE_DIR="$HOME/.local/share/"
+export BUN_INSTALL="$HOME/.local/share/opencode/"
+export BUN_INSTALL_CACHE_DIR="$HOME/.local/share/opencode/cache"
 
 # secrets
 if [ -f ~/.config/.secrets ]; then

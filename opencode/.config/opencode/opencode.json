@@ -1,11 +1,33 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "theme": "system",
+  "disabled_providers": ["openrouter", "openai"],
+  "model": "chatanywhere/gpt-5.1-codex",
+  "small_model": "github-copilot/claude-haiku-4-5",
   "provider": {
-    "openai": {
+    "chatanywhere": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "ChatAnywhere",
       "options": {
-        "baseURL": "{env:OPENAI_BASEURL}",
-        "apiKey": "{env:OPENAI_API_KEY}"
+        "baseURL": "{env:CHATANYWHERE_BASEURL}",
+        "apiKey": "{env:CHATANYWHERE_API_KEY}"
+      },
+      "models": {
+        "deepseek-v3.1-think-250821": {
+          "name": "deepseek-v3.1-think-250821"
+        },
+        "deepseek-v3.1-250821": {
+          "name": "deepseek-v3.1-250821"
+        },
+        "gpt-5.1-chat-latest": {
+          "name": "gpt-5.1-chat-latest"
+        },
+        "gpt-5.1-codex": {
+          "name": "gpt-5.1-codex"
+        },
+        "gpt-5-mini": {
+          "name": "gpt-5-mini"
+        }
       }
     }
   }
