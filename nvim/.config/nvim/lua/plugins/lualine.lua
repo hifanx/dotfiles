@@ -125,7 +125,7 @@ return {
               checkhealth = '󰀯 ',
             },
             buffers_color = {
-              active = 'lualine_b_visual',
+              active = 'lualine_c_normal',
               inactive = 'lualine_c_inactive',
             },
             symbols = {

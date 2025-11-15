@@ -4,9 +4,6 @@ local start_time = vim.loop.hrtime()
 
 _G.GLOB = {}
 
-local LAZY_PLUGIN_SPEC = {}
-local function spec(item) table.insert(LAZY_PLUGIN_SPEC, { import = item }) end
-
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ Namespaced profile                                    │
 -- ╰──────────────────────────────────────────────────────────╯
@@ -285,41 +282,6 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
 })
 
 -- }}}
-
--- ╭──────────────────────────────────────────────────────────╮
--- │ ⬇️ EDITOR                                                │
--- ╰──────────────────────────────────────────────────────────╯
-spec('plugins.blink') -- completion
-spec('plugins.conform') -- format
-spec('plugins.mason') -- auto install lsp server, formatter, linter
-spec('plugins.mini') -- pickers, icons and more
-spec('plugins.nvim-treesitter') -- syntax highlighting
-
--- ╭──────────────────────────────────────────────────────────╮
--- │ ⬇️ TOOLS                                                 │
--- ╰──────────────────────────────────────────────────────────╯
-spec('plugins.inc-rename') -- LSP renaming with immediate visual feedback
-spec('plugins.oil')
-spec('plugins.nerdy') -- nerdy icons
-spec('plugins.pangu') -- auto format to add a space between cjk and english letters
-spec('plugins.persistence') -- session manager
-spec('plugins.ts-comments') -- enhance neovim's native comments
-spec('plugins.vim-tmux-navigator')
-
--- ╭──────────────────────────────────────────────────────────╮
--- │ ⬇️ UI                                                    │
--- ╰──────────────────────────────────────────────────────────╯
-spec('plugins.colorschemes')
-spec('plugins.gitsigns')
-spec('plugins.lualine')
-spec('plugins.nvim-colorizer')
-spec('plugins.render-markdown')
-
--- ╭──────────────────────────────────────────────────────────╮
--- │ ⬇️ AI                                                    │
--- ╰──────────────────────────────────────────────────────────╯
-spec('plugins.copilot')
-
 -- lazy {{{
 
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
@@ -344,9 +306,43 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   end
 end
 vim.opt.rtp:prepend(lazypath)
+vim.keymap.set('n', '<leader>hl', ':Lazy<CR>', { desc = 'Lazy' })
+
+-- }}}
 
 require('lazy').setup({
-  spec = LAZY_PLUGIN_SPEC,
+  spec = {
+    -- ╭──────────────────────────────────────────────────────────╮
+    -- │ ⬇️ EDITOR                                                │
+    -- ╰──────────────────────────────────────────────────────────╯
+    { import = 'plugins.blink' }, -- completion
+    { import = 'plugins.conform' }, -- format
+    { import = 'plugins.mason' }, -- auto install lsp server, formatter, linter
+    { import = 'plugins.mini' }, -- pickers, icons and more
+    { import = 'plugins.nvim-treesitter' }, -- syntax highlighting
+    -- ╭──────────────────────────────────────────────────────────╮
+    -- │ ⬇️ TOOLS                                                 │
+    -- ╰──────────────────────────────────────────────────────────╯
+    { import = 'plugins.inc-rename' }, -- LSP renaming with immediate visual feedback
+    { import = 'plugins.oil' },
+    { import = 'plugins.nerdy' }, -- nerdy icons
+    { import = 'plugins.pangu' }, -- auto format to add a space between cjk and english letters
+    { import = 'plugins.persistence' }, -- session manager
+    { import = 'plugins.ts-comments' }, -- enhance neovim's native comments
+    { import = 'plugins.vim-tmux-navigator' },
+    -- ╭──────────────────────────────────────────────────────────╮
+    -- │ ⬇️ UI                                                    │
+    -- ╰──────────────────────────────────────────────────────────╯
+    { import = 'plugins.colorschemes' },
+    { import = 'plugins.gitsigns' },
+    { import = 'plugins.lualine' },
+    { import = 'plugins.nvim-colorizer' },
+    { import = 'plugins.render-markdown' },
+    -- ╭──────────────────────────────────────────────────────────╮
+    -- │ ⬇️ AI                                                    │
+    -- ╰──────────────────────────────────────────────────────────╯
+    { import = 'plugins.copilot' },
+  },
   defaults = { lazy = true, version = false }, -- always use the latest git commit
   checker = { enabled = true, notify = false },
   change_detection = { notify = false },
@@ -370,9 +366,6 @@ require('lazy').setup({
   },
 })
 
-vim.keymap.set('n', '<leader>hl', ':Lazy<CR>', { desc = 'Lazy' })
-
--- }}}
 -- lsp {{{
 
 -- ╭──────────────────────────────────────────────────────────╮
