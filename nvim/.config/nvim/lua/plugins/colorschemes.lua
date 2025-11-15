@@ -41,26 +41,6 @@ return {
     end,
   },
   {
-    'projekt0n/github-nvim-theme',
-    cond = false,
-    name = 'github-theme',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require('github-theme').setup({
-        options = {
-          styles = {
-            comments = 'italic',
-            keywords = 'italic',
-          },
-        },
-      })
-      -- vim.cmd([[colorscheme github_dark]])
-      -- vim.cmd([[colorscheme github_dark_default]])
-      -- vim.cmd([[colorscheme github_dark_tritanopia]])
-    end,
-  },
-  {
     'everviolet/nvim',
     cond = false,
     lazy = false,
@@ -92,19 +72,19 @@ return {
   },
   {
     'folke/tokyonight.nvim',
-    cond = false,
+    -- cond = false,
     lazy = false,
     priority = 1000,
     config = function()
       require('tokyonight').setup({
         style = 'night',
       })
-      -- vim.cmd([[colorscheme tokyonight]])
+      vim.cmd([[colorscheme tokyonight]])
     end,
   },
   {
     'rose-pine/neovim',
-    -- cond = false,
+    cond = false,
     name = 'rose-pine',
     lazy = false,
     priority = 1000,
@@ -118,7 +98,7 @@ return {
           transparency = false,
         },
       })
-      vim.cmd([[colorscheme rose-pine]])
+      -- vim.cmd([[colorscheme rose-pine]])
     end,
   },
 }
