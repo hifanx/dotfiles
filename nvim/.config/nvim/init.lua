@@ -314,7 +314,6 @@ spec('plugins.gitsigns')
 spec('plugins.lualine')
 spec('plugins.nvim-colorizer')
 spec('plugins.render-markdown')
-spec('plugins.todo-comments')
 
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ AI                                                    │
