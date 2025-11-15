@@ -2,6 +2,7 @@ tap "buo/cask-upgrade"
 tap "felixkratz/formulae"
 tap "koekeishiya/formulae"
 tap "nikitabobko/tap"
+tap "sst/tap"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Diff that understands syntax
@@ -28,7 +29,7 @@ brew "mas"
 brew "tree-sitter"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim", args: ["HEAD"]
-# Platform built on V8 to build network applications
+# Open-source, cross-platform JavaScript runtime environment
 brew "node"
 # PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
@@ -50,6 +51,8 @@ brew "yazi", args: ["HEAD"]
 brew "zoxide"
 # A window border system for macOS
 brew "felixkratz/formulae/borders"
+# The AI coding agent built for the terminal.
+brew "sst/tap/opencode"
 # Collection of apps and services for photography, design, video, web, and UX
 cask "adobe-creative-cloud"
 # AeroSpace is an i3-like tiling window manager for macOS
@@ -107,6 +110,8 @@ cask "upscayl"
 cask "via"
 # Free messaging and calling application
 cask "wechat"
+# Native desktop client for WhatsApp
+cask "whatsapp"
 # Video communication and virtual meeting platform
 cask "zoom"
 mas "Blackmagic Disk Speed Test", id: 425264550
