@@ -6,19 +6,13 @@
   "small_model": "github-copilot/claude-haiku-4-5",
   "provider": {
     "chatanywhere": {
-      "npm": "@ai-sdk/openai-compatible",
+      "npm": "@ai-sdk/openai",
       "name": "ChatAnywhere",
       "options": {
         "baseURL": "{env:CHATANYWHERE_BASEURL}",
         "apiKey": "{env:CHATANYWHERE_API_KEY}"
       },
       "models": {
-        "deepseek-v3.1-think-250821": {
-          "name": "deepseek-v3.1-think-250821"
-        },
-        "deepseek-v3.1-250821": {
-          "name": "deepseek-v3.1-250821"
-        },
         "gpt-5.1-chat-latest": {
           "name": "gpt-5.1-chat-latest"
         },
