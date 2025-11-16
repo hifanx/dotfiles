@@ -23,7 +23,11 @@
 
 - Use fold markers `{{{` and `}}}` to organize code sections
 - Main config in `init.lua`, plugins in `lua/plugins/*.lua`, LSP configs in `lsp/*.lua`
-- Plugin files should return a lazy.nvim spec table
+
+### Colors & Highlights
+
+- Define shared colors in `lua/palette.lua`
+- Configure highlight groups in `lua/highlights.lua` instead of per-plugin highlight tweaks where possible
 
 ### Lua Conventions
 
@@ -36,7 +40,7 @@
 ### Comments & Documentation
 
 - Use `---@type` annotations for type hints
-- Document LSP configs with `---@brief` blocks at file start
+- For LSP configs, add `---@type vim.lsp.Config` at the top of the file; `---@brief` is optional for extra context
 - Use box comments with unicode for major sections (see init.lua examples)
 - Inline comments with `--` for brief explanations, `NOTE:` prefix for important notes
 
@@ -44,7 +48,7 @@
 
 - Load plugins lazily via lazy.nvim (`event`, `cmd`, `keys`, etc.)
 - Use `require()` only when needed, prefer `init` for keymaps
-- Global utilities in `_G.GLOB` namespace (see init.lua:5-55)
+- Global utilities live in the `_G.GLOB` namespace (see the top of `init.lua` for definitions)
 - Before adding a new plugin, check if Neovim already provides the functionality
 
 ### Plugin Guidelines
@@ -57,6 +61,6 @@
 
 ### Error Handling
 
-- Use `pcall()` for operations that may fail (see init.lua:372)
+- Use `pcall()` for operations that may fail (see the LSP/client setup section in `init.lua` for examples)
 - Validate with `if not client then return end` pattern
 - Use `vim.notify()` with log levels for user-facing messages
