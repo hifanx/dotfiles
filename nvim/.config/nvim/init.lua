@@ -282,6 +282,75 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
 })
 
 -- }}}
+-- colorschemes {{{
+
+vim.pack.add({
+  { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin' },
+  { src = 'https://github.com/rebelot/kanagawa.nvim' },
+  { src = 'https://github.com/everviolet/nvim', name = 'evergarden' },
+  { src = 'https://github.com/vague-theme/vague.nvim' },
+  { src = 'https://github.com/folke/tokyonight.nvim' },
+  { src = 'https://github.com/rose-pine/neovim', name = 'rose-pine' },
+})
+
+-- require('catppuccin').setup({
+--   flavour = 'mocha',
+--   transparent_background = false,
+--   term_colors = true,
+--   styles = {
+--     comments = { 'italic' },
+--     keywords = { 'italic' },
+--   },
+--   float = {
+--     solid = true,
+--   },
+--   lsp_styles = {
+--     inlay_hints = {
+--       background = false,
+--     },
+--   },
+-- })
+-- vim.cmd('colorscheme catppuccin')
+
+-- require('kanagawa').setup({
+--   theme = 'wave', -- dragon, lotus, wave
+--   commentStyle = { italic = true },
+--   keywordStyle = { italic = true },
+-- })
+-- vim.cmd('colorscheme kanagawa')
+
+-- require('evergarden').setup({
+--   theme = {
+--     variant = 'winter', -- 'winter'|'fall'|'spring'|'summer'
+--     accent = 'skye',
+--   },
+-- })
+-- vim.cmd('colorscheme evergarden')
+
+-- require('vague').setup({
+--   style = {
+--     keywords = 'italic',
+--   },
+-- })
+-- vim.cmd('colorscheme vague')
+
+-- require('tokyonight').setup({
+--   style = 'night',
+-- })
+-- vim.cmd('colorscheme tokyonight')
+
+require('rose-pine').setup({
+  variant = 'auto', -- auto, main, moon, or dawn
+  dark_variant = 'main', -- main, moon, or dawn
+  styles = {
+    bold = true,
+    italic = true,
+    transparency = false,
+  },
+})
+vim.cmd('colorscheme rose-pine')
+
+-- }}}
 -- lazy {{{
 
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
@@ -333,7 +402,6 @@ require('lazy').setup({
     -- ╭──────────────────────────────────────────────────────────╮
     -- │ ⬇️ UI                                                    │
     -- ╰──────────────────────────────────────────────────────────╯
-    { import = 'plugins.colorschemes' },
     { import = 'plugins.gitsigns' },
     { import = 'plugins.lualine' },
     { import = 'plugins.nvim-colorizer' },
@@ -368,170 +436,183 @@ require('lazy').setup({
 
 -- lsp {{{
 
--- ╭──────────────────────────────────────────────────────────╮
--- │ ⬇️ disable default keybinds                              │
--- ╰──────────────────────────────────────────────────────────╯
-for _, bind in ipairs({ 'grn', 'gra', 'gri', 'grr', 'grt' }) do
-  pcall(vim.keymap.del, 'n', bind)
-end
+local function lsp()
+  -- ╭──────────────────────────────────────────────────────────╮
+  -- │ ⬇️ disable default keybinds                              │
+  -- ╰──────────────────────────────────────────────────────────╯
+  for _, bind in ipairs({ 'grn', 'gra', 'gri', 'grr', 'grt' }) do
+    pcall(vim.keymap.del, 'n', bind)
+  end
 
--- ╭──────────────────────────────────────────────────────────╮
--- │ ⬇️ setup lsp attach                                      │
--- ╰──────────────────────────────────────────────────────────╯
-local highlight_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = true })
-local detach_augroup = vim.api.nvim_create_augroup('lsp-detach', { clear = true })
+  -- ╭──────────────────────────────────────────────────────────╮
+  -- │ ⬇️ setup lsp attach                                      │
+  -- ╰──────────────────────────────────────────────────────────╯
+  local highlight_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = true })
+  local detach_augroup = vim.api.nvim_create_augroup('lsp-detach', { clear = true })
 
-vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
-  callback = function(ev)
-    local client = vim.lsp.get_client_by_id(ev.data.client_id)
-    if not client then return end
+  vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
+    callback = function(ev)
+      local client = vim.lsp.get_client_by_id(ev.data.client_id)
+      if not client then return end
 
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'LSP [D]efinition' })
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = 'LSP [D]eclaration' })
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, { nowait = true, desc = 'LSP [R]eferences' })
-    vim.keymap.set('n', 'gI', vim.lsp.buf.implementation, { desc = 'LSP [I]mplementation' })
-    vim.keymap.set('n', 'gy', vim.lsp.buf.type_definition, { desc = 'LSP T[y]pe Definition' })
+      vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'LSP [D]efinition' })
+      vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = 'LSP [D]eclaration' })
+      vim.keymap.set('n', 'gr', vim.lsp.buf.references, { nowait = true, desc = 'LSP [R]eferences' })
+      vim.keymap.set('n', 'gI', vim.lsp.buf.implementation, { desc = 'LSP [I]mplementation' })
+      vim.keymap.set('n', 'gy', vim.lsp.buf.type_definition, { desc = 'LSP T[y]pe Definition' })
 
-    vim.keymap.set('n', 'gh', vim.diagnostic.open_float, { buffer = ev.buf, desc = 'LSP [H]over Diagnostic' })
-    vim.keymap.set({ 'n', 'v' }, '<leader>la', vim.lsp.buf.code_action, { buffer = ev.buf, desc = 'Code [A]ction' })
-    vim.keymap.set('n', '<leader>lh', vim.lsp.buf.signature_help, { buffer = ev.buf, desc = 'Signature [H]elp' })
-    vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, { buffer = ev.buf, desc = '[R]ename' })
+      vim.keymap.set('n', 'gh', vim.diagnostic.open_float, { buffer = ev.buf, desc = 'LSP [H]over Diagnostic' })
+      vim.keymap.set({ 'n', 'v' }, '<leader>la', vim.lsp.buf.code_action, { buffer = ev.buf, desc = 'Code [A]ction' })
+      vim.keymap.set('n', '<leader>lh', vim.lsp.buf.signature_help, { buffer = ev.buf, desc = 'Signature [H]elp' })
+      vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, { buffer = ev.buf, desc = '[R]ename' })
 
-    -- CodeLens support
-    if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_codeLens) then
-      vim.keymap.set('n', '<leader>ll', vim.lsp.codelens.refresh, { buffer = ev.buf, desc = 'Code[L]ens refresh' })
-      vim.keymap.set('n', '<leader>lL', vim.lsp.codelens.run, { buffer = ev.buf, desc = 'Code[L]ens run' })
-    end
+      -- CodeLens support
+      if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_codeLens) then
+        vim.keymap.set('n', '<leader>ll', vim.lsp.codelens.refresh, { buffer = ev.buf, desc = 'Code[L]ens refresh' })
+        vim.keymap.set('n', '<leader>lL', vim.lsp.codelens.run, { buffer = ev.buf, desc = 'Code[L]ens run' })
+      end
 
-    -- Inlay hints
-    if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint) then
-      vim.keymap.set(
-        'n',
-        '<leader>li',
-        function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
-        { desc = 'Toggle [I]nlay hint' }
-      )
-    end
+      -- Inlay hints
+      if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint) then
+        vim.keymap.set(
+          'n',
+          '<leader>li',
+          function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
+          { desc = 'Toggle [I]nlay hint' }
+        )
+      end
 
-    -- Document highlight - buffer-specific autocmds
-    if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight) then
-      vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-        buffer = ev.buf,
-        group = highlight_augroup,
-        callback = vim.lsp.buf.document_highlight,
-      })
+      -- Document highlight - buffer-specific autocmds
+      if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+        vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+          buffer = ev.buf,
+          group = highlight_augroup,
+          callback = vim.lsp.buf.document_highlight,
+        })
 
-      vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-        buffer = ev.buf,
-        group = highlight_augroup,
-        callback = vim.lsp.buf.clear_references,
-      })
-    end
-  end,
-})
+        vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+          buffer = ev.buf,
+          group = highlight_augroup,
+          callback = vim.lsp.buf.clear_references,
+        })
+      end
+    end,
+  })
 
-vim.api.nvim_create_autocmd('LspDetach', {
-  group = detach_augroup,
-  callback = function(ev)
-    vim.lsp.buf.clear_references()
-    vim.api.nvim_clear_autocmds({ group = highlight_augroup, buffer = ev.buf })
-  end,
-})
+  vim.api.nvim_create_autocmd('LspDetach', {
+    group = detach_augroup,
+    callback = function(ev)
+      vim.lsp.buf.clear_references()
+      vim.api.nvim_clear_autocmds({ group = highlight_augroup, buffer = ev.buf })
+    end,
+  })
 
--- ╭──────────────────────────────────────────────────────────╮
--- │ ⬇️ setup vim.diagnostic.Config                           │
--- ╰──────────────────────────────────────────────────────────╯
+  -- ╭──────────────────────────────────────────────────────────╮
+  -- │ ⬇️ setup vim.diagnostic.Config                           │
+  -- ╰──────────────────────────────────────────────────────────╯
 
-local diagnostic_opts = {
-  signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = ' ',
-      [vim.diagnostic.severity.WARN] = ' ',
-      [vim.diagnostic.severity.HINT] = ' ',
-      [vim.diagnostic.severity.INFO] = ' ',
-    },
-    numhl = {
-      [vim.diagnostic.severity.ERROR] = 'DiagnosticError',
-      [vim.diagnostic.severity.WARN] = 'DiagnosticWarn',
-      [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
-      [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
-    },
-  },
-  virtual_text = {
-    virt_text_pos = 'eol_right_align',
-  },
-  update_in_insert = false,
-  underline = true,
-  severity_sort = true,
-  float = {
-    border = 'rounded',
-    header = '',
-  },
-}
-
-vim.diagnostic.config(diagnostic_opts)
-
--- ╭──────────────────────────────────────────────────────────╮
--- │ ⬇️ server specific capabilities                          │
--- ╰──────────────────────────────────────────────────────────╯
-
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-local has_blink = require('lazy.core.config').plugins['blink.cmp'] ~= nil
-if has_blink then
-  capabilities = vim.tbl_deep_extend('force', capabilities, {
-    textDocument = {
-      foldingRange = {
-        dynamicRegistration = false,
-        lineFoldingOnly = true,
+  local diagnostic_opts = {
+    signs = {
+      text = {
+        [vim.diagnostic.severity.ERROR] = ' ',
+        [vim.diagnostic.severity.WARN] = ' ',
+        [vim.diagnostic.severity.HINT] = ' ',
+        [vim.diagnostic.severity.INFO] = ' ',
+      },
+      numhl = {
+        [vim.diagnostic.severity.ERROR] = 'DiagnosticError',
+        [vim.diagnostic.severity.WARN] = 'DiagnosticWarn',
+        [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
+        [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
       },
     },
-  })
-end
-
-local has_markdown_oxide = vim.fn.executable('markdown-oxide') == 1
-if has_markdown_oxide then
-  capabilities = vim.tbl_deep_extend('force', capabilities, {
-    workspace = {
-      didChangeWatchedFiles = {
-        dynamicRegistration = true,
-      },
+    virtual_text = {
+      virt_text_pos = 'eol_right_align',
     },
+    update_in_insert = false,
+    underline = true,
+    severity_sort = true,
+    float = {
+      border = 'rounded',
+      header = '',
+    },
+  }
+
+  vim.diagnostic.config(diagnostic_opts)
+
+  -- ╭──────────────────────────────────────────────────────────╮
+  -- │ ⬇️ server specific capabilities                          │
+  -- ╰──────────────────────────────────────────────────────────╯
+
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+  local has_blink = require('lazy.core.config').plugins['blink.cmp'] ~= nil
+  if has_blink then
+    capabilities = vim.tbl_deep_extend('force', capabilities, {
+      textDocument = {
+        foldingRange = {
+          dynamicRegistration = false,
+          lineFoldingOnly = true,
+        },
+      },
+    })
+  end
+
+  local has_markdown_oxide = vim.fn.executable('markdown-oxide') == 1
+  if has_markdown_oxide then
+    capabilities = vim.tbl_deep_extend('force', capabilities, {
+      workspace = {
+        didChangeWatchedFiles = {
+          dynamicRegistration = true,
+        },
+      },
+    })
+  end
+
+  vim.lsp.config('*', {
+    capabilities = capabilities,
   })
+
+  -- ╭──────────────────────────────────────────────────────────╮
+  -- │ ⬇️ this is where magic happens                           │
+  -- ╰──────────────────────────────────────────────────────────╯
+
+  local servers = {
+    'cssls',
+    'lua_ls',
+    'bashls',
+    'yamlls',
+    'jsonls',
+    'markdown_oxide',
+    'taplo',
+    'basedpyright',
+    'docker_language_server',
+  }
+
+  vim.lsp.enable(servers)
 end
 
-vim.lsp.config('*', {
-  capabilities = capabilities,
-})
-
--- ╭──────────────────────────────────────────────────────────╮
--- │ ⬇️ this is where magic happens                           │
--- ╰──────────────────────────────────────────────────────────╯
-
-local servers = {
-  'cssls',
-  'lua_ls',
-  'bashls',
-  'yamlls',
-  'jsonls',
-  'markdown_oxide',
-  'taplo',
-  'basedpyright',
-  'docker_language_server',
-}
-
-vim.lsp.enable(servers)
+vim.schedule(lsp)
 
 -- }}}
 -- {{{ highlight
 
-local groups = require('highlights')
-for _, group in pairs(groups) do
-  for name, attrs in pairs(group) do
-    vim.api.nvim_set_hl(0, name, attrs)
+local function apply_highlights()
+  local ok, groups = pcall(require, 'highlights')
+  if not ok then
+    vim.notify('Failed to load highlights: ' .. groups, vim.log.levels.ERROR)
+    return
+  end
+
+  for _, group in pairs(groups) do
+    for name, attrs in pairs(group) do
+      vim.api.nvim_set_hl(0, name, attrs)
+    end
   end
 end
+
+vim.schedule(apply_highlights)
 
 -- }}}
 -- {{{ startup timer
@@ -539,9 +620,6 @@ end
 local end_time = vim.loop.hrtime()
 local elapsed_ms = (end_time - start_time) / 1000000 -- Convert nanoseconds to milliseconds
 
-vim.defer_fn(
-  function() vim.notify(string.format('Neovim startup time: %.2f ms', elapsed_ms), vim.log.levels.INFO) end,
-  0
-)
+vim.schedule(function() vim.notify(string.format('Neovim startup time: %.2f ms', elapsed_ms), vim.log.levels.INFO) end)
 
 -- }}}
