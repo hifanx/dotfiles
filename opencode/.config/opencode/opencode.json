@@ -5,10 +5,23 @@
   "model": "github-copilot/claude-haiku-4-5",
   "small_model": "github-copilot/claude-haiku-4-5",
   "provider": {
-    "openai": {
+    "chatanywhere": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Chat Anywhere",
       "options": {
         "baseURL": "{env:CHATANYWHERE_BASEURL}",
         "apiKey": "{env:CHATANYWHERE_API_KEY}"
+      },
+      "models": {
+        "claude-sonnet-4-5-20250929-thinking": {
+          "name": "claude-sonnet-4-5-20250929-thinking"
+        },
+        "claude-sonnet-4-5-20250929": {
+          "name": "claude-sonnet-4-5-20250929"
+        },
+        "deepseek-v3.1-think-250821": {
+          "name": "deepseek-v3.1-think-250821"
+        }
       }
     }
   }
