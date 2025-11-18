@@ -138,97 +138,106 @@ g.loaded_ruby_provider = 0
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ Experimental, update when necessary                   │
 -- ╰──────────────────────────────────────────────────────────╯
-require('vim._extui').enable({
-  enable = true,
-  msg = {
-    ---@type 'cmd'|'msg' Where to place regular messages, either in the
-    ---cmdline or in a separate ephemeral message window.
-    target = 'msg',
-    timeout = 4000,
-  },
-})
 
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'msg',
-  callback = function()
-    vim.opt_local.winblend = 30
-    vim.opt_local.winhighlight = 'Normal:Normal,FloatBorder:Normal'
-  end,
-})
+vim.schedule(function()
+  require('vim._extui').enable({
+    enable = true,
+    msg = {
+      ---@type 'cmd'|'msg' Where to place regular messages, either in the
+      ---cmdline or in a separate ephemeral message window.
+      target = 'msg',
+      timeout = 4000,
+    },
+  })
+  vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'msg',
+    callback = function()
+      vim.opt_local.winblend = 30
+      vim.opt_local.winhighlight = 'Normal:Normal,FloatBorder:Normal'
+    end,
+  })
+end)
 
 --  }}}
 -- mappings {{{
 
--- basic
-vim.keymap.set('n', '<C-c>', ':close<CR>', { desc = '[C]lose' })
-vim.keymap.set('n', '<Leader>y', ':%y+<CR>', { desc = '[Y]ank buffer' })
+vim.schedule(function()
+  -- basic
+  vim.keymap.set('n', '<C-c>', ':close<CR>', { desc = '[C]lose' })
+  vim.keymap.set('n', '<Leader>y', ':%y+<CR>', { desc = '[Y]ank buffer' })
 
-vim.keymap.set('n', 'H', ':bprev<CR>', { desc = 'Prev buffer', noremap = false })
-vim.keymap.set('n', 'L', ':bnext<CR>', { desc = 'Next buffer', noremap = false })
+  vim.keymap.set('n', 'H', ':bprev<CR>', { desc = 'Prev buffer', noremap = false })
+  vim.keymap.set('n', 'L', ':bnext<CR>', { desc = 'Next buffer', noremap = false })
 
-vim.keymap.set('n', '=', [[:vertical resize +5<CR>]])
-vim.keymap.set('n', '-', [[:vertical resize -5<CR>]])
-vim.keymap.set('n', '+', [[:horizontal resize +2<CR>]])
-vim.keymap.set('n', '_', [[:horizontal resize -2<CR>]])
+  vim.keymap.set('n', '=', [[:vertical resize +5<CR>]])
+  vim.keymap.set('n', '-', [[:vertical resize -5<CR>]])
+  vim.keymap.set('n', '+', [[:horizontal resize +2<CR>]])
+  vim.keymap.set('n', '_', [[:horizontal resize -2<CR>]])
 
--- Delete the character to the right of the cursor
-vim.keymap.set('i', '<C-D>', '<DEL>')
+  -- Delete the character to the right of the cursor
+  vim.keymap.set('i', '<C-D>', '<DEL>')
 
--- navigate within insert mode
-vim.keymap.set('i', '<C-h>', '<Left>', { desc = 'Move left' })
-vim.keymap.set('i', '<C-l>', '<Right>', { desc = 'Move right' })
-vim.keymap.set('i', '<C-j>', '<Down>', { desc = 'Move down' })
-vim.keymap.set('i', '<C-k>', '<Up>', { desc = 'Move up' })
+  -- navigate within insert mode
+  vim.keymap.set('i', '<C-h>', '<Left>', { desc = 'Move left' })
+  vim.keymap.set('i', '<C-l>', '<Right>', { desc = 'Move right' })
+  vim.keymap.set('i', '<C-j>', '<Down>', { desc = 'Move down' })
+  vim.keymap.set('i', '<C-k>', '<Up>', { desc = 'Move up' })
 
--- turn the word under cursor to upper case
-vim.keymap.set('i', '<C-u>', '<Esc>viwUea', { desc = 'Turn into upper case' })
--- turn the current word into title case
-vim.keymap.set('i', '<C-t>', '<Esc>b~lea', { desc = 'Turn into title case' })
+  -- turn the word under cursor to upper case
+  vim.keymap.set('i', '<C-u>', '<Esc>viwUea', { desc = 'Turn into upper case' })
+  -- turn the current word into title case
+  vim.keymap.set('i', '<C-t>', '<Esc>b~lea', { desc = 'Turn into title case' })
 
--- window management
-vim.keymap.set('n', '|', '<C-w>v', { desc = 'Split vertically' })
-vim.keymap.set('n', '\\', '<C-w>s', { desc = 'Split horizontally' })
+  -- window management
+  vim.keymap.set('n', '|', '<C-w>v', { desc = 'Split vertically' })
+  vim.keymap.set('n', '\\', '<C-w>s', { desc = 'Split horizontally' })
 
--- clear highlights
-vim.keymap.set('n', '<Esc>', ':noh<CR>', { desc = 'Clear highlights' })
+  -- clear highlights
+  vim.keymap.set('n', '<Esc>', ':noh<CR>', { desc = 'Clear highlights' })
 
--- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
--- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
--- empty mode is same as using : :map
--- also don't use g[j|k] when in operator pending mode, so it doesn't alter d, y or c behaviour
-vim.keymap.set({ 'n', 'x' }, 'j', 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { desc = 'Move down', expr = true })
-vim.keymap.set({ 'n', 'x' }, 'k', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { desc = 'Move up', expr = true })
-vim.keymap.set({ 'n', 'v' }, '<Up>', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { desc = 'Move up', expr = true })
-vim.keymap.set(
-  { 'n', 'v' },
-  '<Down>',
-  'v:count || mode(1)[0:1] == "no" ? "j" : "gj"',
-  { desc = 'Move down', expr = true }
-)
+  -- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
+  -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
+  -- empty mode is same as using : :map
+  -- also don't use g[j|k] when in operator pending mode, so it doesn't alter d, y or c behaviour
+  vim.keymap.set({ 'n', 'x' }, 'j', 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { desc = 'Move down', expr = true })
+  vim.keymap.set({ 'n', 'x' }, 'k', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { desc = 'Move up', expr = true })
+  vim.keymap.set(
+    { 'n', 'v' },
+    '<Up>',
+    'v:count || mode(1)[0:1] == "no" ? "k" : "gk"',
+    { desc = 'Move up', expr = true }
+  )
+  vim.keymap.set(
+    { 'n', 'v' },
+    '<Down>',
+    'v:count || mode(1)[0:1] == "no" ? "j" : "gj"',
+    { desc = 'Move down', expr = true }
+  )
 
--- Line operation
-vim.keymap.set({ 'x', 'v' }, '<', '<gv', { desc = 'Indent line' })
-vim.keymap.set({ 'x', 'v' }, '>', '>gv', { desc = 'Indent line' })
-vim.keymap.set('v', 'J', ":move '>+1<CR>gv-gv", { desc = 'Move text down' })
-vim.keymap.set('v', 'K', ":move '<-2<CR>gv-gv", { desc = 'Move text up' })
+  -- Line operation
+  vim.keymap.set({ 'x', 'v' }, '<', '<gv', { desc = 'Indent line' })
+  vim.keymap.set({ 'x', 'v' }, '>', '>gv', { desc = 'Indent line' })
+  vim.keymap.set('v', 'J', ":move '>+1<CR>gv-gv", { desc = 'Move text down' })
+  vim.keymap.set('v', 'K', ":move '<-2<CR>gv-gv", { desc = 'Move text up' })
 
--- Change text without putting it into register,
--- see https://stackoverflow.com/q/54255/6064933
-vim.keymap.set('n', 'c', '"_c')
-vim.keymap.set('n', 'C', '"_C')
-vim.keymap.set('n', 'cc', '"_cc')
-vim.keymap.set('x', 'c', '"_c')
+  -- Change text without putting it into register,
+  -- see https://stackoverflow.com/q/54255/6064933
+  vim.keymap.set('n', 'c', '"_c')
+  vim.keymap.set('n', 'C', '"_C')
+  vim.keymap.set('n', 'cc', '"_cc')
+  vim.keymap.set('x', 'c', '"_c')
 
--- Don't copy the replaced text after pasting in visual mode
--- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
-vim.keymap.set('x', 'p', 'p:let @+=@0<CR>:let @"=@0<CR>', { desc = "Don't copy replaced text" })
+  -- Don't copy the replaced text after pasting in visual mode
+  -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
+  vim.keymap.set('x', 'p', 'p:let @+=@0<CR>:let @"=@0<CR>', { desc = "Don't copy replaced text" })
 
--- commenting
-vim.keymap.set('n', 'gco', 'o<esc>Vcx<esc>:normal gcc<CR>fxa<bs>', { desc = 'Add comment below' })
-vim.keymap.set('n', 'gcO', 'O<esc>Vcx<esc>:normal gcc<CR>fxa<bs>', { desc = 'Add comment above' })
+  -- commenting
+  vim.keymap.set('n', 'gco', 'o<esc>Vcx<esc>:normal gcc<CR>fxa<bs>', { desc = 'Add comment below' })
+  vim.keymap.set('n', 'gcO', 'O<esc>Vcx<esc>:normal gcc<CR>fxa<bs>', { desc = 'Add comment above' })
 
--- delete buffer
-vim.keymap.set('n', '<C-x>', ':bdelete<CR>', { desc = 'Delete buffer' })
+  -- delete buffer
+  vim.keymap.set('n', '<C-x>', ':bdelete<CR>', { desc = 'Delete buffer' })
+end)
 
 -- }}}
 -- autocmd {{{
@@ -282,75 +291,6 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
 })
 
 -- }}}
--- colorschemes {{{
-
-vim.pack.add({
-  { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin' },
-  { src = 'https://github.com/rebelot/kanagawa.nvim' },
-  { src = 'https://github.com/everviolet/nvim', name = 'evergarden' },
-  { src = 'https://github.com/vague-theme/vague.nvim' },
-  { src = 'https://github.com/folke/tokyonight.nvim' },
-  { src = 'https://github.com/rose-pine/neovim', name = 'rose-pine' },
-})
-
--- require('catppuccin').setup({
---   flavour = 'mocha',
---   transparent_background = false,
---   term_colors = true,
---   styles = {
---     comments = { 'italic' },
---     keywords = { 'italic' },
---   },
---   float = {
---     solid = true,
---   },
---   lsp_styles = {
---     inlay_hints = {
---       background = false,
---     },
---   },
--- })
--- vim.cmd('colorscheme catppuccin')
-
--- require('kanagawa').setup({
---   theme = 'wave', -- dragon, lotus, wave
---   commentStyle = { italic = true },
---   keywordStyle = { italic = true },
--- })
--- vim.cmd('colorscheme kanagawa')
-
--- require('evergarden').setup({
---   theme = {
---     variant = 'winter', -- 'winter'|'fall'|'spring'|'summer'
---     accent = 'skye',
---   },
--- })
--- vim.cmd('colorscheme evergarden')
-
--- require('vague').setup({
---   style = {
---     keywords = 'italic',
---   },
--- })
--- vim.cmd('colorscheme vague')
-
--- require('tokyonight').setup({
---   style = 'night',
--- })
--- vim.cmd('colorscheme tokyonight')
-
-require('rose-pine').setup({
-  variant = 'auto', -- auto, main, moon, or dawn
-  dark_variant = 'main', -- main, moon, or dawn
-  styles = {
-    bold = true,
-    italic = true,
-    transparency = false,
-  },
-})
-vim.cmd('colorscheme rose-pine')
-
--- }}}
 -- lazy {{{
 
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
@@ -402,6 +342,7 @@ require('lazy').setup({
     -- ╭──────────────────────────────────────────────────────────╮
     -- │ ⬇️ UI                                                    │
     -- ╰──────────────────────────────────────────────────────────╯
+    { import = 'plugins.colorschemes' },
     { import = 'plugins.gitsigns' },
     { import = 'plugins.lualine' },
     { import = 'plugins.nvim-colorizer' },
@@ -615,11 +556,11 @@ end
 vim.schedule(apply_highlights)
 
 -- }}}
--- {{{ startup timer
+-- {{{ timer
 
 local end_time = vim.loop.hrtime()
-local elapsed_ms = (end_time - start_time) / 1000000 -- Convert nanoseconds to milliseconds
+local elapsed_ms = (end_time - start_time) / 1e6 -- Convert nanoseconds to milliseconds
 
-vim.schedule(function() vim.notify(string.format('Neovim startup time: %.2f ms', elapsed_ms), vim.log.levels.INFO) end)
+vim.schedule(function() vim.notify(string.format('init.lua costs: %.2f ms', elapsed_ms), vim.log.levels.INFO) end)
 
 -- }}}

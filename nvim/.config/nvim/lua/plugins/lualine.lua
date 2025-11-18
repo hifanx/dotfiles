@@ -123,6 +123,7 @@ return {
               help = '',
               mason = ' ',
               checkhealth = '󰀯 ',
+              ['nvim-pack'] = ' ',
             },
             buffers_color = {
               active = 'lualine_c_normal',

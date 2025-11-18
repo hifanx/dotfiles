@@ -14,7 +14,6 @@
 
 - **Format Lua**: `stylua .` (config: `stylua.toml` - 120 cols, 2 spaces, Unix endings, single quotes)
 - **Check config**: `nvim --headless "+Lazy! sync" +qa` (sync plugins)
-- **LSP info**: Launch nvim and run `:LspInfo` or `:ConformInfo`
 - No formal test suite - test changes by launching `nvim` and verifying functionality
 
 ## Code Style Guidelines
@@ -39,8 +38,6 @@
 
 ### Comments & Documentation
 
-- Use `---@type` annotations for type hints
-- For LSP configs, add `---@type vim.lsp.Config` at the top of the file; `---@brief` is optional for extra context
 - Use box comments with unicode for major sections (see init.lua examples)
 - Inline comments with `--` for brief explanations, `NOTE:` prefix for important notes
 
@@ -61,6 +58,5 @@
 
 ### Error Handling
 
-- Use `pcall()` for operations that may fail (see the LSP/client setup section in `init.lua` for examples)
 - Validate with `if not client then return end` pattern
 - Use `vim.notify()` with log levels for user-facing messages
