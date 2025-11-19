@@ -13,14 +13,14 @@
         "apiKey": "{env:CHATANYWHERE_API_KEY}"
       },
       "models": {
-        "claude-sonnet-4-5-20250929-thinking": {
-          "name": "claude-sonnet-4-5-20250929-thinking"
-        },
         "claude-sonnet-4-5-20250929": {
           "name": "claude-sonnet-4-5-20250929"
         },
         "deepseek-v3.1-think-250821": {
           "name": "deepseek-v3.1-think-250821"
+        },
+        "gpt-5.1-2025-11-13": {
+          "name": "gpt-5.1-2025-11-13"
         }
       }
     }
