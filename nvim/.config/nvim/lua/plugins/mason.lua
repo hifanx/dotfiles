@@ -7,7 +7,7 @@ vim.env.PATH = table.concat({ vim.fn.stdpath('data'), 'mason', 'bin' }, sep) .. 
 return {
   'williamboman/mason.nvim',
   event = 'VeryLazy',
-  init = function() vim.keymap.set('n', '<leader>hm', ':Mason<CR>', { desc = 'Mason' }) end,
+  init = function() vim.keymap.set('n', '<leader>hm', ':Mason<CR>', { desc = '[M]ason' }) end,
   config = function()
     require('mason').setup({})
 

@@ -1,7 +1,9 @@
 return {
   'nvim-mini/mini.nvim',
   event = { 'VeryLazy' },
+  lazy = false,
   init = function()
+    require('mini.starter').setup()
     vim.keymap.set('n', '<leader>ff', ':Pick files<CR>', { desc = '[F]iles' })
     vim.keymap.set('n', '<leader>fg', ':Pick grep_live<CR>', { desc = '[G]rep live' })
     vim.keymap.set('n', '<leader>fh', ':Pick help<CR>', { desc = '[H]elp' })

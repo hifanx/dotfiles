@@ -1,6 +1,8 @@
 -- bootstrap {{{
 
-local start_time = vim.loop.hrtime()
+local profiler = require('profiler')
+
+profiler.start('bootstrap')
 
 _G.GLOB = {}
 
@@ -51,9 +53,12 @@ function _G.GLOB.get_hl_value(hl_group, attr, fallback)
   return value
 end
 
+profiler.stop('bootstrap')
+
 -- }}}
 -- options {{{
 
+profiler.start('options')
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ Option section                                        │
 -- ╰──────────────────────────────────────────────────────────╯
@@ -158,8 +163,12 @@ vim.schedule(function()
   })
 end)
 
+profiler.stop('options')
+
 --  }}}
 -- mappings {{{
+
+profiler.start('mappings')
 
 vim.schedule(function()
   -- basic
@@ -239,8 +248,12 @@ vim.schedule(function()
   vim.keymap.set('n', '<C-x>', ':bdelete<CR>', { desc = 'Delete buffer' })
 end)
 
+profiler.stop('mappings')
+
 -- }}}
 -- autocmd {{{
+
+profiler.start('autocmd')
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
@@ -290,8 +303,12 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
   callback = function() vim.opt_local.cursorline = false end,
 })
 
+profiler.stop('autocmd')
+
 -- }}}
 -- lazy {{{
+
+profiler.start('lazy')
 
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -315,7 +332,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   end
 end
 vim.opt.rtp:prepend(lazypath)
-vim.keymap.set('n', '<leader>hl', ':Lazy<CR>', { desc = 'Lazy' })
+vim.keymap.set('n', '<leader>hl', ':Lazy<CR>', { desc = '[L]azy' })
 
 -- }}}
 
@@ -375,7 +392,11 @@ require('lazy').setup({
   },
 })
 
+profiler.stop('lazy')
+
 -- lsp {{{
+
+profiler.start('lsp')
 
 local function lsp()
   -- ╭──────────────────────────────────────────────────────────╮
@@ -536,8 +557,12 @@ end
 
 vim.schedule(lsp)
 
+profiler.stop('lsp')
+
 -- }}}
 -- {{{ highlight
+
+profiler.start('highlights')
 
 local function apply_highlights()
   local ok, groups = pcall(require, 'highlights')
@@ -555,12 +580,11 @@ end
 
 vim.schedule(apply_highlights)
 
+profiler.stop('highlights')
+
 -- }}}
 -- {{{ timer
 
-local end_time = vim.loop.hrtime()
-local elapsed_ms = (end_time - start_time) / 1e6 -- Convert nanoseconds to milliseconds
-
-vim.schedule(function() vim.notify(string.format('init.lua costs: %.2f ms', elapsed_ms), vim.log.levels.INFO) end)
+profiler.report()
 
 -- }}}

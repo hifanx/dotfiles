@@ -8,7 +8,7 @@ return {
       function() require('conform').format({ async = true, lsp_fallback = true }) end,
       { desc = '[F]ormat buffer' }
     )
-    vim.keymap.set('n', '<Leader>hI', ':ConformInfo<CR>', { desc = '[C]onform info' })
+    vim.keymap.set('n', '<Leader>hc', ':ConformInfo<CR>', { desc = '[C]onform info' })
   end,
   config = function()
     require('conform').setup({
