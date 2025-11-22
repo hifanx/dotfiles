@@ -16,43 +16,6 @@ local hostname = vim.loop.os_gethostname()
 -- NOTE: computed once on load and called with O(1) operation
 _G.GLOB.is_sif = (os_name == 'darwin' and hostname:find('sif') ~= nil)
 
--- ╭──────────────────────────────────────────────────────────╮
--- │ ⬇️ Util functions                                        │
--- ╰──────────────────────────────────────────────────────────╯
-
----Retrieve a value from a highlight group with fallback warnings
----@param hl_group string The highlight group name (e.g., "Normal", "Comment")
----@param attr string The attribute to retrieve ("fg", "bg", "sp", "bold", "italic", etc.)
----@param fallback any Optional fallback value to return if not found
----@return any|nil The attribute value or fallback/nil (colors always returned as hex strings)
-function _G.GLOB.get_hl_value(hl_group, attr, fallback)
-  local hl = vim.api.nvim_get_hl(0, { name = hl_group, link = false, create = false })
-
-  if vim.tbl_isempty(hl) then
-    vim.notify(
-      string.format("Trying to retrieve from '%s' but highlight group doesn't exist", hl_group),
-      vim.log.levels.WARN
-    )
-    return fallback
-  end
-
-  if hl[attr] == nil then
-    vim.notify(
-      string.format("Trying to retrieve from '%s' but '%s' doesn't exist", hl_group, attr),
-      vim.log.levels.WARN
-    )
-    return fallback
-  end
-
-  local value = hl[attr]
-
-  -- Always convert color values to hex
-  local color_attrs = { fg = true, bg = true, sp = true }
-  if color_attrs[attr] and type(value) == 'number' then return string.format('#%06x', value) end
-
-  return value
-end
-
 profiler.stop('bootstrap')
 
 -- }}}
@@ -557,29 +520,6 @@ end
 vim.schedule(lsp)
 
 profiler.stop('lsp')
-
--- }}}
--- {{{ highlight
-
--- profiler.start('highlights')
---
--- local function apply_highlights()
---   local ok, groups = pcall(require, 'highlights')
---   if not ok then
---     vim.notify('Failed to load highlights: ' .. groups, vim.log.levels.ERROR)
---     return
---   end
---
---   for _, group in pairs(groups) do
---     for name, attrs in pairs(group) do
---       vim.api.nvim_set_hl(0, name, attrs)
---     end
---   end
--- end
---
--- vim.schedule(apply_highlights)
---
--- profiler.stop('highlights')
 
 -- }}}
 -- {{{ timer

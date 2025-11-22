@@ -1,113 +1,50 @@
 return {
   {
     'catppuccin/nvim',
-    cond = false,
     lazy = false,
     priority = 1000,
     name = 'catppuccin',
     config = function()
       require('catppuccin').setup({
         flavour = 'mocha',
+        default_integrations = false,
         transparent_background = false,
         term_colors = true,
         styles = {
           comments = { 'italic' },
           keywords = { 'italic' },
         },
-        float = {
-          solid = true,
-        },
         lsp_styles = {
           inlay_hints = {
             background = false,
           },
         },
-      })
-      -- vim.cmd([[colorscheme catppuccin]])
-    end,
-  },
-  {
-    'rebelot/kanagawa.nvim',
-    cond = false,
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require('kanagawa').setup({
-        theme = 'wave', -- dragon, lotus, wave
-        commentStyle = { italic = true },
-        keywordStyle = { italic = true },
-      })
-      -- vim.cmd([[colorscheme kanagawa]])
-    end,
-  },
-  {
-    'everviolet/nvim',
-    cond = false,
-    lazy = false,
-    name = 'evergarden',
-    priority = 1000,
-    config = function()
-      require('evergarden').setup({
-        theme = {
-          variant = 'winter', -- 'winter'|'fall'|'spring'|'summer'
-          accent = 'skye',
+        color_overrides = {
+          mocha = {
+            mauve = '#E06C75',
+            lavender = '#C0CAF5',
+          },
         },
+        custom_highlights = function(c)
+          return {
+            -- default highlights
+            Folded = { link = 'MoreMsg' },
+            PmenuSel = { fg = c.base, bg = c.green },
+            -- render-markdown
+            RenderMarkdownH1Bg = { bg = c.base },
+            RenderMarkdownH2Bg = { bg = c.base },
+            RenderMarkdownH3Bg = { bg = c.base },
+            RenderMarkdownH4Bg = { bg = c.base },
+            RenderMarkdownH5Bg = { bg = c.base },
+            RenderMarkdownH6Bg = { bg = c.base },
+            RenderMarkdownTableRow = { link = 'DiagnosticWarn' },
+            RenderMarkdownTableHead = { link = 'DiagnosticError' },
+            -- blink
+            BlinkCmpMenuSelection = { link = 'PmenuSel' },
+          }
+        end,
       })
-      -- vim.cmd([[colorscheme evergarden]])
-    end,
-  },
-  {
-    'vague-theme/vague.nvim',
-    cond = false,
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require('vague').setup({
-        style = {
-          keywords = 'italic',
-        },
-      })
-      -- vim.cmd([[colorscheme vague]])
-    end,
-  },
-  {
-    'folke/tokyonight.nvim',
-    cond = false,
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require('tokyonight').setup({
-        style = 'night',
-      })
-      -- vim.cmd([[colorscheme tokyonight]])
-    end,
-  },
-  {
-    'rose-pine/neovim',
-    cond = false,
-    name = 'rose-pine',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require('rose-pine').setup({
-        variant = 'auto', -- auto, main, moon, or dawn
-        dark_variant = 'main', -- main, moon, or dawn
-        styles = {
-          bold = true,
-          italic = true,
-          transparency = false,
-        },
-      })
-      -- vim.cmd([[colorscheme rose-pine]])
-    end,
-  },
-  {
-    dir = '~/git/isekai.nvim/',
-    -- cond = false,
-    lazy = false,
-    priority = 1000,
-    config = function()
-      vim.cmd([[colorscheme isekai]])
+      vim.cmd([[colorscheme catppuccin]])
     end,
   },
 }

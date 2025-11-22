@@ -57,11 +57,7 @@ return {
     -- ╭──────────────────────────────────────────────────────────╮
     -- │ ⬇️ setup the thing                                       │
     -- ╰──────────────────────────────────────────────────────────╯
-    local normal_ish = _G.GLOB.get_hl_value('Normal', 'bg')
-    local warn_ish_fg = _G.GLOB.get_hl_value('WarningMsg', 'fg')
-    local ok_ish_fg = _G.GLOB.get_hl_value('DiagnosticOk', 'fg')
-    local nontext_ish_fg = _G.GLOB.get_hl_value('NonText', 'fg')
-    local err_ish_fg = _G.GLOB.get_hl_value('DiagnosticError', 'fg')
+    local c = require('palette').catppuccin
 
     require('lualine').setup({
       options = {
@@ -79,7 +75,7 @@ return {
           if not theme then theme = require('lualine.themes.auto') end
           -- Override section c background for all modes
           for _, sections in pairs(theme) do
-            if sections.c then sections.c.bg = normal_ish end
+            if sections.c then sections.c.bg = c.base end
           end
           return theme
         end)(),
@@ -101,7 +97,7 @@ return {
         lualine_c = {
           {
             'location',
-            color = { fg = nontext_ish_fg },
+            color = { fg = c.overlay0 },
           },
           { function() return '%=' end },
           {
@@ -135,7 +131,7 @@ return {
           {
             lazy,
             cond = conditions.lazy_status,
-            color = { fg = warn_ish_fg },
+            color = { fg = c.yellow },
           },
           {
             'copilot',
@@ -150,11 +146,11 @@ return {
                   unknown = ' ',
                 },
                 hl = {
-                  enabled = ok_ish_fg,
-                  sleep = ok_ish_fg,
-                  disabled = nontext_ish_fg,
-                  warning = warn_ish_fg,
-                  unknown = err_ish_fg,
+                  enabled = c.green,
+                  sleep = c.cgreen,
+                  disabled = c.overlay0,
+                  warning = c.yellow,
+                  unknown = c.red,
                 },
               },
               spinners = require('copilot-lualine.spinners').dots,
