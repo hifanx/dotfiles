@@ -3,7 +3,7 @@ font-feature = calt,cv06,ss09
 font-size = 18
 
 # theme = evergarden-winter-skye.yml
-theme = Rose Pine
+theme = Catppuccin Mocha
 
 adjust-cell-height = 10
 
@@ -12,7 +12,7 @@ cursor-style-blink = true
 # cursor-color = b3e6db
 # cursor-text = 171c1f
 
-background-opacity = 0.8
+background-opacity = 0.85
 background-blur = true
 
 window-padding-balance = true
