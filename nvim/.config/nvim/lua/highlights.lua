@@ -27,4 +27,8 @@ M.mini = {
   MiniPickMatchCurrent = { link = 'PmenuSel' },
 }
 
+M.blink = {
+  BlinkCmpMenuSelection = { link = 'PmenuSel' },
+}
+
 return M

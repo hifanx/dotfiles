@@ -1,7 +1,6 @@
 return {
   'nvim-mini/mini.nvim',
   event = { 'VeryLazy' },
-  lazy = false,
   init = function()
     require('mini.starter').setup()
     vim.keymap.set('n', '<leader>ff', ':Pick files<CR>', { desc = '[F]iles' })
@@ -33,6 +32,8 @@ return {
         move_up = '<C-k>',
         scroll_down = '<C-d>',
         scroll_up = '<C-u>',
+        mark_all = '<C-f>',
+        choose_marked = '<C-q>',
       },
     })
     require('mini.extra').setup()

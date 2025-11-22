@@ -72,14 +72,14 @@ return {
   },
   {
     'folke/tokyonight.nvim',
-    -- cond = false,
+    cond = false,
     lazy = false,
     priority = 1000,
     config = function()
       require('tokyonight').setup({
         style = 'night',
       })
-      vim.cmd([[colorscheme tokyonight]])
+      -- vim.cmd([[colorscheme tokyonight]])
     end,
   },
   {
@@ -99,6 +99,15 @@ return {
         },
       })
       -- vim.cmd([[colorscheme rose-pine]])
+    end,
+  },
+  {
+    dir = '~/git/isekai.nvim/',
+    -- cond = false,
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd([[colorscheme isekai]])
     end,
   },
 }

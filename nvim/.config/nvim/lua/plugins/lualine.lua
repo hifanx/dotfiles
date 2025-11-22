@@ -100,16 +100,9 @@ return {
         },
         lualine_c = {
           {
-            'diff',
-            cond = conditions.hide_in_width,
-            symbols = {
-              added = ' ',
-              modified = ' ',
-              removed = ' ',
-            },
+            'location',
+            color = { fg = nontext_ish_fg },
           },
-          { trailing },
-          { indent },
           { function() return '%=' end },
           {
             'buffers',
@@ -137,6 +130,8 @@ return {
           },
         },
         lualine_x = {
+          { trailing },
+          { indent },
           {
             lazy,
             cond = conditions.lazy_status,
@@ -175,6 +170,15 @@ return {
               warn = ' ',
               info = ' ',
               hint = ' ',
+            },
+          },
+          {
+            'diff',
+            cond = conditions.hide_in_width,
+            symbols = {
+              added = ' ',
+              modified = ' ',
+              removed = ' ',
             },
           },
         },

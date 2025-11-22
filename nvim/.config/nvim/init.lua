@@ -148,8 +148,6 @@ vim.schedule(function()
   require('vim._extui').enable({
     enable = true,
     msg = {
-      ---@type 'cmd'|'msg' Where to place regular messages, either in the
-      ---cmdline or in a separate ephemeral message window.
       target = 'msg',
       timeout = 4000,
     },
@@ -158,7 +156,8 @@ vim.schedule(function()
     pattern = 'msg',
     callback = function()
       vim.opt_local.winblend = 30
-      vim.opt_local.winhighlight = 'Normal:Normal,FloatBorder:Normal'
+      vim.opt_local.winborder = 'none'
+      vim.opt_local.winhighlight = 'Normal:Comment,FloatBorder:Normal'
     end,
   })
 end)
@@ -362,7 +361,7 @@ require('lazy').setup({
     { import = 'plugins.colorschemes' },
     { import = 'plugins.gitsigns' },
     { import = 'plugins.lualine' },
-    { import = 'plugins.nvim-colorizer' },
+    { import = 'plugins.nvim-highlight-colors' },
     { import = 'plugins.render-markdown' },
     -- ╭──────────────────────────────────────────────────────────╮
     -- │ ⬇️ AI                                                    │
@@ -374,7 +373,7 @@ require('lazy').setup({
   change_detection = { notify = false },
   performance = {
     rtp = {
-      -- NOTE: see full list:
+      -- see full list:
       -- https://github.com/neovim/neovim/tree/master/runtime/plugin
       disabled_plugins = {
         'tohtml.lua',
@@ -562,25 +561,25 @@ profiler.stop('lsp')
 -- }}}
 -- {{{ highlight
 
-profiler.start('highlights')
-
-local function apply_highlights()
-  local ok, groups = pcall(require, 'highlights')
-  if not ok then
-    vim.notify('Failed to load highlights: ' .. groups, vim.log.levels.ERROR)
-    return
-  end
-
-  for _, group in pairs(groups) do
-    for name, attrs in pairs(group) do
-      vim.api.nvim_set_hl(0, name, attrs)
-    end
-  end
-end
-
-vim.schedule(apply_highlights)
-
-profiler.stop('highlights')
+-- profiler.start('highlights')
+--
+-- local function apply_highlights()
+--   local ok, groups = pcall(require, 'highlights')
+--   if not ok then
+--     vim.notify('Failed to load highlights: ' .. groups, vim.log.levels.ERROR)
+--     return
+--   end
+--
+--   for _, group in pairs(groups) do
+--     for name, attrs in pairs(group) do
+--       vim.api.nvim_set_hl(0, name, attrs)
+--     end
+--   end
+-- end
+--
+-- vim.schedule(apply_highlights)
+--
+-- profiler.stop('highlights')
 
 -- }}}
 -- {{{ timer
