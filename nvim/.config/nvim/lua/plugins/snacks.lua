@@ -115,6 +115,19 @@ return {
       statuscolumn = { enabled = true },
       words = { enabled = true },
       explorer = { enabled = true, trash = true },
+      indent = {
+        indent = {
+          enabled = true,
+          only_scope = true,
+          only_current = true,
+        },
+        animate = {
+          enabled = false,
+        },
+        scope = {
+          enabled = false,
+        },
+      },
       picker = {
         enabled = true,
         sources = {
@@ -130,7 +143,12 @@ return {
             },
           },
         },
-        layout = { preset = 'bottom' },
+        layout = {
+          preset = 'ivy',
+          layout = {
+            height = 0.6,
+          },
+        },
         win = {
           input = {
             keys = {

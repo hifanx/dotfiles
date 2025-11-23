@@ -27,11 +27,13 @@ return {
         color_overrides = {
           mocha = {
             mauve = '#EB6F92',
-            lavender = '#C0CAF5',
+            lavender = '#CBA6F7',
           },
         },
         custom_highlights = function(c)
           return {
+            -- syntax
+            Boolean = { fg = c.pink },
             -- default highlights
             Folded = { link = 'MoreMsg' },
             PmenuSel = { fg = c.base, bg = c.green },
