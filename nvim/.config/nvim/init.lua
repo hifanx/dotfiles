@@ -205,9 +205,6 @@ vim.schedule(function()
   -- commenting
   vim.keymap.set('n', 'gco', 'o<esc>Vcx<esc>:normal gcc<CR>fxa<bs>', { desc = 'Add comment below' })
   vim.keymap.set('n', 'gcO', 'O<esc>Vcx<esc>:normal gcc<CR>fxa<bs>', { desc = 'Add comment above' })
-
-  -- delete buffer
-  vim.keymap.set('n', '<C-x>', ':bdelete<CR>', { desc = 'Delete buffer' })
 end)
 
 profiler.stop('mappings')
@@ -306,14 +303,14 @@ require('lazy').setup({
     { import = 'plugins.blink' }, -- completion
     { import = 'plugins.conform' }, -- format
     { import = 'plugins.mason' }, -- auto install lsp server, formatter, linter
-    { import = 'plugins.mini' }, -- pickers, icons and more
+    { import = 'plugins.mini' }, -- editor, icons and more
     { import = 'plugins.nvim-treesitter' }, -- syntax highlighting
+    { import = 'plugins.snacks' }, -- quality of life plugins
     -- ╭──────────────────────────────────────────────────────────╮
     -- │ ⬇️ TOOLS                                                 │
     -- ╰──────────────────────────────────────────────────────────╯
     { import = 'plugins.inc-rename' }, -- LSP renaming with immediate visual feedback
     { import = 'plugins.oil' },
-    { import = 'plugins.nerdy' }, -- nerdy icons
     { import = 'plugins.pangu' }, -- auto format to add a space between cjk and english letters
     { import = 'plugins.persistence' }, -- session manager
     { import = 'plugins.ts-comments' }, -- enhance neovim's native comments
@@ -371,8 +368,6 @@ local function lsp()
   -- ╭──────────────────────────────────────────────────────────╮
   -- │ ⬇️ setup lsp attach                                      │
   -- ╰──────────────────────────────────────────────────────────╯
-  local highlight_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = true })
-  local detach_augroup = vim.api.nvim_create_augroup('lsp-detach', { clear = true })
 
   vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
@@ -406,29 +401,6 @@ local function lsp()
           { desc = 'Toggle [I]nlay hint' }
         )
       end
-
-      -- Document highlight - buffer-specific autocmds
-      if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight) then
-        vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-          buffer = ev.buf,
-          group = highlight_augroup,
-          callback = vim.lsp.buf.document_highlight,
-        })
-
-        vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-          buffer = ev.buf,
-          group = highlight_augroup,
-          callback = vim.lsp.buf.clear_references,
-        })
-      end
-    end,
-  })
-
-  vim.api.nvim_create_autocmd('LspDetach', {
-    group = detach_augroup,
-    callback = function(ev)
-      vim.lsp.buf.clear_references()
-      vim.api.nvim_clear_autocmds({ group = highlight_augroup, buffer = ev.buf })
     end,
   })
 

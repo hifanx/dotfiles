@@ -1,44 +1,9 @@
 return {
   'nvim-mini/mini.nvim',
   event = { 'VeryLazy' },
-  init = function()
-    require('mini.starter').setup()
-    vim.keymap.set('n', '<leader>ff', ':Pick files<CR>', { desc = '[F]iles' })
-    vim.keymap.set('n', '<leader>fg', ':Pick grep_live<CR>', { desc = '[G]rep live' })
-    vim.keymap.set('n', '<leader>fh', ':Pick help<CR>', { desc = '[H]elp' })
-    vim.keymap.set('n', '<leader>fH', ':Pick hl_groups<CR>', { desc = '[H]ighlights' })
-    vim.keymap.set('n', '<leader><space>', ':Pick resume<CR>', { desc = 'Resume' })
-    vim.keymap.set('n', '<leader>fi', ':Nerdy<CR>', { desc = '[I]con' })
-    vim.keymap.set('n', '<leader>fc', ':Pick commands<CR>', { desc = '[C]ommands' })
-    vim.keymap.set('n', '<leader>fC', ':Pick colorschemes<CR>', { desc = '[C]olorschemes' })
-    vim.keymap.set('n', '<leader>fk', ':Pick keymaps<CR>', { desc = '[K]eymaps' })
-    vim.keymap.set('n', '<leader>fm', ':Pick marks<CR>', { desc = '[M]arks' })
-    vim.keymap.set('n', '<leader>fo', ':Pick options<CR>', { desc = '[O]ptions' })
-    vim.keymap.set('n', '<leader>fb', ':Pick buf_lines<CR>', { desc = '[B]uffer lines' })
-    vim.keymap.set('n', '<leader>fd', ':Pick diagnostic<CR>', { desc = '[D]iagnostics' })
-    vim.keymap.set('n', '<leader>e', ':Pick explorer<CR>', { desc = '[E]xplorer' })
-    vim.keymap.set('n', '<leader>gc', ':Pick git_commits<CR>', { desc = '[G]it [c]ommits' })
-    vim.keymap.set('n', '<leader>gh', ':Pick git_hunks<CR>', { desc = '[G]it [h]unks' })
-    vim.keymap.set('n', '<leader>fq', ':Pick list scope="quickfix"<CR>', { desc = '[Q]ickfix' })
-    vim.keymap.set('n', '<leader>fl', ':Pick list scope="location-list"<CR>', { desc = '[L]oclist' })
-    vim.keymap.set('n', '<leader>fj', ':Pick list scope="jumplist"<CR>', { desc = '[J]umplist' })
-    vim.keymap.set('n', '<leader>fr', ':Pick registers<CR>', { desc = '[R]egisters' })
-  end,
   config = function()
-    require('mini.pick').setup({
-      mappings = {
-        delete_left = '',
-        move_down = '<C-j>',
-        move_up = '<C-k>',
-        scroll_down = '<C-d>',
-        scroll_up = '<C-u>',
-        mark_all = '<C-f>',
-        choose_marked = '<C-q>',
-      },
-    })
-    require('mini.extra').setup()
     require('mini.icons').setup()
-    ---@diagnostic disable-next-line: undefined-global
+    --- @diagnostic disable-next-line: undefined-global
     MiniIcons.mock_nvim_web_devicons()
     require('mini.ai').setup()
 

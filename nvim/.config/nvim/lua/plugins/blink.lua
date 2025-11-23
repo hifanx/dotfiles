@@ -77,7 +77,7 @@ return {
         },
       },
 
-      -- NOTE: Use :BlinkCmp status to view which sources providers are enabled or not enabled
+      -- use :BlinkCmp status to view which sources providers are enabled or not enabled
       sources = {
         default = default,
         providers = {

@@ -113,6 +113,11 @@ return {
               mason = ' ',
               checkhealth = '󰀯 ',
               ['nvim-pack'] = ' ',
+              snacks_dashboard = ' ',
+              snacks_input = ' ',
+              snacks_notif_history = ' ',
+              snacks_picker_list = ' ',
+              snacks_picker_input = ' ',
             },
             buffers_color = {
               active = 'lualine_c_normal',

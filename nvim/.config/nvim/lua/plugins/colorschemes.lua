@@ -19,9 +19,14 @@ return {
             background = false,
           },
         },
+        integrations = {
+          gitsigns = true,
+          render_markdown = true,
+          blink_cmp = { enabled = true, style = 'bordered' },
+        },
         color_overrides = {
           mocha = {
-            mauve = '#E06C75',
+            mauve = '#EB6F92',
             lavender = '#C0CAF5',
           },
         },
@@ -30,6 +35,8 @@ return {
             -- default highlights
             Folded = { link = 'MoreMsg' },
             PmenuSel = { fg = c.base, bg = c.green },
+            FloatBorder = { fg = c.yellow },
+            FloatTitle = { fg = c.yellow },
             -- render-markdown
             RenderMarkdownH1Bg = { bg = c.base },
             RenderMarkdownH2Bg = { bg = c.base },
@@ -41,6 +48,15 @@ return {
             RenderMarkdownTableHead = { link = 'DiagnosticError' },
             -- blink
             BlinkCmpMenuSelection = { link = 'PmenuSel' },
+            -- snacks
+            SnacksInputNormal = { link = 'NormalFloat' },
+            SnacksInputBorder = { link = 'FloatBorder' },
+            SnacksInputTitle = { link = 'FloatTitle' },
+            SnacksInputIcon = { link = 'DiagnosticWarn' },
+            SnacksPickerCursorLine = { link = 'PmenuSel' },
+            SnacksPickerListCursorLine = { link = 'PmenuSel' },
+            SnacksPickerPreviewCursorLine = { link = 'PmenuSel' },
+            SnacksPickerInputCursorLine = { link = 'NormalFloat' },
           }
         end,
       })

@@ -1,28 +1,3 @@
 {
-  "plugins": {
-    "catppuccin": {
-      "rev": "da33755d00e09bff2473978910168ff9ea5dc453",
-      "src": "https://github.com/catppuccin/nvim"
-    },
-    "evergarden": {
-      "rev": "951d0c459f5d7fff8e90e0c0803dad8faf5180ff",
-      "src": "https://github.com/everviolet/nvim"
-    },
-    "kanagawa.nvim": {
-      "rev": "aef7f5cec0a40dbe7f3304214850c472e2264b10",
-      "src": "https://github.com/rebelot/kanagawa.nvim"
-    },
-    "rose-pine": {
-      "rev": "cf2a288696b03d0934da713d66c6d71557b5c997",
-      "src": "https://github.com/rose-pine/neovim"
-    },
-    "tokyonight.nvim": {
-      "rev": "5da1b76e64daf4c5d410f06bcb6b9cb640da7dfd",
-      "src": "https://github.com/folke/tokyonight.nvim"
-    },
-    "vague.nvim": {
-      "rev": "dba28050887c2810b5ebf9e0143b4e919bd55757",
-      "src": "https://github.com/vague-theme/vague.nvim"
-    }
-  }
+  "plugins": []
 }
