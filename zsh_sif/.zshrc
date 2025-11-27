@@ -88,11 +88,9 @@ ta() {
     # Use the argument as the session name if provided, otherwise default to "WEN"
     local session_name=${1:-"WEN"}
 
-    # Check if the session already exists
     if tmux has-session -t "$session_name" 2>/dev/null; then
         tmux attach-session -t "$session_name"
     else
-        # If the session doesn't exist, create and attach to it
         tmux new-session -s "$session_name"
     fi
 }
@@ -113,6 +111,7 @@ alias heimdall="ssh root@10.0.0.1"
 alias nanna="ssh xuhaifan@10.0.0.12"
 alias baldur="ssh xuhaifan@10.0.0.10"
 alias co='cd "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian"'
+alias g='lazygit'
 
 ## yazi
 y() {
