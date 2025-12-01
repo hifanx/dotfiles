@@ -27,10 +27,11 @@ return {
     vim.keymap.set('n', '<leader>e', function() Snacks.explorer() end, { desc = '[E]xplorer' })
 
     -- Find
+    vim.keymap.set('n', '<C-s>', function() Snacks.picker.smart() end, { desc = '[S]mart find' })
     vim.keymap.set('n', '<leader>fh', function() Snacks.picker.help() end, { desc = '[H]elp pages' })
     vim.keymap.set('n', '<leader>fH', function() Snacks.picker.highlights() end, { desc = '[H]ighlights' })
     vim.keymap.set('n', '<leader>ff', function() Snacks.picker.files() end, { desc = '[F]iles' })
-    vim.keymap.set('n', '<leader>fr', function() Snacks.picker.recent() end, { desc = '[R]ecent' })
+    vim.keymap.set('n', '<leader>fr', function() Snacks.picker.registers() end, { desc = '[R]egisters' })
     vim.keymap.set('n', '<leader>fa', function() Snacks.picker.autocmds() end, { desc = '[A]utocmds' })
     vim.keymap.set('n', '<leader>fC', function() Snacks.picker.colorschemes() end, { desc = '[C]olorschemes' })
     vim.keymap.set('n', '<leader>fc', function() Snacks.picker.commands() end, { desc = '[C]ommands' })
@@ -54,12 +55,12 @@ return {
     -- Grep
     vim.keymap.set('n', '<leader>fb', function() Snacks.picker.lines() end, { desc = '[B]uffer' })
     vim.keymap.set('n', '<leader>fB', function() Snacks.picker.grep_buffers() end, { desc = '[B]uffers opened' })
-    vim.keymap.set('n', '<leader>fg', function() Snacks.picker.grep() end, { desc = '[G]rep live' })
+    vim.keymap.set('n', '<leader>/', function() Snacks.picker.grep() end, { desc = 'Grep live' })
     vim.keymap.set(
       { 'n', 'x' },
-      '<leader>fw',
+      '<leader>?',
       function() Snacks.picker.grep_word() end,
-      { desc = '[Word] under cursor' }
+      { desc = 'Grep word under cursor' }
     )
 
     -- Git
@@ -143,12 +144,7 @@ return {
             },
           },
         },
-        layout = {
-          preset = 'ivy',
-          layout = {
-            height = 0.6,
-          },
-        },
+        layout = { preset = 'ivy' },
         win = {
           input = {
             keys = {

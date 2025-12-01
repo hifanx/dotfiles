@@ -32,7 +32,6 @@ local g = vim.g
 g.mapleader = ' '
 o.mouse = 'a' -- enable mouse support
 o.undofile = true -- enable persistent undo
-o.clipboard = 'unnamedplus' -- connection to the system clipboard
 o.backup = false -- disable backup
 o.confirm = true -- Confirm to save changes before exiting modified buffer
 o.iskeyword = '@,48-57,_,192-255,-' -- Treat dash as `word` textobject part
@@ -97,11 +96,41 @@ o.foldmarker = '{{{,}}}' -- this is the default
 o.foldlevel = 0 -- start with all folds closed
 o.foldlevelstart = 0 -- open files with folds closed
 
+-- clipboard
+o.clipboard = 'unnamedplus' -- connection to the system clipboard
+if vim.env.SSH_CONNECTION then
+  local function vim_paste()
+    local content = vim.fn.getreg('"')
+    return vim.split(content, '\n')
+  end
+
+  vim.g.clipboard = {
+    name = 'OSC 52',
+    copy = {
+      ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+      ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+    },
+    paste = {
+      ['+'] = vim_paste,
+      ['*'] = vim_paste,
+    },
+  }
+end
+
 -- disable some default providers
 g.loaded_node_provider = 0
 g.loaded_python3_provider = 0
 g.loaded_perl_provider = 0
 g.loaded_ruby_provider = 0
+
+-- see full list:
+-- https://github.com/neovim/neovim/tree/master/runtime/plugin
+g.loaded_2html_plugin = 1
+g.loaded_gzip = 1
+g.loaded_man = 1
+g.loaded_tarPlugin = 1
+g.loaded_zipPlugin = 1
+g.loaded_remote_plugins = 1
 
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ Experimental, update when necessary                   │
@@ -205,6 +234,9 @@ vim.schedule(function()
   -- commenting
   vim.keymap.set('n', 'gco', 'o<esc>Vcx<esc>:normal gcc<CR>fxa<bs>', { desc = 'Add comment below' })
   vim.keymap.set('n', 'gcO', 'O<esc>Vcx<esc>:normal gcc<CR>fxa<bs>', { desc = 'Add comment above' })
+
+  -- messages
+  vim.keymap.set('n', '<Leader>m', ':messages<CR>', { desc = '[M]essages' })
 end)
 
 profiler.stop('mappings')
@@ -215,9 +247,18 @@ profiler.stop('mappings')
 profiler.start('autocmd')
 
 vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
+  desc = 'Highlight when yanking text, cycle numbered registers',
   group = vim.api.nvim_create_augroup('highlight_yanked_text', { clear = true }),
-  callback = function() vim.hl.on_yank({ higroup = 'IncSearch', timeout = 300 }) end,
+  callback = function()
+    vim.hl.on_yank({ higroup = 'IncSearch', timeout = 300 })
+    -- yank ring
+    -- credit: https://github.com/justinmk/config/blob/be345533e05db933baa587f901e08061de5579fa/.config/nvim/init.lua#L676
+    if vim.v.event.operator == 'y' then
+      for i = 9, 1, -1 do -- Shift all numbered registers.
+        vim.fn.setreg(tostring(i), vim.fn.getreg(tostring(i - 1)))
+      end
+    end
+  end,
 })
 
 -- Don't auto-wrap comments and don't insert comment leader after hitting 'o'.
@@ -313,7 +354,6 @@ require('lazy').setup({
     { import = 'plugins.oil' },
     { import = 'plugins.pangu' }, -- auto format to add a space between cjk and english letters
     { import = 'plugins.persistence' }, -- session manager
-    { import = 'plugins.ts-comments' }, -- enhance neovim's native comments
     { import = 'plugins.vim-tmux-navigator' },
     -- ╭──────────────────────────────────────────────────────────╮
     -- │ ⬇️ UI                                                    │
@@ -331,20 +371,6 @@ require('lazy').setup({
   defaults = { lazy = true, version = false }, -- always use the latest git commit
   checker = { enabled = true, notify = false },
   change_detection = { notify = false },
-  performance = {
-    rtp = {
-      -- see full list:
-      -- https://github.com/neovim/neovim/tree/master/runtime/plugin
-      disabled_plugins = {
-        'tohtml.lua',
-        'gzip.vim',
-        'man.lua',
-        'tarPlugin.vim',
-        'zipPlugin.vim',
-        'rplugin.vim',
-      },
-    },
-  },
   rocks = {
     enabled = false,
     hererocks = false,

@@ -61,19 +61,16 @@ return {
 
     require('lualine').setup({
       options = {
+        -- use auto, but change c to Normal bg
         theme = (function()
           local theme
-          -- Try to load colorscheme-specific theme first (mimics 'auto' behavior)
           if vim.g.colors_name then
             local color_name = vim.g.colors_name
-            -- Handle base16 colorschemes
             if color_name:sub(1, 6) == 'base16' then color_name = 'base16' end
             local ok, loaded_theme = pcall(require, 'lualine.themes.' .. color_name)
             if ok and loaded_theme then theme = loaded_theme end
           end
-          -- Fallback to auto-generated theme if colorscheme theme doesn't exist
           if not theme then theme = require('lualine.themes.auto') end
-          -- Override section c background for all modes
           for _, sections in pairs(theme) do
             if sections.c then sections.c.bg = c.base end
           end
@@ -96,10 +93,59 @@ return {
         },
         lualine_c = {
           {
-            'location',
-            color = { fg = c.overlay0 },
+            'diff',
+            cond = conditions.hide_in_width,
+            symbols = {
+              added = ' ',
+              modified = ' ',
+              removed = ' ',
+            },
           },
+          {
+            'copilot',
+            cond = conditions.is_sif,
+            symbols = {
+              status = {
+                icons = {
+                  enabled = ' ',
+                  sleep = ' ',
+                  disabled = ' ',
+                  warning = ' ',
+                  unknown = ' ',
+                },
+                hl = {
+                  enabled = c.green,
+                  sleep = c.cgreen,
+                  disabled = c.overlay0,
+                  warning = c.yellow,
+                  unknown = c.red,
+                },
+              },
+              spinners = require('copilot-lualine.spinners').dots,
+            },
+            show_colors = true,
+            show_loading = true,
+          },
+          {
+            lazy,
+            cond = conditions.lazy_status,
+            color = { fg = c.yellow },
+          },
+          { trailing },
+          { indent },
           { function() return '%=' end },
+          {
+            'diagnostics',
+            sources = { 'nvim_diagnostic' },
+            symbols = {
+              error = ' ',
+              warn = ' ',
+              info = ' ',
+              hint = ' ',
+            },
+          },
+        },
+        lualine_x = {
           {
             'buffers',
             show_filename_only = true,
@@ -130,59 +176,6 @@ return {
             },
           },
         },
-        lualine_x = {
-          { trailing },
-          { indent },
-          {
-            lazy,
-            cond = conditions.lazy_status,
-            color = { fg = c.yellow },
-          },
-          {
-            'copilot',
-            cond = conditions.is_sif,
-            symbols = {
-              status = {
-                icons = {
-                  enabled = ' ',
-                  sleep = ' ',
-                  disabled = ' ',
-                  warning = ' ',
-                  unknown = ' ',
-                },
-                hl = {
-                  enabled = c.green,
-                  sleep = c.cgreen,
-                  disabled = c.overlay0,
-                  warning = c.yellow,
-                  unknown = c.red,
-                },
-              },
-              spinners = require('copilot-lualine.spinners').dots,
-            },
-            show_colors = true,
-            show_loading = true,
-          },
-          {
-            'diagnostics',
-            sources = { 'nvim_diagnostic' },
-            symbols = {
-              error = ' ',
-              warn = ' ',
-              info = ' ',
-              hint = ' ',
-            },
-          },
-          {
-            'diff',
-            cond = conditions.hide_in_width,
-            symbols = {
-              added = ' ',
-              modified = ' ',
-              removed = ' ',
-            },
-          },
-        },
         lualine_y = {
           {
             'lsp_status',
@@ -195,7 +188,8 @@ return {
           },
         },
         lualine_z = {
-          { 'progress', color = { gui = 'bold' } },
+          { 'location' },
+          { 'progress' },
         },
       },
     })

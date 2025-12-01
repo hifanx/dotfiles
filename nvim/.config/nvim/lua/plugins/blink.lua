@@ -7,21 +7,6 @@ return {
   version = '*',
   event = { 'InsertEnter', 'CmdlineEnter' },
   config = function()
-    if pcall(require, 'copilot') then
-      vim.api.nvim_create_autocmd('User', {
-        pattern = 'BlinkCmpMenuOpen',
-        callback = function()
-          require('copilot.suggestion').dismiss()
-          vim.b.copilot_suggestion_hidden = true
-        end,
-      })
-
-      vim.api.nvim_create_autocmd('User', {
-        pattern = 'BlinkCmpMenuClose',
-        callback = function() vim.b.copilot_suggestion_hidden = false end,
-      })
-    end
-
     local default = {
       'lsp',
       'snippets',
@@ -48,34 +33,12 @@ return {
         ['<C-j>'] = { 'select_next', 'fallback_to_mappings' },
         ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
         ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
-        ['<Tab>'] = { 'snippet_forward', 'fallback' },
+        ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
         ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
         ['<C-r>'] = { 'show_signature', 'hide_signature', 'fallback' },
       },
 
-      cmdline = {
-        keymap = {
-          preset = 'none',
-          ['<Tab>'] = { 'show_and_insert_or_accept_single', 'select_next' },
-          ['<S-Tab>'] = { 'show_and_insert_or_accept_single', 'select_prev' },
-          ['<C-space>'] = false,
-          ['<C-j>'] = { 'select_next', 'fallback' },
-          ['<C-k>'] = { 'select_prev', 'fallback' },
-          ['<Right>'] = { 'select_next', 'fallback' },
-          ['<Left>'] = { 'select_prev', 'fallback' },
-          ['<C-y>'] = { 'select_and_accept', 'fallback' },
-          ['<C-w>'] = { 'show', 'cancel', 'fallback' },
-        },
-        completion = {
-          list = {
-            selection = {
-              preselect = false,
-              auto_insert = false,
-            },
-          },
-          menu = { auto_show = true },
-        },
-      },
+      cmdline = { enabled = false },
 
       -- use :BlinkCmp status to view which sources providers are enabled or not enabled
       sources = {
@@ -97,6 +60,9 @@ return {
         },
       },
       completion = {
+        list = {
+          selection = { preselect = false },
+        },
         menu = {
           scrollbar = false,
           draw = {
@@ -109,7 +75,6 @@ return {
           },
         },
         documentation = {
-          auto_show_delay_ms = 0,
           auto_show = true,
           window = {
             border = 'rounded',
