@@ -1,31 +1,17 @@
 font-family = Maple Mono CN
 font-feature = calt,cv06,ss09
 font-size = 18
-
-# theme = evergarden-winter-skye.yml
 theme = Catppuccin Mocha
-
 adjust-cell-height = 10
-
 cursor-style = block
 cursor-style-blink = true
-# cursor-color = b3e6db
-# cursor-text = 171c1f
-
 background-opacity = 0.85
 background-blur = true
-
 window-padding-balance = true
-
 quit-after-last-window-closed = true
-
-macos-titlebar-style = hidden
-
 term = xterm-256color
-
 auto-update = download
-
 macos-option-as-alt = true
-
+macos-titlebar-style = hidden
 custom-shader-animation = true
 custom-shader = "shaders/cursor_frozen.glsl"
