@@ -18,6 +18,43 @@ _G.GLOB.is_sif = (os_name == 'darwin' and hostname:find('sif') ~= nil)
 
 profiler.stop('bootstrap')
 
+-- ╭──────────────────────────────────────────────────────────╮
+-- │ ⬇️ Util functions                                        │
+-- ╰──────────────────────────────────────────────────────────╯
+
+---Retrieve a value from a highlight group with fallback warnings
+---@param hl_group string The highlight group name (e.g., "Normal", "Comment")
+---@param attr string The attribute to retrieve ("fg", "bg", "sp", "bold", "italic", etc.)
+---@param fallback any Optional fallback value to return if not found
+---@return any|nil The attribute value or fallback/nil (colors always returned as hex strings)
+function _G.GLOB.get_hl_value(hl_group, attr, fallback)
+  local hl = vim.api.nvim_get_hl(0, { name = hl_group, link = false, create = false })
+
+  if vim.tbl_isempty(hl) then
+    vim.notify(
+      string.format("Trying to retrieve from '%s' but highlight group doesn't exist", hl_group),
+      vim.log.levels.WARN
+    )
+    return fallback
+  end
+
+  if hl[attr] == nil then
+    vim.notify(
+      string.format("Trying to retrieve from '%s' but '%s' doesn't exist", hl_group, attr),
+      vim.log.levels.WARN
+    )
+    return fallback
+  end
+
+  local value = hl[attr]
+
+  -- Always convert color values to hex
+  local color_attrs = { fg = true, bg = true, sp = true }
+  if color_attrs[attr] and type(value) == 'number' then return string.format('#%06x', value) end
+
+  return value
+end
+
 -- }}}
 -- options {{{
 

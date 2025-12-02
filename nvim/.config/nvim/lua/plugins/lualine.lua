@@ -55,27 +55,52 @@ return {
     }
 
     -- ╭──────────────────────────────────────────────────────────╮
+    -- │ ⬇️ theme                                                 │
+    -- ╰──────────────────────────────────────────────────────────╯
+    local bg_ish = GLOB.get_hl_value('Normal', 'bg')
+    local blue_ish = GLOB.get_hl_value('Folded', 'fg')
+    local red_ish = GLOB.get_hl_value('ErrorMsg', 'fg')
+    local orange_ish = GLOB.get_hl_value('MatchParen', 'fg')
+    local green_ish = GLOB.get_hl_value('OkMsg', 'fg')
+    local yellow_ish = GLOB.get_hl_value('WarningMsg', 'fg')
+    local gray_ish = GLOB.get_hl_value('Conceal', 'fg')
+
+    local theme = {
+      normal = {
+        a = { bg = blue_ish, fg = bg_ish, gui = 'bold' },
+        b = { bg = bg_ish, fg = blue_ish },
+        c = { bg = bg_ish, fg = yellow_ish, gui = 'bold' },
+      },
+      insert = {
+        a = { bg = green_ish, fg = bg_ish, gui = 'bold' },
+        b = { bg = bg_ish, fg = green_ish },
+      },
+      visual = {
+        a = { bg = yellow_ish, fg = bg_ish, gui = 'bold' },
+        b = { bg = bg_ish, fg = yellow_ish },
+      },
+      replace = {
+        a = { bg = red_ish, fg = bg_ish, gui = 'bold' },
+        b = { bg = bg_ish, fg = red_ish },
+      },
+      command = {
+        a = { bg = orange_ish, fg = bg_ish, gui = 'bold' },
+        b = { bg = bg_ish, fg = orange_ish },
+      },
+      inactive = {
+        a = { bg = bg_ish, fg = blue_ish, gui = 'bold' },
+        b = { bg = bg_ish, fg = gray_ish },
+        c = { bg = bg_ish, fg = gray_ish },
+      },
+    }
+
+    -- ╭──────────────────────────────────────────────────────────╮
     -- │ ⬇️ setup the thing                                       │
     -- ╰──────────────────────────────────────────────────────────╯
-    local c = require('palette').catppuccin
 
     require('lualine').setup({
       options = {
-        -- use auto, but change c to Normal bg
-        theme = (function()
-          local theme
-          if vim.g.colors_name then
-            local color_name = vim.g.colors_name
-            if color_name:sub(1, 6) == 'base16' then color_name = 'base16' end
-            local ok, loaded_theme = pcall(require, 'lualine.themes.' .. color_name)
-            if ok and loaded_theme then theme = loaded_theme end
-          end
-          if not theme then theme = require('lualine.themes.auto') end
-          for _, sections in pairs(theme) do
-            if sections.c then sections.c.bg = c.base end
-          end
-          return theme
-        end)(),
+        theme = theme,
         globalstatus = true,
         section_separators = { left = '', right = '' },
         component_separators = { left = '', right = '' },
@@ -114,11 +139,11 @@ return {
                   unknown = ' ',
                 },
                 hl = {
-                  enabled = c.green,
-                  sleep = c.cgreen,
-                  disabled = c.overlay0,
-                  warning = c.yellow,
-                  unknown = c.red,
+                  enabled = green_ish,
+                  sleep = green_ish,
+                  disabled = gray_ish,
+                  warning = yellow_ish,
+                  unknown = red_ish,
                 },
               },
               spinners = require('copilot-lualine.spinners').dots,
@@ -129,7 +154,7 @@ return {
           {
             lazy,
             cond = conditions.lazy_status,
-            color = { fg = c.yellow },
+            color = { fg = orange_ish },
           },
           { trailing },
           { indent },
