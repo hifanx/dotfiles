@@ -63,7 +63,7 @@ return {
     local orange_ish = GLOB.get_hl_value('MatchParen', 'fg')
     local green_ish = GLOB.get_hl_value('OkMsg', 'fg')
     local yellow_ish = GLOB.get_hl_value('WarningMsg', 'fg')
-    local gray_ish = GLOB.get_hl_value('Conceal', 'fg')
+    local gray_ish = GLOB.get_hl_value('Comment', 'fg')
 
     local theme = {
       normal = {
@@ -97,7 +97,6 @@ return {
     -- ╭──────────────────────────────────────────────────────────╮
     -- │ ⬇️ setup the thing                                       │
     -- ╰──────────────────────────────────────────────────────────╯
-
     require('lualine').setup({
       options = {
         theme = theme,
@@ -211,9 +210,9 @@ return {
             ignore_lsp = { 'copilot' },
             show_name = true,
           },
+          { 'location' },
         },
         lualine_z = {
-          { 'location' },
           { 'progress' },
         },
       },

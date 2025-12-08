@@ -1,0 +1,19 @@
+# Treesitter demo: diff highlight groups
+# Demonstrates: @diff.plus, @diff.minus, @diff.delta.
+
+diff --git a/example.txt b/example.txt
+index e69de29..b6fc4c6 100644
+--- a/example.txt
++++ b/example.txt
+@@ -1,3 +1,4 @@
+-old line one       # @diff.minus
+-old line two
++new line one       # @diff.plus
++new line two
+@@ -10,7 +11,7 @@
+-context before
+-changed line here  # @diff.delta (original)
+-context after
++context before
++changed line here  # @diff.delta (modified)
++context after

@@ -13,10 +13,8 @@ _G.GLOB = {}
 local os_name = vim.loop.os_uname().sysname:lower()
 local hostname = vim.loop.os_gethostname()
 
--- NOTE: computed once on load and called with O(1) operation
+-- computed once on load and called with O(1) operation
 _G.GLOB.is_sif = (os_name == 'darwin' and hostname:find('sif') ~= nil)
-
-profiler.stop('bootstrap')
 
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ ⬇️ Util functions                                        │
@@ -54,6 +52,17 @@ function _G.GLOB.get_hl_value(hl_group, attr, fallback)
 
   return value
 end
+
+profiler.stop('bootstrap')
+
+-- }}}
+-- {{{ colorscheme
+
+profiler.start('colorscheme')
+
+vim.cmd([[colorscheme isekai]])
+
+profiler.stop('colorscheme')
 
 -- }}}
 -- options {{{
@@ -395,7 +404,6 @@ require('lazy').setup({
     -- ╭──────────────────────────────────────────────────────────╮
     -- │ ⬇️ UI                                                    │
     -- ╰──────────────────────────────────────────────────────────╯
-    { import = 'plugins.colorschemes' },
     { import = 'plugins.gitsigns' },
     { import = 'plugins.lualine' },
     { import = 'plugins.nvim-highlight-colors' },

@@ -116,6 +116,7 @@ return {
       statuscolumn = { enabled = true },
       words = { enabled = true },
       explorer = { enabled = true, trash = true },
+      scroll = { enabled = true, animate = { duration = { total = 100 } } },
       indent = {
         indent = {
           enabled = true,
@@ -148,8 +149,6 @@ return {
         win = {
           input = {
             keys = {
-              -- close the picker on ESC instead of going to normal mode,
-              ['<Esc>'] = { 'close', mode = { 'n', 'i' } },
               ['<C-u>'] = { 'preview_scroll_up', mode = { 'i', 'n' } },
               ['<C-d>'] = { 'preview_scroll_down', mode = { 'i', 'n' } },
             },
