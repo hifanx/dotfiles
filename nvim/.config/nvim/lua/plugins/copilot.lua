@@ -3,11 +3,11 @@ return {
   enabled = GLOB.is_sif, -- only use on my macbook
   event = 'InsertEnter',
   cmd = 'Copilot',
-  build = ':Copilot auth',
   config = function()
     require('copilot').setup({
       suggestion = { enabled = false },
       panel = { enabled = false },
+      disable_limit_reached_message = true,
       filetypes = {
         lua = true,
         java = true,

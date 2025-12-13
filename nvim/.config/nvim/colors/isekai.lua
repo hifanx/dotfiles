@@ -2,42 +2,10 @@ if vim.g.colors_name then vim.cmd('hi clear') end
 vim.o.termguicolors = true
 vim.g.colors_name = 'isekai' -- name used by :colorscheme
 
-local c = { -- yanked from catppuccin
-  none = 'NONE',
-  rosewater = '#F5E0DC',
-  flamingo = '#F2CDCD',
-  pink = '#F5C2E7',
-  mauve = '#CBA6F7',
-  red = '#F38BA8',
-  maroon = '#EBA0AC',
-  peach = '#FAB387',
-  yellow = '#F9E2AF',
-  green = '#A6E3A1',
-  teal = '#94E2D5',
-  sky = '#89DCEB',
-  sapphire = '#74C7EC',
-  blue = '#89B4FA',
-  lavender = '#B4BEFE',
-  text = '#CDD6F4',
-  subtext1 = '#BAC2DE',
-  subtext0 = '#A6ADC8',
-  overlay2 = '#9399B2',
-  overlay1 = '#7F849C',
-  overlay0 = '#6C7086',
-  surface2 = '#585B70',
-  surface1 = '#45475A',
-  surface0 = '#313244',
-  base = '#1E1E2E',
-  mantle = '#181825',
-  crust = '#11111B',
-  blue_dark = '#19272C',
-  green_dark = '#22372c',
-  red_dark = '#342231',
-  peach_dark = '#564629',
-}
+local c = require('palette').isekai
 
 -- terminal colors.
-vim.g.terminal_color_0 = c.overlay0
+vim.g.terminal_color_0 = c.overlay
 vim.g.terminal_color_1 = c.red
 vim.g.terminal_color_2 = c.green
 vim.g.terminal_color_3 = c.yellow
@@ -45,7 +13,7 @@ vim.g.terminal_color_4 = c.mauve
 vim.g.terminal_color_5 = c.pink
 vim.g.terminal_color_6 = c.sapphire
 vim.g.terminal_color_7 = c.rosewater
-vim.g.terminal_color_8 = c.overlay1
+vim.g.terminal_color_8 = c.overlay
 vim.g.terminal_color_9 = c.red
 vim.g.terminal_color_10 = c.green
 vim.g.terminal_color_11 = c.yellow
@@ -58,18 +26,18 @@ vim.g.terminal_color_foreground = c.text
 
 local hl = {
   -- :h highlight-default
-  Normal = { fg = c.text, bg = c.base }, -- normal text
-  NormalNC = { fg = c.text, bg = c.base }, -- normal text in non-current windows
-  NormalFloat = { fg = c.text, bg = c.mantle }, -- Normal text in floating windows.
-  Cursor = { fg = c.bg, bg = c.dan_huang }, -- character under the cursor
-  lCursor = { fg = c.bg, bg = c.dan_huang }, -- the character under the cursor when |language-mapping| is used (see 'guicursor')
-  CursorIM = { fg = c.bg, bg = c.dan_huang }, -- like Cursor, but used when in IME mode |CursorIM|
+  Normal = { fg = c.subtext, bg = c.none }, -- normal text
+  NormalNC = { fg = c.subtext, bg = c.none }, -- normal text in non-current windows
+  NormalFloat = { fg = c.subtext, bg = c.mantle }, -- Normal text in floating windows.
+  -- Cursor = {}, -- character under the cursor
+  -- lCursor = {}, -- the character under the cursor when |language-mapping| is used (see 'guicursor')
+  -- CursorIM = {}, -- like Cursor, but used when in IME mode |CursorIM|
   CursorColumn = { bg = c.mantle }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
-  CursorLine = { bg = c.surface0 }, -- Screen-line at the cursor, when 'cursorline' is set.  Low-priority if forecrust (ctermfg OR guifg) is not set.
-  CursorLineNr = { fg = c.peach }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line. highlights the number in numberline.
-  LineNr = { fg = c.surface1 }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
-  SignColumn = { fg = c.surface1 }, -- column where |signs| are displayed
-  FoldColumn = { fg = c.overlay0 }, -- 'foldcolumn'
+  CursorLine = { bg = c.surface }, -- Screen-line at the cursor, when 'cursorline' is set.  Low-priority if forecrust (ctermfg OR guifg) is not set.
+  CursorLineNr = { fg = c.peach, bold = true }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line. highlights the number in numberline.
+  LineNr = { fg = c.overlay }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
+  SignColumn = { fg = c.surface }, -- column where |signs| are displayed
+  FoldColumn = { fg = c.overlay }, -- 'foldcolumn'
   Folded = { fg = c.blue, bg = c.base }, -- line used for closed folds
   VertSplit = { fg = c.crust }, -- the column separating vertically split windows
   WinSeparator = { fg = c.crust }, -- separator between window splits
@@ -77,25 +45,25 @@ local hl = {
   WinBarNC = { link = 'WinBar' }, -- window bar of not-current windows
   FloatBorder = { fg = c.yellow, bg = c.mantle }, -- border of floating windows
   FloatTitle = { fg = c.yellow, bg = c.mantle }, -- Title of floating windows
-  Pmenu = { fg = c.overlay2, bg = c.mantle }, -- Popup menu: normal item.
-  PmenuSel = { fg = c.mantle, bg = c.green }, -- Popup menu: selected item.
+  Pmenu = { fg = c.overlay, bg = c.mantle }, -- Popup menu: normal item.
+  PmenuSel = { fg = c.base, bg = c.green }, -- Popup menu: selected item.
   PmenuMatch = { fg = c.peach }, -- Popup menu: matching text.
   PmenuMatchSel = { bold = true }, -- Popup menu: matching text in selected item; is combined with |hl-PmenuMatch| and |hl-PmenuSel|.
-  PmenuSbar = { bg = c.surface0 }, -- Popup menu: scrollbar.
-  PmenuThumb = { bg = c.overlay0 }, -- Popup menu: Thumb of the scrollbar.
-  PmenuExtra = { fg = c.overlay0 }, -- Popup menu: normal item extra text.
-  PmenuExtraSel = { bg = c.surface0, fg = c.overlay0, bold = true }, -- Popup menu: selected item extra text.
+  PmenuSbar = { bg = c.surface }, -- Popup menu: scrollbar.
+  PmenuThumb = { bg = c.overlay }, -- Popup menu: Thumb of the scrollbar.
+  PmenuExtra = { fg = c.overlay }, -- Popup menu: normal item extra text.
+  PmenuExtraSel = { bg = c.surface, fg = c.overlay, bold = true }, -- Popup menu: selected item extra text.
   PmenuBorder = { link = 'FloatBorder' }, -- Popup menu: border
   ComplMatchIns = { link = 'PreInsert' }, -- Matched text of the currently inserted completion.
-  PreInsert = { fg = c.overlay2 }, -- Text inserted when "preinsert" is in 'completeopt'.
-  ComplHint = { fg = c.subtext0 }, -- Virtual text of the currently selected completion.
+  PreInsert = { fg = c.overlay }, -- Text inserted when "preinsert" is in 'completeopt'.
+  ComplHint = { fg = c.subtext }, -- Virtual text of the currently selected completion.
   ComplHintMore = { link = 'Question' }, -- The additional information of the virtual text.
-  Visual = { bg = c.surface2, bold = true }, -- Visual mode selection
+  Visual = { bg = c.overlay, bold = true }, -- Visual mode selection
   VisualNOS = { link = 'Visual' }, -- Visual mode selection when vim is "Not Owning the Selection".
-  MatchParen = { fg = c.peach, bg = c.surface0, bold = true }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
-  Search = { bg = c.peach, fg = c.mantle }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand out.
-  CurSearch = { bg = c.red, fg = c.mantle }, -- 'cursearch' highlighting: highlights the current search you're on differently
-  Substitute = { bg = c.surface1, fg = c.peach }, -- |:substitute| replacement text highlighting
+  MatchParen = { fg = c.peach, bg = c.surface, bold = true }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
+  Search = { bg = c.peach, fg = c.base }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand out.
+  CurSearch = { bg = c.green, fg = c.base }, -- 'cursearch' highlighting: highlights the current search you're on differently
+  Substitute = { bg = c.surface, fg = c.peach }, -- |:substitute| replacement text highlighting
   DiffAdd = { bg = c.green_dark }, -- diff mode: Added line |diff.txt|
   DiffChange = { bg = c.peach_dark }, -- diff mode: Changed line |diff.txt|
   DiffDelete = { bg = c.red_dark }, -- diff mode: Deleted line |diff.txt|
@@ -105,9 +73,9 @@ local hl = {
   SpellCap = { sp = c.yellow, undercurl = true }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
   SpellLocal = { sp = c.blue, undercurl = true }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
   SpellRare = { sp = c.green, undercurl = true }, -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.
-  StatusLine = { fg = c.overlay1, bg = c.base }, -- status line of current window
-  StatusLineNC = { fg = c.overlay1, bg = c.base }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
-  TabLine = { bg = c.crust, fg = c.overlay0 }, -- tab pages line, not active tab page label
+  StatusLine = { fg = c.overlay, bg = c.base }, -- status line of current window
+  StatusLineNC = { fg = c.overlay, bg = c.base }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
+  TabLine = { bg = c.crust, fg = c.overlay }, -- tab pages line, not active tab page label
   TabLineFill = { bg = c.mantle }, -- tab pages line, where there are no labels
   TabLineSel = { link = 'Normal' }, -- tab pages line, active tab page label
   ErrorMsg = { fg = c.red }, -- error messages on the command line
@@ -115,50 +83,50 @@ local hl = {
   OkMsg = { fg = c.green }, -- success messages
   ModeMsg = { fg = c.yellow, bold = true }, -- 'showmode' message (e.g., "-- INSERT -- ")
   MoreMsg = { fg = c.blue }, -- |more-prompt|
-  MsgArea = { bg = c.base }, -- Area for messages and cmdline, don't set this highlight because of https://github.com/neovim/neovim/issues/17832
-  MsgSeparator = { link = 'WinSeparator' }, -- Separator for scrolled messages, `msgsep` flag of 'display'
+  MsgArea = { bg = c.none }, -- Area for messages and cmdline, don't set this highlight because of https://github.com/neovim/neovim/issues/17832
+  MsgSeparator = { fg = c.crust }, -- Separator for scrolled messages, `msgsep` flag of 'display'
   Question = { fg = c.peach }, -- |hit-enter| prompt and yes/no questions
-  NonText = { fg = c.surface2 }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
-  EndOfBuffer = { fg = c.overlay0 }, -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
+  NonText = { fg = c.overlay }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
+  EndOfBuffer = { fg = c.overlay }, -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
   SpecialKey = { link = 'NonText' }, -- Unprintable characters: text displayed differently from what it really is.  But not 'listchars' textspace. |hl-Whitespace|
-  Whitespace = { fg = c.surface2 }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
-  Conceal = { fg = c.surface1 }, -- placeholder characters substituted for concealed text (see 'conceallevel')
+  Whitespace = { fg = c.surface }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
+  Conceal = { fg = c.surface }, -- placeholder characters substituted for concealed text (see 'conceallevel')
   ColorColumn = { bg = c.mantle }, -- used for the columns set with 'colorcolumn'
   Directory = { fg = c.blue }, -- directory names (and other special names in listings)
   Title = { fg = c.yellow, bold = true }, -- titles for output from ":set all", ":autocmd" etc.
-  QuickFixLine = { bg = c.surface2, bold = true }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
+  QuickFixLine = { bg = c.surface, bold = true }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
   WildMenu = { bg = c.green }, -- current match in 'wildmenu' completion
 
   -- :h group-name
-  Comment = { fg = c.overlay1, italic = true }, -- comments
-  Constant = { fg = c.sapphire }, -- any constant
-  String = { fg = c.green }, -- a string constant: "this is a string"
+  Comment = { fg = c.comment, italic = true }, -- comments
+  Constant = { fg = c.white, bold = true }, -- any constant
+  String = { fg = c.text, bold = true }, -- a string constant: "this is a string"
   Character = { fg = c.teal }, -- a character constant: 'c', '\n'
   Number = { fg = c.peach }, --	a number constant: 234, 0xff
-  Boolean = { fg = c.peach }, -- a boolean constant: TRUE, false
+  Boolean = { fg = c.green }, -- a boolean constant: TRUE, false
   Float = { link = 'Number' }, -- a floating point constant: 2.3e10
-  Identifier = { fg = c.lavender }, -- any variable name
+  Identifier = { fg = c.text }, -- any variable name
   Function = { fg = c.blue }, -- function name (also: methods for classes)
   Statement = { fg = c.mauve }, -- any statement
-  Conditional = { fg = c.mauve }, -- if, then, else, endif, switch, etc.
-  Repeat = { fg = c.mauve }, -- for, do, while, etc.
+  Conditional = { fg = c.subtext }, -- if, then, else, endif, switch, etc.
+  Repeat = { fg = c.subtext }, -- for, do, while, etc.
   Label = { fg = c.lavender }, -- case, default, etc.
-  Operator = { fg = c.teal }, -- "sizeof", "+", "*", etc.
-  Keyword = { fg = c.red, italic = true }, -- any other keyword
-  Exception = { fg = c.peach }, -- try, catch, throw
-  PreProc = { fg = c.mauve }, -- generic Preprocessor
-  Include = { fg = c.mauve }, -- preprocessor #include
+  Operator = { fg = c.overlay }, -- "sizeof", "+", "*", etc.
+  Keyword = { fg = c.subtext, italic = true }, -- any other keyword
+  Exception = { fg = c.subtext }, -- try, catch, throw
+  PreProc = { fg = c.subtext }, -- generic Preprocessor
+  Include = { fg = c.subtext }, -- preprocessor #include
   Define = { link = 'PreProc' }, -- preprocessor #define
-  Macro = { fg = c.pink }, -- same as Define
+  Macro = { fg = c.lavender }, -- same as Define
   PreCondit = { link = 'PreProc' }, -- preprocessor #if, #else, #endif, etc.
   Type = { fg = c.yellow }, -- int, long, char, etc.
   StorageClass = { fg = c.yellow }, -- static, register, volatile, etc.
   Structure = { fg = c.yellow, italic = true }, -- struct, union, enum, etc.
   Typedef = { link = 'Type' }, -- a typedef
-  Special = { fg = c.pink }, -- any special symbol
+  Special = { fg = c.red }, -- any special symbol
   SpecialChar = { link = 'Special' }, -- special character in a constant
-  Tag = { fg = c.lavender, bold = true }, -- you can use CTRL-] on this
-  Delimiter = { fg = c.overlay2 }, -- character that needs attention
+  Tag = { fg = c.lavender, bold = true }, -- you can use CTRL       -] on this
+  Delimiter = { fg = c.overlay }, -- character that needs attention
   SpecialComment = { link = 'Special' }, -- special things inside a comment
   Debug = { link = 'Special' }, -- debugging statements
   Underlined = { underline = true }, -- text that stands out, HTML links
@@ -181,9 +149,9 @@ local hl = {
   -- ordered by `treesitter-highlight-groups` in how they are documented
   -- so don't delete stuff, commented out ones are the defaults.
   ['@variable'] = { fg = c.text }, -- various variable names
-  ['@variable.builtin'] = { fg = c.red }, -- built-in variable names (e.g. `this`, `self`)
-  ['@variable.parameter'] = { fg = c.mauve }, -- parameters of a function
-  ['@variable.parameter.builtin'] = { fg = c.mauve }, -- special parameters (e.g. `_`, `it`)
+  -- ['@variable.builtin'] = { fg = c.red }, -- built-in variable names (e.g. `this`, `self`)
+  -- ['@variable.parameter'] = { fg = c.maroon }, -- parameters of a function
+  -- ['@variable.parameter.builtin'] = { fg = c.maroon }, -- special parameters (e.g. `_`, `it`)
   ['@variable.member'] = { fg = c.lavender }, -- object and struct fields
 
   -- ['@constant'] = { link = 'Constant' }, -- constant identifiers
@@ -191,7 +159,7 @@ local hl = {
   ['@constant.macro'] = { link = 'Macro' }, -- constants defined by the preprocessor
 
   -- ['@module'] = { link = 'Structure' }, -- modules or namespaces
-  ['@module.builtin'] = { link = 'Structure' }, -- built-in modules or namespaces
+  -- ['@module.builtin'] = { link = 'Structure' }, -- built-in modules or namespaces
   -- ['@label'] = { link = 'Label' }, -- `GOTO` and other labels (e.g. `label:` in C), including heredoc labels
 
   -- ['@string'] = { link = 'String' }, -- string literals
@@ -201,7 +169,7 @@ local hl = {
   ['@string.special'] = { link = 'Special' }, -- other special strings (e.g. dates)
   -- ['@string.special.symbol'] = { link = '@string.special' }, -- symbols or atoms
   -- ['@string.special.path'] = { link = '@string.special' }, -- filenames
-  ['@string.special.url'] = { fg = c.subtext0, underline = true }, -- URIs (e.g. hyperlinks)
+  ['@string.special.url'] = { fg = c.subtext, underline = true }, -- URIs (e.g. hyperlinks)
 
   -- ['@character'] = { link = 'Character' }, -- character literals
   -- ['@character.special'] = { link = 'SpecialChar' }, -- special characters (e.g. wildcards)
@@ -211,15 +179,15 @@ local hl = {
   -- ['@number.float'] = { link = 'Float' }, -- number literals
 
   -- ['@type'] = { link = 'Type' }, -- type or class definitions and annotations
-  ['@type.builtin'] = { link = 'Type' }, -- built-in types
+  -- ['@type.builtin'] = { link = 'Type' }, -- built-in types
   ['@type.definition'] = { link = 'Typedef' }, -- identifiers in type definitions (e.g. `typedef <type> <identifier>` in C)
 
   -- ['@attribute'] = { link = 'Macro' }, -- attribute annotations (e.g. Python decorators, Rust lifetimes)
-  ['@attribute.builtin'] = { link = '@attribute' }, -- builtin annotations (e.g. `@property` in Python)
+  -- ['@attribute.builtin'] = { link = '@attribute' }, -- builtin annotations (e.g. `@property` in Python)
   -- ['@property'] = { link = 'Identifier' }, -- the key in key/value pairs
 
   -- ['@function'] = { link = 'Function' }, -- function definitions
-  ['@function.builtin'] = { fg = c.peach }, -- built-in functions
+  ['@function.builtin'] = { fg = c.lavender }, -- built-in functions
   ['@function.call'] = { link = 'Function' }, -- function calls
   ['@function.macro'] = { link = 'Macro' }, -- preprocessor macros
 
@@ -237,7 +205,7 @@ local hl = {
   -- ['@keyword.type'] = {}, -- keywords describing namespaces and composite types (e.g. `struct`, `enum`)
   -- ['@keyword.modifier'] = {}, -- keywords modifying other constructs (e.g. `const`, `static`, `public`)
   ['@keyword.repeat'] = { link = 'Repeat' }, -- keywords related to loops (e.g. `for`, `while`)
-  -- ['@keyword.return'] = {}, -- keywords like `return` and `yield`
+  ['@keyword.return'] = { fg = c.peachRed, bold = true, italic = true }, -- keywords like `return` and `yield`
   ['@keyword.debug'] = { link = 'Exception' }, -- keywords related to debugging
   ['@keyword.exception'] = { link = 'Exception' }, -- keywords related to exceptions (e.g. `throw`, `catch`)
 
@@ -261,12 +229,12 @@ local hl = {
 
   ['@markup.strong'] = { fg = c.lavender, bold = true }, -- bold text
   ['@markup.italic'] = { fg = c.lavender, italic = true }, -- italic text
-  ['@markup.strikethrough'] = { fg = c.subtext0, strikethrough = true }, -- struck-through text
+  ['@markup.strikethrough'] = { fg = c.subtext, strikethrough = true }, -- struck-through text
   ['@markup.underline'] = { link = 'Underlined' }, -- underlined text (only for literal underline markup!)
 
   ['@markup.heading'] = { fg = c.peach, bold = true }, -- headings, titles (including markers)
 
-  ['@markup.quote'] = { fg = c.subtext0 }, -- block quotes
+  ['@markup.quote'] = { fg = c.subtext }, -- block quotes
   ['@markup.math'] = { fg = c.pink }, -- math environments (e.g. `$ ... $` in LaTeX)
 
   ['@markup.link'] = { fg = c.blue }, -- text references, footnotes, citations, etc.
@@ -276,9 +244,9 @@ local hl = {
   ['@markup.raw'] = { fg = c.maroon, bold = true }, -- literal or verbatim text (e.g. inline code, python """)
   -- ['@markup.raw.block'] = {}, -- literal or verbatim text as a stand-alone block
 
-  ['@markup.list'] = { fg = c.teal }, -- list markers
+  ['@markup.list'] = { fg = c.yellow }, -- list markers
   ['@markup.list.checked'] = { fg = c.green, strikethrough = true }, -- checked todo-style list markers
-  ['@markup.list.unchecked'] = { fg = c.overlay1 }, -- unchecked todo-style list markers
+  ['@markup.list.unchecked'] = { fg = c.overlay }, -- unchecked todo-style list markers
 
   -- ['@diff.plus'] = { link = 'Added' }, -- added text (for diff files)
   -- ['@diff.minus'] = { link = 'Changed' }, -- deleted text (for diff files)
@@ -318,6 +286,8 @@ local hl = {
   SnacksPickerCursorLine = { link = 'PmenuSel' },
   SnacksPickerListCursorLine = { link = 'PmenuSel' },
   SnacksPickerInputCursorLine = { link = 'NormalFloat' },
+  SnacksPickerTree = { link = 'Conceal' },
+  SnacksIndent = { link = 'Conceal' },
 }
 
 for group, spec in pairs(hl) do

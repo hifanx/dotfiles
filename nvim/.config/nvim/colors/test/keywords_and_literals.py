@@ -1,8 +1,3 @@
-# Treesitter demo: Python keywords, literals, attributes, constructors
-# This file is meant to exercise many of the @variable.*, @constant.*, @type.*, @attribute.*,
-# @function.*, @keyword.*, @boolean, @number, @number.float and @string.* groups.
-# Each interesting bit has a trailing comment naming the intended highlight group.
-
 import math  # 'import': @keyword.import, math: @module.builtin
 from dataclasses import (
     dataclass,
@@ -13,8 +8,6 @@ import re  # re: @module
 PI = 3.1415  # PI: @constant, 3.1415: @number.float
 MAX_RETRIES = 5  # MAX_RETRIES: @constant
 DEBUG_ENABLED = True  # True: @boolean
-
-
 PATH = Path("/tmp/data.txt")  # string: @string, path-like: @string.special.path
 URL = "https://example.com/demo"  # @string.special.url
 

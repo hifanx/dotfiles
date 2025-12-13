@@ -6,6 +6,7 @@ return {
     --- @diagnostic disable-next-line: undefined-global
     MiniIcons.mock_nvim_web_devicons()
     require('mini.ai').setup()
+    require('mini.align').setup()
 
     -- mini.surround: Surround text objects
     -- NORMAL MODE:

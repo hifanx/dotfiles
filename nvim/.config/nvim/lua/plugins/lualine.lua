@@ -57,40 +57,33 @@ return {
     -- ╭──────────────────────────────────────────────────────────╮
     -- │ ⬇️ theme                                                 │
     -- ╰──────────────────────────────────────────────────────────╯
-    local bg_ish = GLOB.get_hl_value('Normal', 'bg')
-    local blue_ish = GLOB.get_hl_value('Folded', 'fg')
-    local red_ish = GLOB.get_hl_value('ErrorMsg', 'fg')
-    local orange_ish = GLOB.get_hl_value('MatchParen', 'fg')
-    local green_ish = GLOB.get_hl_value('OkMsg', 'fg')
-    local yellow_ish = GLOB.get_hl_value('WarningMsg', 'fg')
-    local gray_ish = GLOB.get_hl_value('Comment', 'fg')
-
+    local c = require('palette').isekai -- this is O(1) since already required at colorscheme
     local theme = {
       normal = {
-        a = { bg = blue_ish, fg = bg_ish, gui = 'bold' },
-        b = { bg = bg_ish, fg = blue_ish },
-        c = { bg = bg_ish, fg = yellow_ish, gui = 'bold' },
+        a = { bg = c.white, fg = c.base, gui = 'bold' },
+        b = { bg = c.none, fg = c.white },
+        c = { bg = c.none, fg = c.white, gui = 'bold' },
       },
       insert = {
-        a = { bg = green_ish, fg = bg_ish, gui = 'bold' },
-        b = { bg = bg_ish, fg = green_ish },
+        a = { bg = c.peach, fg = c.base, gui = 'bold' },
+        b = { bg = c.none, fg = c.peach },
       },
       visual = {
-        a = { bg = yellow_ish, fg = bg_ish, gui = 'bold' },
-        b = { bg = bg_ish, fg = yellow_ish },
+        a = { bg = c.green, fg = c.base, gui = 'bold' },
+        b = { bg = c.none, fg = c.green },
       },
       replace = {
-        a = { bg = red_ish, fg = bg_ish, gui = 'bold' },
-        b = { bg = bg_ish, fg = red_ish },
+        a = { bg = c.peach, fg = c.base, gui = 'bold' },
+        b = { bg = c.none, fg = c.peach },
       },
       command = {
-        a = { bg = orange_ish, fg = bg_ish, gui = 'bold' },
-        b = { bg = bg_ish, fg = orange_ish },
+        a = { bg = c.red, fg = c.base, gui = 'bold' },
+        b = { bg = c.none, fg = c.red },
       },
       inactive = {
-        a = { bg = bg_ish, fg = blue_ish, gui = 'bold' },
-        b = { bg = bg_ish, fg = gray_ish },
-        c = { bg = bg_ish, fg = gray_ish },
+        a = { bg = c.none, fg = c.blue, gui = 'bold' },
+        b = { bg = c.none, fg = c.overlay },
+        c = { bg = c.none, fg = c.overlay },
       },
     }
 
@@ -138,11 +131,11 @@ return {
                   unknown = ' ',
                 },
                 hl = {
-                  enabled = green_ish,
-                  sleep = green_ish,
-                  disabled = gray_ish,
-                  warning = yellow_ish,
-                  unknown = red_ish,
+                  enabled = c.green,
+                  sleep = c.green,
+                  disabled = c.overlay,
+                  warning = c.yellow,
+                  unknown = c.red,
                 },
               },
               spinners = require('copilot-lualine.spinners').dots,
@@ -153,7 +146,7 @@ return {
           {
             lazy,
             cond = conditions.lazy_status,
-            color = { fg = orange_ish },
+            color = { fg = c.peach },
           },
           { trailing },
           { indent },

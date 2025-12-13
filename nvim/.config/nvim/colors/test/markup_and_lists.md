@@ -1,6 +1,3 @@
-<!-- Treesitter demo: markup and list/link groups -->
-<!-- Demonstrates: @markup.*, @markup.list.*, @markup.link.*, @markup.raw.* -->
-
 # Heading level 1 @markup.heading
 
 ## Heading level 2
