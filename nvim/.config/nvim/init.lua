@@ -1,76 +1,20 @@
 -- bootstrap {{{
 
-local profiler = require('profiler')
-
-profiler.start('bootstrap')
-
 _G.GLOB = {}
 
--- ╭──────────────────────────────────────────────────────────╮
--- │ ⬇️ Namespaced profile                                    │
--- ╰──────────────────────────────────────────────────────────╯
-
+-- namespaced profile
 local os_name = vim.loop.os_uname().sysname:lower()
 local hostname = vim.loop.os_gethostname()
-
--- computed once on load and called with O(1) operation
-_G.GLOB.is_sif = (os_name == 'darwin' and hostname:find('sif') ~= nil)
-
--- ╭──────────────────────────────────────────────────────────╮
--- │ ⬇️ Util functions                                        │
--- ╰──────────────────────────────────────────────────────────╯
-
----Retrieve a value from a highlight group with fallback warnings
----@param hl_group string The highlight group name (e.g., "Normal", "Comment")
----@param attr string The attribute to retrieve ("fg", "bg", "sp", "bold", "italic", etc.)
----@param fallback any Optional fallback value to return if not found
----@return any|nil The attribute value or fallback/nil (colors always returned as hex strings)
-function _G.GLOB.get_hl_value(hl_group, attr, fallback)
-  local hl = vim.api.nvim_get_hl(0, { name = hl_group, link = false, create = false })
-
-  if vim.tbl_isempty(hl) then
-    vim.notify(
-      string.format("Trying to retrieve from '%s' but highlight group doesn't exist", hl_group),
-      vim.log.levels.WARN
-    )
-    return fallback
-  end
-
-  if hl[attr] == nil then
-    vim.notify(
-      string.format("Trying to retrieve from '%s' but '%s' doesn't exist", hl_group, attr),
-      vim.log.levels.WARN
-    )
-    return fallback
-  end
-
-  local value = hl[attr]
-
-  -- Always convert color values to hex
-  local color_attrs = { fg = true, bg = true, sp = true }
-  if color_attrs[attr] and type(value) == 'number' then return string.format('#%06x', value) end
-
-  return value
-end
-
-profiler.stop('bootstrap')
+GLOB.is_sif = (os_name == 'darwin' and hostname:find('sif') ~= nil)
 
 -- }}}
 -- {{{ colorscheme
 
-profiler.start('colorscheme')
-
 vim.cmd([[colorscheme isekai]])
-
-profiler.stop('colorscheme')
 
 -- }}}
 -- options {{{
 
-profiler.start('options')
--- ╭──────────────────────────────────────────────────────────╮
--- │ ⬇️ Option section                                        │
--- ╰──────────────────────────────────────────────────────────╯
 local o = vim.opt
 local g = vim.g
 
@@ -174,10 +118,7 @@ g.loaded_tarPlugin = 1
 g.loaded_zipPlugin = 1
 g.loaded_remote_plugins = 1
 
--- ╭──────────────────────────────────────────────────────────╮
--- │ ⬇️ Experimental, update when necessary                   │
--- ╰──────────────────────────────────────────────────────────╯
-
+-- experimental, update when necessary
 vim.schedule(function()
   require('vim._extui').enable({
     enable = true,
@@ -196,12 +137,8 @@ vim.schedule(function()
   })
 end)
 
-profiler.stop('options')
-
 --  }}}
 -- mappings {{{
-
-profiler.start('mappings')
 
 vim.schedule(function()
   -- basic
@@ -216,7 +153,7 @@ vim.schedule(function()
   vim.keymap.set('n', '+', [[:horizontal resize +2<CR>]])
   vim.keymap.set('n', '_', [[:horizontal resize -2<CR>]])
 
-  -- Delete the character to the right of the cursor
+  -- delete the character to the right of the cursor
   vim.keymap.set('i', '<C-D>', '<DEL>')
 
   -- navigate within insert mode
@@ -237,7 +174,7 @@ vim.schedule(function()
   -- clear highlights
   vim.keymap.set('n', '<Esc>', ':noh<CR>', { desc = 'Clear highlights' })
 
-  -- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
+  -- allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
   -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
   -- empty mode is same as using : :map
   -- also don't use g[j|k] when in operator pending mode, so it doesn't alter d, y or c behaviour
@@ -256,20 +193,20 @@ vim.schedule(function()
     { desc = 'Move down', expr = true }
   )
 
-  -- Line operation
+  -- line operation
   vim.keymap.set({ 'x', 'v' }, '<', '<gv', { desc = 'Indent line' })
   vim.keymap.set({ 'x', 'v' }, '>', '>gv', { desc = 'Indent line' })
   vim.keymap.set('v', 'J', ":move '>+1<CR>gv-gv", { desc = 'Move text down' })
   vim.keymap.set('v', 'K', ":move '<-2<CR>gv-gv", { desc = 'Move text up' })
 
-  -- Change text without putting it into register,
+  -- change text without putting it into register,
   -- see https://stackoverflow.com/q/54255/6064933
   vim.keymap.set('n', 'c', '"_c')
   vim.keymap.set('n', 'C', '"_C')
   vim.keymap.set('n', 'cc', '"_cc')
   vim.keymap.set('x', 'c', '"_c')
 
-  -- Don't copy the replaced text after pasting in visual mode
+  -- don't copy the replaced text after pasting in visual mode
   -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
   vim.keymap.set('x', 'p', 'p:let @+=@0<CR>:let @"=@0<CR>', { desc = "Don't copy replaced text" })
 
@@ -279,14 +216,13 @@ vim.schedule(function()
 
   -- messages
   vim.keymap.set('n', '<Leader>m', ':messages<CR>', { desc = '[M]essages' })
-end)
 
-profiler.stop('mappings')
+  -- buffers
+  vim.keymap.set('n', '<Leader>b', ':ls<CR>:b ', { desc = '[B]uffers' })
+end)
 
 -- }}}
 -- autocmd {{{
-
-profiler.start('autocmd')
 
 vim.api.nvim_create_autocmd('FileType', {
   desc = 'Enable spell check lazily and conditionally',
@@ -354,12 +290,8 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
   callback = function() vim.opt_local.cursorline = false end,
 })
 
-profiler.stop('autocmd')
-
 -- }}}
 -- lazy {{{
-
-profiler.start('lazy')
 
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -389,33 +321,25 @@ vim.keymap.set('n', '<leader>hl', ':Lazy<CR>', { desc = '[L]azy' })
 
 require('lazy').setup({
   spec = {
-    -- ╭──────────────────────────────────────────────────────────╮
-    -- │ ⬇️ EDITOR                                                │
-    -- ╰──────────────────────────────────────────────────────────╯
+    -- ⬇️ EDITOR
     { import = 'plugins.blink' }, -- completion
     { import = 'plugins.conform' }, -- format
     { import = 'plugins.mason' }, -- auto install lsp server, formatter, linter
     { import = 'plugins.mini' }, -- editor, icons and more
     { import = 'plugins.nvim-treesitter' }, -- syntax highlighting
     { import = 'plugins.snacks' }, -- quality of life plugins
-    -- ╭──────────────────────────────────────────────────────────╮
-    -- │ ⬇️ TOOLS                                                 │
-    -- ╰──────────────────────────────────────────────────────────╯
+    -- ⬇️ TOOLS
     { import = 'plugins.inc-rename' }, -- LSP renaming with immediate visual feedback
     { import = 'plugins.oil' },
     { import = 'plugins.pangu' }, -- auto format to add a space between cjk and english letters
     { import = 'plugins.persistence' }, -- session manager
     { import = 'plugins.vim-tmux-navigator' },
-    -- ╭──────────────────────────────────────────────────────────╮
-    -- │ ⬇️ UI                                                    │
-    -- ╰──────────────────────────────────────────────────────────╯
+    -- ⬇️ UI
     { import = 'plugins.gitsigns' },
     { import = 'plugins.lualine' },
     { import = 'plugins.nvim-highlight-colors' },
     { import = 'plugins.render-markdown' },
-    -- ╭──────────────────────────────────────────────────────────╮
-    -- │ ⬇️ AI                                                    │
-    -- ╰──────────────────────────────────────────────────────────╯
+    -- ⬇️ AI
     { import = 'plugins.copilot' },
   },
   defaults = { lazy = true, version = false }, -- always use the latest git commit
@@ -427,24 +351,15 @@ require('lazy').setup({
   },
 })
 
-profiler.stop('lazy')
-
 -- lsp {{{
 
-profiler.start('lsp')
-
 local function lsp()
-  -- ╭──────────────────────────────────────────────────────────╮
-  -- │ ⬇️ disable default keybinds                              │
-  -- ╰──────────────────────────────────────────────────────────╯
+  -- disable default keybinds
   for _, bind in ipairs({ 'grn', 'gra', 'gri', 'grr', 'grt' }) do
     pcall(vim.keymap.del, 'n', bind)
   end
 
-  -- ╭──────────────────────────────────────────────────────────╮
-  -- │ ⬇️ setup lsp attach                                      │
-  -- ╰──────────────────────────────────────────────────────────╯
-
+  -- setup lsp attach
   vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
     callback = function(ev)
@@ -462,13 +377,11 @@ local function lsp()
       vim.keymap.set('n', '<leader>lh', vim.lsp.buf.signature_help, { buffer = ev.buf, desc = 'Signature [H]elp' })
       vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, { buffer = ev.buf, desc = '[R]ename' })
 
-      -- CodeLens support
       if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_codeLens) then
         vim.keymap.set('n', '<leader>ll', vim.lsp.codelens.refresh, { buffer = ev.buf, desc = 'Code[L]ens refresh' })
         vim.keymap.set('n', '<leader>lL', vim.lsp.codelens.run, { buffer = ev.buf, desc = 'Code[L]ens run' })
       end
 
-      -- Inlay hints
       if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint) then
         vim.keymap.set(
           'n',
@@ -480,10 +393,7 @@ local function lsp()
     end,
   })
 
-  -- ╭──────────────────────────────────────────────────────────╮
-  -- │ ⬇️ setup vim.diagnostic.Config                           │
-  -- ╰──────────────────────────────────────────────────────────╯
-
+  -- vim.diagnostic.Config
   local diagnostic_opts = {
     signs = {
       text = {
@@ -513,10 +423,7 @@ local function lsp()
 
   vim.diagnostic.config(diagnostic_opts)
 
-  -- ╭──────────────────────────────────────────────────────────╮
-  -- │ ⬇️ server specific capabilities                          │
-  -- ╰──────────────────────────────────────────────────────────╯
-
+  -- server specific capabilities
   local capabilities = vim.lsp.protocol.make_client_capabilities()
 
   local has_blink = require('lazy.core.config').plugins['blink.cmp'] ~= nil
@@ -546,10 +453,7 @@ local function lsp()
     capabilities = capabilities,
   })
 
-  -- ╭──────────────────────────────────────────────────────────╮
-  -- │ ⬇️ this is where magic happens                           │
-  -- ╰──────────────────────────────────────────────────────────╯
-
+  -- this is where magic happens
   local servers = {
     'cssls',
     'lua_ls',
@@ -566,12 +470,5 @@ local function lsp()
 end
 
 vim.schedule(lsp)
-
-profiler.stop('lsp')
-
--- }}}
--- {{{ timer
-
-profiler.report()
 
 -- }}}
