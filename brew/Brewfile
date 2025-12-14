@@ -17,7 +17,7 @@ brew "fzf"
 brew "git"
 # Alternative to top/htop
 brew "glances"
-# GNU Pretty Good Privacy (PGP) package
+# GNU Privacy Guard (OpenPGP)
 brew "gnupg"
 # Tools and libraries to manipulate images in many formats
 brew "imagemagick"
