@@ -120,10 +120,6 @@ o.updatetime = 200 -- length of time to wait before triggering the plugin
 o.timeoutlen = 250 -- shorten key timeout length for which-key
 o.inccommand = 'split' -- preview substitutions live
 
--- check spell
-o.spell = true
-o.spelllang = 'en_us,en_gb,cjk'
-
 -- indenting
 o.expandtab = true -- convert tabs to spaces
 o.shiftwidth = 2 -- number of space inserted for indentation
@@ -291,6 +287,15 @@ profiler.stop('mappings')
 -- autocmd {{{
 
 profiler.start('autocmd')
+
+vim.api.nvim_create_autocmd('FileType', {
+  desc = 'Enable spell check lazily and conditionally',
+  pattern = { 'markdown', 'text', 'gitcommit' },
+  callback = function()
+    vim.opt_local.spell = true
+    vim.opt_local.spelllang = { 'en_us', 'en_gb', 'cjk' }
+  end,
+})
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking text, cycle numbered registers',
