@@ -327,6 +327,7 @@ require('lazy').setup({
     { import = 'plugins.snacks' }, -- quality of life plugins
     -- ⬇️ TOOLS
     { import = 'plugins.inc-rename' }, -- LSP renaming with immediate visual feedback
+    { import = 'plugins.fidget' },
     { import = 'plugins.oil' },
     { import = 'plugins.pangu' }, -- auto format to add a space between cjk and english letters
     { import = 'plugins.persistence' }, -- session manager

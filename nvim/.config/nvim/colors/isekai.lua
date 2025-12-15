@@ -83,7 +83,7 @@ local hl = {
   OkMsg = { fg = c.green }, -- success messages
   ModeMsg = { fg = c.yellow, bold = true }, -- 'showmode' message (e.g., "-- INSERT -- ")
   MoreMsg = { fg = c.blue }, -- |more-prompt|
-  MsgArea = { bg = c.none }, -- Area for messages and cmdline, don't set this highlight because of https://github.com/neovim/neovim/issues/17832
+  -- MsgArea = { bg = c.none }, -- Area for messages and cmdline, don't set this highlight because of https://github.com/neovim/neovim/issues/17832
   MsgSeparator = { fg = c.crust }, -- Separator for scrolled messages, `msgsep` flag of 'display'
   Question = { fg = c.peach }, -- |hit-enter| prompt and yes/no questions
   NonText = { fg = c.overlay }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
