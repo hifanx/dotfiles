@@ -20,13 +20,11 @@ local g = vim.g
 
 -- general
 g.mapleader = ' '
-o.mouse = 'a' -- enable mouse support
 o.undofile = true -- enable persistent undo
 o.backup = false -- disable backup
 o.confirm = true -- Confirm to save changes before exiting modified buffer
-o.iskeyword = '@,48-57,_,192-255,-' -- Treat dash as `word` textobject part
+o.iskeyword = '@,48-57,_,192-255,-' -- Treat dash as `word` textobject part, default "@,48-57,_,192-255"
 o.termguicolors = true
-o.autoread = true
 
 -- ui
 o.winborder = 'solid'
@@ -34,7 +32,6 @@ o.cursorline = true -- highlight the text line of the cursor
 o.number = true -- show numberline
 o.relativenumber = true -- show relative numberline
 o.signcolumn = 'yes' -- always show the sign column
-o.cmdheight = 1 -- height of the command bar, default: 1
 
 -- wrapping
 o.wrap = true -- soft wrap lines
@@ -218,7 +215,7 @@ vim.schedule(function()
   vim.keymap.set('n', '<Leader>m', ':messages<CR>', { desc = '[M]essages' })
 
   -- buffers
-  vim.keymap.set('n', '<Leader>b', ':ls<CR>:b ', { desc = '[B]uffers' })
+  vim.keymap.set('n', '<Leader>b', ':b <C-z>', { desc = '[B]uffers' })
 end)
 
 -- }}}

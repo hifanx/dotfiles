@@ -5,8 +5,7 @@ return {
   lazy = false,
   init = function()
     vim.keymap.set('n', '<leader>.', function() Snacks.scratch() end, { desc = 'Scratch Buffer' })
-    vim.keymap.set('n', '<c-/>', function() Snacks.terminal() end, { desc = 'Terminal' })
-    vim.keymap.set('n', '<c-_>', function() Snacks.terminal() end, { desc = 'which_key_ignore' })
+    vim.keymap.set('n', '<leader>/', function() Snacks.terminal() end, { desc = 'Terminal' })
     vim.keymap.set({ 'n', 't' }, ']]', function() Snacks.words.jump(vim.v.count1) end, { desc = 'Next reference' })
     vim.keymap.set({ 'n', 't' }, '[[', function() Snacks.words.jump(-vim.v.count1) end, { desc = 'Prev reference' })
     vim.keymap.set('n', '<C-x>', function() Snacks.bufdelete() end, { desc = 'Delete buffer' })
@@ -55,7 +54,8 @@ return {
     -- Grep
     vim.keymap.set('n', '<leader>fb', function() Snacks.picker.lines() end, { desc = '[B]uffer' })
     vim.keymap.set('n', '<leader>fB', function() Snacks.picker.grep_buffers() end, { desc = '[B]uffers opened' })
-    vim.keymap.set('n', '<leader>/', function() Snacks.picker.grep() end, { desc = 'Grep live' })
+    vim.keymap.set('n', '<C-/>', function() Snacks.picker.grep() end, { desc = 'Grep live' })
+    vim.keymap.set('n', '<C-_>', function() Snacks.picker.grep() end, { desc = 'Grep live' })
     vim.keymap.set(
       { 'n', 'x' },
       '<leader>?',

@@ -3,17 +3,14 @@ return {
   event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
     'AndreM222/copilot-lualine',
+    'SmiteshP/nvim-navic',
   },
   config = function()
-    -- ╭──────────────────────────────────────────────────────────╮
-    -- │ ⬇️ lazy status component                                 │
-    -- ╰──────────────────────────────────────────────────────────╯
+    -- lazy status component
     local lazy_status = require('lazy.status')
     local lazy = function() return lazy_status.updates() end
 
-    -- ╭──────────────────────────────────────────────────────────╮
-    -- │ ⬇️ mixed indent component                                │
-    -- ╰──────────────────────────────────────────────────────────╯
+    -- mixed indent component
     local indent = function()
       local space_pat = [[\v^ +]]
       local tab_pat = [[\v^\t+]]
@@ -36,32 +33,37 @@ return {
       end
     end
 
-    -- ╭──────────────────────────────────────────────────────────╮
-    -- │ ⬇️ trailing white spaces component                       │
-    -- ╰──────────────────────────────────────────────────────────╯
+    -- trailing white spaces component
     local trailing = function()
       local space = vim.fn.search([[\s\+$]], 'nwc')
       return space ~= 0 and 'TW:' .. space or ''
     end
 
-    -- ╭──────────────────────────────────────────────────────────╮
-    -- │ ⬇️ conditions for components to show                     │
-    -- ╰──────────────────────────────────────────────────────────╯
+    -- navic coponent
+    local navic = require('nvim-navic')
+    navic.setup({
+      highlight = true,
+      lsp = {
+        auto_attach = true,
+      },
+    })
+    local function navic_component() return navic.get_location() end
+
+    -- conditions for components to show
     local conditions = {
       buffer_not_empty = function() return vim.fn.empty(vim.fn.expand('%:t')) ~= 1 end,
       hide_in_width = function() return vim.fn.winwidth(0) > 80 end,
       lazy_status = lazy_status.has_updates,
       is_sif = function() return GLOB.is_sif end,
+      navic_available = function() return navic.is_available() end,
     }
 
-    -- ╭──────────────────────────────────────────────────────────╮
-    -- │ ⬇️ theme                                                 │
-    -- ╰──────────────────────────────────────────────────────────╯
+    -- ⬇️ theme
     local c = require('palette').isekai -- this is O(1) since already required at colorscheme
     local theme = {
       normal = {
-        a = { bg = c.white, fg = c.base, gui = 'bold' },
-        b = { bg = c.none, fg = c.white },
+        a = { bg = c.lavender, fg = c.base, gui = 'bold' },
+        b = { bg = c.none, fg = c.lavender },
         c = { bg = c.none, fg = c.white, gui = 'bold' },
       },
       insert = {
@@ -87,9 +89,7 @@ return {
       },
     }
 
-    -- ╭──────────────────────────────────────────────────────────╮
-    -- │ ⬇️ setup the thing                                       │
-    -- ╰──────────────────────────────────────────────────────────╯
+    -- ⬇️ setup the thing
     require('lualine').setup({
       options = {
         theme = theme,
@@ -109,14 +109,19 @@ return {
           { 'branch', icon = { '' } },
         },
         lualine_c = {
+          { 'filename' },
           {
-            'diff',
-            cond = conditions.hide_in_width,
-            symbols = {
-              added = ' ',
-              modified = ' ',
-              removed = ' ',
-            },
+            navic_component,
+            cond = conditions.navic_available,
+          },
+        },
+        lualine_x = {
+          { trailing },
+          { indent },
+          {
+            lazy,
+            cond = conditions.lazy_status,
+            color = { fg = c.peach },
           },
           {
             'copilot',
@@ -144,13 +149,14 @@ return {
             show_loading = true,
           },
           {
-            lazy,
-            cond = conditions.lazy_status,
-            color = { fg = c.peach },
+            'diff',
+            cond = conditions.hide_in_width,
+            symbols = {
+              added = ' ',
+              modified = ' ',
+              removed = ' ',
+            },
           },
-          { trailing },
-          { indent },
-          { function() return '%=' end },
           {
             'diagnostics',
             sources = { 'nvim_diagnostic' },
@@ -159,37 +165,6 @@ return {
               warn = ' ',
               info = ' ',
               hint = ' ',
-            },
-          },
-        },
-        lualine_x = {
-          {
-            'buffers',
-            show_filename_only = true,
-            hide_filename_extension = true,
-            show_modified_status = true,
-            mode = 0, -- 0: Shows buffer name 1: Shows buffer index 2: Shows buffer name + buffer index 3: Shows buffer number 4: Shows buffer name + buffer number
-            max_length = vim.o.columns * 2 / 3,
-            filetype_names = {
-              lazy = '󰒲 ',
-              help = '',
-              mason = ' ',
-              checkhealth = '󰀯 ',
-              ['nvim-pack'] = ' ',
-              snacks_dashboard = ' ',
-              snacks_input = ' ',
-              snacks_notif_history = ' ',
-              snacks_picker_list = ' ',
-              snacks_picker_input = ' ',
-            },
-            buffers_color = {
-              active = 'lualine_c_normal',
-              inactive = 'lualine_c_inactive',
-            },
-            symbols = {
-              modified = '',
-              alternate_file = '', -- Text to show to identify the alternate file
-              directory = ' ', -- Text to show when the buffer is a directory
             },
           },
         },

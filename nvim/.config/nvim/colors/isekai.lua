@@ -38,27 +38,27 @@ local hl = {
   LineNr = { fg = c.overlay }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
   SignColumn = { fg = c.surface }, -- column where |signs| are displayed
   FoldColumn = { fg = c.overlay }, -- 'foldcolumn'
-  Folded = { fg = c.blue, bg = c.base }, -- line used for closed folds
+  Folded = { fg = c.comment, bg = c.none }, -- line used for closed folds
   VertSplit = { fg = c.crust }, -- the column separating vertically split windows
   WinSeparator = { fg = c.crust }, -- separator between window splits
   WinBar = { fg = c.rosewater }, -- window bar of current window
   WinBarNC = { link = 'WinBar' }, -- window bar of not-current windows
   FloatBorder = { fg = c.yellow, bg = c.mantle }, -- border of floating windows
   FloatTitle = { fg = c.yellow, bg = c.mantle }, -- Title of floating windows
-  Pmenu = { fg = c.overlay, bg = c.mantle }, -- Popup menu: normal item.
-  PmenuSel = { fg = c.base, bg = c.green }, -- Popup menu: selected item.
+  Pmenu = { fg = c.subtext, bg = c.mantle }, -- Popup menu: normal item.
+  PmenuSel = { fg = c.base, bg = c.green, bold = true }, -- Popup menu: selected item.
   PmenuMatch = { fg = c.peach }, -- Popup menu: matching text.
   PmenuMatchSel = { bold = true }, -- Popup menu: matching text in selected item; is combined with |hl-PmenuMatch| and |hl-PmenuSel|.
   PmenuSbar = { bg = c.surface }, -- Popup menu: scrollbar.
   PmenuThumb = { bg = c.overlay }, -- Popup menu: Thumb of the scrollbar.
-  PmenuExtra = { fg = c.overlay }, -- Popup menu: normal item extra text.
+  PmenuExtra = { fg = c.subtext }, -- Popup menu: normal item extra text.
   PmenuExtraSel = { bg = c.surface, fg = c.overlay, bold = true }, -- Popup menu: selected item extra text.
   PmenuBorder = { link = 'FloatBorder' }, -- Popup menu: border
   ComplMatchIns = { link = 'PreInsert' }, -- Matched text of the currently inserted completion.
   PreInsert = { fg = c.overlay }, -- Text inserted when "preinsert" is in 'completeopt'.
   ComplHint = { fg = c.subtext }, -- Virtual text of the currently selected completion.
   ComplHintMore = { link = 'Question' }, -- The additional information of the virtual text.
-  Visual = { bg = c.overlay, bold = true }, -- Visual mode selection
+  Visual = { bg = c.visual, bold = true }, -- Visual mode selection
   VisualNOS = { link = 'Visual' }, -- Visual mode selection when vim is "Not Owning the Selection".
   MatchParen = { fg = c.peach, bg = c.surface, bold = true }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
   Search = { bg = c.peach, fg = c.base }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand out.
@@ -73,8 +73,8 @@ local hl = {
   SpellCap = { sp = c.yellow, undercurl = true }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
   SpellLocal = { sp = c.blue, undercurl = true }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
   SpellRare = { sp = c.green, undercurl = true }, -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.
-  StatusLine = { fg = c.overlay, bg = c.base }, -- status line of current window
-  StatusLineNC = { fg = c.overlay, bg = c.base }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
+  StatusLine = { fg = c.overlay, bg = c.none }, -- status line of current window
+  StatusLineNC = { fg = c.overlay, bg = c.none }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
   TabLine = { bg = c.crust, fg = c.overlay }, -- tab pages line, not active tab page label
   TabLineFill = { bg = c.mantle }, -- tab pages line, where there are no labels
   TabLineSel = { link = 'Normal' }, -- tab pages line, active tab page label
@@ -268,15 +268,45 @@ local hl = {
   ['@lsp.typemod.function.builtin'] = { link = '@function.builtin' },
 
   -- render-markdown
-  RenderMarkdownH1Bg = { bg = c.base },
-  RenderMarkdownH2Bg = { bg = c.base },
-  RenderMarkdownH3Bg = { bg = c.base },
-  RenderMarkdownH4Bg = { bg = c.base },
-  RenderMarkdownH5Bg = { bg = c.base },
-  RenderMarkdownH6Bg = { bg = c.base },
+  RenderMarkdownH1Bg = { link = '@markup.heading' },
+  RenderMarkdownH2Bg = { link = '@markup.heading' },
+  RenderMarkdownH3Bg = { link = '@markup.heading' },
+  RenderMarkdownH4Bg = { link = '@markup.heading' },
+  RenderMarkdownH5Bg = { link = '@markup.heading' },
+  RenderMarkdownH6Bg = { link = '@markup.heading' },
 
   -- blink
   BlinkCmpMenuSelection = { link = 'PmenuSel' },
+  BlinkCmpDocBorder = { link = 'FloatBorder' },
+  BlinkCmpSignatureHelpBorder = { link = 'FloatBorder' },
+  BlinkCmpLabelDeprecated = { fg = c.overlay, strikethrough = true },
+  BlinkCmpSource = { fg = c.mauve },
+  BlinkCmpKindText = { link = 'Normal' },
+  BlinkCmpKindMethod = { link = '@function.method' },
+  BlinkCmpKindFunction = { link = '@function' },
+  BlinkCmpKindConstructor = { link = '@constructor' },
+  BlinkCmpKindField = { link = '@variable.member' },
+  BlinkCmpKindVariable = { link = '@variable' },
+  BlinkCmpKindClass = { link = '@type' },
+  BlinkCmpKindInterface = { link = '@type' },
+  BlinkCmpKindModule = { link = '@module' },
+  BlinkCmpKindProperty = { link = '@property' },
+  BlinkCmpKindUnit = { link = '@keyword' },
+  BlinkCmpKindValue = { link = '@constant' },
+  BlinkCmpKindEnum = { link = '@constant' },
+  BlinkCmpKindKeyword = { link = '@keyword' },
+  BlinkCmpKindSnippet = { fg = c.flamingo },
+  BlinkCmpKindColor = { fg = c.red },
+  BlinkCmpKindFile = { link = '@markup.link' },
+  BlinkCmpKindReference = { link = '@markup.raw' },
+  BlinkCmpKindFolder = { link = 'Title' },
+  BlinkCmpKindEnumMember = { link = '@keyword.directive' },
+  BlinkCmpKindConstant = { link = '@constant' },
+  BlinkCmpKindStruct = { link = 'Structure' },
+  BlinkCmpKindEvent = { link = '@character' },
+  BlinkCmpKindOperator = { link = '@operator' },
+  BlinkCmpKindTypeParameter = { link = '@variable' },
+  BlinkCmpKindCopilot = { fg = c.green },
 
   -- snacks
   SnacksInputNormal = { link = 'NormalFloat' },
@@ -288,6 +318,41 @@ local hl = {
   SnacksPickerInputCursorLine = { link = 'NormalFloat' },
   SnacksPickerTree = { link = 'Conceal' },
   SnacksIndent = { link = 'Conceal' },
+
+  -- navic
+  NavicIconsFile = { link = 'Title' },
+  NavicIconsModule = { link = '@module' },
+  NavicIconsNamespace = { link = '@type' },
+  NavicIconsPackage = { link = '@keyword.import' },
+  NavicIconsClass = { link = '@type' },
+  NavicIconsMethod = { link = '@function.method' },
+  NavicIconsProperty = { link = '@property' },
+  NavicIconsField = { link = '@variable.member' },
+  NavicIconsConstructor = { link = '@constructor' },
+  NavicIconsEnum = { link = '@constant' },
+  NavicIconsInterface = { link = '@type' },
+  NavicIconsFunction = { link = '@function' },
+  NavicIconsVariable = { link = '@variable' },
+  NavicIconsConstant = { link = '@constant' },
+  NavicIconsString = { link = '@string' },
+  NavicIconsNumber = { link = '@number' },
+  NavicIconsBoolean = { link = '@boolean' },
+  NavicIconsArray = { link = 'Delimiter' },
+  NavicIconsObject = { link = '@variable.member' },
+  NavicIconsKey = { link = '@property' },
+  NavicIconsNull = { link = '@constant' },
+  NavicIconsEnumMember = { link = '@keyword.directive' },
+  NavicIconsStruct = { link = 'Structure' },
+  NavicIconsEvent = { link = '@character' },
+  NavicIconsOperator = { link = '@operator' },
+  NavicIconsTypeParameter = { link = '@variable' },
+  NavicText = { link = 'Normal' },
+  NavicSeparator = { link = 'Delimiter' },
+
+  -- lualine
+  LuaLineDiffAdd = { link = 'Added' },
+  LuaLineDiffChange = { link = 'Changed' },
+  LuaLineDiffDelete = { link = 'Removed' },
 }
 
 for group, spec in pairs(hl) do
