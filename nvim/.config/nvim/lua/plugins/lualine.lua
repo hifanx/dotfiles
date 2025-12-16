@@ -109,7 +109,10 @@ return {
           { 'branch', icon = { '' } },
         },
         lualine_c = {
-          { 'filename' },
+          {
+            'filename',
+            file_status = false,
+          },
           {
             navic_component,
             cond = conditions.navic_available,

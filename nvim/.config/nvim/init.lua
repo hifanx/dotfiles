@@ -2,6 +2,13 @@
 
 _G.GLOB = {}
 
+_G.GLOB.timer = require('profiler')
+
+vim.api.nvim_create_autocmd('VimEnter', {
+  once = true,
+  callback = function() GLOB.timer.report() end,
+})
+
 -- namespaced profile
 local os_name = vim.loop.os_uname().sysname:lower()
 local hostname = vim.loop.os_gethostname()
@@ -27,7 +34,7 @@ o.iskeyword = '@,48-57,_,192-255,-' -- Treat dash as `word` textobject part, def
 o.termguicolors = true
 
 -- ui
-o.winborder = 'solid'
+o.winborder = 'rounded'
 o.cursorline = true -- highlight the text line of the cursor
 o.number = true -- show numberline
 o.relativenumber = true -- show relative numberline
@@ -115,24 +122,7 @@ g.loaded_tarPlugin = 1
 g.loaded_zipPlugin = 1
 g.loaded_remote_plugins = 1
 
--- experimental, update when necessary
-vim.schedule(function()
-  require('vim._extui').enable({
-    enable = true,
-    msg = {
-      target = 'msg',
-      timeout = 4000,
-    },
-  })
-  vim.api.nvim_create_autocmd('FileType', {
-    pattern = 'msg',
-    callback = function()
-      vim.opt_local.winblend = 30
-      vim.opt_local.winborder = 'none'
-      vim.opt_local.winhighlight = 'Normal:Comment,FloatBorder:Normal'
-    end,
-  })
-end)
+vim.schedule(function() require('vim._extui').enable({}) end)
 
 --  }}}
 -- mappings {{{
@@ -210,12 +200,6 @@ vim.schedule(function()
   -- commenting
   vim.keymap.set('n', 'gco', 'o<esc>Vcx<esc>:normal gcc<CR>fxa<bs>', { desc = 'Add comment below' })
   vim.keymap.set('n', 'gcO', 'O<esc>Vcx<esc>:normal gcc<CR>fxa<bs>', { desc = 'Add comment above' })
-
-  -- messages
-  vim.keymap.set('n', '<Leader>m', ':messages<CR>', { desc = '[M]essages' })
-
-  -- buffers
-  vim.keymap.set('n', '<Leader>b', ':b <C-z>', { desc = '[B]uffers' })
 end)
 
 -- }}}
@@ -321,14 +305,14 @@ require('lazy').setup({
     -- ⬇️ EDITOR
     { import = 'plugins.blink' }, -- completion
     { import = 'plugins.conform' }, -- format
+    { import = 'plugins.fzf-lua' }, -- picker
     { import = 'plugins.mason' }, -- auto install lsp server, formatter, linter
     { import = 'plugins.mini' }, -- editor, icons and more
     { import = 'plugins.nvim-treesitter' }, -- syntax highlighting
-    { import = 'plugins.snacks' }, -- quality of life plugins
     -- ⬇️ TOOLS
     { import = 'plugins.inc-rename' }, -- LSP renaming with immediate visual feedback
-    { import = 'plugins.fidget' },
-    { import = 'plugins.oil' },
+    { import = 'plugins.fidget' }, -- an unintrusive vim.notify
+    { import = 'plugins.oil' }, -- edit files like a buffer
     { import = 'plugins.pangu' }, -- auto format to add a space between cjk and english letters
     { import = 'plugins.persistence' }, -- session manager
     { import = 'plugins.vim-tmux-navigator' },

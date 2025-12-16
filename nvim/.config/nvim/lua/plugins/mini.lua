@@ -1,6 +1,10 @@
 return {
   'nvim-mini/mini.nvim',
   event = { 'VeryLazy' },
+  init = function()
+    require('mini.starter').setup()
+    vim.keymap.set('n', '<C-x>', function() require('mini.bufremove').delete() end, { desc = 'Delete buffer' })
+  end,
   config = function()
     require('mini.icons').setup()
     --- @diagnostic disable-next-line: undefined-global

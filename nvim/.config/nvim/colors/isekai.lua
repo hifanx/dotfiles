@@ -43,8 +43,8 @@ local hl = {
   WinSeparator = { fg = c.crust }, -- separator between window splits
   WinBar = { fg = c.rosewater }, -- window bar of current window
   WinBarNC = { link = 'WinBar' }, -- window bar of not-current windows
-  FloatBorder = { fg = c.yellow, bg = c.mantle }, -- border of floating windows
-  FloatTitle = { fg = c.yellow, bg = c.mantle }, -- Title of floating windows
+  FloatBorder = { fg = c.surface, bg = c.mantle }, -- border of floating windows
+  FloatTitle = { fg = c.text, bg = c.mantle }, -- Title of floating windows
   Pmenu = { fg = c.subtext, bg = c.mantle }, -- Popup menu: normal item.
   PmenuSel = { fg = c.base, bg = c.green, bold = true }, -- Popup menu: selected item.
   PmenuMatch = { fg = c.peach }, -- Popup menu: matching text.
@@ -277,6 +277,7 @@ local hl = {
 
   -- blink
   BlinkCmpMenuSelection = { link = 'PmenuSel' },
+  BlinkCmpMenuBorder = { link = 'FloatBorder' },
   BlinkCmpDocBorder = { link = 'FloatBorder' },
   BlinkCmpSignatureHelpBorder = { link = 'FloatBorder' },
   BlinkCmpLabelDeprecated = { fg = c.overlay, strikethrough = true },
@@ -353,6 +354,11 @@ local hl = {
   LuaLineDiffAdd = { link = 'Added' },
   LuaLineDiffChange = { link = 'Changed' },
   LuaLineDiffDelete = { link = 'Removed' },
+
+  -- fzf-lua
+  FzfLuaNormal = { link = 'NormalFloat' },
+  FzfLuaBorder = { link = 'FloatBorder' },
+  FzfLuaTitle = { link = 'FloatTitle' },
 }
 
 for group, spec in pairs(hl) do
