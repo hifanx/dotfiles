@@ -372,6 +372,29 @@ local function lsp()
           { desc = 'Toggle [I]nlay hint' }
         )
       end
+
+      if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+        local hl_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = false })
+        vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+          buffer = ev.buf,
+          group = hl_augroup,
+          callback = vim.lsp.buf.document_highlight,
+        })
+
+        vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+          buffer = ev.buf,
+          group = hl_augroup,
+          callback = vim.lsp.buf.clear_references,
+        })
+      end
+    end,
+  })
+
+  vim.api.nvim_create_autocmd('LspDetach', {
+    group = vim.api.nvim_create_augroup('lsp-detach', { clear = true }),
+    callback = function(ev)
+      vim.lsp.buf.clear_references()
+      vim.api.nvim_clear_autocmds({ group = 'kickstart-lsp-highlight', buffer = ev.buf })
     end,
   })
 

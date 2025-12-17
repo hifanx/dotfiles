@@ -1,6 +1,6 @@
 return {
   'j-hui/fidget.nvim',
-  event = { 'BufReadPre', 'BufNewFile' },
+  lazy = false, -- so that profiler can use fidget
   init = function() vim.keymap.set('n', '<leader>hf', ':Fidget history<CR>', { desc = '[F]idget history' }) end,
   config = function()
     require('fidget').setup({
