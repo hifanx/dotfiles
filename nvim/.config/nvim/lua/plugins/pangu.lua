@@ -1,4 +1,3 @@
-GLOB.timer.start('pangu')
 vim.api.nvim_create_autocmd('BufWritePre', {
     pattern = { '*.markdown', '*.md', '*.text', '*.txt', '*.wiki', '*.cnx' },
     desc = 'Auto format text files with Pangu',
@@ -7,4 +6,3 @@ vim.api.nvim_create_autocmd('BufWritePre', {
         vim.notify('Format with Pangu', vim.log.levels.INFO)
     end,
 })
-GLOB.timer.stop('pangu')

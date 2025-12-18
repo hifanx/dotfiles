@@ -1,4 +1,3 @@
-GLOB.timer.start('fzf-lua')
 -- buffers & files
 vim.keymap.set('n', '<C-s>', ':FzfLua files<CR>', { desc = '[F]iles' })
 vim.keymap.set('n', '<leader>b', ':FzfLua buffers<CR>', { desc = '[B]uffers' })
@@ -63,4 +62,3 @@ require('fzf-lua').setup({
         hidden = true,
     },
 })
-GLOB.timer.stop('fzf-lua')

@@ -1,4 +1,3 @@
-GLOB.timer.start('nvim-treesitter')
 local ensure_installed_ts = {
     'c',
     'lua',
@@ -49,5 +48,3 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 require('nvim-treesitter').setup()
-
-GLOB.timer.stop('nvim-treesitter')

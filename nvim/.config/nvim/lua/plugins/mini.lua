@@ -1,4 +1,3 @@
-GLOB.timer.start('mini')
 vim.keymap.set('n', '<C-x>', function() require('mini.bufremove').delete() end, { desc = 'Delete buffer' })
 
 require('mini.icons').setup()
@@ -104,4 +103,3 @@ miniclue.setup({
         { mode = 'n', keys = '<Leader>l', desc = '[L]sp' },
     },
 })
-GLOB.timer.stop('mini')

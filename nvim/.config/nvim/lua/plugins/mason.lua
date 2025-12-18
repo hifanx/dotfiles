@@ -1,4 +1,3 @@
-GLOB.timer.start('mason')
 -- add binaries installed by mason.nvim to path
 local is_windows = vim.fn.has('win32') ~= 0
 local sep = is_windows and '\\' or '/'
@@ -64,4 +63,3 @@ local function auto_install_missing_tools()
 end
 
 vim.defer_fn(function() auto_install_missing_tools() end, 100)
-GLOB.timer.stop('mason')

@@ -1,4 +1,3 @@
-GLOB.timer.start('inc_rename')
 vim.keymap.set(
     'n',
     '<Leader>r',
@@ -7,4 +6,3 @@ vim.keymap.set(
 )
 
 require('inc_rename').setup({})
-GLOB.timer.stop('inc_rename')

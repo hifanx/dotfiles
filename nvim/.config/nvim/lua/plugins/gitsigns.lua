@@ -1,4 +1,3 @@
-GLOB.timer.start('gitsigns')
 require('gitsigns').setup({
     signs = {
         add = { text = '▎' },
@@ -62,4 +61,3 @@ require('gitsigns').setup({
         )
     end,
 })
-GLOB.timer.stop('gitsigns')

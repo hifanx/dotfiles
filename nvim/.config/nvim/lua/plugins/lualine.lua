@@ -1,4 +1,3 @@
-GLOB.timer.start('lualine')
 -- mixed indent component
 local indent = function()
     local space_pat = [[\v^ +]]
@@ -91,6 +90,7 @@ require('lualine').setup({
                 'mode',
                 fmt = function(str) return str:sub(1, 1) end,
                 color = { gui = 'bold' },
+                separator = { right = '▓▒░' },
             },
         },
         lualine_b = {
@@ -164,8 +164,10 @@ require('lualine').setup({
             { 'location' },
         },
         lualine_z = {
-            { 'progress' },
+            {
+                'progress',
+                separator = { left = '░▒▓' },
+            },
         },
     },
 })
-GLOB.timer.stop('lualine')

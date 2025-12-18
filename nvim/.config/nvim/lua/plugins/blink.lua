@@ -1,4 +1,3 @@
-GLOB.timer.start('blink')
 local default = {
     'lsp',
     'snippets',
@@ -76,4 +75,3 @@ require('blink.cmp').setup({
         },
     },
 })
-GLOB.timer.stop('blink')

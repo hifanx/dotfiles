@@ -1,4 +1,3 @@
-GLOB.timer.start('conform')
 vim.keymap.set(
     { 'n', 'v' },
     '<Leader>lf',
@@ -33,4 +32,3 @@ require('conform').setup({
         shfmt = { append_args = { '-i', '2' } },
     },
 })
-GLOB.timer.stop('conform')

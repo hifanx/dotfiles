@@ -1,4 +1,3 @@
-GLOB.timer.start('copilot')
 if not GLOB.is_sif then return end
 
 require('copilot').setup({
@@ -20,4 +19,3 @@ require('copilot').setup({
         ['*'] = false, -- disable for all other filetypes and ignore default `filetypes`
     },
 })
-GLOB.timer.stop('copilot')

@@ -1,4 +1,3 @@
-GLOB.timer.start('render-markdown')
 require('render-markdown').setup({
     file_types = { 'markdown' },
     heading = {
@@ -20,4 +19,3 @@ require('render-markdown').setup({
     latex = { enabled = false },
     checkbox = { checked = { scope_highlight = '@markup.strikethrough' } },
 })
-GLOB.timer.stop('render-markdown')

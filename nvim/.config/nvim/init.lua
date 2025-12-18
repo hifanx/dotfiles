@@ -3,7 +3,6 @@
 vim.loader.enable()
 
 _G.GLOB = {}
-_G.GLOB.timer = require('profiler')
 
 -- namespaced profile
 local os_name = vim.loop.os_uname().sysname:lower()
@@ -262,8 +261,6 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
 
 -- }}}
 
-GLOB.timer.start('vim.pack')
-
 vim.pack.add({
     -- ⬇️ EDITOR
     'https://github.com/fang2hou/blink-copilot.git',
@@ -292,11 +289,7 @@ vim.pack.add({
     'https://github.com/zbirenbaum/copilot.lua.git',
 })
 
-GLOB.timer.stop('vim.pack')
-
 -- lsp {{{
-
-GLOB.timer.start('lsp')
 
 -- disable default keybinds
 for _, bind in ipairs({ 'grn', 'gra', 'gri', 'grr', 'grt' }) do
@@ -438,18 +431,10 @@ local servers = {
 
 vim.lsp.enable(servers)
 
-GLOB.timer.stop('lsp')
-
 -- }}}
 -- {{{ eager require
 
-GLOB.timer.start('mini.starter')
-
 require('mini.starter').setup()
-
-GLOB.timer.stop('mini.starter')
-
-GLOB.timer.start('fidget')
 
 vim.keymap.set('n', '<leader>hf', ':Fidget history<CR>', { desc = '[F]idget history' })
 require('fidget').setup({
@@ -458,10 +443,6 @@ require('fidget').setup({
         override_vim_notify = true,
     },
 })
-
-GLOB.timer.stop('fidget')
-
-GLOB.timer.start('oil')
 
 vim.keymap.set('n', '<leader>o', function() require('oil').toggle_float() end, { desc = '[O]il' })
 require('oil').setup({
@@ -496,8 +477,6 @@ require('oil').setup({
         ['g\\'] = { 'actions.toggle_trash', mode = 'n' },
     },
 })
-
-GLOB.timer.stop('oil')
 
 -- }}}
 -- {{{ not so fast
