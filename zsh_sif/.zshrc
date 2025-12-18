@@ -71,7 +71,7 @@ export EDITOR='nvim'
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
 
-#  FIX: gibberish for cjk characters
+# FIX: gibberish for cjk characters
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
@@ -80,7 +80,7 @@ alias cn="cd ~/.config/nvim"
 alias vi="nvim"
 alias vim="nvim"
 
-## tmux
+# tmux
 alias tn="tmux new -s"
 alias tl="tmux ls"
 alias td="tmux detach"
@@ -95,12 +95,12 @@ ta() {
     fi
 }
 
-## eza
+# eza
 export EZA_CONFIG_DIR=$HOME/.config/eza/
 alias v='eza -lag --icons auto --sort name --group-directories-first --no-quotes --no-time'
 alias ll='eza -lag --icons auto --sort name --group-directories-first --no-quotes'
 
-## personal aliases
+# personal aliases
 alias cdd='cd "$HOME/.dotfiles"'
 alias c="clear"
 alias bu="sudo softwareupdate -ia --verbose; brew bundle -v --file=~/.dotfiles/brew/Brewfile; brew cu; brew upgrade; brew bundle dump --force --file=~/.dotfiles/brew/Brewfile --describe; brew autoremove; brew cleanup; brew doctor"
@@ -113,7 +113,7 @@ alias baldur="ssh xuhaifan@10.0.0.10"
 alias co='cd "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian"'
 alias g='lazygit'
 
-## yazi
+# yazi
 y() {
 	local tmp cwd
 	tmp="$(mktemp -t 'yazi-cwd.XXXXXX')"
