@@ -15,8 +15,6 @@ brew "fd"
 brew "fzf"
 # Distributed revision control system
 brew "git"
-# Alternative to top/htop
-brew "glances"
 # GNU Privacy Guard (OpenPGP)
 brew "gnupg"
 # Tools and libraries to manipulate images in many formats
@@ -33,6 +31,8 @@ brew "neovim", args: ["HEAD"]
 brew "node"
 # PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.14"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # 7-Zip is a file archiver with a high compression ratio
