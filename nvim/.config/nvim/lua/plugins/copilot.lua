@@ -1,14 +1,11 @@
-return {
-  'zbirenbaum/copilot.lua',
-  enabled = GLOB.is_sif, -- only use on my macbook
-  event = 'InsertEnter',
-  cmd = 'Copilot',
-  config = function()
-    require('copilot').setup({
-      suggestion = { enabled = false },
-      panel = { enabled = false },
-      disable_limit_reached_message = true,
-      filetypes = {
+GLOB.timer.start('copilot')
+if not GLOB.is_sif then return end
+
+require('copilot').setup({
+    suggestion = { enabled = false },
+    panel = { enabled = false },
+    disable_limit_reached_message = true,
+    filetypes = {
         lua = true,
         java = true,
         python = true,
@@ -21,7 +18,6 @@ return {
         gitrebase = true,
         sh = true,
         ['*'] = false, -- disable for all other filetypes and ignore default `filetypes`
-      },
-    })
-  end,
-}
+    },
+})
+GLOB.timer.stop('copilot')

@@ -1,9 +1,5 @@
-return {
-  'brenoprata10/nvim-highlight-colors',
-  event = { 'BufReadPre', 'BufNewFile' },
-  config = function()
-    require('nvim-highlight-colors').setup({
-      enable_hex = false,
-    })
-  end,
-}
+GLOB.timer.start('nvim-highlight-colors')
+require('nvim-highlight-colors').setup({
+    enable_hex = false,
+})
+GLOB.timer.stop('nvim-highlight-colors')

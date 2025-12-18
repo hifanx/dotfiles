@@ -1,16 +1,12 @@
-return {
-  'MeanderingProgrammer/render-markdown.nvim',
-  dependencies = { 'nvim-treesitter/nvim-treesitter' },
-  ft = { 'markdown' },
-  config = function()
-    require('render-markdown').setup({
-      file_types = { 'markdown' },
-      heading = {
+GLOB.timer.start('render-markdown')
+require('render-markdown').setup({
+    file_types = { 'markdown' },
+    heading = {
         sign = false,
         position = 'overlay',
         icons = { '󰲠  ', '󰲢  ', '󰲤  ', '󰲦  ', '󰲨  ', '󰲪  ' },
-      },
-      code = {
+    },
+    code = {
         language_icon = false,
         language_name = false,
         language_info = false,
@@ -19,10 +15,9 @@ return {
         language_pad = 0,
         width = 'block',
         border = 'thin',
-      },
-      pipe_table = { preset = 'heavy', style = 'normal' },
-      latex = { enabled = false },
-      checkbox = { checked = { scope_highlight = '@markup.strikethrough' } },
-    })
-  end,
-}
+    },
+    pipe_table = { preset = 'heavy', style = 'normal' },
+    latex = { enabled = false },
+    checkbox = { checked = { scope_highlight = '@markup.strikethrough' } },
+})
+GLOB.timer.stop('render-markdown')

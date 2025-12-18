@@ -1,18 +1,14 @@
-return {
-  'stevearc/conform.nvim',
-  cmd = { 'ConformInfo' },
-  init = function()
-    vim.keymap.set(
-      { 'n', 'v' },
-      '<Leader>lf',
-      function() require('conform').format({ async = true, lsp_fallback = true }) end,
-      { desc = '[F]ormat buffer' }
-    )
-    vim.keymap.set('n', '<Leader>hc', ':ConformInfo<CR>', { desc = '[C]onform info' })
-  end,
-  config = function()
-    require('conform').setup({
-      formatters_by_ft = {
+GLOB.timer.start('conform')
+vim.keymap.set(
+    { 'n', 'v' },
+    '<Leader>lf',
+    function() require('conform').format({ async = true, lsp_fallback = true }) end,
+    { desc = '[F]ormat buffer' }
+)
+vim.keymap.set('n', '<Leader>hc', ':ConformInfo<CR>', { desc = '[C]onform info' })
+
+require('conform').setup({
+    formatters_by_ft = {
         lua = { 'stylua' },
         python = { 'black' },
         markdown = { 'prettier' },
@@ -32,10 +28,9 @@ return {
         sh = { 'shfmt' },
         bash = { 'shfmt' },
         toml = { 'taplo' },
-      },
-      formatters = {
+    },
+    formatters = {
         shfmt = { append_args = { '-i', '2' } },
-      },
-    })
-  end,
-}
+    },
+})
+GLOB.timer.stop('conform')

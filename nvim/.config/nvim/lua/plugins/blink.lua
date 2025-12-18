@@ -1,28 +1,19 @@
-return {
-  'saghen/blink.cmp',
-  dependencies = {
-    'rafamadriz/friendly-snippets',
-    'fang2hou/blink-copilot',
-  },
-  version = '*',
-  event = { 'InsertEnter', 'CmdlineEnter' },
-  config = function()
-    local default = {
-      'lsp',
-      'snippets',
-      'path',
-      'buffer',
-    }
+GLOB.timer.start('blink')
+local default = {
+    'lsp',
+    'snippets',
+    'path',
+    'buffer',
+}
 
-    local ai = {
-      'copilot',
-    }
+local ai = {
+    'copilot',
+}
 
-    local is_sif = GLOB.is_sif
-    if is_sif then vim.list_extend(default, ai) end
+if GLOB.is_sif then vim.list_extend(default, ai) end
 
-    require('blink.cmp').setup({
-      keymap = {
+require('blink.cmp').setup({
+    keymap = {
         preset = 'none',
         ['<C-space>'] = false,
         ['<C-e>'] = { 'show', 'cancel', 'fallback' },
@@ -36,54 +27,53 @@ return {
         ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
         ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
         ['<C-r>'] = { 'show_signature', 'hide_signature', 'fallback' },
-      },
+    },
 
-      cmdline = { enabled = false },
+    cmdline = { enabled = false },
 
-      -- use :BlinkCmp status to view which sources providers are enabled or not enabled
-      sources = {
+    -- use :BlinkCmp status to view which sources providers are enabled or not enabled
+    sources = {
         default = default,
         providers = {
-          copilot = {
-            name = 'copilot',
-            module = 'blink-copilot',
-            score_offset = -10,
-            async = true,
-            opts = {
-              kind_hl = 'BlinkCmpKindCopilot',
+            copilot = {
+                name = 'copilot',
+                module = 'blink-copilot',
+                score_offset = -10,
+                async = true,
+                opts = {
+                    kind_hl = 'BlinkCmpKindCopilot',
+                },
             },
-          },
-          path = {
-            -- Path completion from cwd instead of current buffer's directory
-            opts = { get_cwd = function(_) return vim.fn.getcwd() end },
-          },
+            path = {
+                -- Path completion from cwd instead of current buffer's directory
+                opts = { get_cwd = function(_) return vim.fn.getcwd() end },
+            },
         },
-      },
-      completion = {
+    },
+    completion = {
         list = {
-          selection = { preselect = false },
+            selection = { preselect = false },
         },
         menu = {
-          scrollbar = false,
-          draw = {
-            treesitter = { 'lsp' },
-            columns = {
-              { 'kind_icon' },
-              { 'label', 'label_description', gap = 1 },
-              { 'source_name' },
+            scrollbar = false,
+            draw = {
+                treesitter = { 'lsp' },
+                columns = {
+                    { 'kind_icon' },
+                    { 'label', 'label_description', gap = 1 },
+                    { 'source_name' },
+                },
             },
-          },
         },
         documentation = {
-          auto_show = true,
-          window = {
-            border = 'rounded',
-          },
+            auto_show = true,
+            window = {
+                border = 'rounded',
+            },
         },
         ghost_text = {
-          enabled = true,
+            enabled = true,
         },
-      },
-    })
-  end,
-}
+    },
+})
+GLOB.timer.stop('blink')

@@ -1,25 +1,22 @@
-return {
-  'lewis6991/gitsigns.nvim',
-  event = { 'BufReadPre', 'BufNewFile' },
-  config = function()
-    require('gitsigns').setup({
-      signs = {
+GLOB.timer.start('gitsigns')
+require('gitsigns').setup({
+    signs = {
         add = { text = '▎' },
         change = { text = '▎' },
         delete = { text = '▎', show_count = true },
         topdelete = { text = '▎', show_count = true },
         changedelete = { text = '▎', show_count = true },
         untracked = { text = '▎' },
-      },
-      signs_staged = {
+    },
+    signs_staged = {
         add = { text = '▎' },
         change = { text = '▎' },
         delete = { text = '▎', show_count = true },
         topdelete = { text = '▎', show_count = true },
         changedelete = { text = '▎', show_count = true },
         untracked = { text = '▎' },
-      },
-      count_chars = {
+    },
+    count_chars = {
         [1] = '¹',
         [2] = '²',
         [3] = '³',
@@ -30,23 +27,23 @@ return {
         [8] = '⁸',
         [9] = '⁹',
         ['+'] = '⁺',
-      },
-      attach_to_untracked = true,
-      on_attach = function()
+    },
+    attach_to_untracked = true,
+    on_attach = function()
         local gs = require('gitsigns')
         vim.keymap.set('n', ']h', function()
-          if vim.wo.diff then
-            vim.cmd.normal({ ']c', bang = true })
-          else
-            gs.nav_hunk('next')
-          end
+            if vim.wo.diff then
+                vim.cmd.normal({ ']c', bang = true })
+            else
+                gs.nav_hunk('next')
+            end
         end, { desc = 'Next hunk' })
         vim.keymap.set('n', '[h', function()
-          if vim.wo.diff then
-            vim.cmd.normal({ '[c', bang = true })
-          else
-            gs.nav_hunk('prev')
-          end
+            if vim.wo.diff then
+                vim.cmd.normal({ '[c', bang = true })
+            else
+                gs.nav_hunk('prev')
+            end
         end, { desc = 'Prev hunk' })
         vim.keymap.set('n', '<Leader>gr', function() gs.reset_hunk() end, { desc = '[R]eset hunk' })
         vim.keymap.set('n', '<Leader>gR', function() gs.reset_buffer() end, { desc = '[R]eset buffer' })
@@ -58,12 +55,11 @@ return {
         vim.keymap.set('n', '<Leader>gB', function() gs.blame_line({ full = true }) end, { desc = '[B]lame buffer' })
         vim.keymap.set('n', '<Leader>gd', function() gs.diffthis() end, { desc = '[G]it [D]iff' })
         vim.keymap.set(
-          'n',
-          '<Leader>gt',
-          function() gs.toggle_current_line_blame() end,
-          { desc = '[T]oggle line blame' }
+            'n',
+            '<Leader>gt',
+            function() gs.toggle_current_line_blame() end,
+            { desc = '[T]oggle line blame' }
         )
-      end,
-    })
-  end,
-}
+    end,
+})
+GLOB.timer.stop('gitsigns')
