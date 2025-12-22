@@ -19,6 +19,7 @@ return {
             },
             completion = {
                 callSnippet = 'Replace',
+                keywordSnippet = 'Disable',
             },
             runtime = {
                 version = 'LuaJIT',

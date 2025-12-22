@@ -30,6 +30,7 @@ o.termguicolors = true
 
 -- ui
 o.winborder = 'rounded'
+o.pumborder = 'rounded'
 o.cursorline = true -- highlight the text line of the cursor
 o.number = true -- show numberline
 o.relativenumber = true -- show relative numberline
@@ -65,9 +66,9 @@ o.inccommand = 'split' -- preview substitutions live
 
 -- indenting
 o.expandtab = true -- convert tabs to spaces
-o.shiftwidth = 2 -- number of space inserted for indentation
-o.softtabstop = 2 -- number of spaces that a <Tab> counts for.
-o.tabstop = 2 -- number of space in a tab
+o.shiftwidth = 4 -- number of space inserted for indentation
+o.softtabstop = 4 -- number of spaces that a <Tab> counts for.
+o.tabstop = 4 -- number of space in a tab
 o.smartindent = true -- do smart auto indenting.
 
 -- searching
@@ -101,6 +102,15 @@ if vim.env.SSH_CONNECTION then
         },
     }
 end
+
+-- cmdline-autocomplete
+o.wildmode = 'noselect:lastused,full'
+o.wildoptions = 'pum'
+
+vim.api.nvim_create_autocmd('CmdlineChanged', {
+    pattern = { ':', '/', '?' },
+    callback = function() vim.fn.wildtrigger() end,
+})
 
 -- disable some default providers
 g.loaded_node_provider = 0
@@ -264,14 +274,14 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
 vim.pack.add({
     -- ⬇️ EDITOR
     'https://github.com/fang2hou/blink-copilot.git',
-    'https://github.com/rafamadriz/friendly-snippets.git',
     { src = 'https://github.com/saghen/blink.cmp.git', version = vim.version.range('*') },
     'https://github.com/stevearc/conform.nvim.git',
     'https://github.com/ibhagwan/fzf-lua.git',
-    'https://github.com/mason-org/mason.nvim.git',
+    'https://github.com/L3MON4D3/LuaSnip.git',
     'https://github.com/nvim-mini/mini.nvim.git',
     'https://github.com/nvim-treesitter/nvim-treesitter.git',
     -- ⬇️ TOOLS
+    'https://github.com/mason-org/mason.nvim.git',
     'https://github.com/smjonas/inc-rename.nvim.git',
     'https://github.com/j-hui/fidget.nvim.git',
     'https://github.com/stevearc/oil.nvim.git',
@@ -346,15 +356,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
                 group = hl_augroup,
                 callback = vim.lsp.buf.clear_references,
             })
+            vim.api.nvim_create_autocmd('LspDetach', {
+                group = vim.api.nvim_create_augroup('lsp-detach', { clear = true }),
+                callback = function(ev)
+                    vim.lsp.buf.clear_references()
+                    vim.api.nvim_clear_autocmds({ group = 'lsp-highlight', buffer = ev.buf })
+                end,
+            })
         end
-    end,
-})
-
-vim.api.nvim_create_autocmd('LspDetach', {
-    group = vim.api.nvim_create_augroup('lsp-detach', { clear = true }),
-    callback = function(ev)
-        vim.lsp.buf.clear_references()
-        vim.api.nvim_clear_autocmds({ group = 'lsp-highlight', buffer = ev.buf })
     end,
 })
 
@@ -435,6 +444,7 @@ vim.lsp.enable(servers)
 -- {{{ eager require
 
 require('mini.starter').setup()
+require('mini.icons').setup()
 
 vim.keymap.set('n', '<leader>hf', ':Fidget history<CR>', { desc = '[F]idget history' })
 require('fidget').setup({
@@ -450,7 +460,7 @@ require('oil').setup({
     delete_to_trash = true,
     view_options = {
         show_hidden = true,
-        is_always_hidden = function(name, _) return name == '.git' end,
+        is_always_hidden = function(name, _) return name == '.git' end, -- but not .git
     },
     float = {
         max_width = 0.6,
@@ -500,8 +510,6 @@ coroutine.wrap(function()
             not_so_fast(path)
         end
     end
-
-    GLOB.timer.report()
 end)()
 
 -- }}}

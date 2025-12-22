@@ -1,5 +1,9 @@
 # Agent Guidelines for Neovim Configuration
 
+## Scope
+
+- These guidelines apply to this Neovim config directory and all files under it
+
 ## Philosophy: Minimal Configuration
 
 **This Neovim config prioritizes minimalism above all else.**
@@ -12,7 +16,7 @@
 
 ## Build/Lint/Test Commands
 
-- **Format Lua**: `stylua .` (config: `stylua.toml` - 120 cols, 2 spaces, Unix endings, single quotes)
+- **Format Lua**: `stylua .` (config: `stylua.toml` - 120 cols, 4 spaces, Unix endings, single quotes)
 - **Check config**: `nvim --headless "+Lazy! sync" +qa` (sync plugins)
 - No formal test suite - test changes by launching `nvim` and verifying functionality
 
@@ -26,7 +30,7 @@
 ### Colors & Highlights
 
 - Define shared colors in `lua/palette.lua`
-- Configure highlight groups in `lua/highlights.lua` instead of per-plugin highlight tweaks where possible
+- Configure highlight groups in `colors/isekai.lua`
 
 ### Lua Conventions
 
@@ -60,3 +64,11 @@
 
 - Validate with `if not client then return end` pattern
 - Use `vim.notify()` with log levels for user-facing messages
+
+## Assistant Workflow
+
+- Prefer editing existing files over creating new ones
+- Avoid adding new plugins unless explicitly requested
+- Run `stylua .` after modifying Lua files when practical
+- Do not edit `nvim-pack-lock.json` by hand
+- Keep changes small, focused, and easy to revert

@@ -38,7 +38,7 @@ local hl = {
     LineNr = { fg = c.overlay }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
     SignColumn = { fg = c.surface }, -- column where |signs| are displayed
     FoldColumn = { fg = c.overlay }, -- 'foldcolumn'
-    Folded = { fg = c.comment, bg = c.none }, -- line used for closed folds
+    Folded = { fg = c.comment }, -- line used for closed folds
     VertSplit = { fg = c.crust }, -- the column separating vertically split windows
     WinSeparator = { fg = c.crust }, -- separator between window splits
     WinBar = { fg = c.rosewater }, -- window bar of current window
@@ -46,7 +46,7 @@ local hl = {
     FloatBorder = { fg = c.surface, bg = c.mantle }, -- border of floating windows
     FloatTitle = { fg = c.text, bg = c.mantle }, -- Title of floating windows
     Pmenu = { fg = c.subtext, bg = c.mantle }, -- Popup menu: normal item.
-    PmenuSel = { fg = c.base, bg = c.green, bold = true }, -- Popup menu: selected item.
+    PmenuSel = { bg = c.visual, bold = true }, -- Popup menu: selected item.
     PmenuMatch = { fg = c.peach }, -- Popup menu: matching text.
     PmenuMatchSel = { bold = true }, -- Popup menu: matching text in selected item; is combined with |hl-PmenuMatch| and |hl-PmenuSel|.
     PmenuSbar = { bg = c.surface }, -- Popup menu: scrollbar.
@@ -95,7 +95,7 @@ local hl = {
     Directory = { fg = c.blue }, -- directory names (and other special names in listings)
     Title = { fg = c.yellow, bold = true }, -- titles for output from ":set all", ":autocmd" etc.
     QuickFixLine = { bg = c.surface, bold = true }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
-    WildMenu = { bg = c.green }, -- current match in 'wildmenu' completion
+    WildMenu = { bg = c.visual }, -- current match in 'wildmenu' completion
 
     -- :h group-name
     Comment = { fg = c.comment, italic = true }, -- comments

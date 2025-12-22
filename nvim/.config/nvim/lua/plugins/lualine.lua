@@ -100,7 +100,7 @@ require('lualine').setup({
             { 'filename' },
             {
                 navic_component,
-                cond = conditions.navic_available,
+                cond = conditions.navic_available and conditions.hide_in_width,
             },
         },
         lualine_x = {
@@ -108,7 +108,7 @@ require('lualine').setup({
             { indent },
             {
                 'copilot',
-                cond = conditions.is_sif,
+                cond = conditions.is_sif and conditions.hide_in_width,
                 symbols = {
                     status = {
                         icons = {
@@ -142,6 +142,7 @@ require('lualine').setup({
             },
             {
                 'diagnostics',
+                cond = conditions.hide_in_width,
                 sources = { 'nvim_diagnostic' },
                 symbols = {
                     error = ' ',
@@ -154,6 +155,7 @@ require('lualine').setup({
         lualine_y = {
             {
                 'lsp_status',
+                cond = conditions.hide_in_width,
                 icon = ' ',
                 symbols = {
                     separator = '',
@@ -161,7 +163,10 @@ require('lualine').setup({
                 ignore_lsp = { 'copilot' },
                 show_name = true,
             },
-            { 'location' },
+            {
+                'location',
+                cond = conditions.hide_in_width,
+            },
         },
         lualine_z = {
             {

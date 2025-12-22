@@ -1,8 +1,5 @@
 vim.keymap.set('n', '<C-x>', function() require('mini.bufremove').delete() end, { desc = 'Delete buffer' })
 
-require('mini.icons').setup()
---- @diagnostic disable-next-line: undefined-global
-MiniIcons.mock_nvim_web_devicons()
 require('mini.ai').setup()
 require('mini.align').setup()
 
@@ -20,50 +17,7 @@ require('mini.align').setup()
 --
 -- COMMON CHARS: ( ) [ ] { } < > " ' ` t (tag)
 require('mini.surround').setup()
-require('mini.pairs').setup({
-    modes = { command = true },
-    mappings = {
-        ['('] = {
-            action = 'open',
-            pair = '()',
-            neigh_pattern = '[^\\][^%w]', -- ✅ Don't pair before word chars
-            register = { cr = false },
-        },
-        ['['] = {
-            action = 'open',
-            pair = '[]',
-            neigh_pattern = '[^\\][^%w]', -- ✅ Don't pair before word chars
-            register = { cr = false },
-        },
-        ['{'] = {
-            action = 'open',
-            pair = '{}',
-            neigh_pattern = '[^\\][^%w]', -- ✅ Don't pair before word chars
-            register = { cr = false },
-        },
-        [')'] = { action = 'close', pair = '()', register = { cr = false } },
-        [']'] = { action = 'close', pair = '[]', register = { cr = false } },
-        ['}'] = { action = 'close', pair = '{}', register = { cr = false } },
-        ['"'] = {
-            action = 'closeopen',
-            pair = '""',
-            neigh_pattern = '[^\\][^%a]', -- Don't pair before letters
-            register = { cr = false },
-        },
-        ["'"] = {
-            action = 'closeopen',
-            pair = "''",
-            neigh_pattern = '[^%a\\][^%a]', -- Don't pair after/before letters
-            register = { cr = false },
-        },
-        ['`'] = {
-            action = 'closeopen',
-            pair = '``',
-            neigh_pattern = '[^\\][^%a]',
-            register = { cr = false },
-        },
-    },
-})
+
 local miniclue = require('mini.clue')
 miniclue.setup({
     window = {
