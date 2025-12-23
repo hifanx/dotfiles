@@ -245,7 +245,7 @@ local hl = {
     -- ['@markup.raw.block'] = {}, -- literal or verbatim text as a stand-alone block
 
     ['@markup.list'] = { fg = c.yellow }, -- list markers
-    ['@markup.list.checked'] = { fg = c.green, strikethrough = true }, -- checked todo-style list markers
+    ['@markup.list.checked'] = { fg = c.green }, -- checked todo-style list markers
     ['@markup.list.unchecked'] = { fg = c.overlay }, -- unchecked todo-style list markers
 
     -- ['@diff.plus'] = { link = 'Added' }, -- added text (for diff files)

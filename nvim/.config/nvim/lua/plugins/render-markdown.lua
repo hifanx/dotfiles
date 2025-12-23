@@ -15,7 +15,7 @@ require('render-markdown').setup({
         width = 'block',
         border = 'thin',
     },
-    pipe_table = { preset = 'heavy', style = 'normal' },
+    pipe_table = { preset = 'heavy', cell = 'trimmed', style = 'normal' },
     latex = { enabled = false },
     checkbox = { checked = { scope_highlight = '@markup.strikethrough' } },
 })

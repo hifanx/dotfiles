@@ -358,9 +358,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
             })
             vim.api.nvim_create_autocmd('LspDetach', {
                 group = vim.api.nvim_create_augroup('lsp-detach', { clear = true }),
-                callback = function(ev)
+                callback = function(ev1)
                     vim.lsp.buf.clear_references()
-                    vim.api.nvim_clear_autocmds({ group = 'lsp-highlight', buffer = ev.buf })
+                    vim.api.nvim_clear_autocmds({ group = 'lsp-highlight', buffer = ev1.buf })
                 end,
             })
         end
@@ -443,19 +443,11 @@ vim.lsp.enable(servers)
 -- }}}
 -- {{{ eager require
 
-require('mini.starter').setup()
-require('mini.icons').setup()
-
-vim.keymap.set('n', '<leader>hf', ':Fidget history<CR>', { desc = '[F]idget history' })
-require('fidget').setup({
-    notification = {
-        filter = vim.log.levels.DEBUG,
-        override_vim_notify = true,
-    },
-})
+require('mini.starter').setup() -- self explanatory
+require('mini.icons').setup() -- dependency for oil.nvim
 
 vim.keymap.set('n', '<leader>o', function() require('oil').toggle_float() end, { desc = '[O]il' })
-require('oil').setup({
+require('oil').setup({ -- need oil-ssh
     default_file_explorer = true,
     delete_to_trash = true,
     view_options = {
@@ -500,16 +492,21 @@ local function not_so_fast(path)
     coroutine.yield()
 end
 
-coroutine.wrap(function()
-    local groups = {
-        vim.api.nvim_get_runtime_file('lua/plugins/*.lua', true),
-    }
+vim.api.nvim_create_autocmd('VimEnter', {
+    once = true,
+    callback = function()
+        coroutine.wrap(function()
+            local groups = {
+                vim.api.nvim_get_runtime_file('lua/plugins/*.lua', true),
+            }
 
-    for _, files in ipairs(groups) do
-        for _, path in ipairs(files) do
-            not_so_fast(path)
-        end
-    end
-end)()
+            for _, files in ipairs(groups) do
+                for _, path in ipairs(files) do
+                    not_so_fast(path)
+                end
+            end
+        end)()
+    end,
+})
 
 -- }}}

@@ -2,8 +2,8 @@
 
 return {
     -- local
-    s('l', fmt([[ local {} ]], { i(0) })),
-    s('ll', fmt([[ local {} = {} ]], { i(1), i(0) })),
+    s('l', fmt('local {}', { i(0) })),
+    s('ll', fmt('local {} = {}', { i(1), i(0) })),
     s(
         'lm',
         fmta(
@@ -36,6 +36,16 @@ return {
             ]],
             { i(1), i(2), i(0) }
         )
+    ),
+    s(
+        'lr',
+        fmt([[ local {} = require('{}') ]], {
+            f(function(name)
+                local parts = vim.split(name[1][1], '.', { plain = true })
+                return parts[#parts] or ''
+            end, { 1 }),
+            i(1),
+        })
     ),
     -- if
     s(
@@ -109,11 +119,11 @@ return {
         'f',
         fmt(
             [[
-                function()
+                function({})
                     {}
                 end
             ]],
-            { i(0) }
+            { i(1), i(0) }
         )
     ),
     s(
@@ -128,6 +138,6 @@ return {
         )
     ),
     -- print
-    s('p', fmt([[ print({}) ]], { i(0) })),
-    s('pi', fmt([[ print(vim.inspect({})) ]], { i(0) })),
+    s('p', fmt('print({})', { i(0) })),
+    s('pi', fmt('print(vim.inspect({}))', { i(0) })),
 }
