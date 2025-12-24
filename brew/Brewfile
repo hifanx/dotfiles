@@ -5,6 +5,8 @@ tap "nikitabobko/tap"
 tap "sst/tap"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Resource monitor. C++ version and continuation of bashtop and bpytop
+brew "btop"
 # Diff that understands syntax
 brew "difftastic"
 # Modern, maintained replacement for ls
