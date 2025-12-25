@@ -26,8 +26,8 @@ vim.g.terminal_color_foreground = c.text
 
 local hl = {
     -- :h highlight-default
-    Normal = { fg = c.subtext, bg = c.none }, -- normal text
-    NormalNC = { fg = c.subtext, bg = c.none }, -- normal text in non-current windows
+    Normal = { fg = c.subtext, bg = c.base }, -- normal text
+    NormalNC = { fg = c.subtext, bg = c.base }, -- normal text in non-current windows
     NormalFloat = { fg = c.subtext, bg = c.mantle }, -- Normal text in floating windows.
     -- Cursor = {}, -- character under the cursor
     -- lCursor = {}, -- the character under the cursor when |language-mapping| is used (see 'guicursor')
@@ -73,8 +73,8 @@ local hl = {
     SpellCap = { sp = c.yellow, undercurl = true }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
     SpellLocal = { sp = c.blue, undercurl = true }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
     SpellRare = { sp = c.green, undercurl = true }, -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.
-    StatusLine = { fg = c.overlay, bg = c.none }, -- status line of current window
-    StatusLineNC = { fg = c.overlay, bg = c.none }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
+    StatusLine = { fg = c.overlay, bg = c.base }, -- status line of current window
+    StatusLineNC = { fg = c.overlay, bg = c.base }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
     TabLine = { bg = c.crust, fg = c.overlay }, -- tab pages line, not active tab page label
     TabLineFill = { bg = c.mantle }, -- tab pages line, where there are no labels
     TabLineSel = { link = 'Normal' }, -- tab pages line, active tab page label
@@ -83,8 +83,8 @@ local hl = {
     OkMsg = { fg = c.green }, -- success messages
     ModeMsg = { fg = c.yellow, bold = true }, -- 'showmode' message (e.g., "-- INSERT -- ")
     MoreMsg = { fg = c.blue }, -- |more-prompt|
-    -- MsgArea = { bg = c.none }, -- Area for messages and cmdline, don't set this highlight because of https://github.com/neovim/neovim/issues/17832
-    MsgSeparator = { fg = c.crust }, -- Separator for scrolled messages, `msgsep` flag of 'display'
+    -- MsgArea = { bg = c.base }, -- Area for messages and cmdline, don't set this highlight because of https://github.com/neovim/neovim/issues/17832
+    -- MsgSeparator = { fg = c.crust }, -- Separator for scrolled messages, `msgsep` flag of 'display'
     Question = { fg = c.peach }, -- |hit-enter| prompt and yes/no questions
     NonText = { fg = c.overlay }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
     EndOfBuffer = { fg = c.overlay }, -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
