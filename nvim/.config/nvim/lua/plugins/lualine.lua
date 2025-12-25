@@ -159,6 +159,16 @@ require('lualine').setup({
                 icon = ' ',
                 symbols = {
                     separator = '',
+                    spinner = {
+                        '▰▱▱▱▱▱▱',
+                        '▰▰▱▱▱▱▱',
+                        '▰▰▰▱▱▱▱',
+                        '▰▰▰▰▱▱▱',
+                        '▰▰▰▰▰▱▱',
+                        '▰▰▰▰▰▰▱',
+                        '▰▰▰▰▰▰▰',
+                        '▰▱▱▱▱▱▱',
+                    },
                 },
                 ignore_lsp = { 'copilot' },
                 show_name = true,

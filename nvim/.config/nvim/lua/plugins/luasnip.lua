@@ -1,8 +1,21 @@
 local ls = require('luasnip')
 local types = require('luasnip.util.types')
 
-vim.keymap.set({ 'i', 's' }, '<Tab>', function() ls.jump(1) end, { silent = true })
-vim.keymap.set({ 'i', 's' }, '<S-Tab>', function() ls.jump(-1) end, { silent = true })
+vim.keymap.set({ 'i', 's' }, '<Tab>', function()
+    if ls.jumpable(1) then
+        ls.jump(1)
+    else
+        return '<Tab>'
+    end
+end, { silent = true, expr = true })
+
+vim.keymap.set({ 'i', 's' }, '<S-Tab>', function()
+    if ls.jumpable(-1) then
+        ls.jump(-1)
+    else
+        return '<S-Tab>'
+    end
+end, { silent = true, expr = true })
 
 vim.keymap.set({ 'i', 's' }, '<C-c>', function()
     if ls.expandable() then
@@ -25,13 +38,13 @@ ls.setup({
         },
         [types.exitNode] = {
             unvisited = {
-                virt_text = { { '○', 'LspInlayHint' } },
+                virt_text = { { '◌', 'LspInlayHint' } },
                 virt_text_pos = 'inline',
             },
         },
         [types.choiceNode] = {
             active = {
-                virt_text = { { 'choice node', 'LspInlayHint' } },
+                virt_text = { { '<-- choice node', 'LspInlayHint' } },
             },
         },
     },

@@ -25,7 +25,7 @@ require('blink.cmp').setup({
     },
 
     signature = { enabled = true },
-    cmdline = { enabled = false },
+    cmdline = { completion = { menu = { auto_show = true } } },
     snippets = { preset = 'luasnip' },
 
     -- use :BlinkCmp status to view which sources providers are enabled or not enabled

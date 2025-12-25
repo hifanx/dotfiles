@@ -83,7 +83,10 @@ o.foldlevel = 0 -- start with all folds closed
 o.foldlevelstart = 0 -- open files with folds closed
 
 -- clipboard
-o.clipboard = 'unnamedplus' -- connection to the system clipboard
+vim.schedule(function() -- to avoid increasing startup-time
+    o.clipboard = 'unnamedplus' -- connection to the system clipboard
+end)
+
 if vim.env.SSH_CONNECTION then
     local function vim_paste()
         local content = vim.fn.getreg('"')
@@ -102,15 +105,6 @@ if vim.env.SSH_CONNECTION then
         },
     }
 end
-
--- cmdline-autocomplete
-o.wildmode = 'noselect:lastused,full'
-o.wildoptions = 'pum'
-
-vim.api.nvim_create_autocmd('CmdlineChanged', {
-    pattern = { ':', '/', '?' },
-    callback = function() vim.fn.wildtrigger() end,
-})
 
 -- disable some default providers
 g.loaded_node_provider = 0
@@ -301,11 +295,6 @@ vim.pack.add({
 
 -- lsp {{{
 
--- disable default keybinds
-for _, bind in ipairs({ 'grn', 'gra', 'gri', 'grr', 'grt' }) do
-    pcall(vim.keymap.del, 'n', bind)
-end
-
 -- setup lsp attach
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
@@ -313,16 +302,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
         local client = vim.lsp.get_client_by_id(ev.data.client_id)
         if not client then return end
 
-        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'LSP [D]efinition' })
-        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = 'LSP [D]eclaration' })
-        vim.keymap.set('n', 'gr', vim.lsp.buf.references, { nowait = true, desc = 'LSP [R]eferences' })
-        vim.keymap.set('n', 'gI', vim.lsp.buf.implementation, { desc = 'LSP [I]mplementation' })
-        vim.keymap.set('n', 'gy', vim.lsp.buf.type_definition, { desc = 'LSP T[y]pe Definition' })
-
+        vim.keymap.set('n', 'grd', vim.lsp.buf.definition, { desc = 'LSP [D]efinition' })
+        vim.keymap.set('n', 'grD', vim.lsp.buf.declaration, { desc = 'LSP [D]eclaration' })
         vim.keymap.set('n', 'gh', vim.diagnostic.open_float, { buffer = ev.buf, desc = 'LSP [H]over Diagnostic' })
-        vim.keymap.set({ 'n', 'v' }, '<leader>la', vim.lsp.buf.code_action, { buffer = ev.buf, desc = 'Code [A]ction' })
-        vim.keymap.set('n', '<leader>lh', vim.lsp.buf.signature_help, { buffer = ev.buf, desc = 'Signature [H]elp' })
-        vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, { buffer = ev.buf, desc = '[R]ename' })
 
         if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_codeLens) then
             vim.keymap.set(
@@ -390,7 +372,6 @@ vim.diagnostic.config({
     underline = true,
     severity_sort = true,
     float = {
-        border = 'rounded',
         header = '',
     },
 })
@@ -444,57 +425,37 @@ vim.lsp.enable(servers)
 -- {{{ eager require
 
 require('mini.starter').setup() -- self explanatory
-require('mini.icons').setup() -- dependency for oil.nvim
+require('mini.icons').setup() -- dependency for oil.nvim and others
 
 vim.keymap.set('n', '<leader>o', function() require('oil').toggle_float() end, { desc = '[O]il' })
-require('oil').setup({ -- need oil-ssh
+require('oil').setup({ -- g? to see help & keymaps
     default_file_explorer = true,
     delete_to_trash = true,
     view_options = {
-        show_hidden = true,
-        is_always_hidden = function(name, _) return name == '.git' end, -- but not .git
+        show_hidden = true, -- but not .git ↓
+        is_always_hidden = function(name, _) return name == '.git' end,
     },
     float = {
         max_width = 0.6,
         max_height = 0.9,
-    },
-    use_default_keymaps = true,
-    -- See :help oil-actions for a list of all available actions
-    keymaps = { -- these are defaults.
-        ['g?'] = { 'actions.show_help', mode = 'n' },
-        ['<CR>'] = 'actions.select',
-        ['<C-s>'] = { 'actions.select', opts = { vertical = true } },
-        ['<C-h>'] = { 'actions.select', opts = { horizontal = true } },
-        ['<C-t>'] = { 'actions.select', opts = { tab = true } },
-        ['<C-p>'] = 'actions.preview',
-        ['<C-c>'] = { 'actions.close', mode = 'n' },
-        ['<C-l>'] = 'actions.refresh',
-        ['-'] = { 'actions.parent', mode = 'n' },
-        ['_'] = { 'actions.open_cwd', mode = 'n' },
-        ['`'] = { 'actions.cd', mode = 'n' },
-        ['~'] = { 'actions.cd', opts = { scope = 'tab' }, mode = 'n' },
-        ['gs'] = { 'actions.change_sort', mode = 'n' },
-        ['gx'] = 'actions.open_external',
-        ['g.'] = { 'actions.toggle_hidden', mode = 'n' },
-        ['g\\'] = { 'actions.toggle_trash', mode = 'n' },
     },
 })
 
 -- }}}
 -- {{{ not so fast
 
-local function not_so_fast(path)
-    local co = coroutine.running()
-    vim.schedule(function()
-        dofile(path)
-        coroutine.resume(co)
-    end)
-    coroutine.yield()
-end
-
 vim.api.nvim_create_autocmd('VimEnter', {
     once = true,
     callback = function()
+        local function not_so_fast(path)
+            local co = coroutine.running()
+            vim.schedule(function()
+                dofile(path)
+                coroutine.resume(co)
+            end)
+            coroutine.yield()
+        end
+
         coroutine.wrap(function()
             local groups = {
                 vim.api.nvim_get_runtime_file('lua/plugins/*.lua', true),
