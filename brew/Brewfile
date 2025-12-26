@@ -23,8 +23,6 @@ brew "gnupg"
 brew "imagemagick"
 # Simple terminal UI for git commands
 brew "lazygit"
-# May the code be with you
-brew "leetcode-cli"
 # Mac App Store command-line interface
 brew "mas"
 # Incremental parsing library
