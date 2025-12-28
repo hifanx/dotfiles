@@ -1,30 +1,28 @@
-import math  # 'import': @keyword.import, math: @module.builtin
+import math
 from dataclasses import (
     dataclass,
-)  # 'from'/'import': @keyword.import, dataclass: @attribute.builtin
-from pathlib import Path  # Path: @type
-import re  # re: @module
+)
+from pathlib import Path
+import re
 
-PI = 3.1415  # PI: @constant, 3.1415: @number.float
-MAX_RETRIES = 5  # MAX_RETRIES: @constant
-DEBUG_ENABLED = True  # True: @boolean
-PATH = Path("/tmp/data.txt")  # string: @string, path-like: @string.special.path
-URL = "https://example.com/demo"  # @string.special.url
+PI = 3.1415
+MAX_RETRIES = 5
+DEBUG_ENABLED = True
+PATH = Path("/tmp/data.txt")
+URL = "https://example.com/demo"
 
 
-@dataclass  # @attribute.builtin
-class Point:  # Point: @type.definition
-    x: float  # x: @variable.member, float: @type.builtin
+@dataclass
+class Point:
+    x: float
     y: float
 
-    def __init__(
-        self, x: float, y: float
-    ) -> None:  # __init__: @constructor.python, def: @keyword.function
-        self.x = x  # self: @variable.builtin, x: @variable.parameter
-        self.y = y  # y: @variable.parameter
+    def __init__(self, x: float, y: float) -> None:
+        self.x = x
+        self.y = y
 
     def length(self) -> float:
-        return (self.x**2 + self.y**2) ** 0.5  # '**', '+': @operator
+        return (self.x**2 + self.y**2) ** 0.5
 
 
 def math_test():
@@ -34,61 +32,49 @@ def math_test():
 
 def documented_add(x: int, y: int) -> int:
     """@string.documentation simple documented function adding two numbers."""
-    # x, y: @variable.parameter
-    return x + y  # return: @keyword.return
+    return x + y
 
 
 def safe_divide(x: float, y: float) -> float:
     """Demonstrate exceptions: try/except/raise -> @keyword.exception."""
-    try:  # try: @keyword.exception
+    try:
         return x / y
-    except ZeroDivisionError:  # except: @keyword.exception
-        raise ValueError(
-            "cannot divide by zero"
-        )  # raise: @keyword.exception, string: @string
+    except ZeroDivisionError:
+        raise ValueError("cannot divide by zero")
 
 
 async def fetch_point(scale: float) -> Point:
     """Async function to show coroutine-related keywords."""
-    # async def / await: @keyword.coroutine, @keyword.function
     base = Point(1.0, 2.0)
-    await some_async_side_effect()  # await: @keyword.coroutine, call: @function.call
+    await some_async_side_effect()
     return Point(base.x * scale, base.y * scale)
 
 
 def some_async_side_effect() -> None:
     """Placeholder for an async library function (often @lsp.typemod.function.defaultLibrary)."""
-    pass  # pass: @keyword
+    pass
 
 
 def regex_examples() -> None:
-    pattern = re.compile(
-        r"\w+\s+value"
-    )  # raw string: @string.regexp, '\\w', '\\s': @string.escape
-    text = (
-        "line1\\nline2\tend"  # standard string: @string, '\\n', '\\t': @string.escape
-    )
-    match = pattern.search(text)  # search(): @function.method.call
-    if match:  # if: @keyword.conditional
-        print(match.group(0))  # print: @function.builtin
+    pattern = re.compile(r"\w+\s+value")
+    text = "line1\\nline2\tend"
+    match = pattern.search(text)
+    if match:
+        print(match.group(0))
 
 
 def boolean_and_ternary(flag: bool) -> int:
-    # flag: @variable.parameter, bool: @type.builtin
-    value = 10 if flag else 0  # inline if/else: @keyword.conditional.ternary
+    value = 10 if flag else 0
     return value
 
 
 def modifier_and_type_keywords(x: int | None) -> int:
-    # 'None' is a built-in constant: @constant.builtin
-    if x is None:  # is: @keyword.operator
+    if x is None:
         x = 0
-    final_result: int = (
-        x + 1
-    )  # type annotation 'int': @type.builtin, 'final_result': @variable
+    final_result: int = x + 1
     return final_result
 
 
-if __name__ == "__main__":  # __name__: @variable.builtin, string: @string
-    p = Point(3.0, 4.0)  # Point(): @constructor.python call
+if __name__ == "__main__":
+    p = Point(3.0, 4.0)
     print("length:", p.length())

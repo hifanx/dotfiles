@@ -1,18 +1,32 @@
-const plain = "plain string value"; // @string
-const escaped = "line1\nline2\tend"; // '\\n', '\\t': @string.escape
+const plain = "plain string value";
+const escaped = "line1\nline2\tend";
+const template = `path: ${plain}`;
 
-const regex = /foo\d+/g; // /foo\d+/: @string.regexp, '\\d': @string.escape
+const regex = /foo\d+/g;
+const rawRegex = String.raw`^foo\\w+bar$`;
 
-const filePath = "/usr/local/bin/node"; // path-like string: @string.special.path
-const website = "https://example.com/path"; // URL string: @string.special.url
+const filePath = "/usr/local/bin/node";
+const website = "https://example.com/path";
 
-const sym = Symbol("demo-symbol"); // "demo-symbol": @string.special.symbol (depending on grammar)
+const sym = Symbol("demo-symbol");
+
+class Box {
+  constructor(value) {
+    this.value = value;
+  }
+
+  getValue() {
+    return this.value;
+  }
+}
 
 function useAll(x) {
-  // function: @function
   if (regex.test(plain)) {
-    // test(): @function.method.call
-    console.log(website, filePath, sym); // console.log: @function.method.call
+    console.log(website, filePath, sym);
   }
-  return x ? escaped : plain; // ternary uses @keyword.conditional.ternary
+
+  const box = new Box(x ? escaped : plain);
+  const result = box.getValue();
+
+  return x ? result : template;
 }

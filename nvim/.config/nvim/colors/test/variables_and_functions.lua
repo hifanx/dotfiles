@@ -85,7 +85,9 @@ end
 
 -- import / type keywords (LuaSimulated)
 -- In other languages this would look like:
--- import os                      -- `import`: @keyword.import, os: @module.builtin from math import sqrt as root  -- `from`, `import`: @keyword.import
+-- import os
+-- `import`: @keyword.import, os: @module.builtin from math import sqrt as root
+-- `from`, `import`: @keyword.import
 
 print(M)
 
