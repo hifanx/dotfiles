@@ -57,14 +57,11 @@ require('conform').setup({
         toml = { 'taplo' },
         java = { 'google-java-format' },
     },
-    default_format_opts = {
+    format_after_save = {
         lsp_format = 'fallback',
     },
-    format_on_save = function(bufnr)
-        if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then return end
-        return { timeout_ms = 500 }
-    end,
     formatters = {
         shfmt = { append_args = { '-i', '2' } },
+        ['google-java-format'] = { append_args = { '--aosp' } },
     },
 })

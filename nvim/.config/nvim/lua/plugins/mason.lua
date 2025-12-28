@@ -25,6 +25,7 @@ local ensure_installed = {
     'prettier',
     'shfmt',
     'black',
+    'google-java-format',
     -- Linters
     'shellcheck', -- used by shfmt
 }

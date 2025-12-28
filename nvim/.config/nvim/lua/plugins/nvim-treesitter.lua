@@ -24,6 +24,7 @@ local ensure_installed_ts = {
     'javascript',
     'typescript',
     'json',
+    'latex',
 }
 
 local isnt_installed = function(lang) return #vim.api.nvim_get_runtime_file('parser/' .. lang .. '.*', false) == 0 end

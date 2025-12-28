@@ -251,15 +251,15 @@ vim.api.nvim_create_autocmd('BufRead', {
     callback = function() vim.bo.filetype = 'dosini' end,
 })
 
-vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
-    desc = 'Show cursorline only in active window',
-    group = vim.api.nvim_create_augroup('active_cursorline', { clear = true }),
+vim.api.nvim_create_autocmd({ 'InsertLeave', 'WinEnter' }, {
+    desc = 'No cusorline in INSERT or inactive',
+    group = vim.api.nvim_create_augroup('CursorLineToggle', { clear = true }),
     callback = function() vim.opt_local.cursorline = true end,
 })
 
-vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
-    desc = 'Hide cursorline in inactive window',
-    group = 'active_cursorline',
+vim.api.nvim_create_autocmd({ 'InsertEnter', 'WinLeave' }, {
+    desc = 'Cusorline when not in INSERT and active',
+    group = 'CursorLineToggle',
     callback = function() vim.opt_local.cursorline = false end,
 })
 
