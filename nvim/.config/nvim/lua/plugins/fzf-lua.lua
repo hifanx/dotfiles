@@ -29,10 +29,9 @@ vim.keymap.set('n', '<leader>fo', ':FzfLua nvim_options<CR>', { desc = '[O]ption
 vim.keymap.set('n', '<leader>fk', ':FzfLua keymaps<CR>', { desc = '[K]eymaps' })
 vim.keymap.set('n', '<leader>fu', ':FzfLua undotree<CR>', { desc = '[U]ndo' })
 
-require('fzf-lua').register_ui_select()
-
 require('fzf-lua').setup({
     { 'border-fused', 'hide' },
+    ui_select = true,
     defaults = {
         file_icons = 'mini',
         cwd_prompt = false,

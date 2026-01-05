@@ -22,6 +22,8 @@ require('blink.cmp').setup({
         ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
         ['<C-s>'] = { 'show_signature', 'hide_signature', 'fallback' },
         ['<CR>'] = { 'accept', 'fallback' },
+        ['<Tab>'] = { 'snippet_forward', 'fallback' },
+        ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
     },
 
     signature = { enabled = true },

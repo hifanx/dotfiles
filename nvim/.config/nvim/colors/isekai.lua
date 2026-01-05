@@ -9,9 +9,9 @@ vim.g.terminal_color_0 = c.overlay
 vim.g.terminal_color_1 = c.red
 vim.g.terminal_color_2 = c.green
 vim.g.terminal_color_3 = c.yellow
-vim.g.terminal_color_4 = c.purple
-vim.g.terminal_color_5 = c.red_muted
-vim.g.terminal_color_6 = c.purple
+vim.g.terminal_color_4 = c.member_ish
+vim.g.terminal_color_5 = c.keyword_ish
+vim.g.terminal_color_6 = c.member_ish
 vim.g.terminal_color_7 = c.white
 vim.g.terminal_color_8 = c.overlay
 vim.g.terminal_color_9 = c.red
@@ -19,7 +19,7 @@ vim.g.terminal_color_10 = c.green
 vim.g.terminal_color_11 = c.yellow
 vim.g.terminal_color_12 = c.blue
 vim.g.terminal_color_13 = c.white
-vim.g.terminal_color_14 = c.blue_muted
+vim.g.terminal_color_14 = c.func_ish
 vim.g.terminal_color_15 = c.white
 vim.g.terminal_color_background = c.base
 vim.g.terminal_color_foreground = c.text
@@ -67,8 +67,8 @@ local hl = {
     DiffAdd = { bg = c.green_diff }, -- diff mode: Added line |diff.txt|
     DiffChange = { bg = c.orange_diff }, -- diff mode: Changed line |diff.txt|
     DiffDelete = { bg = c.red_diff }, -- diff mode: Deleted line |diff.txt|
-    DiffText = { fg = c.orange, bg = c.orange_diff }, -- diff mode: Changed text within a changed line |diff.txt|
-    DiffTextAdd = { fg = c.green, bg = c.green_diff }, -- diff mode: Added text within a changed line (variant)
+    DiffText = { fg = c.orange }, -- diff mode: Changed text within a changed line |diff.txt|
+    DiffTextAdd = { fg = c.green }, -- diff mode: Added text within a changed line (variant)
     SpellBad = { sp = c.red, undercurl = true }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
     SpellCap = { sp = c.yellow, undercurl = true }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
     SpellLocal = { sp = c.blue, undercurl = true }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
@@ -93,40 +93,40 @@ local hl = {
     Conceal = { fg = c.surface }, -- placeholder characters substituted for concealed text (see 'conceallevel')
     ColorColumn = { bg = c.mantle }, -- used for the columns set with 'colorcolumn'
     Directory = { fg = c.blue }, -- directory names (and other special names in listings)
-    Title = { fg = c.yellow, bold = true }, -- titles for output from ":set all", ":autocmd" etc.
+    Title = { fg = c.orange, bold = true }, -- titles for output from ":set all", ":autocmd" etc.
     QuickFixLine = { bg = c.surface, bold = true }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
     WildMenu = { bg = c.visual }, -- current match in 'wildmenu' completion
 
     -- :h group-name
     Comment = { fg = c.comment, italic = true }, -- comments
-    Constant = { fg = c.builtin, bold = true }, -- any constant
-    String = { fg = c.green_muted, bold = true }, -- a string constant: "this is a string"
-    Character = { fg = c.orange_muted }, -- a character constant: 'c', '\n'
-    Number = { fg = c.orange_muted }, --	a number constant: 234, 0xff
-    Boolean = { fg = c.orange_muted }, -- a boolean constant: TRUE, false
+    Constant = { fg = c.variable_ish }, -- any constant
+    String = { fg = c.value_ish }, -- a string constant: "this is a string"
+    Character = { fg = c.variable_ish }, -- a character constant: 'c', '\n'
+    Number = { fg = c.value_ish }, --	a number constant: 234, 0xff
+    Boolean = { fg = c.value_ish }, -- a boolean constant: TRUE, false
     Float = { link = 'Number' }, -- a floating point constant: 2.3e10
-    Identifier = { fg = c.lavender }, -- any variable name
-    Function = { fg = c.blue_muted, bold = true }, -- function name (also: methods for classes)
-    Statement = { fg = c.purple }, -- any statement
-    Conditional = { fg = c.purple }, -- if, then, else, endif, switch, etc.
-    Repeat = { fg = c.purple }, -- for, do, while, etc.
-    Label = { fg = c.purple }, -- case, default, etc.
+    Identifier = { fg = c.member_ish }, -- any variable name
+    Function = { fg = c.func_ish, bold = true }, -- function name (also: methods for classes)
+    Statement = { fg = c.keyword_ish }, -- any statement
+    Conditional = { fg = c.keyword_ish }, -- if, then, else, endif, switch, etc.
+    Repeat = { fg = c.keyword_ish }, -- for, do, while, etc.
+    Label = { fg = c.keyword_ish }, -- case, default, etc.
     Operator = { fg = c.overlay }, -- "sizeof", "+", "*", etc.
-    Keyword = { fg = c.purple, italic = true }, -- any other keyword
-    Exception = { fg = c.purple }, -- try, catch, throw
-    PreProc = { fg = c.purple }, -- generic Preprocessor
-    Include = { fg = c.purple }, -- preprocessor #include
+    Keyword = { fg = c.keyword_ish, italic = true }, -- any other keyword
+    Exception = { fg = c.keyword_ish }, -- try, catch, throw
+    PreProc = { fg = c.member_ish }, -- generic Preprocessor
+    Include = { fg = c.member_ish }, -- preprocessor #include
     Define = { link = 'PreProc' }, -- preprocessor #define
-    Macro = { fg = c.yellow_muted }, -- same as Define
+    Macro = { fg = c.type_ish }, -- same as Define
     PreCondit = { link = 'PreProc' }, -- preprocessor #if, #else, #endif, etc.
-    Type = { fg = c.yellow_muted }, -- int, long, char, etc.
-    StorageClass = { fg = c.yellow_muted }, -- static, register, volatile, etc.
-    Structure = { fg = c.yellow_muted, italic = true }, -- struct, union, enum, etc.
+    Type = { fg = c.type_ish }, -- int, long, char, etc.
+    StorageClass = { fg = c.type_ish }, -- static, register, volatile, etc.
+    Structure = { fg = c.type_ish, italic = true }, -- struct, union, enum, etc.
     Typedef = { link = 'Type' }, -- a typedef
     Special = { fg = c.builtin }, -- any special symbol
     SpecialChar = { link = 'Special' }, -- special character in a constant
-    Tag = { fg = c.lavender, bold = true }, -- you can use CTRL       -] on this
-    Delimiter = { fg = c.overlay }, -- character that needs attention
+    Tag = { fg = c.yellow }, -- you can use CTRL       -] on this
+    Delimiter = { fg = c.overlay, bold = true }, -- character that needs attention
     SpecialComment = { link = 'Special' }, -- special things inside a comment
     Debug = { link = 'Special' }, -- debugging statements
     Underlined = { underline = true }, -- text that stands out, HTML links
@@ -142,34 +142,34 @@ local hl = {
     DiagnosticError = { fg = c.red }, -- error diagnostics
     DiagnosticWarn = { fg = c.yellow }, -- warning diagnostics
     DiagnosticInfo = { fg = c.blue }, -- info diagnostics
-    DiagnosticHint = { fg = c.lavender }, -- hint diagnostics
+    DiagnosticHint = { fg = c.variable_ish }, -- hint diagnostics
 
     -- treesitter
     -- :h treesitter-highlight-groups
     -- ordered by `treesitter-highlight-groups` in how they are documented
     -- so don't delete stuff, commented out ones are the defaults.
-    ['@variable'] = { fg = c.lavender }, -- various variable names
-    ['@variable.builtin'] = { fg = c.red_muted }, -- built-in variable names (e.g. `this`, `self`)
-    ['@variable.parameter'] = { fg = c.red_muted }, -- parameters of a function
+    ['@variable'] = { fg = c.variable_ish }, -- various variable names
+    ['@variable.builtin'] = { fg = c.builtin }, -- built-in variable names (e.g. `this`, `self`)
+    ['@variable.parameter'] = { fg = c.variable_ish }, -- parameters of a function
     ['@variable.parameter.builtin'] = { fg = c.overlay }, -- special parameters (e.g. `_`, `it`)
-    ['@variable.member'] = { fg = c.lavender }, -- object and struct fields
+    ['@variable.member'] = { fg = c.member_ish }, -- object and struct fields
 
     -- ['@constant'] = { link = 'Constant' }, -- constant identifiers
-    ['@constant.builtin'] = { link = 'Constant' }, -- built-in constant values
+    -- ['@constant.builtin'] = {}, -- built-in constant values
     ['@constant.macro'] = { link = 'Macro' }, -- constants defined by the preprocessor
 
     -- ['@module'] = { link = 'Structure' }, -- modules or namespaces
-    -- ['@module.builtin'] = { link = 'Structure' }, -- built-in modules or namespaces
+    -- ['@module.builtin'] = {}, -- built-in modules or namespaces
     -- ['@label'] = { link = 'Label' }, -- `GOTO` and other labels (e.g. `label:` in C), including heredoc labels
 
     -- ['@string'] = { link = 'String' }, -- string literals
     ['@string.documentation'] = { fg = c.comment, bold = true }, -- string documenting code (e.g. Python docstrings)
     -- ['@string.regexp'] = { link = '@string.special' }, -- regular expressions
     -- ['@string.escape'] = { link = '@string.special' }, -- escape sequences
-    ['@string.special'] = { link = 'Special' }, -- other special strings (e.g. dates)
+    -- ['@string.special'] = { link = 'Special' }, -- other special strings (e.g. dates)
     -- ['@string.special.symbol'] = { link = '@string.special' }, -- symbols or atoms
     -- ['@string.special.path'] = { link = '@string.special' }, -- filenames
-    ['@string.special.url'] = { fg = c.text, underline = true }, -- URIs (e.g. hyperlinks)
+    -- ['@string.special.url'] = { link = 'Underlined' }, -- URIs (e.g. hyperlinks)
 
     -- ['@character'] = { link = 'Character' }, -- character literals
     -- ['@character.special'] = { link = 'SpecialChar' }, -- special characters (e.g. wildcards)
@@ -187,33 +187,33 @@ local hl = {
     -- ['@property'] = { link = 'Identifier' }, -- the key in key/value pairs
 
     -- ['@function'] = { link = 'Function' }, -- function definitions
-    -- ['@function.builtin'] = {}, -- built-in functions
-    ['@function.call'] = { link = 'Function' }, -- function calls
-    ['@function.macro'] = { link = 'Macro' }, -- preprocessor macros
+    -- ['@function.builtin'] = { fg = c.purple, bold = true }, -- built-in functions
+    -- ['@function.call'] = { link = 'Function' }, -- function calls
+    -- ['@function.macro'] = { link = 'Macro' }, -- preprocessor macros
 
-    ['@function.method'] = { link = 'Function' }, -- method definitions
-    ['@function.method.call'] = { link = 'Function' }, -- method calls
+    -- ['@function.method'] = { link = 'Function' }, -- method definitions
+    -- ['@function.method.call'] = { link = 'Function' }, -- method calls
 
-    ['@constructor'] = { fg = c.orange_muted }, -- constructor calls and definitions
+    ['@constructor'] = { link = 'Structure' }, -- constructor calls and definitions
     -- ['@operator'] = { link = 'Operator' }, -- symbolic operators (e.g. `+`, `*`)
 
     -- ['@keyword'] = { link = 'Keyword' }, -- keywords not fitting into specific categories
     -- ['@keyword.coroutine'] = {}, -- keywords related to coroutines (e.g. `go` in Go, `async/await` in Python)
     -- ['@keyword.function'] = {}, -- keywords that define a function (e.g. `func` in Go, `def` in Python)
     -- ['@keyword.operator'] = {}, -- operators that are English words (e.g. `and`, `or`)
-    ['@keyword.import'] = { link = 'Include' }, -- keywords for including or exporting modules (e.g. `import`, `from` in Python)
+    -- ['@keyword.import'] = { link = 'Include' }, -- keywords for including or exporting modules (e.g. `import`, `from` in Python)
     -- ['@keyword.type'] = {}, -- keywords describing namespaces and composite types (e.g. `struct`, `enum`)
     -- ['@keyword.modifier'] = {}, -- keywords modifying other constructs (e.g. `const`, `static`, `public`)
-    ['@keyword.repeat'] = { link = 'Repeat' }, -- keywords related to loops (e.g. `for`, `while`)
+    -- ['@keyword.repeat'] = { link = 'Repeat' }, -- keywords related to loops (e.g. `for`, `while`)
     ['@keyword.return'] = { fg = c.red, bold = true, italic = true }, -- keywords like `return` and `yield`
-    ['@keyword.debug'] = { link = 'Exception' }, -- keywords related to debugging
-    ['@keyword.exception'] = { link = 'Exception' }, -- keywords related to exceptions (e.g. `throw`, `catch`)
+    -- ['@keyword.debug'] = { link = 'Exception' }, -- keywords related to debugging
+    -- ['@keyword.exception'] = { link = 'Exception' }, -- keywords related to exceptions (e.g. `throw`, `catch`)
 
-    ['@keyword.conditional'] = { link = 'Conditional' }, -- keywords related to conditionals (e.g. `if`, `else`)
-    ['@keyword.conditional.ternary'] = { link = 'Operator' }, -- ternary operator (e.g. `?`, `:`)
+    -- ['@keyword.conditional'] = { link = 'Conditional' }, -- keywords related to conditionals (e.g. `if`, `else`)
+    -- ['@keyword.conditional.ternary'] = { link = 'Operator' }, -- ternary operator (e.g. `?`, `:`)
 
-    ['@keyword.directive'] = { link = 'PreProc' }, -- various preprocessor directives and shebangs
-    ['@keyword.directive.define'] = { link = 'Define' }, -- preprocessor definition directives
+    -- ['@keyword.directive'] = { link = 'PreProc' }, -- various preprocessor directives and shebangs
+    -- ['@keyword.directive.define'] = { link = 'Define' }, -- preprocessor definition directives
 
     -- ['@punctuation.delimiter'] = {}, -- delimiters (e.g. `;`, `.`, `,`)
     -- ['@punctuation.bracket'] = {}, -- brackets (e.g. `()`, `{}`, `[]`)
@@ -227,25 +227,25 @@ local hl = {
     -- ['@comment.todo'] = { link = 'Todo' }, -- todo-type comments (e.g. `TODO`, `WIP`)
     -- ['@comment.note'] = { link = 'DiagnosticInfo' }, -- note-type comments (e.g. `NOTE`, `INFO`, `XXX`)
 
-    ['@markup.strong'] = { fg = c.red_muted, bold = true }, -- bold text
-    ['@markup.italic'] = { fg = c.red_muted, italic = true }, -- italic text
-    ['@markup.strikethrough'] = { fg = c.text, strikethrough = true }, -- struck-through text
-    ['@markup.underline'] = { link = 'Underlined' }, -- underlined text (only for literal underline markup!)
+    ['@markup.strong'] = { fg = c.keyword_ish, bold = true }, -- bold text
+    ['@markup.italic'] = { fg = c.keyword_ish, italic = true }, -- italic text
+    -- ['@markup.strikethrough'] = {}, -- struck-through text
+    -- ['@markup.underline'] = {}, -- underlined text (only for literal underline markup!)
 
-    ['@markup.heading'] = { fg = c.orange_muted, bold = true }, -- headings, titles (including markers)
+    ['@markup.heading'] = { fg = c.variable_ish, bold = true }, -- headings, titles (including markers)
 
-    ['@markup.quote'] = { fg = c.comment }, -- block quotes
-    ['@markup.math'] = { fg = c.red }, -- math environments (e.g. `$ ... $` in LaTeX)
+    ['@markup.quote'] = { fg = c.comment, italic = true }, -- block quotes
+    ['@markup.math'] = { fg = c.keyword_ish }, -- math environments (e.g. `$ ... $` in LaTeX)
 
-    ['@markup.link'] = { fg = c.blue }, -- text references, footnotes, citations, etc.
-    ['@markup.link.label'] = { fg = c.blue }, -- link, reference descriptions
-    ['@markup.link.url'] = { fg = c.blue, underline = true, italic = true }, -- URL-style links
+    ['@markup.link'] = { fg = c.func_ish }, -- text references, footnotes, citations, etc.
+    -- ['@markup.link.label'] = {}, -- link, reference descriptions
+    -- ['@markup.link.url'] = {}, -- URL-style links
 
-    ['@markup.raw'] = { fg = c.red_muted, bold = true }, -- literal or verbatim text (e.g. inline code, python """)
+    ['@markup.raw'] = { fg = c.keyword_ish, bold = true }, -- literal or verbatim text (e.g. inline code, python """)
     -- ['@markup.raw.block'] = {}, -- literal or verbatim text as a stand-alone block
 
-    ['@markup.list'] = { fg = c.lavender }, -- list markers
-    ['@markup.list.checked'] = { fg = c.green }, -- checked todo-style list markers
+    ['@markup.list'] = { fg = c.value_ish }, -- list markers
+    ['@markup.list.checked'] = { fg = c.value_ish }, -- checked todo-style list markers
     ['@markup.list.unchecked'] = { fg = c.overlay }, -- unchecked todo-style list markers
 
     -- ['@diff.plus'] = { link = 'Added' }, -- added text (for diff files)
@@ -259,7 +259,6 @@ local hl = {
 
     -- language specific
     ['@constructor.lua'] = { link = '@punctuation.bracket' }, -- For constructor calls and definitions: = {} in Lua.
-    -- ['@constructor.python'] = {}, -- __init__(), __new__().
 
     -- semantic tokens.
     -- :h lsp-semantic-highlight
@@ -281,7 +280,7 @@ local hl = {
     BlinkCmpDocBorder = { link = 'FloatBorder' },
     BlinkCmpSignatureHelpBorder = { link = 'FloatBorder' },
     BlinkCmpLabelDeprecated = { fg = c.overlay, strikethrough = true },
-    BlinkCmpSource = { fg = c.purple },
+    BlinkCmpSource = { fg = c.member_ish },
     BlinkCmpKindText = { link = 'Normal' },
     BlinkCmpKindMethod = { link = '@function.method' },
     BlinkCmpKindFunction = { link = '@function' },

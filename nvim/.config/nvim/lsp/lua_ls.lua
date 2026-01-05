@@ -8,23 +8,16 @@ return {
         '.luacheckrc',
         '.stylua.toml',
         'stylua.toml',
-        'selene.toml',
-        'selene.yml',
         '.git',
     },
     settings = {
         Lua = {
-            format = {
-                enable = false,
-            },
+            format = { enable = false },
             completion = {
                 callSnippet = 'Replace',
                 keywordSnippet = 'Disable',
             },
-            runtime = {
-                version = 'LuaJIT',
-                path = vim.split(package.path, ';'),
-            },
+            runtime = { version = 'LuaJIT' },
             diagnostics = {
                 globals = { 'vim' },
                 disable = { 'missing-fields' },
@@ -32,7 +25,7 @@ return {
             workspace = {
                 checkThirdParty = false,
                 ignoreSubmodules = true,
-                library = { vim.env.VIMRUNTIME },
+                -- library = { vim.env.VIMRUNTIME },
             },
             hint = {
                 enable = true,
