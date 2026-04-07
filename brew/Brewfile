@@ -2,6 +2,7 @@ tap "buo/cask-upgrade"
 tap "felixkratz/formulae"
 tap "koekeishiya/formulae"
 tap "nikitabobko/tap"
+tap "shinokawa/nipaplay-reload"
 tap "sst/tap"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
@@ -19,12 +20,14 @@ brew "fzf"
 brew "git"
 # GNU Privacy Guard (OpenPGP)
 brew "gnupg"
-# Tools and libraries to manipulate images in many formats
+# Tools and libraries to manipulate images in select formats
 brew "imagemagick"
 # Simple terminal UI for git commands
 brew "lazygit"
 # Mac App Store command-line interface
 brew "mas"
+# Deep clean and optimize your Mac
+brew "mole"
 # Incremental parsing library
 brew "tree-sitter"
 # Ambitious Vim-fork focused on extensibility and agility
@@ -58,24 +61,20 @@ brew "sst/tap/opencode"
 # Collection of apps and services for photography, design, video, web, and UX
 cask "adobe-creative-cloud"
 # AeroSpace is an i3-like tiling window manager for macOS
-cask "aerospace"
+cask "nikitabobko/tap/aerospace"
 # Application launcher and productivity software
 cask "alfred"
 # Tool to flash OS images to SD cards & USB drives
 cask "balenaetcher"
-# Tool to remove unnecessary files and folders from disk Chinese edition
-cask "cleanmymac-zh"
 # Voice and text chat software
 cask "discord"
-# Downloads videos from different websites
-cask "downie"
+# Web browser
+cask "firefox"
 cask "font-maple-mono-cn"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
 # Java IDE by JetBrains
 cask "intellij-idea"
-# Open-source keystroke visualiser
-cask "keycastr"
 # Provides updates to various Microsoft products
 cask "microsoft-auto-update"
 # Spreadsheet software
@@ -88,20 +87,13 @@ cask "microsoft-powerpoint"
 cask "microsoft-word"
 # Media player
 cask "movist-pro"
-# Open-source software for live streaming and screen recording
-cask "obs"
+cask "shinokawa/nipaplay-reload/nipaplay-reload"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
 # Instant messaging tool
 cask "qq"
-# Mesh VPN based on WireGuard
-cask "tailscale-app"
-# Mesh VPN based on WireGuard
-cask "tailscale-app"
 # Messaging app with a focus on speed and security
 cask "telegram"
-# Cloud video conferencing
-cask "tencent-meeting"
 # Unpacks archive files
 cask "the-unarchiver"
 # VPN and WiFi proxy
@@ -114,10 +106,5 @@ cask "via"
 cask "wechat"
 # Native desktop client for WhatsApp
 cask "whatsapp"
-# Video communication and virtual meeting platform
-cask "zoom"
-mas "Blackmagic Disk Speed Test", id: 425264550
 mas "GIPHY CAPTURE", id: 668208984
 mas "Infuse", id: 1136220934
-mas "Vimlike", id: 1584519802
-mas "Wipr", id: 1662217862
