@@ -1,6 +1,5 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "theme": "system",
   "disabled_providers": ["openrouter"],
   "model": "github-copilot/claude-haiku-4-5",
   "small_model": "github-copilot/claude-haiku-4-5",
@@ -21,6 +20,9 @@
         },
         "gpt-5.1-2025-11-13": {
           "name": "gpt-5.1-2025-11-13"
+        },
+        "claude-sonnet-4-6": {
+          "name": "claude-sonnet-4-6"
         }
       }
     }
