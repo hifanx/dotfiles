@@ -10,9 +10,9 @@ fi
 eval "$(/opt/homebrew/bin/brew shellenv)"
 export HOMEBREW_PREFIX="/opt/homebrew/"
 # configure mirrors
-export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
-export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
-export HOMEBREW_API_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api"
+# export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
+# export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
+# export HOMEBREW_API_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api"
 
 #  NOTE: use zinit because it automatically installs what I need
 #  https://www.youtube.com/watch?v=ud7YxC33Z3w
@@ -103,7 +103,7 @@ alias ll='eza -lag --icons auto --sort name --group-directories-first --no-quote
 # personal aliases
 alias cdd='cd "$HOME/.dotfiles"'
 alias c="clear"
-alias bu="sudo softwareupdate -ia --verbose; brew bundle -v --file=~/.dotfiles/brew/Brewfile; brew cu; brew upgrade; brew bundle dump --force --file=~/.dotfiles/brew/Brewfile --describe; brew autoremove; brew cleanup; brew doctor"
+alias bu="sudo softwareupdate -ia --verbose; brew bundle -v --file=~/.dotfiles/brew/Brewfile; brew cu; brew upgrade; brew autoremove; brew cleanup; brew doctor"
 alias bi="brew bundle --verbose --force cleanup --file=~/.dotfiles/brew/Brewfile"
 alias bd="brew bundle dump --force --file=~/.dotfiles/brew/Brewfile --describe" 
 alias lofn="ssh root@10.0.0.5"
