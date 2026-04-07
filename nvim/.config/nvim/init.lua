@@ -121,7 +121,7 @@ g.loaded_tarPlugin = 1
 g.loaded_zipPlugin = 1
 g.loaded_remote_plugins = 1
 
-vim.schedule(function() require('vim._extui').enable({}) end)
+vim.schedule(function() require('vim._core.ui2').enable({}) end)
 
 --  }}}
 -- mappings {{{
@@ -406,7 +406,6 @@ vim.lsp.config('*', {
     capabilities = capabilities,
 })
 
--- this is where magic happens
 local servers = {
     'cssls',
     'lua_ls',
@@ -424,8 +423,7 @@ vim.lsp.enable(servers)
 -- }}}
 -- {{{ eager require
 
-require('mini.starter').setup() -- self explanatory
-require('mini.icons').setup() -- dependency for oil.nvim and others
+require('mini.icons').setup()
 
 vim.keymap.set('n', '<leader>o', function() require('oil').toggle_float() end, { desc = '[O]il' })
 require('oil').setup({ -- g? to see help & keymaps
