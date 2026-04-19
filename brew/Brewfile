@@ -100,8 +100,6 @@ cask "the-unarchiver"
 cask "thunder"
 # AI image upscaler
 cask "upscayl"
-# Keyboard configurator
-cask "via"
 # Free messaging and calling application
 cask "wechat"
 # Native desktop client for WhatsApp
