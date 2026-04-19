@@ -425,7 +425,7 @@ vim.lsp.enable(servers)
 
 require('mini.icons').setup()
 
-vim.keymap.set('n', '<leader>o', function() require('oil').toggle_float() end, { desc = '[O]il' })
+vim.keymap.set('n', '<leader>e', function() require('oil').toggle_float() end, { desc = '[O]il' })
 require('oil').setup({ -- g? to see help & keymaps
     default_file_explorer = true,
     delete_to_trash = true,
