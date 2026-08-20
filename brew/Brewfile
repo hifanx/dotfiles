@@ -1,8 +1,8 @@
 tap "buo/cask-upgrade"
-tap "felixkratz/formulae"
+tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae"
 tap "koekeishiya/formulae"
 tap "nikitabobko/tap"
-tap "shinokawa/nipaplay-reload"
+tap "shinokawa/nipaplay-reload", "https://github.com/Shinokawa/homebrew-nipaplay-reload"
 tap "sst/tap"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
@@ -24,6 +24,8 @@ brew "gnupg"
 brew "imagemagick"
 # Simple terminal UI for git commands
 brew "lazygit"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.14"
 # Mac App Store command-line interface
 brew "mas"
 # Deep clean and optimize your Mac
@@ -36,8 +38,6 @@ brew "neovim", args: ["HEAD"]
 brew "node"
 # PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.14"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # 7-Zip is a file archiver with a high compression ratio
@@ -58,8 +58,6 @@ brew "zoxide"
 brew "felixkratz/formulae/borders"
 # The AI coding agent built for the terminal.
 brew "sst/tap/opencode"
-# Collection of apps and services for photography, design, video, web, and UX
-cask "adobe-creative-cloud"
 # AeroSpace is an i3-like tiling window manager for macOS
 cask "nikitabobko/tap/aerospace"
 # Application launcher and productivity software
@@ -90,8 +88,12 @@ cask "movist-pro"
 cask "shinokawa/nipaplay-reload/nipaplay-reload"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
+# Home media player
+cask "plex"
 # Instant messaging tool
 cask "qq"
+# Mesh VPN based on WireGuard
+cask "tailscale-app"
 # Messaging app with a focus on speed and security
 cask "telegram"
 # Unpacks archive files

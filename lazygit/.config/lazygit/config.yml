@@ -24,5 +24,6 @@ gui:
   showIcons: true
   nerdFontsVersion: "3"
 git:
-  pagers:
-    - externalDiffCommand: difft --color=always --syntax-highlight=on --tab-width=2
+  diffRenderers:
+    - command: difft --color=always --syntax-highlight=on --tab-width=2
+      type: extDiff
