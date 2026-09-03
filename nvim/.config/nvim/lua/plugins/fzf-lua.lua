@@ -31,7 +31,7 @@ vim.keymap.set('n', '<leader>fu', ':FzfLua undotree<CR>', { desc = '[U]ndo' })
 
 require('fzf-lua').setup({
     { 'border-fused', 'hide' },
-    ui_select = true,
+    ui_select = {},
     defaults = {
         file_icons = 'mini',
         cwd_prompt = false,
