@@ -149,6 +149,9 @@ export PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
 export BUN_INSTALL="$HOME/.local/share/opencode/"
 export BUN_INSTALL_CACHE_DIR="$HOME/.local/share/opencode/cache"
 
+# python
+export MPLCONFIGDIR="$HOME/.local/share/matplotlib"
+
 # secrets
 if [ -f ~/.config/.secrets ]; then
     source ~/.config/.secrets
