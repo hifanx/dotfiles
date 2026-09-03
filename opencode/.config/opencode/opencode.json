@@ -12,17 +12,20 @@
         "apiKey": "{env:CHATANYWHERE_API_KEY}"
       },
       "models": {
-        "claude-sonnet-4-5-20250929": {
-          "name": "claude-sonnet-4-5-20250929"
-        },
-        "deepseek-v3.1-think-250821": {
-          "name": "deepseek-v3.1-think-250821"
-        },
-        "gpt-5.1-2025-11-13": {
-          "name": "gpt-5.1-2025-11-13"
-        },
         "claude-sonnet-4-6": {
           "name": "claude-sonnet-4-6"
+        },
+        "claude-sonnet-5": {
+          "name": "claude-sonnet-5"
+        },
+        "claude-opus-5": {
+          "name": "claude-opus-5"
+        },
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        },
+        "gpt-5.5": {
+          "name": "gpt-5.5"
         }
       }
     }
