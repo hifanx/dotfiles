@@ -157,6 +157,10 @@ vim.keymap.set('i', '<C-t>', '<Esc>b~lea', { desc = 'Turn into title case' })
 -- window management
 vim.keymap.set('n', '|', '<C-w>v', { desc = 'Split vertically' })
 vim.keymap.set('n', '\\', '<C-w>s', { desc = 'Split horizontally' })
+vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Move to left window' })
+vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Move to lower window' })
+vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Move to upper window' })
+vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Move to right window' })
 
 -- clear highlights
 vim.keymap.set('n', '<Esc>', ':noh<CR>', { desc = 'Clear highlights' })
