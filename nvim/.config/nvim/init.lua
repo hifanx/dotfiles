@@ -41,7 +41,6 @@ o.signcolumn = 'yes' -- always show the sign column
 
 -- wrapping
 o.wrap = true -- soft wrap lines
-o.showbreak = '↪ '
 o.breakindent = true -- make wrapped lines continue visually indented
 
 -- special UI symbols
@@ -284,7 +283,6 @@ vim.pack.add({
     'https://github.com/stevearc/oil.nvim.git',
     'https://github.com/hotoo/pangu.vim.git',
     'https://github.com/folke/persistence.nvim.git',
-    'https://github.com/christoomey/vim-tmux-navigator.git',
     -- ⬇️ UI
     'https://github.com/lewis6991/gitsigns.nvim.git',
     'https://github.com/AndreM222/copilot-lualine.git',
