@@ -8,8 +8,6 @@ fi
 
 # setup homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
-export HOMEBREW_PREFIX="/opt/homebrew/"
-export HOMEBREW_NO_REQUIRE_TAP_TRUST=1
 # configure mirrors
 # export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
 # export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
@@ -35,10 +33,7 @@ zinit light zsh-users/zsh-completions # this adds additional completion definiti
 zinit light marlonrichert/zsh-autocomplete # this adds real-time type-ahead autocompletion
 zinit light zsh-users/zsh-autosuggestions
 
-# clean up $HOME directory, also needed for plugins to work across sessions
-export LESSHISTFILE=/dev/null # stop .lesshst from generating
-export ZSH_COMPDUMP="$HOME/.cache/zsh/zcompdump-$ZSH_VERSION" # move .zcompdump to cache
-export HISTFILE=$HOME/.cache/zsh/.zsh_history # move .zsh_history to cache
+# history configuration (env vars in .zshenv)
 export HISTSIZE=5000
 export SAVEHIST=$HISTSIZE
 export ISTDUP=erase # erase duplicates
@@ -67,37 +62,12 @@ bindkey "$terminfo[kcbt]" reverse-menu-complete
 bindkey              '^I' menu-select
 bindkey "$terminfo[kcbt]" menu-select
 
-# general config
-export EDITOR='nvim'
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_DATA_HOME=$HOME/.local/share
-
-# FIX: gibberish for cjk characters
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-
 # neovim
 alias cn="cd ~/.config/nvim"
 alias vi="nvim"
 alias vim="nvim"
 
-# tmux
-alias tn="tmux new -s"
-alias tl="tmux ls"
-alias td="tmux detach"
-ta() {
-    # Use the argument as the session name if provided, otherwise default to "WEN"
-    local session_name=${1:-"WEN"}
-
-    if tmux has-session -t "$session_name" 2>/dev/null; then
-        tmux attach-session -t "$session_name"
-    else
-        tmux new-session -s "$session_name"
-    fi
-}
-
 # eza
-export EZA_CONFIG_DIR=$HOME/.config/eza/
 alias v='eza -lag --icons auto --sort name --group-directories-first --no-quotes --no-time'
 alias ll='eza -lag --icons auto --sort name --group-directories-first --no-quotes'
 
@@ -129,28 +99,11 @@ source <(fzf --zsh)
 # zoxide
 eval "$(zoxide init --cmd cd zsh)"
 
-# tealdeer
-export TEALDEER_CONFIG_DIR=$HOME/.config/tealdeer/
-
 # bat
 alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 
 # thefuck
 eval "$(thefuck --alias)"
-
-# npm
-export NPM_CONFIG_PREFIX="$HOME/.local/share/npm"
-export NPM_CONFIG_CACHE="$HOME/.cache/npm"
-export NPM_CONFIG_TMP="$HOME/.cache/npm/tmp"
-export NODE_PATH="$NPM_CONFIG_PREFIX/lib/node_modules"
-export PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
-
-# opencode
-export BUN_INSTALL="$HOME/.local/share/opencode/"
-export BUN_INSTALL_CACHE_DIR="$HOME/.local/share/opencode/cache"
-
-# python
-export MPLCONFIGDIR="$HOME/.local/share/matplotlib"
 
 # secrets
 if [ -f ~/.config/.secrets ]; then
