@@ -1,9 +1,9 @@
+tap "aimessoft/nipaplay-reload", "https://github.com/AimesSoft/homebrew-nipaplay-reload.git"
+tap "anomalyco/tap", "https://github.com/anomalyco/homebrew-tap.git"
+tap "asmvik/formulae", "https://github.com/asmvik/homebrew-formulae.git"
 tap "buo/cask-upgrade"
 tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae"
-tap "koekeishiya/formulae"
 tap "nikitabobko/tap"
-tap "shinokawa/nipaplay-reload", "https://github.com/Shinokawa/homebrew-nipaplay-reload"
-tap "sst/tap"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
@@ -20,12 +20,14 @@ brew "fzf"
 brew "git"
 # GNU Privacy Guard (OpenPGP)
 brew "gnupg"
+# Agent multiplexer that lives in your terminal
+brew "herdr"
+# TIFF library and utilities
+brew "libtiff"
 # Tools and libraries to manipulate images in select formats
 brew "imagemagick"
 # Simple terminal UI for git commands
 brew "lazygit"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.14"
 # Mac App Store command-line interface
 brew "mas"
 # Deep clean and optimize your Mac
@@ -36,10 +38,14 @@ brew "tree-sitter"
 brew "neovim", args: ["HEAD"]
 # Open-source, cross-platform JavaScript runtime environment
 brew "node"
-# PDF rendering library (based on the xpdf-3.0 code base)
-brew "poppler"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# AI coding agent, built for the terminal
+brew "opencode"
+# PDF rendering library (based on the xpdf-3.0 code base)
+brew "poppler"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.14"
 # 7-Zip is a file archiver with a high compression ratio
 brew "sevenzip"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
@@ -48,16 +54,14 @@ brew "stow"
 brew "tealdeer"
 # Programmatically correct mistyped console commands
 brew "thefuck"
-# Terminal multiplexer
-brew "tmux", args: ["HEAD"]
 # Blazing fast terminal file manager written in Rust, based on async I/O
 brew "yazi", args: ["HEAD"]
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
 # A window border system for macOS
 brew "felixkratz/formulae/borders"
-# The AI coding agent built for the terminal.
-brew "sst/tap/opencode"
+# Collection of apps and services for photography, design, video, web, and UX
+cask "adobe-creative-cloud"
 # AeroSpace is an i3-like tiling window manager for macOS
 cask "nikitabobko/tap/aerospace"
 # Application launcher and productivity software
@@ -73,6 +77,8 @@ cask "font-maple-mono-cn"
 cask "ghostty"
 # Java IDE by JetBrains
 cask "intellij-idea"
+# Free and open-source painting and sketching program
+cask "krita"
 # Provides updates to various Microsoft products
 cask "microsoft-auto-update"
 # Spreadsheet software
@@ -85,7 +91,7 @@ cask "microsoft-powerpoint"
 cask "microsoft-word"
 # Media player
 cask "movist-pro"
-cask "shinokawa/nipaplay-reload/nipaplay-reload"
+cask "aimessoft/nipaplay-reload/nipaplay-reload", trusted: true
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
 # Home media player
@@ -96,8 +102,6 @@ cask "qq"
 cask "tailscale-app"
 # Messaging app with a focus on speed and security
 cask "telegram"
-# Unpacks archive files
-cask "the-unarchiver"
 # VPN and WiFi proxy
 cask "thunder"
 # AI image upscaler
