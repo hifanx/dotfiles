@@ -6,9 +6,9 @@ local ensure_installed_ts = {
     'query',
     'vim',
     'vimdoc',
+    'diff',
     -- NOTE: the above are natively installed since neovim 0.12
     'bash',
-    'diff',
     'dockerfile',
     'gitignore',
     'git_config',
