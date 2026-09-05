@@ -91,7 +91,7 @@ local hl = {
     SpecialKey = { link = 'NonText' }, -- Unprintable characters: text displayed differently from what it really is.  But not 'listchars' textspace. |hl-Whitespace|
     Whitespace = { fg = c.surface }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
     Conceal = { fg = c.surface }, -- placeholder characters substituted for concealed text (see 'conceallevel')
-    ColorColumn = { bg = c.mantle }, -- used for the columns set with 'colorcolumn'
+    ColorColumn = { bg = c.overlay }, -- used for the columns set with 'colorcolumn'
     Directory = { fg = c.blue }, -- directory names (and other special names in listings)
     Title = { fg = c.orange, bold = true }, -- titles for output from ":set all", ":autocmd" etc.
     QuickFixLine = { bg = c.surface, bold = true }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
@@ -227,12 +227,12 @@ local hl = {
     -- ['@comment.todo'] = { link = 'Todo' }, -- todo-type comments (e.g. `TODO`, `WIP`)
     -- ['@comment.note'] = { link = 'DiagnosticInfo' }, -- note-type comments (e.g. `NOTE`, `INFO`, `XXX`)
 
-    ['@markup.strong'] = { fg = c.keyword_ish, bold = true }, -- bold text
-    ['@markup.italic'] = { fg = c.keyword_ish, italic = true }, -- italic text
+    ['@markup.strong'] = { fg = c.variable_ish, bold = true }, -- bold text
+    ['@markup.italic'] = { italic = true }, -- italic text
     -- ['@markup.strikethrough'] = {}, -- struck-through text
     -- ['@markup.underline'] = {}, -- underlined text (only for literal underline markup!)
 
-    ['@markup.heading'] = { fg = c.variable_ish, bold = true }, -- headings, titles (including markers)
+    ['@markup.heading'] = { fg = c.orange, bold = true }, -- headings, titles (including markers)
 
     ['@markup.quote'] = { fg = c.comment, italic = true }, -- block quotes
     ['@markup.math'] = { fg = c.keyword_ish }, -- math environments (e.g. `$ ... $` in LaTeX)
@@ -265,6 +265,7 @@ local hl = {
     ['@lsp.type.variable'] = vim.empty_dict(),
     ['@lsp.typemod.function.defaultLibrary'] = { link = '@function.builtin' },
     ['@lsp.typemod.function.builtin'] = { link = '@function.builtin' },
+    ['@lsp.type.decorator.markdown'] = vim.empty_dict(),
 
     -- render-markdown
     RenderMarkdownH1Bg = { link = '@markup.heading' },
@@ -273,6 +274,8 @@ local hl = {
     RenderMarkdownH4Bg = { link = '@markup.heading' },
     RenderMarkdownH5Bg = { link = '@markup.heading' },
     RenderMarkdownH6Bg = { link = '@markup.heading' },
+    RenderMarkdownCode = { bg = c.mantle },
+    RenderMarkdownCodeInline = { fg = c.keyword_ish },
 
     -- blink
     BlinkCmpMenuSelection = { link = 'PmenuSel' },
@@ -309,15 +312,15 @@ local hl = {
     BlinkCmpKindCopilot = { fg = c.green },
 
     -- snacks
-    SnacksInputNormal = { link = 'NormalFloat' },
-    SnacksInputBorder = { link = 'FloatBorder' },
-    SnacksInputTitle = { link = 'FloatTitle' },
-    SnacksInputIcon = { link = 'DiagnosticWarn' },
-    SnacksPickerCursorLine = { link = 'PmenuSel' },
-    SnacksPickerListCursorLine = { link = 'PmenuSel' },
-    SnacksPickerInputCursorLine = { link = 'NormalFloat' },
-    SnacksPickerTree = { link = 'Conceal' },
-    SnacksIndent = { link = 'Conceal' },
+    -- SnacksInputNormal = { link = 'NormalFloat' },
+    -- SnacksInputBorder = { link = 'FloatBorder' },
+    -- SnacksInputTitle = { link = 'FloatTitle' },
+    -- SnacksInputIcon = { link = 'DiagnosticWarn' },
+    -- SnacksPickerCursorLine = { link = 'PmenuSel' },
+    -- SnacksPickerListCursorLine = { link = 'PmenuSel' },
+    -- SnacksPickerInputCursorLine = { link = 'NormalFloat' },
+    -- SnacksPickerTree = { link = 'Conceal' },
+    -- SnacksIndent = { link = 'Conceal' },
 
     -- navic
     NavicIconsFile = { link = '@markup.link' },

@@ -25,7 +25,7 @@ return {
             workspace = {
                 checkThirdParty = false,
                 ignoreSubmodules = true,
-                -- library = { vim.env.VIMRUNTIME },
+                library = { vim.env.VIMRUNTIME }, -- comment to speed up by not indexing runtime files
             },
             hint = {
                 enable = true,
