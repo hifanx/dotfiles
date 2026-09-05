@@ -1,7 +1,38 @@
-vim.keymap.set('n', '<C-x>', function() require('mini.bufremove').delete() end, { desc = 'Delete buffer' })
+vim.keymap.set('n', '<Leader>d', function() require('mini.bufremove').delete() end, { desc = '[D]elete buffer' })
 
+-- mini.ai: Extended text objects
+-- NORMAL/VISUAL MODE:
+--   i{obj}  - Inner text object              | dif      | delete inner function
+--   a{obj}  - Around text object             | vaf      | select around function
+--
+-- OBJECTS: f (function call), a (argument), t (tag), q (quote), b/(/[ (brackets)
+--          Uppercase variants select including whitespace
 require('mini.ai').setup()
+
+-- mini.align: Align text interactively
+-- NORMAL/VISUAL MODE:
+--   ga{motion} - Align (interactive)         | gaip=    | align paragraph on =
+--   gA{motion} - Align with preview          | gAip,    | align paragraph on ,
+--
+-- MODIFIERS (during interactive align):
+--   s  - change Split pattern
+--   j  - change Justify side (left/center/right/none)
+--   m  - change Merge delimiter
+--   f  - filter lines by Lua pattern
+--   i  - ignore lines by Lua pattern
+--   p  - pair separator
+--   t  - trim whitespace
+--   <CR> - confirm
 require('mini.align').setup()
+
+local statuscolumn = require('mini.statuscolumn')
+local spec = {
+    { format = 's=l', sep = ' ' },
+    { ltype = 'virt', lnum = '·' },
+    { ltype = 'wrap', lnum = '↪' },
+    { win = 'inactive', fold = '', lnum = '', sign = '', sep = '' },
+}
+statuscolumn.setup({ content = statuscolumn.gen_content.main(spec) })
 
 -- mini.surround: Surround text objects
 -- NORMAL MODE:
