@@ -52,8 +52,6 @@ brew "sevenzip"
 brew "stow"
 # Very fast implementation of tldr in Rust
 brew "tealdeer"
-# Programmatically correct mistyped console commands
-brew "thefuck"
 # Blazing fast terminal file manager written in Rust, based on async I/O
 brew "yazi", args: ["HEAD"]
 # Shell extension to navigate your filesystem faster
