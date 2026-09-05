@@ -19,14 +19,12 @@ onboarding = false
 
 # Override individual color tokens on top of the base theme.
 # Accepts: hex (#rrggbb), named colors, rgb(r,g,b), or panel_bg = "reset"
-# [theme.custom]
-# sidebar_bg = "#181825"
+[theme.custom]
+sidebar_bg = "#080B10"
 # active_row_bg = "#1e1e2e"
 # selection_bg = "#313244"
-# panel_bg = "reset"
-# accent = "#f5c2e7"
-# red = "#ff6188"
-# green = "#a6e3a1"
+panel_bg = "transparent"
+accent = "#F9E2AF"
 
 [terminal]
 # Executable used for new interactive panes.
@@ -71,7 +69,7 @@ prefix = "ctrl+a"
 # detach = "prefix+q"
 # reload_config = "prefix+shift+r"
 # open_notification_target = "prefix+o"
-# workspace_picker = "prefix+w"
+workspace_picker = "prefix+n"
 goto = "prefix+w"
 # new_workspace = "prefix+shift+n"
 # new_worktree = "prefix+shift+g"
@@ -166,7 +164,7 @@ height = "85%"
 # sidebar_start_collapsed = false
 
 # Collapsed sidebar presentation: "compact" keeps the narrow status rail, "hidden" uses zero width.
-# sidebar_collapsed_mode = "compact"
+sidebar_collapsed_mode = "hidden"
 
 # Terminal width at or below which Herdr uses the mobile single-column layout.
 # Increase this for foldables, tablets, or wide phone terminals.
@@ -236,8 +234,8 @@ prompt_new_tab_name = false
 # Ordered status entries at the right edge of the desktop tab bar.
 # Supported types: zoom, hostname, datetime, text, and command.
 # Hostname, datetime, and command entries resolve on the Herdr server.
-# tab_bar_right = []
-# tab_bar_right_separator = " "
+tab_bar_right = [{ type = "hostname" }, { type = "zoom" }]
+tab_bar_right_separator = " "
 
 # Title Herdr writes to the terminal it runs in, which is what window managers
 # show in title, tab, and group bars. Tokens are {hostname}, {workspace}, {tab},
