@@ -7,7 +7,7 @@ export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_CACHE_HOME=$HOME/.cache
 
-# Locale
+# Locale (solves cjk gibberish)
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
@@ -31,13 +31,6 @@ export CARGO_HOME="$HOME/.local/share/cargo"
 
 # Python/matplotlib (for Krita AI diffusion plugin)
 export MPLCONFIGDIR="$HOME/.cache/matplotlib"
-
-# Less
-export LESSHISTFILE=/dev/null
-
-# Zsh history and cache
-export ZSH_COMPDUMP="$HOME/.cache/zsh/zcompdump-$ZSH_VERSION"
-export HISTFILE=$HOME/.cache/zsh/.zsh_history
 
 # Tool configs
 export EZA_CONFIG_DIR=$HOME/.config/eza/

@@ -33,7 +33,12 @@ zinit light zsh-users/zsh-completions # this adds additional completion definiti
 zinit light marlonrichert/zsh-autocomplete # this adds real-time type-ahead autocompletion
 zinit light zsh-users/zsh-autosuggestions
 
-# history configuration (env vars in .zshenv)
+# history configuration
+# NOTE: HISTFILE is set here, not in .zshenv, because macOS /etc/zshrc loads
+# after .zshenv and unconditionally resets it to ${ZDOTDIR:-$HOME}/.zsh_history.
+export LESSHISTFILE=/dev/null
+export HISTFILE="$HOME/.cache/zsh/.zsh_history"
+export ZSH_COMPDUMP="$HOME/.cache/zsh/zcompdump-$ZSH_VERSION"
 export HISTSIZE=5000
 export SAVEHIST=$HISTSIZE
 export ISTDUP=erase # erase duplicates
