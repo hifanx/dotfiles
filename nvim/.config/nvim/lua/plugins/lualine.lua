@@ -76,149 +76,164 @@ local theme = {
     },
 }
 
-vim.api.nvim_create_autocmd({ 'BufReadPre', 'BufNewFile' }, {
-    once = true,
-    callback = function()
-        require('lualine').setup({
-            options = {
-                theme = theme,
-                globalstatus = true,
-                section_separators = { left = '', right = '' },
-                component_separators = { left = '', right = '' },
-            },
-            winbar = {
+local lualine = require('lualine')
+lualine.setup({
 
-                lualine_c = {
-                    { 'filename' },
-                    {
-                        navic_component,
-                        cond = conditions.navic_available and conditions.hide_in_width,
-                    },
+    options = {
+        theme = theme,
+        globalstatus = true,
+        section_separators = { left = '', right = '' },
+        component_separators = { left = '', right = '' },
+    },
+
+    winbar = {
+
+        lualine_c = {
+            { 'filename' },
+            {
+                navic_component,
+                cond = conditions.navic_available and conditions.hide_in_width,
+            },
+        },
+    },
+    inactive_winbar = {
+        lualine_c = {
+            { 'filename' },
+        },
+    },
+    sections = {
+        lualine_a = {
+            {
+                'mode',
+                fmt = function(str) return str:sub(1, 1) end,
+                color = { gui = 'bold' },
+                separator = { right = '▓▒░' },
+            },
+        },
+        lualine_b = {
+            { 'branch', icon = { '' } },
+        },
+        lualine_c = {
+            {
+                'buffers',
+                show_filename_only = true,
+                hide_filename_extension = true,
+                show_modified_status = true,
+                mode = 0, -- 0: Shows buffer name 1: Shows buffer index 2: Shows buffer name + buffer index 3: Shows buffer number 4: Shows buffer name + buffer number
+                max_length = vim.o.columns * 2 / 3,
+                filetype_names = {
+                    help = '',
+                    mason = ' ',
+                    checkhealth = '󰀯 ',
+                },
+                buffers_color = {
+                    active = 'lualine_c_normal',
+                    inactive = 'lualine_c_inactive',
+                },
+                symbols = {
+                    modified = '',
+                    alternate_file = '', -- Text to show to identify the alternate file
+                    directory = ' ', -- Text to show when the buffer is a directory
                 },
             },
-            inactive_winbar = {
-                lualine_c = {
-                    { 'filename' },
+        },
+        lualine_x = {
+            { trailing },
+            { indent },
+            {
+                'copilot',
+                cond = conditions.is_sif and conditions.hide_in_width,
+                symbols = {
+                    status = {
+                        icons = {
+                            enabled = ' ',
+                            sleep = ' ',
+                            disabled = ' ',
+                            warning = ' ',
+                            unknown = ' ',
+                        },
+                        hl = {
+                            enabled = c.green,
+                            sleep = c.green,
+                            disabled = c.overlay,
+                            warning = c.yellow,
+                            unknown = c.red,
+                        },
+                    },
+                    spinners = require('copilot-lualine.spinners').dots,
+                },
+                show_colors = true,
+                show_loading = true,
+            },
+            {
+                'diff',
+                cond = conditions.hide_in_width,
+                symbols = {
+                    added = ' ',
+                    modified = ' ',
+                    removed = ' ',
                 },
             },
-            sections = {
-                lualine_a = {
-                    {
-                        'mode',
-                        fmt = function(str) return str:sub(1, 1) end,
-                        color = { gui = 'bold' },
-                        separator = { right = '▓▒░' },
-                    },
-                },
-                lualine_b = {
-                    { 'branch', icon = { '' } },
-                },
-                lualine_c = {
-                    {
-                        'buffers',
-                        show_filename_only = true,
-                        hide_filename_extension = true,
-                        show_modified_status = true,
-                        mode = 0, -- 0: Shows buffer name 1: Shows buffer index 2: Shows buffer name + buffer index 3: Shows buffer number 4: Shows buffer name + buffer number
-                        max_length = vim.o.columns * 2 / 3,
-                        filetype_names = {
-                            help = '',
-                            mason = ' ',
-                            checkhealth = '󰀯 ',
-                        },
-                        buffers_color = {
-                            active = 'lualine_c_normal',
-                            inactive = 'lualine_c_inactive',
-                        },
-                        symbols = {
-                            modified = '',
-                            alternate_file = '', -- Text to show to identify the alternate file
-                            directory = ' ', -- Text to show when the buffer is a directory
-                        },
-                    },
-                },
-                lualine_x = {
-                    { trailing },
-                    { indent },
-                    {
-                        'copilot',
-                        cond = conditions.is_sif and conditions.hide_in_width,
-                        symbols = {
-                            status = {
-                                icons = {
-                                    enabled = ' ',
-                                    sleep = ' ',
-                                    disabled = ' ',
-                                    warning = ' ',
-                                    unknown = ' ',
-                                },
-                                hl = {
-                                    enabled = c.green,
-                                    sleep = c.green,
-                                    disabled = c.overlay,
-                                    warning = c.yellow,
-                                    unknown = c.red,
-                                },
-                            },
-                            spinners = require('copilot-lualine.spinners').dots,
-                        },
-                        show_colors = true,
-                        show_loading = true,
-                    },
-                    {
-                        'diff',
-                        cond = conditions.hide_in_width,
-                        symbols = {
-                            added = ' ',
-                            modified = ' ',
-                            removed = ' ',
-                        },
-                    },
-                    {
-                        'diagnostics',
-                        cond = conditions.hide_in_width,
-                        sources = { 'nvim_diagnostic' },
-                        symbols = {
-                            error = ' ',
-                            warn = ' ',
-                            info = ' ',
-                            hint = ' ',
-                        },
-                    },
-                },
-                lualine_y = {
-                    {
-                        'lsp_status',
-                        cond = conditions.hide_in_width,
-                        icon = ' ',
-                        symbols = {
-                            separator = '',
-                            spinner = {
-                                '▰▱▱▱▱▱▱',
-                                '▰▰▱▱▱▱▱',
-                                '▰▰▰▱▱▱▱',
-                                '▰▰▰▰▱▱▱',
-                                '▰▰▰▰▰▱▱',
-                                '▰▰▰▰▰▰▱',
-                                '▰▰▰▰▰▰▰',
-                                '▰▱▱▱▱▱▱',
-                            },
-                        },
-                        ignore_lsp = { 'copilot' },
-                        show_name = true,
-                    },
-                    {
-                        'location',
-                        cond = conditions.hide_in_width,
-                    },
-                },
-                lualine_z = {
-                    {
-                        'progress',
-                        separator = { left = '░▒▓' },
-                    },
+            {
+                'diagnostics',
+                cond = conditions.hide_in_width,
+                sources = { 'nvim_diagnostic' },
+                symbols = {
+                    error = ' ',
+                    warn = ' ',
+                    info = ' ',
+                    hint = ' ',
                 },
             },
-        })
+        },
+        lualine_y = {
+            {
+                'lsp_status',
+                cond = conditions.hide_in_width,
+                icon = ' ',
+                symbols = {
+                    separator = '',
+                    spinner = {
+                        '▰▱▱▱▱▱▱',
+                        '▰▰▱▱▱▱▱',
+                        '▰▰▰▱▱▱▱',
+                        '▰▰▰▰▱▱▱',
+                        '▰▰▰▰▰▱▱',
+                        '▰▰▰▰▰▰▱',
+                        '▰▰▰▰▰▰▰',
+                        '▰▱▱▱▱▱▱',
+                    },
+                },
+                ignore_lsp = { 'copilot' },
+                show_name = true,
+            },
+            {
+                'location',
+                cond = conditions.hide_in_width,
+            },
+        },
+        lualine_z = {
+            {
+                'progress',
+                separator = { left = '░▒▓' },
+            },
+        },
+    },
+})
+
+-- hides lualine on dashboard and empty page ([NO NAME])
+local function is_dashboard() return vim.fn.bufname() == '' and vim.bo.buftype == '' and vim.bo.filetype == '' end
+
+vim.schedule(function()
+    if is_dashboard() then lualine.hide() end
+end)
+
+vim.api.nvim_create_autocmd({ 'BufWinEnter', 'BufEnter' }, {
+    callback = function()
+        if is_dashboard() then
+            lualine.hide()
+        else
+            lualine.hide({ unhide = true })
+        end
     end,
 })
