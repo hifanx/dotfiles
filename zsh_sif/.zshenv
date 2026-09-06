@@ -14,11 +14,6 @@ export LANG=en_US.UTF-8
 # Editor
 export EDITOR='nvim'
 
-# Homebrew
-export HOMEBREW_PREFIX="/opt/homebrew"
-export HOMEBREW_NO_REQUIRE_TAP_TRUST=1
-export HOMEBREW_NO_INSTALL_CLEANUP=1
-
 # npm - consolidated XDG-compliant paths
 export NPM_CONFIG_PREFIX="$HOME/.local/share/npm"
 export NPM_CONFIG_CACHE="$HOME/.cache/npm"

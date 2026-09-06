@@ -7,6 +7,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # setup homebrew
+export HOMEBREW_PREFIX="/opt/homebrew"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 # configure mirrors
 # export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
