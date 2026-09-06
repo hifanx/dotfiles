@@ -1,8 +1,9 @@
 -- bootstrap {{{
 
-vim.loader.enable()
-
 _G.GLOB = {}
+
+vim.loader.enable()
+require('vim._core.ui2').enable({})
 
 -- namespaced profile
 local os_name = vim.loop.os_uname().sysname:lower()
@@ -24,7 +25,6 @@ local g = vim.g
 g.mapleader = ' '
 o.undofile = true -- enable persistent undo
 o.confirm = true -- Confirm to save changes before exiting modified buffer
-o.iskeyword = '@,48-57,_,192-255,-' -- Treat dash as `word` textobject part, default "@,48-57,_,192-255"
 o.termguicolors = true
 
 o.backup = false -- disable backup
@@ -122,8 +122,6 @@ g.loaded_man = 1
 g.loaded_tarPlugin = 1
 g.loaded_zipPlugin = 1
 g.loaded_remote_plugins = 1
-
-vim.schedule(function() require('vim._core.ui2').enable({}) end)
 
 --  }}}
 -- mappings {{{
@@ -324,7 +322,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
             vim.keymap.set(
                 'n',
                 '<leader>ll',
-                vim.lsp.codelens.refresh,
+                function() vim.lsp.codelens.enable(true) end,
                 { buffer = ev.buf, desc = 'Code[L]ens refresh' }
             )
             vim.keymap.set('n', '<leader>lL', vim.lsp.codelens.run, { buffer = ev.buf, desc = 'Code[L]ens run' })
