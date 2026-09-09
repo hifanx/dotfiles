@@ -1,3 +1,4 @@
+# there's no prebuilt slackware for unRAID, so I'm building my own
 mkdir -p /tmp/nvimbuild/usr/local
 cd /tmp/nvimbuild
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
