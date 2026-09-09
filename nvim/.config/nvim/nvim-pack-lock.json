@@ -5,7 +5,7 @@
       "src": "https://github.com/L3MON4D3/LuaSnip.git"
     },
     "blink.cmp": {
-      "rev": "49d39fda6350d7f789d1da1053e86c9e256f8108",
+      "rev": "f72465357ede7f8d899f34816d49408813c374c6",
       "src": "https://github.com/saghen/blink.cmp.git"
     },
     "blink.lib": {
@@ -41,12 +41,8 @@
       "src": "https://github.com/mason-org/mason.nvim.git"
     },
     "mini.nvim": {
-      "rev": "455856f765c78220fe547fb0862708942b52c42c",
+      "rev": "25f25d3e6661d942323e56711096de1850d814ec",
       "src": "https://github.com/nvim-mini/mini.nvim.git"
-    },
-    "neocodeium": {
-      "rev": "ab8a3da3a66d299ad5422b76ce5ee21b68719296",
-      "src": "https://github.com/monkoose/neocodeium"
     },
     "nvim-highlight-colors": {
       "rev": "e4c7af0211866162d999ce0bdd6a029302e19139",

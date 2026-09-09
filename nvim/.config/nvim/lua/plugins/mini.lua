@@ -7,7 +7,7 @@ vim.keymap.set('n', '<Leader>d', function() require('mini.bufremove').delete(0, 
 --
 -- OBJECTS: f (function call), a (argument), t (tag), q (quote), b/(/[ (brackets)
 --          Uppercase variants select including whitespace
--- require('mini.ai').setup()
+require('mini.ai').setup()
 
 -- mini.align: Align text interactively
 -- NORMAL/VISUAL MODE:
@@ -23,7 +23,7 @@ vim.keymap.set('n', '<Leader>d', function() require('mini.bufremove').delete(0, 
 --   p  - pair separator
 --   t  - trim whitespace
 --   <CR> - confirm
--- require('mini.align').setup()
+require('mini.align').setup()
 
 local statuscolumn = require('mini.statuscolumn')
 local spec = {

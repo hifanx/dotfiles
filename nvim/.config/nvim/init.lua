@@ -263,9 +263,10 @@ vim.api.nvim_create_autocmd({ 'InsertEnter', 'WinLeave' }, {
     callback = function() vim.opt_local.cursorline = false end,
 })
 
--- }}}
-
 vim.pack.add({
+
+    -- }}}
+
     -- ⬇️ EDITOR
     'https://github.com/saghen/blink.lib',
     'https://github.com/saghen/blink.cmp.git',
@@ -287,11 +288,9 @@ vim.pack.add({
     'https://github.com/brenoprata10/nvim-highlight-colors.git',
     'https://github.com/MeanderingProgrammer/render-markdown.nvim.git',
     'https://github.com/lukas-reineke/indent-blankline.nvim',
-    -- ⬇️ AI
-    'https://github.com/monkoose/neocodeium',
-})
 
--- lsp {{{
+    -- lsp {{{
+})
 
 -- add mason binaries to PATH early so LSP servers are findable on direct file open
 do
