@@ -44,6 +44,10 @@
       "rev": "455856f765c78220fe547fb0862708942b52c42c",
       "src": "https://github.com/nvim-mini/mini.nvim.git"
     },
+    "neocodeium": {
+      "rev": "ab8a3da3a66d299ad5422b76ce5ee21b68719296",
+      "src": "https://github.com/monkoose/neocodeium"
+    },
     "nvim-highlight-colors": {
       "rev": "e4c7af0211866162d999ce0bdd6a029302e19139",
       "src": "https://github.com/brenoprata10/nvim-highlight-colors.git"

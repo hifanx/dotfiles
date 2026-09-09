@@ -288,6 +288,7 @@ vim.pack.add({
     'https://github.com/MeanderingProgrammer/render-markdown.nvim.git',
     'https://github.com/lukas-reineke/indent-blankline.nvim',
     -- ⬇️ AI
+    'https://github.com/monkoose/neocodeium',
 })
 
 -- lsp {{{
