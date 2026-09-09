@@ -32,6 +32,6 @@ customCommands:
     description: "Generate AI commit message (OpenCode)"
     context: "files"
     command: >
-      bash -c 'git diff --cached | opencode run "Write a Conventional Commits-style commit message for this diff. Use the format type(scope): description, where type is one of feat, fix, docs, style, refactor, perf, test, build, ci, or chore. Scope is mandatory — omit it only if the change is not scoped to one clear area. Keep the description in imperative mood, lowercase, no trailing period, under 72 characters. Add a body only if the change needs more explanation, separated by a blank line. Output only the commit message, nothing else — no backticks, no explanation." > /tmp/commit_msg.txt && git commit -e -F /tmp/commit_msg.txt'
+      bash -c 'git diff --cached | opencode run --model opencode/big-pickle "Write a Conventional Commits-style commit message for this diff. Use the format type(scope): description, where type is one of feat, fix, docs, style, refactor, perf, test, build, ci, or chore. Scope is mandatory — omit it only if the change is not scoped to one clear area. Keep the description in imperative mood, lowercase, no trailing period, under 72 characters. Add a body only if the change needs more explanation, separated by a blank line. Output only the commit message, nothing else — no backticks, no explanation." > /tmp/commit_msg.txt && git commit -e -F /tmp/commit_msg.txt'
 
     output: terminal
