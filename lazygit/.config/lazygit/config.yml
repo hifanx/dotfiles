@@ -27,3 +27,11 @@ git:
   diffRenderers:
     - command: difft --color=always --syntax-highlight=on --tab-width=2
       type: extDiff
+customCommands:
+  - key: "<c-g>"
+    description: "Generate AI commit message (OpenCode)"
+    context: "files"
+    command: >
+      bash -c 'git diff --cached | opencode run "Write a Conventional Commits-style commit message for this diff. Use the format type(scope): description, where type is one of feat, fix, docs, style, refactor, perf, test, build, ci, or chore. Scope is optional — omit it if the change is not scoped to one clear area. Keep the description in imperative mood, lowercase, no trailing period, under 72 characters. Add a body only if the change needs more explanation, separated by a blank line. Output only the commit message, nothing else — no backticks, no explanation." | git commit -F -'
+
+    output: terminal
