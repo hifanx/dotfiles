@@ -17,8 +17,8 @@
 ## Build/Lint/Test Commands
 
 - **Format Lua**: `stylua .` (config: `stylua.toml` - 120 cols, 4 spaces, Unix endings, single quotes)
-- **Check config**: `nvim --headless "+Lazy! sync" +qa` (sync plugins)
-- No formal test suite - test changes by launching `nvim` and verifying functionality
+- **Check config**: launch `nvim` and verify functionality manually; no headless sync command
+- No formal test suite
 
 ## Code Style Guidelines
 
@@ -34,7 +34,7 @@
 
 ### Lua Conventions
 
-- **Indentation**: 2 spaces, no tabs
+- **Indentation**: 4 spaces, no tabs
 - **Line length**: 120 characters max
 - **Quotes**: Single quotes preferred (auto-prefer via stylua)
 - **Function calls**: Always use parentheses (stylua: `call_parentheses = "Always"`)
@@ -47,17 +47,19 @@
 
 ### Imports & Dependencies
 
-- Load plugins lazily via lazy.nvim (`event`, `cmd`, `keys`, etc.)
-- Use `require()` only when needed, prefer `init` for keymaps
-- Global utilities live in the `_G.GLOB` namespace (see the top of `init.lua` for definitions)
+- Plugins are declared via `vim.pack.add()` in `init.lua`
+- Plugin files in `lua/plugins/*.lua` are deferred via a coroutine loader after `VimEnter`; two exceptions load eagerly: `mini.icons` and `oil.nvim`
+- LSP servers use native `vim.lsp.config` / `vim.lsp.enable` — no nvim-lspconfig; each server config lives in `lsp/*.lua`
+- Use `require()` only when needed
+- Global utilities and feature flags live in the `_G.GLOB` namespace
 - Before adding a new plugin, check if Neovim already provides the functionality
 
 ### Plugin Guidelines
 
 - **Avoid bloat**: Only include plugins that provide significant value
-- **Lazy loading**: All plugins must be lazy-loaded appropriately
+- **Deferred loading**: Plugin setup files run one-per-tick via coroutine after `VimEnter`; eager loading is the exception, not the rule
 - **No duplicates**: Remove plugins with overlapping functionality
-- **Native first**: Use Vim/Neovim built-ins before reaching for plugins
+- **Native first**: Use Vim/Neovim built-ins before reaching for plugins (e.g., `vim.pack`, `vim.lsp`, `vim.treesitter`)
 - **Performance**: Profile impact before adding heavy plugins
 
 ### Error Handling
