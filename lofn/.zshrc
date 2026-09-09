@@ -1,9 +1,8 @@
-# shellcheck disable=SC1073,SC1090,SC1091,SC2296,SC2034
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
@@ -11,9 +10,9 @@ export ZSH=/mnt/user/appdata/zsh/.oh-my-zsh
 export HISTFILE=/mnt/user/appdata/zsh/.zsh_history
 if [ ! "$TMUX" = "" ]; then export TERM=xterm-256color; fi
 
-export ZSH_THEME="powerlevel10k/powerlevel10k"
-export ZSH_DISABLE_COMPFIX=true
-zstyle ':omz:update' mode auto      # update automatically without asking
+ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_DISABLE_COMPFIX=true
+zstyle ':omz:update' mode auto # update automatically without asking
 
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
@@ -28,7 +27,7 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 # set EDITOR
-export EDITOR='vim'
+export EDITOR='nvim'
 
 # neovim
 alias cn="cd ~/.config/nvim"
@@ -38,8 +37,16 @@ alias c="clear"
 alias v="ls -alh"
 alias cda="cd /mnt/user/appdata/"
 alias cdd="cd /mnt/user/data/"
-alias cdf="cd /mnt/disks/fast/"
-alias cho="chown -R nobody:users"
+alias cdf="cd /mnt/user/fast/"
+cho() {
+    if [ "$#" -eq 0 ]; then
+        echo "Usage: cho <file|directory> [...]"
+        return 1
+    fi
+
+    chown -R nobody:users -- "$@" &&
+        find "$@" -exec chmod u=rwX,g=rwX,o=rX {} +
+}
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
