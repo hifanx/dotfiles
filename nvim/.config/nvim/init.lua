@@ -268,8 +268,7 @@ vim.pack.add({
     -- }}}
 
     -- ⬇️ EDITOR
-    'https://github.com/saghen/blink.lib',
-    'https://github.com/saghen/blink.cmp.git',
+    { src = 'https://github.com/saghen/blink.cmp.git', version = vim.version.range('1.*') },
     'https://github.com/stevearc/conform.nvim.git',
     'https://github.com/ibhagwan/fzf-lua.git',
     'https://github.com/L3MON4D3/LuaSnip.git',

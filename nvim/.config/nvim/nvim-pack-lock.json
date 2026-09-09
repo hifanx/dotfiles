@@ -5,8 +5,9 @@
       "src": "https://github.com/L3MON4D3/LuaSnip.git"
     },
     "blink.cmp": {
-      "rev": "f72465357ede7f8d899f34816d49408813c374c6",
-      "src": "https://github.com/saghen/blink.cmp.git"
+      "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
+      "src": "https://github.com/saghen/blink.cmp.git",
+      "version": "1.0.0 - 2.0.0"
     },
     "blink.lib": {
       "rev": "fd9a48ebbe6ec30d5dfcc5b42c243941ccdca1aa",

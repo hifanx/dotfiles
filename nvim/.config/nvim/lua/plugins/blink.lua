@@ -1,6 +1,4 @@
-local cmp = require('blink.cmp')
-cmp.build():pwait()
-cmp.setup({
+require('blink.cmp').setup({
     keymap = {
         preset = 'none',
         ['<C-e>'] = { 'show', 'hide', 'fallback' },
