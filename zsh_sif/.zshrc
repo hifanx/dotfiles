@@ -115,3 +115,13 @@ fi
 
 # powerlevel10k
 [[ ! -f ~/.config/.p10k.zsh ]] || source ~/.config/.p10k.zsh
+
+# Re-patch Krita's bundled Python after app updates to keep ~/.matplotlib clean.
+# Run manually with: krita-fix
+krita-fix() {
+  local f="/Applications/Krita.app/Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/sitecustomize.py"
+  [[ -f "$f" ]] || { echo "Krita not found at expected path"; return 1; }
+  grep -q 'MPLCONFIGDIR' "$f" && echo "already patched" && return
+  printf '\nimport os\nos.environ.setdefault("MPLCONFIGDIR", os.path.expanduser("~/.cache/matplotlib"))\n' >> "$f"
+  echo "patched"
+}
