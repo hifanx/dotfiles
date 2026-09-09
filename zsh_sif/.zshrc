@@ -2,8 +2,8 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then 
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" 
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 # setup homebrew
@@ -28,9 +28,10 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 source "${ZINIT_HOME}/zinit.zsh"
 
 # install plugins
-zinit ice depth=1; zinit light romkatv/powerlevel10k
+zinit ice depth=1
+zinit light romkatv/powerlevel10k
 zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions # this adds additional completion definitions 
+zinit light zsh-users/zsh-completions      # this adds additional completion definitions
 zinit light marlonrichert/zsh-autocomplete # this adds real-time type-ahead autocompletion
 zinit light zsh-users/zsh-autosuggestions
 
@@ -42,9 +43,9 @@ export HISTFILE="$HOME/.cache/zsh/.zsh_history"
 export ZSH_COMPDUMP="$HOME/.cache/zsh/zcompdump-$ZSH_VERSION"
 export HISTSIZE=5000
 export SAVEHIST=$HISTSIZE
-export ISTDUP=erase # erase duplicates
+export ISTDUP=erase  # erase duplicates
 setopt appendhistory # append rather than writing
-setopt sharehistory # for cross sessions
+setopt sharehistory  # for cross sessions
 setopt hist_ignore_space
 setopt hist_ignore_all_dups
 setopt hist_save_no_dups
@@ -59,13 +60,13 @@ bindkey '^n' history-search-forward
 
 # zsh-completions
 # autoload -Uz compinit && compinit # load completions
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' # case insensitive matching
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'  # case insensitive matching
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}" # use color for completions
 
 # zsh-autocomplete
-bindkey              '^I'         menu-complete
+bindkey '^I' menu-complete
 bindkey "$terminfo[kcbt]" reverse-menu-complete
-bindkey              '^I' menu-select
+bindkey '^I' menu-select
 bindkey "$terminfo[kcbt]" menu-select
 
 # neovim
@@ -82,21 +83,22 @@ alias cdd='cd "$HOME/.dotfiles"'
 alias c="clear"
 alias bu="sudo softwareupdate -ia --verbose; brew bundle -v --file=~/.dotfiles/brew/Brewfile; brew cu; brew upgrade; brew autoremove; brew cleanup; brew doctor"
 alias bi="brew bundle --verbose --force cleanup --file=~/.dotfiles/brew/Brewfile"
-alias bd="brew bundle dump --force --file=~/.dotfiles/brew/Brewfile" 
+alias bd="brew bundle dump --force --file=~/.dotfiles/brew/Brewfile"
 alias lofn="ssh root@10.0.0.5"
 alias heimdall="ssh root@10.0.0.1"
 alias nanna="ssh xuhaifan@10.0.0.12"
 alias baldur="ssh xuhaifan@10.0.0.10"
 alias co='cd "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian"'
 alias g='lazygit'
+alias oc='opencode'
 
 # yazi
 function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	command yazi "$@" --cwd-file="$tmp"
-	IFS= read -r -d '' cwd < "$tmp"
-	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
-	command rm -f -- "$tmp"
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    command yazi "$@" --cwd-file="$tmp"
+    IFS= read -r -d '' cwd <"$tmp"
+    [ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+    command rm -f -- "$tmp"
 }
 
 # fzf
@@ -119,9 +121,12 @@ fi
 # Re-patch Krita's bundled Python after app updates to keep ~/.matplotlib clean.
 # Run manually with: krita-fix
 krita-fix() {
-  local f="/Applications/Krita.app/Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/sitecustomize.py"
-  [[ -f "$f" ]] || { echo "Krita not found at expected path"; return 1; }
-  grep -q 'MPLCONFIGDIR' "$f" && echo "already patched" && return
-  printf '\nimport os\nos.environ.setdefault("MPLCONFIGDIR", os.path.expanduser("~/.cache/matplotlib"))\n' >> "$f"
-  echo "patched"
+    local f="/Applications/Krita.app/Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/sitecustomize.py"
+    [[ -f "$f" ]] || {
+        echo "Krita not found at expected path"
+        return 1
+    }
+    grep -q 'MPLCONFIGDIR' "$f" && echo "already patched" && return
+    printf '\nimport os\nos.environ.setdefault("MPLCONFIGDIR", os.path.expanduser("~/.cache/matplotlib"))\n' >>"$f"
+    echo "patched"
 }
