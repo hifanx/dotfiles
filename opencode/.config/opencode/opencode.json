@@ -1,7 +1,7 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "disabled_providers": ["openrouter"],
-  "model": "opencode/big-pickle",
+  "model": "chatanywhere/claude-sonnet-4-6",
   "small_model": "opencode/big-pickle",
   "provider": {
     "chatanywhere": {
