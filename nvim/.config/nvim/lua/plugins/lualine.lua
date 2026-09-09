@@ -27,7 +27,7 @@ local trailing = function()
     return space ~= 0 and 'TW:' .. space or ''
 end
 
--- navic coponent
+-- navic component
 local navic = require('nvim-navic')
 navic.setup({
     highlight = true,
@@ -37,16 +37,10 @@ navic.setup({
 })
 local function navic_component() return navic.get_location() end
 
--- conditions for components to show
-local conditions = {
-    buffer_not_empty = function() return vim.fn.empty(vim.fn.expand('%:t')) ~= 1 end,
-    hide_in_width = function() return vim.fn.winwidth(0) > 80 end,
-    is_sif = function() return GLOB.is_sif end,
-    navic_available = function() return navic.is_available() end,
-}
+local function hide_in_width() return vim.fn.winwidth(0) > 80 end
 
 -- ⬇️ theme
-local c = require('palette').isekai -- this is O(1) since already required at colorscheme
+local c = require('palette').isekai -- O(1), already cached after colorscheme load
 local theme = {
     normal = {
         a = { bg = c.white, fg = c.base, gui = 'bold' },
@@ -92,7 +86,7 @@ lualine.setup({
             { 'filename' },
             {
                 navic_component,
-                cond = conditions.navic_available and conditions.hide_in_width,
+                cond = function() return navic.is_available() and hide_in_width() end,
             },
         },
     },
@@ -141,33 +135,8 @@ lualine.setup({
             { trailing },
             { indent },
             {
-                'copilot',
-                cond = conditions.is_sif and conditions.hide_in_width,
-                symbols = {
-                    status = {
-                        icons = {
-                            enabled = ' ',
-                            sleep = ' ',
-                            disabled = ' ',
-                            warning = ' ',
-                            unknown = ' ',
-                        },
-                        hl = {
-                            enabled = c.green,
-                            sleep = c.green,
-                            disabled = c.overlay,
-                            warning = c.yellow,
-                            unknown = c.red,
-                        },
-                    },
-                    spinners = require('copilot-lualine.spinners').dots,
-                },
-                show_colors = true,
-                show_loading = true,
-            },
-            {
                 'diff',
-                cond = conditions.hide_in_width,
+                cond = hide_in_width,
                 symbols = {
                     added = ' ',
                     modified = ' ',
@@ -176,7 +145,7 @@ lualine.setup({
             },
             {
                 'diagnostics',
-                cond = conditions.hide_in_width,
+                cond = hide_in_width,
                 sources = { 'nvim_diagnostic' },
                 symbols = {
                     error = ' ',
@@ -189,7 +158,7 @@ lualine.setup({
         lualine_y = {
             {
                 'lsp_status',
-                cond = conditions.hide_in_width,
+                cond = hide_in_width,
                 icon = ' ',
                 symbols = {
                     separator = '',
@@ -204,12 +173,11 @@ lualine.setup({
                         '▰▱▱▱▱▱▱',
                     },
                 },
-                ignore_lsp = { 'copilot' },
                 show_name = true,
             },
             {
                 'location',
-                cond = conditions.hide_in_width,
+                cond = hide_in_width,
             },
         },
         lualine_z = {

@@ -1,14 +1,12 @@
 -- bootstrap {{{
 
-_G.GLOB = {}
-
 vim.loader.enable()
 require('vim._core.ui2').enable({})
 
 -- namespaced profile
 local os_name = vim.loop.os_uname().sysname:lower()
 local hostname = vim.loop.os_gethostname()
-GLOB.is_sif = (os_name == 'darwin' and hostname:find('sif') ~= nil)
+vim.g.is_sif = (os_name == 'darwin' and hostname:find('sif') ~= nil)
 
 -- }}}
 -- {{{ colorscheme
@@ -28,7 +26,6 @@ o.confirm = true -- Confirm to save changes before exiting modified buffer
 o.termguicolors = true
 
 o.backup = false -- disable backup
-o.backupcopy = 'yes' -- make a copy of the file and overwrite the original one
 o.swapfile = false -- bye bye swp
 
 -- ui
@@ -46,7 +43,7 @@ o.breakindent = true -- make wrapped lines continue visually indented
 -- special UI symbols
 o.list = true -- show invisible characters.
 o.listchars = 'extends:…,nbsp:␣,precedes:…,tab:> ,trail:·'
-o.fillchars = 'eob: ,fold:┄,foldclose:,foldopen:'
+o.fillchars = 'eob: ,fold:┄,foldclose:,foldopen:,msgsep:─'
 
 -- statusline
 o.laststatus = 0 -- never a statusline
@@ -82,7 +79,6 @@ o.hlsearch = true -- highlight search results as you type.
 o.foldmethod = 'marker'
 o.foldmarker = '{{{,}}}' -- this is the default
 o.foldlevel = 0 -- start with all folds closed
-o.foldlevelstart = 0 -- open files with folds closed
 
 -- clipboard
 vim.schedule(function() -- to avoid increasing startup-time
@@ -116,19 +112,19 @@ g.loaded_ruby_provider = 0
 
 -- see full list:
 -- https://github.com/neovim/neovim/tree/master/runtime/plugin
-g.loaded_2html_plugin = 1
 g.loaded_gzip = 1
 g.loaded_man = 1
 g.loaded_tarPlugin = 1
-g.loaded_zipPlugin = 1
+g.loaded_nvim_zip_plugin = 1
 g.loaded_remote_plugins = 1
+g.loaded_netrwPlugin = 1
+g.loaded_nvim_dir_plugin = 1 -- for now
 
 --  }}}
 -- mappings {{{
 
 -- basic
-vim.keymap.set('n', '<C-c>', ':close<CR>', { desc = '[C]lose' })
-vim.keymap.set('n', '<Leader>y', ':%y+<CR>', { desc = '[Y]ank buffer' })
+vim.keymap.set('n', '<C-c>', ':close<CR>', { desc = 'Close' })
 
 vim.keymap.set('n', 'H', ':bprev<CR>', { desc = 'Prev buffer', noremap = false })
 vim.keymap.set('n', 'L', ':bnext<CR>', { desc = 'Next buffer', noremap = false })
@@ -256,13 +252,13 @@ vim.api.nvim_create_autocmd('BufRead', {
 })
 
 vim.api.nvim_create_autocmd({ 'InsertLeave', 'WinEnter' }, {
-    desc = 'No cusorline in INSERT or inactive',
+    desc = 'Cusorline when not in INSERT and active',
     group = vim.api.nvim_create_augroup('CursorLineToggle', { clear = true }),
     callback = function() vim.opt_local.cursorline = true end,
 })
 
 vim.api.nvim_create_autocmd({ 'InsertEnter', 'WinLeave' }, {
-    desc = 'Cusorline when not in INSERT and active',
+    desc = 'No cusorline in INSERT or inactive',
     group = 'CursorLineToggle',
     callback = function() vim.opt_local.cursorline = false end,
 })
@@ -271,8 +267,8 @@ vim.api.nvim_create_autocmd({ 'InsertEnter', 'WinLeave' }, {
 
 vim.pack.add({
     -- ⬇️ EDITOR
-    'https://github.com/fang2hou/blink-copilot.git',
-    { src = 'https://github.com/saghen/blink.cmp.git', version = vim.version.range('*') },
+    'https://github.com/saghen/blink.lib',
+    'https://github.com/saghen/blink.cmp.git',
     'https://github.com/stevearc/conform.nvim.git',
     'https://github.com/ibhagwan/fzf-lua.git',
     'https://github.com/L3MON4D3/LuaSnip.git',
@@ -281,19 +277,17 @@ vim.pack.add({
     -- ⬇️ TOOLS
     'https://github.com/mason-org/mason.nvim.git',
     'https://github.com/smjonas/inc-rename.nvim.git',
-    'https://github.com/j-hui/fidget.nvim.git',
     'https://github.com/stevearc/oil.nvim.git',
     'https://github.com/hotoo/pangu.vim.git',
     'https://github.com/folke/persistence.nvim.git',
     -- ⬇️ UI
     'https://github.com/lewis6991/gitsigns.nvim.git',
-    'https://github.com/AndreM222/copilot-lualine.git',
     'https://github.com/SmiteshP/nvim-navic.git',
     'https://github.com/nvim-lualine/lualine.nvim.git',
     'https://github.com/brenoprata10/nvim-highlight-colors.git',
     'https://github.com/MeanderingProgrammer/render-markdown.nvim.git',
+    'https://github.com/lukas-reineke/indent-blankline.nvim',
     -- ⬇️ AI
-    'https://github.com/zbirenbaum/copilot.lua.git',
 })
 
 -- lsp {{{
@@ -308,36 +302,46 @@ do
 end
 
 -- setup lsp attach
+-- NOTE: created once outside LspAttach so re-attaching (e.g. :LspRestart) doesn't
+-- clobber the detach handler registered for already-open buffers
+local lsp_detach_group = vim.api.nvim_create_augroup('lsp-detach', { clear = true })
+
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
     callback = function(ev)
         local client = vim.lsp.get_client_by_id(ev.data.client_id)
         if not client then return end
 
-        vim.keymap.set('n', 'grd', vim.lsp.buf.definition, { desc = 'LSP [D]efinition' })
-        vim.keymap.set('n', 'grD', vim.lsp.buf.declaration, { desc = 'LSP [D]eclaration' })
-        vim.keymap.set('n', 'gh', vim.diagnostic.open_float, { buffer = ev.buf, desc = 'LSP [H]over Diagnostic' })
+        vim.keymap.set('n', 'gh', vim.diagnostic.open_float, { buffer = ev.buf, desc = 'Hover diagnostic' })
 
-        if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_codeLens) then
-            vim.keymap.set(
-                'n',
-                '<leader>ll',
-                function() vim.lsp.codelens.enable(true) end,
-                { buffer = ev.buf, desc = 'Code[L]ens refresh' }
-            )
-            vim.keymap.set('n', '<leader>lL', vim.lsp.codelens.run, { buffer = ev.buf, desc = 'Code[L]ens run' })
+        if client:supports_method('textDocument/definition') then
+            vim.keymap.set('n', 'gd', ':FzfLua lsp_definitions jump1=true<CR>', { desc = 'Go to definition' })
+            vim.keymap.set('n', 'gD', ':FzfLua lsp_definitions jump1=false<CR>', { desc = 'Peek definition' })
         end
 
-        if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint) then
+        if client:supports_method('textDocument/references') then
+            vim.keymap.set('n', 'grr', ':FzfLua lsp_references<CR>', { desc = 'vim.lsp.buf.references()' })
+        end
+
+        if client:supports_method('textDocument/documentColor') then
+            vim.keymap.set(
+                { 'n', 'x' },
+                'grc',
+                vim.lsp.document_color.color_presentation,
+                { desc = 'vim.lsp.document_color.color_presentation()' }
+            )
+        end
+
+        if client:supports_method('textDocument/inlayHint') then
             vim.keymap.set(
                 'n',
-                '<leader>li',
+                '<Leader>hi',
                 function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
-                { desc = 'Toggle [I]nlay hint' }
+                { desc = 'Toggle inlay hint' }
             )
         end
 
-        if client.supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+        if client:supports_method('textDocument/documentHighlight') then
             local hl_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = false })
             vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
                 buffer = ev.buf,
@@ -351,7 +355,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
                 callback = vim.lsp.buf.clear_references,
             })
             vim.api.nvim_create_autocmd('LspDetach', {
-                group = vim.api.nvim_create_augroup('lsp-detach', { clear = true }),
+                buffer = ev.buf,
+                group = lsp_detach_group,
                 callback = function(ev1)
                     vim.lsp.buf.clear_references()
                     vim.api.nvim_clear_autocmds({ group = 'lsp-highlight', buffer = ev1.buf })
@@ -437,7 +442,7 @@ vim.lsp.enable(servers)
 
 require('mini.icons').setup()
 
-vim.keymap.set('n', '<leader>e', function() require('oil').toggle_float() end, { desc = '[O]il' })
+vim.keymap.set('n', '<leader>e', function() require('oil').toggle_float() end, { desc = 'Oil' })
 require('oil').setup({ -- g? to see help & keymaps
     default_file_explorer = true,
     delete_to_trash = true,

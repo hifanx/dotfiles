@@ -1,4 +1,4 @@
-vim.keymap.set('n', '<Leader>d', function() require('mini.bufremove').delete() end, { desc = '[D]elete buffer' })
+vim.keymap.set('n', '<Leader>d', function() require('mini.bufremove').delete(0, false) end, { desc = 'Delete buffer' })
 
 -- mini.ai: Extended text objects
 -- NORMAL/VISUAL MODE:
@@ -7,7 +7,7 @@ vim.keymap.set('n', '<Leader>d', function() require('mini.bufremove').delete() e
 --
 -- OBJECTS: f (function call), a (argument), t (tag), q (quote), b/(/[ (brackets)
 --          Uppercase variants select including whitespace
-require('mini.ai').setup()
+-- require('mini.ai').setup()
 
 -- mini.align: Align text interactively
 -- NORMAL/VISUAL MODE:
@@ -23,7 +23,7 @@ require('mini.ai').setup()
 --   p  - pair separator
 --   t  - trim whitespace
 --   <CR> - confirm
-require('mini.align').setup()
+-- require('mini.align').setup()
 
 local statuscolumn = require('mini.statuscolumn')
 local spec = {
@@ -82,9 +82,8 @@ miniclue.setup({
         miniclue.gen_clues.registers(),
         miniclue.gen_clues.windows(),
         miniclue.gen_clues.z(),
-        { mode = 'n', keys = '<Leader>f', desc = '[F]ind' },
-        { mode = 'n', keys = '<Leader>g', desc = '[G]it' },
-        { mode = 'n', keys = '<Leader>h', desc = '[H]elper' },
-        { mode = 'n', keys = '<Leader>l', desc = '[L]sp' },
+        { mode = 'n', keys = '<Leader>f', desc = ' ' },
+        { mode = 'n', keys = '<Leader>g', desc = ' ' },
+        { mode = 'n', keys = '<Leader>h', desc = ' ' },
     },
 })

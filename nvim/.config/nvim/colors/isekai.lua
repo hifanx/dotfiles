@@ -10,15 +10,15 @@ vim.g.terminal_color_1 = c.red
 vim.g.terminal_color_2 = c.green
 vim.g.terminal_color_3 = c.yellow
 vim.g.terminal_color_4 = c.member_ish
-vim.g.terminal_color_5 = c.keyword_ish
-vim.g.terminal_color_6 = c.member_ish
+vim.g.terminal_color_5 = c.builtin
+vim.g.terminal_color_6 = c.func_ish
 vim.g.terminal_color_7 = c.white
 vim.g.terminal_color_8 = c.overlay
 vim.g.terminal_color_9 = c.red
 vim.g.terminal_color_10 = c.green
 vim.g.terminal_color_11 = c.yellow
 vim.g.terminal_color_12 = c.blue
-vim.g.terminal_color_13 = c.white
+vim.g.terminal_color_13 = c.builtin
 vim.g.terminal_color_14 = c.func_ish
 vim.g.terminal_color_15 = c.white
 vim.g.terminal_color_background = c.base
@@ -36,14 +36,15 @@ local hl = {
     CursorLine = { bg = c.surface }, -- Screen-line at the cursor, when 'cursorline' is set.  Low-priority if forecrust (ctermfg OR guifg) is not set.
     CursorLineNr = { fg = c.orange, bold = true }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line. highlights the number in numberline.
     LineNr = { fg = c.overlay }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
-    SignColumn = { fg = c.surface }, -- column where |signs| are displayed
+    SignColumn = { fg = c.overlay }, -- column where |signs| are displayed
     FoldColumn = { fg = c.overlay }, -- 'foldcolumn'
     Folded = { fg = c.comment }, -- line used for closed folds
     VertSplit = { fg = c.crust }, -- the column separating vertically split windows
-    WinSeparator = { fg = c.crust }, -- separator between window splits
-    WinBar = { fg = c.rosewater }, -- window bar of current window
+    WinSeparator = { fg = c.surface }, -- separator between window splits
+    WinBar = { fg = c.text }, -- window bar of current window
     WinBarNC = { link = 'WinBar' }, -- window bar of not-current windows
     FloatBorder = { fg = c.surface, bg = c.mantle }, -- border of floating windows
+    MsgSeparator = { fg = c.surface }, -- separator / border for ui2 message pager/dialog
     FloatTitle = { fg = c.text, bg = c.mantle }, -- Title of floating windows
     Pmenu = { fg = c.text, bg = c.mantle }, -- Popup menu: normal item.
     PmenuSel = { bg = c.visual, bold = true }, -- Popup menu: selected item.
@@ -52,7 +53,7 @@ local hl = {
     PmenuSbar = { bg = c.surface }, -- Popup menu: scrollbar.
     PmenuThumb = { bg = c.overlay }, -- Popup menu: Thumb of the scrollbar.
     PmenuExtra = { fg = c.text }, -- Popup menu: normal item extra text.
-    PmenuExtraSel = { bg = c.surface, fg = c.overlay, bold = true }, -- Popup menu: selected item extra text.
+    PmenuExtraSel = { bg = c.surface, fg = c.text, bold = true }, -- Popup menu: selected item extra text.
     PmenuBorder = { link = 'FloatBorder' }, -- Popup menu: border
     ComplMatchIns = { link = 'PreInsert' }, -- Matched text of the currently inserted completion.
     PreInsert = { fg = c.overlay }, -- Text inserted when "preinsert" is in 'completeopt'.
@@ -67,8 +68,7 @@ local hl = {
     DiffAdd = { bg = c.green_diff }, -- diff mode: Added line |diff.txt|
     DiffChange = { bg = c.orange_diff }, -- diff mode: Changed line |diff.txt|
     DiffDelete = { bg = c.red_diff }, -- diff mode: Deleted line |diff.txt|
-    DiffText = { fg = c.orange }, -- diff mode: Changed text within a changed line |diff.txt|
-    DiffTextAdd = { fg = c.green }, -- diff mode: Added text within a changed line (variant)
+    DiffText = { fg = c.yellow }, -- diff mode: Changed text within a changed line |diff.txt|
     SpellBad = { sp = c.red, undercurl = true }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
     SpellCap = { sp = c.yellow, undercurl = true }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
     SpellLocal = { sp = c.blue, undercurl = true }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
@@ -84,7 +84,6 @@ local hl = {
     ModeMsg = { fg = c.yellow, bold = true }, -- 'showmode' message (e.g., "-- INSERT -- ")
     MoreMsg = { fg = c.blue }, -- |more-prompt|
     -- MsgArea = { bg = c.base }, -- Area for messages and cmdline, don't set this highlight because of https://github.com/neovim/neovim/issues/17832
-    -- MsgSeparator = { fg = c.crust }, -- Separator for scrolled messages, `msgsep` flag of 'display'
     Question = { fg = c.orange }, -- |hit-enter| prompt and yes/no questions
     NonText = { fg = c.overlay }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
     EndOfBuffer = { fg = c.overlay }, -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
@@ -126,7 +125,7 @@ local hl = {
     Special = { fg = c.builtin }, -- any special symbol
     SpecialChar = { link = 'Special' }, -- special character in a constant
     Tag = { fg = c.yellow }, -- you can use CTRL       -] on this
-    Delimiter = { fg = c.overlay, bold = true }, -- character that needs attention
+    Delimiter = { fg = c.overlay }, -- character that needs attention
     SpecialComment = { link = 'Special' }, -- special things inside a comment
     Debug = { link = 'Special' }, -- debugging statements
     Underlined = { underline = true }, -- text that stands out, HTML links
@@ -309,18 +308,6 @@ local hl = {
     BlinkCmpKindEvent = { link = '@character' },
     BlinkCmpKindOperator = { link = '@operator' },
     BlinkCmpKindTypeParameter = { link = '@variable' },
-    BlinkCmpKindCopilot = { fg = c.green },
-
-    -- snacks
-    -- SnacksInputNormal = { link = 'NormalFloat' },
-    -- SnacksInputBorder = { link = 'FloatBorder' },
-    -- SnacksInputTitle = { link = 'FloatTitle' },
-    -- SnacksInputIcon = { link = 'DiagnosticWarn' },
-    -- SnacksPickerCursorLine = { link = 'PmenuSel' },
-    -- SnacksPickerListCursorLine = { link = 'PmenuSel' },
-    -- SnacksPickerInputCursorLine = { link = 'NormalFloat' },
-    -- SnacksPickerTree = { link = 'Conceal' },
-    -- SnacksIndent = { link = 'Conceal' },
 
     -- navic
     NavicIconsFile = { link = '@markup.link' },

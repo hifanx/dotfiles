@@ -1,17 +1,6 @@
-local default = {
-    'lsp',
-    'snippets',
-    'path',
-    'buffer',
-}
-
-local ai = {
-    'copilot',
-}
-
-if GLOB.is_sif then vim.list_extend(default, ai) end
-
-require('blink.cmp').setup({
+local cmp = require('blink.cmp')
+cmp.build():pwait()
+cmp.setup({
     keymap = {
         preset = 'none',
         ['<C-e>'] = { 'show', 'hide', 'fallback' },
@@ -32,18 +21,7 @@ require('blink.cmp').setup({
 
     -- use :BlinkCmp status to view which sources providers are enabled or not enabled
     sources = {
-        default = default,
-        providers = {
-            copilot = {
-                name = 'copilot',
-                module = 'blink-copilot',
-                score_offset = -10,
-                async = true,
-                opts = {
-                    kind_hl = 'BlinkCmpKindCopilot',
-                },
-            },
-        },
+        default = { 'lsp', 'snippets', 'path', 'buffer' },
     },
     completion = {
         list = { selection = { preselect = false } },

@@ -7,7 +7,7 @@ local ensure_installed_ts = {
     'vim',
     'vimdoc',
     'diff',
-    -- NOTE: the above are natively installed since neovim 0.12
+    -- NOTE: the above are natively installed since neovim 0.13
     'bash',
     'dockerfile',
     'gitignore',
@@ -38,9 +38,14 @@ for _, lang in ipairs(ensure_installed_ts) do
         table.insert(filetypes, ft)
     end
 end
-local ts_start = function(ev) vim.treesitter.start(ev.buf) end
 
--- WARN: Do not use "*" here - snacks.nvim is buggy and vim.notify triggers FileType events internally causing infinite callback loops
+-- NOTE: pcall is necessary — vim.treesitter.start asserts (not just errors) when language
+-- detection fails on filetype-only buffers with no file path (e.g. fzf-lua diff previews).
+local ts_start = function(ev) pcall(vim.treesitter.start, ev.buf) end
+
+-- NOTE: Do not use "*" here — the filetypes list is intentional and explicit.
+-- Using "*" would start treesitter for every filetype, including ones with no parser,
+-- causing errors and unnecessary overhead.
 vim.api.nvim_create_autocmd('FileType', {
     desc = 'Start treesitter',
     group = vim.api.nvim_create_augroup('start_treesitter', { clear = true }),

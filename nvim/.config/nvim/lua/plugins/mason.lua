@@ -1,4 +1,4 @@
-vim.keymap.set('n', '<leader>hm', ':Mason<CR>', { desc = '[M]ason' })
+vim.keymap.set('n', '<leader>hm', ':Mason<CR>', { desc = 'Mason' })
 
 require('mason').setup({})
 
@@ -21,7 +21,7 @@ local ensure_installed = {
     'black',
     'google-java-format',
     -- Linters
-    'shellcheck', -- used by shfmt
+    'shellcheck', -- used by bashls
 }
 
 local function auto_install_missing_tools()

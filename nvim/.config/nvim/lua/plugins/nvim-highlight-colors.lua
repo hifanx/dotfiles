@@ -1,3 +1,1 @@
-require('nvim-highlight-colors').setup({
-    enable_hex = false,
-})
+require('nvim-highlight-colors').setup({})
