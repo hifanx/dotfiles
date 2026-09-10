@@ -12,27 +12,10 @@ vim.api.nvim_create_user_command('Format', function(args)
     require('conform').format({ async = true, range = range })
 end, { range = true })
 
-vim.api.nvim_create_user_command('FormatDisable', function(args)
-    if args.bang then
-        vim.b.disable_autoformat = true
-    else
-        vim.g.disable_autoformat = true
-    end
-end, {
-    desc = 'Disable autoformat-on-save',
-    bang = true,
-})
-
-vim.api.nvim_create_user_command('FormatEnable', function(args)
-    if args.bang then
-        vim.b.disable_autoformat = false
-    else
-        vim.g.disable_autoformat = false
-    end
-end, {
-    desc = 'Enable autoformat-on-save',
-    bang = true,
-})
+vim.keymap.set('n', '<Leader>hf', function()
+    vim.g.disable_autoformat = not vim.g.disable_autoformat
+    vim.notify(('Format on save: %s'):format(vim.g.disable_autoformat and 'off' or 'on'))
+end, { desc = 'Toggle format on save' })
 
 require('conform').setup({
     formatters_by_ft = {
@@ -57,9 +40,10 @@ require('conform').setup({
         toml = { 'taplo' },
         java = { 'google-java-format' },
     },
-    format_after_save = {
-        lsp_format = 'fallback',
-    },
+    format_after_save = function()
+        if vim.g.disable_autoformat then return end
+        return { lsp_format = 'fallback' }
+    end,
     formatters = {
         shfmt = { append_args = { '-i', '2' } },
         ['google-java-format'] = { append_args = { '--aosp' } },

@@ -27,32 +27,27 @@ local ensure_installed = {
 local function auto_install_missing_tools()
     local mr = require('mason-registry')
 
+    local to_install = {}
+    for _, name in ipairs(ensure_installed) do
+        if not mr.is_installed(name) then table.insert(to_install, name) end
+    end
+    if #to_install == 0 then return end
+
+    local show = vim.schedule_wrap(function(msg) vim.notify(msg, vim.log.levels.INFO, { title = 'Mason' }) end)
+    local show_error = vim.schedule_wrap(function(msg) vim.notify(msg, vim.log.levels.ERROR, { title = 'Mason' }) end)
+
+    local function do_install(p)
+        p:once('install:success', function() show(string.format('%s: successfully installed', p.name)) end)
+        p:once('install:failed', function() show_error(string.format('%s: failed to install', p.name)) end)
+        if not p:is_installing() then
+            show(string.format('Installing %s', p.name))
+            p:install()
+        end
+    end
+
     mr.refresh(function()
-        local to_install = {}
-
-        local show = vim.schedule_wrap(function(msg) vim.notify(msg, vim.log.levels.INFO, { title = 'Mason' }) end)
-        local show_error = vim.schedule_wrap(
-            function(msg) vim.notify(msg, vim.log.levels.ERROR, { title = 'Mason' }) end
-        )
-
-        local function do_install(p)
-            p:once('install:success', function() show(string.format('%s: successfully installed', p.name)) end)
-            p:once('install:failed', function() show_error(string.format('%s: failed to install', p.name)) end)
-            if not p:is_installing() then
-                show(string.format('Installing %s', p.name))
-                p:install()
-            end
-        end
-
-        for _, name in ipairs(ensure_installed) do
-            if not mr.is_installed(name) then table.insert(to_install, name) end
-        end
-
-        if #to_install > 0 then
-            for _, name in ipairs(to_install) do
-                local p = mr.get_package(name)
-                do_install(p)
-            end
+        for _, name in ipairs(to_install) do
+            do_install(mr.get_package(name))
         end
     end)
 end

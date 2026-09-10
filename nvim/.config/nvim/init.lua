@@ -4,8 +4,8 @@ vim.loader.enable()
 require('vim._core.ui2').enable({})
 
 -- namespaced profile
-local os_name = vim.loop.os_uname().sysname:lower()
-local hostname = vim.loop.os_gethostname()
+local os_name = vim.uv.os_uname().sysname:lower()
+local hostname = vim.uv.os_gethostname()
 vim.g.is_sif = (os_name == 'darwin' and hostname:find('sif') ~= nil)
 
 -- }}}
