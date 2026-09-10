@@ -15,18 +15,6 @@ require('gitsigns').setup({
         changedelete = { text = '▎', show_count = true },
         untracked = { text = '▎' },
     },
-    count_chars = {
-        [1] = '¹',
-        [2] = '²',
-        [3] = '³',
-        [4] = '⁴',
-        [5] = '⁵',
-        [6] = '⁶',
-        [7] = '⁷',
-        [8] = '⁸',
-        [9] = '⁹',
-        ['+'] = '⁺',
-    },
     attach_to_untracked = true,
     on_attach = function()
         local gs = require('gitsigns')

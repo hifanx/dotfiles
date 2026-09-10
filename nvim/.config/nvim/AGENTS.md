@@ -51,7 +51,6 @@
 - Plugin files in `lua/plugins/*.lua` are deferred via a coroutine loader after `VimEnter`; two exceptions load eagerly: `mini.icons` and `oil.nvim`
 - LSP servers use native `vim.lsp.config` / `vim.lsp.enable` — no nvim-lspconfig; each server config lives in `lsp/*.lua`
 - Use `require()` only when needed
-- Global utilities and feature flags live in the `_G.GLOB` namespace
 - Before adding a new plugin, check if Neovim already provides the functionality
 
 ### Plugin Guidelines

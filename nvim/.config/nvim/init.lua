@@ -471,14 +471,8 @@ vim.api.nvim_create_autocmd('VimEnter', {
         end
 
         coroutine.wrap(function()
-            local groups = {
-                vim.api.nvim_get_runtime_file('lua/plugins/*.lua', true),
-            }
-
-            for _, files in ipairs(groups) do
-                for _, path in ipairs(files) do
-                    not_so_fast(path)
-                end
+            for _, path in ipairs(vim.api.nvim_get_runtime_file('lua/plugins/*.lua', true)) do
+                not_so_fast(path)
             end
         end)()
     end,

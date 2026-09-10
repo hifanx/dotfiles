@@ -35,8 +35,6 @@ navic.setup({
         auto_attach = true,
     },
 })
-local function navic_component() return navic.get_location() end
-
 local function hide_in_width() return vim.fn.winwidth(0) > 80 end
 
 -- ⬇️ theme
@@ -85,7 +83,7 @@ lualine.setup({
         lualine_c = {
             { 'filename' },
             {
-                navic_component,
+                navic.get_location,
                 cond = function() return navic.is_available() and hide_in_width() end,
             },
         },
