@@ -92,7 +92,7 @@ local hl = {
     Conceal = { fg = c.surface }, -- placeholder characters substituted for concealed text (see 'conceallevel')
     ColorColumn = { bg = c.overlay }, -- used for the columns set with 'colorcolumn'
     Directory = { fg = c.blue }, -- directory names (and other special names in listings)
-    Title = { fg = c.orange, bold = true }, -- titles for output from ":set all", ":autocmd" etc.
+    Title = { fg = c.builtin, bold = true }, -- titles for output from ":set all", ":autocmd" etc.
     QuickFixLine = { bg = c.surface, bold = true }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
     WildMenu = { bg = c.visual }, -- current match in 'wildmenu' completion
 
@@ -231,7 +231,12 @@ local hl = {
     -- ['@markup.strikethrough'] = {}, -- struck-through text
     -- ['@markup.underline'] = {}, -- underlined text (only for literal underline markup!)
 
-    ['@markup.heading'] = { fg = c.orange, bold = true }, -- headings, titles (including markers)
+    ['@markup.heading.1'] = { fg = c.builtin, bold = true }, -- h1
+    ['@markup.heading.2'] = { fg = c.blue, bold = true }, -- h2
+    ['@markup.heading.3'] = { fg = c.func_ish, bold = true }, -- h3
+    ['@markup.heading.4'] = { fg = c.green, bold = true }, -- h4
+    ['@markup.heading.5'] = { fg = c.orange, bold = true }, -- h5
+    ['@markup.heading.6'] = { fg = c.overlay, bold = true }, -- h6
 
     ['@markup.quote'] = { fg = c.comment, italic = true }, -- block quotes
     ['@markup.math'] = { fg = c.keyword_ish }, -- math environments (e.g. `$ ... $` in LaTeX)
@@ -267,12 +272,12 @@ local hl = {
     ['@lsp.type.decorator.markdown'] = vim.empty_dict(),
 
     -- render-markdown
-    RenderMarkdownH1Bg = { link = '@markup.heading' },
-    RenderMarkdownH2Bg = { link = '@markup.heading' },
-    RenderMarkdownH3Bg = { link = '@markup.heading' },
-    RenderMarkdownH4Bg = { link = '@markup.heading' },
-    RenderMarkdownH5Bg = { link = '@markup.heading' },
-    RenderMarkdownH6Bg = { link = '@markup.heading' },
+    RenderMarkdownH1Bg = { link = '@markup.heading.1' },
+    RenderMarkdownH2Bg = { link = '@markup.heading.2' },
+    RenderMarkdownH3Bg = { link = '@markup.heading.3' },
+    RenderMarkdownH4Bg = { link = '@markup.heading.4' },
+    RenderMarkdownH5Bg = { link = '@markup.heading.5' },
+    RenderMarkdownH6Bg = { link = '@markup.heading.6' },
     RenderMarkdownCode = { bg = c.mantle },
     RenderMarkdownCodeInline = { fg = c.keyword_ish },
 

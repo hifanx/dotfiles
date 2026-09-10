@@ -174,6 +174,9 @@ lualine.setup({
                     },
                 },
                 show_name = true,
+                ignore_lsp = {
+                    'render-markdown',
+                },
             },
             {
                 'location',

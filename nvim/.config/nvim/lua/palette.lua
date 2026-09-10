@@ -24,10 +24,10 @@ M.isekai = {
   base         = '#0D1117',
   mantle       = '#080B10',
   crust        = '#020202',
-  blue_diff    = '#14334B',
-  green_diff   = '#30452E',
-  red_diff     = '#500C26',
-  orange_diff  = '#30280F',
+  blue_diff    = '#102840',
+  green_diff   = '#1E3A2A',
+  red_diff     = '#3D1520',
+  orange_diff  = '#362410',
 }
 -- stylua: ignore end
 
