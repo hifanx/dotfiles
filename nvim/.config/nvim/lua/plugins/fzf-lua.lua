@@ -51,7 +51,4 @@ require('fzf-lua').setup({
             },
         },
     },
-    grep = {
-        hidden = true,
-    },
 })
