@@ -37,6 +37,15 @@ navic.setup({
 })
 local function hide_in_width() return vim.fn.winwidth(0) > 80 end
 
+-- winbar filename
+local winbar_filename = {
+    'filename',
+    fmt = function(str)
+        if vim.bo.filetype == 'qf' then return ' ' end
+        return str
+    end,
+}
+
 -- ⬇️ theme
 local c = require('palette').isekai -- O(1), already cached after colorscheme load
 local theme = {
@@ -81,7 +90,7 @@ lualine.setup({
     winbar = {
 
         lualine_c = {
-            { 'filename' },
+            winbar_filename,
             {
                 navic.get_location,
                 cond = function() return navic.is_available() and hide_in_width() end,
@@ -90,7 +99,7 @@ lualine.setup({
     },
     inactive_winbar = {
         lualine_c = {
-            { 'filename' },
+            winbar_filename,
         },
     },
     sections = {

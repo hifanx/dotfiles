@@ -233,7 +233,7 @@ local hl = {
 
     ['@markup.heading.1'] = { fg = c.builtin, bold = true }, -- h1
     ['@markup.heading.2'] = { fg = c.blue, bold = true }, -- h2
-    ['@markup.heading.3'] = { fg = c.func_ish, bold = true }, -- h3
+    ['@markup.heading.3'] = { fg = c.type_ish, bold = true }, -- h3
     ['@markup.heading.4'] = { fg = c.green, bold = true }, -- h4
     ['@markup.heading.5'] = { fg = c.orange, bold = true }, -- h5
     ['@markup.heading.6'] = { fg = c.overlay, bold = true }, -- h6

@@ -198,6 +198,12 @@ vim.keymap.set('n', 'gcO', 'O<esc>Vcx<esc>:normal gcc<CR>fxa<bs>', { desc = 'Add
 -- autocmd {{{
 
 vim.api.nvim_create_autocmd('FileType', {
+    desc = 'No statuscolumn in quickfix/location lists',
+    pattern = 'qf',
+    callback = function() vim.opt_local.statuscolumn = ' ' end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
     desc = 'Enable spell check lazily and conditionally',
     pattern = { 'markdown', 'text', 'gitcommit' },
     callback = function()
