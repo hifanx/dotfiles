@@ -17,11 +17,8 @@ toggle_sidebar = "prefix+a"
 sidebar_collapsed_mode = "hidden"
 confirm_close = false
 prompt_new_tab_name = false
-tab_bar_right = [{ type = "hostname" }, { type = "zoom" }]
+tab_bar_right = [{ type = "hostname" }]
 tab_bar_right_separator = " "
-
-[ui.toast]
-delivery = "herdr"
 
 [experimental]
 pane_history = false
@@ -35,13 +32,6 @@ width = "90%"
 height = "85%"
 
 [[keys.command]]
-key = "prefix+e"
+key = "prefix+d"
 type = "plugin_action"
-command = "chmarax.herdr-nvim.toggle"
-description = "nvim sidebar"
-
-[[keys.command]]
-key = "prefix+o"
-type = "plugin_action"
-command = "chmarax.herdr-nvim.pick-file"
-description = "open file from agent output"
+command = "persiyanov.reviewr.toggle"
