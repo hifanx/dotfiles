@@ -21,6 +21,10 @@
       "rev": "f2421c550618d257048afa650413d9e542ddbe67",
       "src": "https://github.com/lewis6991/gitsigns.nvim.git"
     },
+    "herdr-nvim": {
+      "rev": "e652ebf7b3d6713992e68a30aec588822e69fae5",
+      "src": "https://github.com/ChmaraX/herdr-nvim"
+    },
     "inc-rename.nvim": {
       "rev": "ddff8bd3eccedf043bd73f5bf89cf90d2d6d8105",
       "src": "https://github.com/smjonas/inc-rename.nvim.git"
@@ -57,10 +61,6 @@
       "rev": "b73018b75affd13fa38e2fc94ef753b465f770d7",
       "src": "https://github.com/stevearc/oil.nvim.git"
     },
-    "opencode.nvim": {
-      "rev": "bf8db37e600bd83f4bec1303b7a41476381e455c",
-      "src": "https://github.com/nickjvandyke/opencode.nvim"
-    },
     "pangu.vim": {
       "rev": "b7210117695dca05d94de1ac2108401f8eff0a2d",
       "src": "https://github.com/hotoo/pangu.vim.git"
@@ -70,7 +70,7 @@
       "src": "https://github.com/folke/persistence.nvim.git"
     },
     "render-markdown.nvim": {
-      "rev": "4663eb3ecd538bd5062628fb6d95bbe6bdca78f6",
+      "rev": "4286b83f505f3c0e2ca04763a77c9dda0d732340",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim.git"
     }
   }

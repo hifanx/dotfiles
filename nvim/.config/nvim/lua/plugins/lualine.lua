@@ -163,10 +163,6 @@ lualine.setup({
                     hint = ' ',
                 },
             },
-            {
-                require('opencode').statusline,
-                cond = hide_in_width,
-            },
         },
         lualine_y = {
             {

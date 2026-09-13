@@ -286,6 +286,7 @@ vim.pack.add({
     'https://github.com/stevearc/oil.nvim.git',
     'https://github.com/hotoo/pangu.vim.git',
     'https://github.com/folke/persistence.nvim.git',
+    'https://github.com/ChmaraX/herdr-nvim',
     -- ⬇️ UI
     'https://github.com/lewis6991/gitsigns.nvim.git',
     'https://github.com/SmiteshP/nvim-navic.git',
@@ -293,8 +294,6 @@ vim.pack.add({
     'https://github.com/brenoprata10/nvim-highlight-colors.git',
     'https://github.com/MeanderingProgrammer/render-markdown.nvim.git',
     'https://github.com/lukas-reineke/indent-blankline.nvim',
-    -- ⬇️ AI
-    'https://github.com/nickjvandyke/opencode.nvim',
 
     -- lsp {{{
 })
