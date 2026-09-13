@@ -37,7 +37,7 @@ M.kuro = {
     bg = '#181825',
     fg_95 = '#F2F2F2',
     fg_80 = '#CCCCCC',
-    fg_60 = '#999999',
+    fg_65 = '#A6A6A6',
     fg_40 = '#666666',
     fg_20 = '#333333',
     black = '#080B10',
@@ -55,7 +55,7 @@ M.kuro = {
     blue_diff = '#19272C',
     green_diff = '#22372c',
     red_diff = '#342231',
-    orange_diff = '#202624',
+    orange_diff = '#362410',
 }
 
 return M
