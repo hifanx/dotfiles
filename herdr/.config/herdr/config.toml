@@ -20,7 +20,7 @@ onboarding = false
 # Override individual color tokens on top of the base theme.
 # Accepts: hex (#rrggbb), named colors, rgb(r,g,b), or panel_bg = "reset"
 [theme.custom]
-sidebar_bg = "#080B10"
+sidebar_bg = "#11111B"
 # active_row_bg = "#1e1e2e"
 # selection_bg = "#313244"
 panel_bg = "transparent"
