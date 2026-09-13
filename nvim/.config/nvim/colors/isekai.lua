@@ -1,3 +1,4 @@
+if true then return end
 if vim.g.colors_name then vim.cmd('hi clear') end
 vim.o.termguicolors = true
 vim.g.colors_name = 'isekai' -- name used by :colorscheme
@@ -105,13 +106,13 @@ local hl = {
     Boolean = { fg = c.value_ish }, -- a boolean constant: TRUE, false
     Float = { link = 'Number' }, -- a floating point constant: 2.3e10
     Identifier = { fg = c.member_ish }, -- any variable name
-    Function = { fg = c.func_ish, bold = true }, -- function name (also: methods for classes)
+    Function = { fg = c.func_ish, italic = true, bold = true }, -- function name (also: methods for classes)
     Statement = { fg = c.keyword_ish }, -- any statement
     Conditional = { fg = c.keyword_ish }, -- if, then, else, endif, switch, etc.
     Repeat = { fg = c.keyword_ish }, -- for, do, while, etc.
     Label = { fg = c.keyword_ish }, -- case, default, etc.
     Operator = { fg = c.overlay }, -- "sizeof", "+", "*", etc.
-    Keyword = { fg = c.keyword_ish, italic = true }, -- any other keyword
+    Keyword = { fg = c.keyword_ish }, -- any other keyword
     Exception = { fg = c.keyword_ish }, -- try, catch, throw
     PreProc = { fg = c.member_ish }, -- generic Preprocessor
     Include = { fg = c.member_ish }, -- preprocessor #include
@@ -124,7 +125,7 @@ local hl = {
     Typedef = { link = 'Type' }, -- a typedef
     Special = { fg = c.builtin }, -- any special symbol
     SpecialChar = { link = 'Special' }, -- special character in a constant
-    Tag = { fg = c.yellow }, -- you can use CTRL       -] on this
+    Tag = { fg = c.text }, -- you can use CTRL       -] on this
     Delimiter = { fg = c.overlay }, -- character that needs attention
     SpecialComment = { link = 'Special' }, -- special things inside a comment
     Debug = { link = 'Special' }, -- debugging statements

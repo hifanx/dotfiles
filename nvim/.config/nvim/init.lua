@@ -11,7 +11,7 @@ vim.g.is_sif = (os_name == 'darwin' and hostname:find('sif') ~= nil)
 -- }}}
 -- {{{ colorscheme
 
-vim.cmd([[colorscheme isekai]])
+vim.cmd('colorscheme kuro')
 
 -- }}}
 -- options {{{
