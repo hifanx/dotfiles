@@ -21,10 +21,6 @@
       "rev": "f2421c550618d257048afa650413d9e542ddbe67",
       "src": "https://github.com/lewis6991/gitsigns.nvim.git"
     },
-    "herdr-nvim": {
-      "rev": "e652ebf7b3d6713992e68a30aec588822e69fae5",
-      "src": "https://github.com/ChmaraX/herdr-nvim"
-    },
     "inc-rename.nvim": {
       "rev": "ddff8bd3eccedf043bd73f5bf89cf90d2d6d8105",
       "src": "https://github.com/smjonas/inc-rename.nvim.git"
