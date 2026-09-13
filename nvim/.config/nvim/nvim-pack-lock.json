@@ -38,7 +38,7 @@
       "src": "https://github.com/mason-org/mason.nvim.git"
     },
     "mini.nvim": {
-      "rev": "25f25d3e6661d942323e56711096de1850d814ec",
+      "rev": "6664ea9af6c43dc31934e27476bbe61c556c8dc1",
       "src": "https://github.com/nvim-mini/mini.nvim.git"
     },
     "nvim-highlight-colors": {
@@ -50,12 +50,16 @@
       "src": "https://github.com/SmiteshP/nvim-navic.git"
     },
     "nvim-treesitter": {
-      "rev": "5cb0114e6242625db56dd6440e945ed1ece10bc7",
+      "rev": "9a168f6357ed21c3a636e1727bc7d382abc451b8",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter.git"
     },
     "oil.nvim": {
       "rev": "b73018b75affd13fa38e2fc94ef753b465f770d7",
       "src": "https://github.com/stevearc/oil.nvim.git"
+    },
+    "opencode.nvim": {
+      "rev": "bf8db37e600bd83f4bec1303b7a41476381e455c",
+      "src": "https://github.com/nickjvandyke/opencode.nvim"
     },
     "pangu.vim": {
       "rev": "b7210117695dca05d94de1ac2108401f8eff0a2d",
