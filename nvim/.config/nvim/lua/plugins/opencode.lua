@@ -1,3 +1,5 @@
+if not vim.g.is_sif then return end
+
 vim.keymap.set(
     { 'n', 'x' },
     '<Leader>oo',
