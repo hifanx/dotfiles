@@ -35,7 +35,7 @@ navic.setup({
         auto_attach = true,
     },
 })
-local function hide_in_width() return vim.fn.winwidth(0) > 80 end
+local function navic_comp() return navic.get_location() end
 
 -- winbar filename
 local winbar_filename = {
@@ -45,6 +45,8 @@ local winbar_filename = {
         return str
     end,
 }
+
+local function hide_in_width() return vim.fn.winwidth(0) > 80 end
 
 -- ⬇️ theme
 local c = require('palette').isekai -- O(1), already cached after colorscheme load
@@ -88,11 +90,10 @@ lualine.setup({
     },
 
     winbar = {
-
         lualine_c = {
             winbar_filename,
             {
-                navic.get_location,
+                navic_comp,
                 cond = function() return navic.is_available() and hide_in_width() end,
             },
         },
