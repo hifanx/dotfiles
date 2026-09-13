@@ -115,6 +115,11 @@ if [ -f ~/.config/.secrets ]; then
     source ~/.config/.secrets
 fi
 
+# herdr
+if [ -n "$HERDR_TAB_ID" ] || [ -n "$HERDR_SOCKET_PATH" ]; then
+    export TERM=xterm-ghostty
+fi
+
 # powerlevel10k
 [[ ! -f ~/.config/.p10k.zsh ]] || source ~/.config/.p10k.zsh
 
