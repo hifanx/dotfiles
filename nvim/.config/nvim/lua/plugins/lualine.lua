@@ -37,19 +37,20 @@ navic.setup({
 })
 local function navic_comp() return navic.get_location() end
 
--- winbar filename
+-- winbar filename component
+local ft_icons = {
+    qf = ' ',
+    checkhealth = '󰀯 ',
+}
 local winbar_filename = {
     'filename',
-    fmt = function(str)
-        if vim.bo.filetype == 'qf' then return ' ' end
-        return str
-    end,
+    fmt = function(str) return ft_icons[vim.bo.filetype] or str end,
 }
 
 local function hide_in_width() return vim.fn.winwidth(0) > 80 end
 
 -- ⬇️ theme
-local c = require('palette').isekai -- O(1), already cached after colorscheme load
+local c = require('palette').isekai
 local theme = {
     normal = {
         a = { bg = c.white, fg = c.base, gui = 'bold' },
@@ -161,6 +162,10 @@ lualine.setup({
                     info = ' ',
                     hint = ' ',
                 },
+            },
+            {
+                require('opencode').statusline,
+                cond = hide_in_width,
             },
         },
         lualine_y = {
