@@ -1,10 +1,10 @@
 colourful: true
 
 filekinds:
-  normal: { foreground: "#BAC2DE" }
-  directory: { foreground: "#B4BEFE" }
-  symlink: { foreground: "#89DCEB" }
-  pipe: { foreground: "#7F849C" }
+  normal: { foreground: "#CDD6F4" }
+  directory: { foreground: "#CBA6F7" }
+  symlink: { foreground: "#89B4FA" }
+  pipe: { foreground: "#6C7086" }
   block_device: { foreground: "#EBA0AC" }
   char_device: { foreground: "#EBA0AC" }
   socket: { foreground: "#585B70" }
@@ -24,7 +24,7 @@ perms:
   other_write: { foreground: "#F9E2AF" }
   other_execute: { foreground: "#A6E3A1" }
   special_user_file: { foreground: "#CBA6F7" }
-  special_other: { foreground: "#585B70" }
+  special_other: { foreground: "#EBA0AC" }
   attribute: { foreground: "#A6ADC8" }
 
 size:
@@ -34,7 +34,7 @@ size:
   number_kilo: { foreground: "#BAC2DE" }
   number_mega: { foreground: "#89B4FA" }
   number_giga: { foreground: "#CBA6F7" }
-  number_huge: { foreground: "#CBA6F7" }
+  number_huge: { foreground: "#F5C2E7" }
   unit_byte: { foreground: "#A6ADC8" }
   unit_kilo: { foreground: "#89B4FA" }
   unit_mega: { foreground: "#CBA6F7" }
@@ -80,7 +80,7 @@ file_type:
   video: { foreground: "#F38BA8" }
   music: { foreground: "#A6E3A1" }
   lossless: { foreground: "#94E2D5" }
-  crypto: { foreground: "#585B70" }
+  crypto: { foreground: "#EBA0AC" }
   document: { foreground: "#CDD6F4" }
   compressed: { foreground: "#F5C2E7" }
   temp: { foreground: "#EBA0AC" }

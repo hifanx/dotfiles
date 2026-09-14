@@ -75,8 +75,9 @@ alias vi="nvim"
 alias vim="nvim"
 
 # eza
-alias v='eza -lag --icons auto --sort name --group-directories-first --no-quotes --no-time'
-alias ll='eza -lag --icons auto --sort name --group-directories-first --no-quotes'
+alias v='eza -lag --icons auto --group-directories-first --no-quotes --no-time --git --header'
+alias ll='eza -lag --icons auto --group-directories-first --no-quotes --git --header --time-style long-iso --total-size'
+alias tt='eza -T -L 2 --icons auto --git-ignore --no-quotes'
 
 # personal aliases
 alias cdd='cd "$HOME/.dotfiles"'
