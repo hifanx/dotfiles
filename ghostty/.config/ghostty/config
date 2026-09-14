@@ -1,6 +1,6 @@
 font-family = Maple Mono CN
 font-feature = calt,cv06,ss09
-font-size = 16
+font-size = 18
 theme = Catppuccin Mocha
 background = #181825
 adjust-cell-height = 10
