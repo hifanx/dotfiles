@@ -55,5 +55,13 @@ cho() {
         find "$@" -exec chmod u=rwX,g=rwX,o=rX {} +
 }
 
+# docker exec into app containers
+alias qbm='docker exec -it qbittorrent-vpn-movies bash'
+alias qbs='docker exec -it qbittorrent-vpn-series bash'
+alias rec='docker exec -it recyclarr sh'
+alias csm='docker exec -it cross-seed-movies sh'
+alias css='docker exec -it cross-seed-series sh'
+alias ima='docker exec -it ImageMaid sh'
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
