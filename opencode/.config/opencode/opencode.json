@@ -1,7 +1,15 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "model": "opencode-go/deepseek-v4-pro",
-  "small_model": "opencode-go/deepseek-v4-flash",
+  "small_model": "opencode-go/deepseek-v4.1-flash",
   "provider": {},
-  "plugin": ["@dietrichgebert/ponytail", "@tarquinen/opencode-dcp@latest"]
+  "plugin": ["@dietrichgebert/ponytail", "@tarquinen/opencode-dcp@latest"],
+  "agent": {
+    "plan": {
+      "model": "opencode-go/deepseek-v4-pro"
+    },
+    "build": {
+      "model": "opencode-go/deepseek-v4.1-flash"
+    }
+  }
 }
