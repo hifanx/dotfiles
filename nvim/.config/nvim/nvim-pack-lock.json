@@ -14,11 +14,11 @@
       "src": "https://github.com/stevearc/conform.nvim.git"
     },
     "fzf-lua": {
-      "rev": "05e44d38de0a79c11fba5f7bf8138791b1dbdd1e",
+      "rev": "49d44023daa63861af549ccbe092be64f9be8169",
       "src": "https://github.com/ibhagwan/fzf-lua.git"
     },
     "gitsigns.nvim": {
-      "rev": "f2421c550618d257048afa650413d9e542ddbe67",
+      "rev": "aafce231e57bf2c06940b6de90b9f396aee94754",
       "src": "https://github.com/lewis6991/gitsigns.nvim.git"
     },
     "inc-rename.nvim": {
@@ -38,7 +38,7 @@
       "src": "https://github.com/mason-org/mason.nvim.git"
     },
     "mini.nvim": {
-      "rev": "6664ea9af6c43dc31934e27476bbe61c556c8dc1",
+      "rev": "ac5dffcc52b8378fbb15efeb0497a83e57a0b01c",
       "src": "https://github.com/nvim-mini/mini.nvim.git"
     },
     "nvim-highlight-colors": {
@@ -66,7 +66,7 @@
       "src": "https://github.com/folke/persistence.nvim.git"
     },
     "render-markdown.nvim": {
-      "rev": "4286b83f505f3c0e2ca04763a77c9dda0d732340",
+      "rev": "640a3ec6d538bad17c328be373c7cad0293d9589",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim.git"
     }
   }
