@@ -32,5 +32,5 @@ customCommands:
     description: "Generate AI commit message (OpenCode)"
     context: "files"
     command: >
-      bash -c '(git diff --cached | head -c 100000; echo; git log --oneline -10) | opencode run --pure --agent Commit --model opencode-go/glm-5.3-flash "Write a commit message for this diff." > /tmp/commit_msg.txt && git commit -e -F /tmp/commit_msg.txt'
+      bash -c 'p=$(git diff --cached --name-only); { echo "Repo: $(basename "$(git rev-parse --show-toplevel)")"; echo "Branch: $(git branch --show-current)"; echo "Changed files:"; git diff --cached --stat | head -c 2000; echo; echo "Diff:"; git diff --cached | head -c 100000; echo; echo "Recent commits on these files:"; git log --oneline -8 -- $p; echo "Recent commits:"; git log --oneline -10; } | opencode run --pure --agent Commit --model opencode-go/glm-5.3-flash "Write a commit message for this diff." > /tmp/commit_msg.txt && git commit -e -F /tmp/commit_msg.txt'
     output: terminal
