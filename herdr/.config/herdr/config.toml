@@ -35,3 +35,6 @@ height = "85%"
 key = "prefix+d"
 type = "plugin_action"
 command = "persiyanov.reviewr.toggle"
+
+[ui.toast]
+delivery = "herdr"
