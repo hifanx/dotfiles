@@ -124,6 +124,10 @@ if [ -n "$HERDR_TAB_ID" ] || [ -n "$HERDR_SOCKET_PATH" ]; then
     export TERM=xterm-ghostty
 fi
 
+# opencode
+export OPENCODE_EXPERIMENTAL_BACKGROUND_SUBAGENTS=true
+export OPENCODE_ENABLE_EXA=1
+
 # powerlevel10k
 [[ ! -f ~/.config/.p10k.zsh ]] || source ~/.config/.p10k.zsh
 
