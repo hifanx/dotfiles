@@ -25,3 +25,9 @@ _darcs
 ## The above are defaults
 
 scripts
+lofn/
+
+.scratch
+AGENTS.md
+.gitignore
+CONTEXT.md
