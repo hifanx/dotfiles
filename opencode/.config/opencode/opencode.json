@@ -3,13 +3,15 @@
   "model": "opencode-go/deepseek-v4-pro",
   "small_model": "opencode-go/glm-5.3-flash",
   "provider": {},
-  "plugin": ["@dietrichgebert/ponytail", "@tarquinen/opencode-dcp@latest"],
+  "plugin": ["@dietrichgebert/ponytail"],
   "agent": {
     "plan": {
-      "model": "opencode-go/deepseek-v4-pro"
+      "model": "opencode-go/deepseek-v4-pro",
+      "variant": "max"
     },
     "build": {
-      "model": "opencode-go/glm-5.3-flash"
+      "model": "opencode-go/glm-5.3-flash",
+      "variant": "max"
     }
   },
   "lsp": true
