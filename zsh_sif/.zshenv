@@ -3,9 +3,9 @@
 # Loaded by login shells, interactive shells, scripts, and GUI app subprocesses
 
 # XDG Base Directory Specification
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_DATA_HOME=$HOME/.local/share
-export XDG_CACHE_HOME=$HOME/.cache
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
 
 # Locale (solves cjk gibberish)
 export LC_ALL=en_US.UTF-8

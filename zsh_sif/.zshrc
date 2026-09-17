@@ -35,12 +35,14 @@ zinit light zsh-users/zsh-completions      # this adds additional completion def
 zinit light marlonrichert/zsh-autocomplete # this adds real-time type-ahead autocompletion
 zinit light zsh-users/zsh-autosuggestions
 
-# history configuration
+# zsh configuration.
 # NOTE: HISTFILE is set here, not in .zshenv, because macOS /etc/zshrc loads
 # after .zshenv and unconditionally resets it to ${ZDOTDIR:-$HOME}/.zsh_history.
 export LESSHISTFILE=/dev/null
 export HISTFILE="$HOME/.cache/zsh/.zsh_history"
 export ZSH_COMPDUMP="$HOME/.cache/zsh/zcompdump-$ZSH_VERSION"
+export ZDOTDIR="$HOME/.cache/zsh"
+export SHELL_SESSION_DISABLE=1
 export HISTSIZE=5000
 export SAVEHIST=$HISTSIZE
 export ISTDUP=erase  # erase duplicates
@@ -143,3 +145,7 @@ krita-fix() {
     printf '\nimport os\nos.environ.setdefault("MPLCONFIGDIR", os.path.expanduser("~/.cache/matplotlib"))\n' >>"$f"
     echo "patched"
 }
+
+# codeburn:begin bash-output-cap
+export BASH_MAX_OUTPUT_LENGTH=15000
+# codeburn:end bash-output-cap
