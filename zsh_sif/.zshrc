@@ -89,8 +89,10 @@ alias bi="brew bundle --verbose --force cleanup --file=~/.dotfiles/brew/Brewfile
 alias bd="brew bundle dump --force --file=~/.dotfiles/brew/Brewfile"
 alias lofn="ssh root@10.0.0.5"
 alias heimdall="ssh root@10.0.0.1"
-alias nanna="ssh xuhaifan@10.0.0.12"
+alias yggdrasil="ssh root@10.0.0.2"
 alias baldur="ssh xuhaifan@10.0.0.10"
+alias idun="ssh xuhaifan@10.0.0.11"
+alias nanna="ssh xuhaifan@10.0.0.12"
 alias co='cd "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian"'
 alias g='lazygit'
 alias oc='opencode'
