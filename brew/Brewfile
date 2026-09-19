@@ -1,13 +1,17 @@
 tap "aimessoft/nipaplay-reload", "https://github.com/AimesSoft/homebrew-nipaplay-reload.git"
-tap "anomalyco/tap", "https://github.com/anomalyco/homebrew-tap.git"
-tap "asmvik/formulae", "https://github.com/asmvik/homebrew-formulae.git"
-tap "buo/cask-upgrade"
-tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae"
-tap "nikitabobko/tap"
+tap "anomalyco/tap", "https://github.com/anomalyco/homebrew-tap.git", trusted: true
+tap "asmvik/formulae", "https://github.com/asmvik/homebrew-formulae.git", trusted: true
+tap "buo/cask-upgrade", trusted: true
+tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae", trusted: true
+tap "nikitabobko/tap", trusted: true
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
+# Open-source, cross-platform JavaScript runtime environment
+brew "node"
+# See where your AI coding tokens go - by task, tool, model, and project
+brew "codeburn"
 # Diff that understands syntax
 brew "difftastic"
 # Modern, maintained replacement for ls
@@ -36,16 +40,12 @@ brew "mole"
 brew "tree-sitter"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim", args: ["HEAD"]
-# Open-source, cross-platform JavaScript runtime environment
-brew "node"
-# Search tool like grep and The Silver Searcher
-brew "ripgrep"
-# AI coding agent, built for the terminal
-brew "opencode"
 # PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.14"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
 # 7-Zip is a file archiver with a high compression ratio
 brew "sevenzip"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
@@ -56,12 +56,14 @@ brew "tealdeer"
 brew "yazi", args: ["HEAD"]
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
+# The AI coding agent built for the terminal.
+brew "anomalyco/tap/opencode", trusted: true
 # A window border system for macOS
-brew "felixkratz/formulae/borders"
+brew "felixkratz/formulae/borders", trusted: true
 # Collection of apps and services for photography, design, video, web, and UX
 cask "adobe-creative-cloud"
 # AeroSpace is an i3-like tiling window manager for macOS
-cask "nikitabobko/tap/aerospace"
+cask "nikitabobko/tap/aerospace", trusted: true
 # Application launcher and productivity software
 cask "alfred"
 # Tool to flash OS images to SD cards & USB drives
@@ -77,16 +79,10 @@ cask "ghostty"
 cask "intellij-idea"
 # Free and open-source painting and sketching program
 cask "krita"
-# Provides updates to various Microsoft products
-cask "microsoft-auto-update"
-# Spreadsheet software
-cask "microsoft-excel"
+# Free cross-platform office suite, fresh version
+cask "libreoffice"
 # OpenJDK distribution from Microsoft
 cask "microsoft-openjdk"
-# Presentation software
-cask "microsoft-powerpoint"
-# Word processor
-cask "microsoft-word"
 # Media player
 cask "movist-pro"
 cask "aimessoft/nipaplay-reload/nipaplay-reload", trusted: true
