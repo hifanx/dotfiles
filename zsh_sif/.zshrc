@@ -96,6 +96,7 @@ alias nanna="ssh xuhaifan@10.0.0.12"
 alias co='cd "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian"'
 alias g='lazygit'
 alias oc='opencode'
+alias ds='cd ~ && find . -type f -name ".DS_Store" -exec rm -rf {} \;'
 
 # yazi
 function y() {
