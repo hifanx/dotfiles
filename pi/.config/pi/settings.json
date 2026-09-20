@@ -1,0 +1,28 @@
+{
+  "lastChangelogVersion": "0.85.1",
+  "theme": "dark",
+  "defaultProvider": "opencode-go",
+  "defaultModel": "glm-5.3",
+  "enableInstallTelemetry": false,
+  "tuiMode": "fullscreen",
+  "showCacheMissNotices": true,
+  "showHardwareCursor": true,
+  "packages": [
+    "npm:@dietrichgebert/ponytail",
+    "npm:pi-caveman",
+    "npm:pi-mcp-adapter",
+    "npm:pi-web-access",
+    "npm:pi-system-prompt-viewer",
+    "npm:pi-powerline-footer"
+  ],
+  "showLastPrompt": true,
+  "powerline": {
+    "preset": "default",
+    "placement": "above",
+    "welcome": true,
+    "separator": "chevron",
+    "context": { "format": "full" },
+    "cache_read": { "format": "both" }
+  },
+  "workingVibe": "zen"
+}

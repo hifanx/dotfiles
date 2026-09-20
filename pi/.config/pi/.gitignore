@@ -1,0 +1,7 @@
+# ignore everything
+*
+# except the config files
+!.gitignore
+!settings.json
+!keybindings.json
+!web-search.json

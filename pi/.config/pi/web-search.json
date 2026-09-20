@@ -1,0 +1,6 @@
+{
+  "exaApiKey": "${EXA_API_KEY}",
+  "ssrf": {
+    "allowRanges": ["198.18.0.0/15"]
+  }
+}
