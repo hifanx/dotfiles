@@ -6,6 +6,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# so that ctrl+d won't kill the pane
+setopt ignoreeof
+
 # setup homebrew
 export HOMEBREW_PREFIX="/opt/homebrew"
 eval "$(/opt/homebrew/bin/brew shellenv)"
