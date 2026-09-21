@@ -13,16 +13,11 @@
     "npm:pi-mcp-adapter",
     "npm:pi-web-access",
     "npm:pi-system-prompt-viewer",
-    "npm:pi-powerline-footer"
+    "git:github.com/mattpocock/skills",
+    "npm:pine-of-glass"
   ],
-  "showLastPrompt": true,
-  "powerline": {
-    "preset": "default",
-    "placement": "above",
-    "welcome": true,
-    "separator": "chevron",
-    "context": { "format": "full" },
-    "cache_read": { "format": "both" }
-  },
-  "workingVibe": "zen"
+  "hideThinkingBlock": true,
+  "pi-harpoon": {
+    "models": ["opencode-go/glm-5.3:high", "opencode-go/glm-5.3-flash:max"]
+  }
 }

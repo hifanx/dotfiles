@@ -5,3 +5,6 @@
 !settings.json
 !keybindings.json
 !web-search.json
+# and tracked extensions
+!extensions/
+!extensions/pi-harpoon.ts
