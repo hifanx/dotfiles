@@ -1,13 +1,12 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "opencode-go/deepseek-v4-pro",
+  "model": "opencode-go/glm-5.3",
   "small_model": "opencode-go/glm-5.3-flash",
-  "provider": {},
   "plugin": ["@dietrichgebert/ponytail"],
   "agent": {
     "plan": {
-      "model": "opencode-go/deepseek-v4-pro",
-      "variant": "max"
+      "model": "opencode-go/glm-5.3",
+      "variant": "high"
     },
     "build": {
       "model": "opencode-go/glm-5.3-flash",
