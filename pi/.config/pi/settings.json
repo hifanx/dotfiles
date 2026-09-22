@@ -1,6 +1,6 @@
 {
   "lastChangelogVersion": "0.85.1",
-  "theme": "dark",
+  "theme": "isekai",
   "defaultProvider": "opencode-go",
   "defaultModel": "glm-5.3",
   "enableInstallTelemetry": false,
@@ -13,11 +13,14 @@
     "npm:pi-mcp-adapter",
     "npm:pi-web-access",
     "npm:pi-system-prompt-viewer",
-    "git:github.com/mattpocock/skills",
-    "npm:pine-of-glass"
+    "npm:pine-of-glass",
+    "git:github.com/mattpocock/skills"
   ],
   "hideThinkingBlock": true,
   "pi-harpoon": {
-    "models": ["opencode-go/glm-5.3:high", "opencode-go/glm-5.3-flash:max"]
+    "models": [
+      "opencode-go/glm-5.3:high",
+      "opencode-go/glm-5.3-flash:max"
+    ]
   }
 }
