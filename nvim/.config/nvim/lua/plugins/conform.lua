@@ -9,7 +9,9 @@ vim.api.nvim_create_user_command('Format', function(args)
             ['end'] = { args.line2, end_line:len() },
         }
     end
-    require('conform').format({ async = true, range = range })
+    require('conform').format({ async = true, range = range }, function(err)
+        if err then vim.notify(('Format failed: %s'):format(err), vim.log.levels.ERROR) end
+    end)
 end, { range = true })
 
 vim.keymap.set('n', '<Leader>hf', function()
@@ -42,7 +44,9 @@ require('conform').setup({
     },
     format_after_save = function()
         if vim.g.disable_autoformat then return end
-        return { lsp_format = 'fallback' }
+        return { lsp_format = 'fallback' }, function(err)
+            if err then vim.notify(('Format failed: %s'):format(err), vim.log.levels.ERROR) end
+        end
     end,
     formatters = {
         shfmt = { append_args = { '-i', '2' } },
