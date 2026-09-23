@@ -46,7 +46,8 @@ M.kuro = {
     yellow = '#F9E2AF',
     orange = '#FAB387',
     blue = '#5A9BEC',
-    magenta = '#C4A7E7',
+    magenta = '#CBA6F7',
+    lavender = '#B4BEFE',
     cyan = '#33ACAC',
 
     cursorline = '#20222C',

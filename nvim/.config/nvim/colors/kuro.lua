@@ -101,19 +101,20 @@ local hl = {
     ['@keyword.return'] = { fg = c.red, bold = true, italic = true },
     ['@attribute.builtin'] = { link = '@attribute' },
     ['@function.builtin'] = { link = '@function' },
-    ['@markup.heading.1'] = { fg = c.magenta, bold = true },
-    ['@markup.heading.2'] = { fg = c.blue, bold = true },
-    ['@markup.heading.3'] = { fg = c.yellow, bold = true },
-    ['@markup.heading.4'] = { fg = c.green, bold = true },
-    ['@markup.heading.5'] = { fg = c.orange, bold = true },
-    ['@markup.heading.6'] = { fg = c.fg_40, bold = true },
-    ['@markup.quote'] = { fg = c.cyan, bold = true },
+    ['@markup.heading.1'] = { fg = c.magenta, bold = true, underline = true },
+    ['@markup.heading.2'] = { fg = c.blue, bold = true, underline = true },
+    ['@markup.heading.3'] = { fg = c.yellow, bold = true, underline = true },
+    ['@markup.heading.4'] = { fg = c.green, bold = true, underline = true },
+    ['@markup.heading.5'] = { fg = c.orange, bold = true, underline = true },
+    ['@markup.heading.6'] = { fg = c.fg_65, bold = true, underline = true },
+    ['@markup.quote'] = { fg = c.fg_40, bold = true },
     ['@markup.math'] = { fg = c.blue, bold = true },
-    ['@markup.link'] = { fg = c.blue, bold = true },
+    ['@markup.link'] = { fg = c.fg_95, bold = true },
     ['@markup.raw'] = { fg = c.red, bold = true },
     ['@markup.raw.block'] = { bg = c.backdrop },
     ['@markup.list.checked'] = { fg = c.green, strikethrough = true },
     ['@markup.list.unchecked'] = { fg = c.fg_40 },
+    ['@markup.strong'] = { fg = c.lavender, bold = true },
     ['@tag.builtin'] = { link = 'Tag' },
 
     -- language specific
@@ -121,6 +122,7 @@ local hl = {
 
     -- lsp
     ['@lsp.type.variable'] = vim.empty_dict(),
+    ['@lsp.type.decorator.markdown'] = vim.empty_dict(),
 
     -- render-markdown
     RenderMarkdownH1Bg = { link = '@markup.heading.1' },

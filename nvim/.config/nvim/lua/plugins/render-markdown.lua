@@ -19,7 +19,7 @@ require('render-markdown').setup({
         language_left = '█',
         language_right = '',
     },
-    pipe_table = { preset = 'heavy', cell = 'trimmed', style = 'normal' },
+    pipe_table = { preset = 'heavy', cell = 'trimmed', style = 'full' },
     latex = { enabled = false },
     checkbox = { checked = { scope_highlight = '@markup.strikethrough' } },
 })
