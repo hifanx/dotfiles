@@ -35,10 +35,5 @@ export TEALDEER_CONFIG_DIR=$HOME/.config/tealdeer/
 export BUN_INSTALL="$HOME/.local/share/opencode/"
 export BUN_INSTALL_CACHE_DIR="$HOME/.local/share/opencode/cache"
 
-# pi-coding-agent
-export PI_CODING_AGENT_DIR="$HOME/.config/pi/"
-# export PI_CODING_AGENT_SESSION_DIR="$HOME/.local/share/pi/sessions/"
-export PI_TELEMETRY=0
-
 # PATH - Cargo binaries before npm globals
 export PATH="$CARGO_HOME/bin:$NPM_CONFIG_PREFIX/bin:$PATH"
