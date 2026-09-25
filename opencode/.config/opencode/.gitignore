@@ -1,7 +1,7 @@
 *
 !/.gitignore
 !/opencode.json
-!/tui.json
+!/cli.json
 !/upgrade-mattpocock-skills.sh
 !/agents/
 !/agents/Commit.md

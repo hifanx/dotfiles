@@ -1,20 +1,17 @@
 {
-  "$schema": "https://opencode.ai/config.json",
   "model": "opencode-go/glm-5.3",
-  "small_model": "opencode-go/glm-5.3-flash",
-  "plugin": [
-    "@dietrichgebert/ponytail",
-    "./plugins/caveman/plugin.js"
-  ],
-  "agent": {
+  "agents": {
+    "title": {
+      "model": "opencode-go/glm-5.3-flash"
+    },
     "plan": {
-      "model": "opencode-go/glm-5.3",
-      "variant": "high"
+      "model": "opencode-go/glm-5.3#high"
     },
     "build": {
-      "model": "opencode-go/glm-5.3-flash",
-      "variant": "max"
+      "model": "opencode-go/glm-5.3-flash#max"
     }
   },
-  "lsp": true
+  "websearch": {
+    "provider": "exa"
+  }
 }
