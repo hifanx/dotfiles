@@ -34,3 +34,9 @@ customCommands:
     command: >
       bash $HOME/.config/lazygit/commit-msg.sh
     output: terminal
+  - key: "<c-p>"
+    description: "Generate AI commit message (pi)"
+    context: "files"
+    command: >
+      bash $HOME/.config/lazygit/commit-msg-pi.sh
+    output: terminal
