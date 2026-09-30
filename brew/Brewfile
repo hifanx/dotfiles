@@ -1,6 +1,4 @@
-tap "aimessoft/nipaplay-reload", "https://github.com/AimesSoft/homebrew-nipaplay-reload.git"
-tap "anomalyco/tap", "https://github.com/anomalyco/homebrew-tap.git", trusted: true
-tap "asmvik/formulae", "https://github.com/asmvik/homebrew-formulae.git", trusted: true
+tap "aimessoft/nipaplay-reload", "https://github.com/AimesSoft/homebrew-nipaplay-reload.git", truested: true
 tap "buo/cask-upgrade", trusted: true
 tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae", trusted: true
 tap "nikitabobko/tap", trusted: true
@@ -20,6 +18,8 @@ brew "eza"
 brew "fd"
 # Command-line fuzzy finder written in Go
 brew "fzf"
+# GitHub command-line tool
+brew "gh"
 # Distributed revision control system
 brew "git"
 # GNU Privacy Guard (OpenPGP)
@@ -40,6 +40,8 @@ brew "mole"
 brew "tree-sitter"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim", args: ["HEAD"]
+# AI agent toolkit
+brew "pi-coding-agent"
 # PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
 # Interpreted, interactive, object-oriented programming language
@@ -56,8 +58,6 @@ brew "tealdeer"
 brew "yazi", args: ["HEAD"]
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
-# The AI coding agent built for the terminal.
-brew "anomalyco/tap/opencode", trusted: true
 # A window border system for macOS
 brew "felixkratz/formulae/borders", trusted: true
 # Collection of apps and services for photography, design, video, web, and UX
