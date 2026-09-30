@@ -1,0 +1,10 @@
+# ignore everything
+*
+!.gitignore
+!settings.json
+!keybindings.json
+!mcp-adapter.json
+!extensions/
+!extensions/pi-harpoon.ts
+!themes/
+!themes/**

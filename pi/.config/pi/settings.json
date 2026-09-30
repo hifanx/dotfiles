@@ -1,0 +1,28 @@
+{
+  "lastChangelogVersion": "0.87.1",
+  "theme": "isekai",
+  "defaultProvider": "opencode-go",
+  "defaultModel": "glm-5.3",
+  "skills": [
+    "~/.config/pi/.agents/skills"
+  ],
+  "enableInstallTelemetry": false,
+  "tuiMode": "fullscreen",
+  "showCacheMissNotices": true,
+  "showHardwareCursor": true,
+  "packages": [
+    "npm:@dietrichgebert/ponytail",
+    "npm:pi-caveman",
+    "npm:pi-mcp-adapter",
+    "npm:pi-system-prompt-viewer",
+    "npm:pine-of-glass",
+    "npm:pi-hashline-edit-pro"
+  ],
+  "hideThinkingBlock": true,
+  "pi-harpoon": {
+    "models": [
+      "opencode-go/glm-5.3:high",
+      "opencode-go/glm-5.3-flash:max"
+    ]
+  }
+}
