@@ -3,7 +3,7 @@
 # workflow in commit-msg.sh stays untouched.
 set -eu
 
-model="opencode-go/glm-5.3-flash"
+model="openai-codex/gpt-6-luna"
 msg_file="/tmp/commit_msg.txt"
 
 # Commit prompt, copied verbatim from the OpenCode Commit agent.
@@ -66,7 +66,7 @@ echo "Generating commit message with pi ($model)..."
 } | pi --print --no-session --no-tools --no-extensions --no-skills \
      --no-prompt-templates --no-themes --no-context-files \
      --system-prompt "$body" \
-     --model "$model" --thinking off \
+     --model "$model" --thinking max \
      "Write a commit message for this diff." >"$msg_file"
 
 if [ ! -s "$msg_file" ]; then

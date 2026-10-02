@@ -1,11 +1,10 @@
 {
   "lastChangelogVersion": "0.87.1",
   "theme": "isekai",
-  "defaultProvider": "opencode-go",
-  "defaultModel": "glm-5.3",
-  "skills": [
-    "~/.config/pi/.agents/skills"
-  ],
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-6-sol",
+  "defaultThinkingLevel": "high",
+  "skills": ["~/.config/pi/.agents/skills"],
   "enableInstallTelemetry": false,
   "tuiMode": "fullscreen",
   "showCacheMissNotices": true,
@@ -20,9 +19,6 @@
   ],
   "hideThinkingBlock": true,
   "pi-harpoon": {
-    "models": [
-      "opencode-go/glm-5.3:high",
-      "opencode-go/glm-5.3-flash:max"
-    ]
+    "models": ["openai-codex/gpt-6-sol:high", "openai-codex/gpt-6-luna:max"]
   }
 }
