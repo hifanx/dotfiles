@@ -165,9 +165,9 @@ eval "$(zoxide init --cmd cd zsh)"
 # bat
 alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 
-# secrets
-if [ -f ~/.config/.secrets ]; then
-    source ~/.config/.secrets
+# env
+if [ -f ~/.config/.env ]; then
+    source ~/.config/.env
 fi
 
 # herdr
