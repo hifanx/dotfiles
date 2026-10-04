@@ -112,6 +112,7 @@ alias idun="ssh xuhaifan@10.0.0.11"
 alias nanna="ssh xuhaifan@10.0.0.12"
 alias co='cd "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian"'
 alias g='lazygit'
+alias ly='yadm enter lazygit'
 alias oc='opencode'
 alias ds='cd ~ && find . -type f -name ".DS_Store" -exec rm -rf {} \;'
 
