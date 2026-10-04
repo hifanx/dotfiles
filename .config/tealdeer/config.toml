@@ -1,0 +1,29 @@
+[display]
+compact = false
+use_pager = false
+
+[style.description]
+foreground = { rgb = { r = 180, g = 190, b = 254 } } # lavender = "#B4BEFE"
+
+[style.command_name]
+foreground = { rgb = { r = 166, g = 227, b = 161 } } # green = "#A6E3A1"
+bold = true
+
+[style.example_text]
+background = { rgb = { r = 49, g = 50, b = 68 } }    # surface0 = "#313244"
+foreground = { rgb = { r = 205, g = 214, b = 244 } }  # text = "#CDD6F4"
+
+[style.example_code]
+foreground = { rgb = { r = 243, g = 139, b = 168 } } # red = "#F38BA8"
+bold = true
+
+[style.example_variable]
+foreground = { rgb = { r = 137, g = 180, b = 250 } } # blue = "#89B4FA"
+bold = true
+
+[updates]
+auto_update = true
+auto_update_interval_hours = 24
+
+[directories]
+custom_pages_dir = "/Users/sif/.config/tealdeer/pages/"
