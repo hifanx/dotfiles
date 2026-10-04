@@ -1,0 +1,116 @@
+# Desktop base && common packages
+## X11
+libwnck3
+mesa-utils
+xf86-input-libinput
+xorg-dpyinfo
+xorg-server
+xorg-xinit
+xorg-xinput
+xorg-xkill
+xorg-xrandr
+xorg-xrdb
+## GPU
+xf86-video-amdgpu
+xf86-video-ati
+## Network
+b43-fwcutter
+broadcom-wi-dkms
+dhclient
+dnsmasq
+dnsutils
+ethtool
+iwd
+modemmanager
+networkmanager
+networkmanager-openconnect
+networkmanager-openvpn
+nss-mdns
+openssh
+usb_modeswitch
+wpa_supplicant
+xl2tpd
+## Package management
+downgrade
+pacman-contrib
+pkgfile
+rebuild-detector
+reflector
+## Desktop integration
+accountsservice
+bluez
+bluez-utils
+blueman
+ffmpegthumbnailer
+gst-libav
+gst-plugin-pipewire
+gst-plugins-bad
+gst-plugins-ugly
+libdvdcss
+libgsf
+libopenraw
+mlocate
+poppler-glib
+xdg-user-dirs
+xdg-utils
+## File system
+efitools
+haveged
+nfs-utils
+nilfs-utils
+ntp
+smartmontools
+unrar
+unzip
+xz
+## Fonts
+cantarell-fonts
+freetype2
+noto-fonts
+noto-fonts-cjk
+noto-fonts-extra
+noto-fonts-emoji
+ttf-bitstream-vera
+ttf-dejavu
+ttf-liberation
+ttf-opensans
+## Audio
+alsa-firmware
+alsa-plugins
+alsa-utils
+pavucontrol
+pipewire-pulse
+pipewire-alsa
+pipewire-jack
+wireplumber
+rtkit
+## Brightness
+brightnessctl
+## Hardware
+dmidecode
+dmraid
+hdparm
+hwdetect
+lsscsi
+mtools
+sg3_utils
+sof-firmware
+## Power
+power-profiles-daemon
+upower
+## CPU specific microcode update packages
+amd-ucode
+intel-ucode
+## Recommended applications
+git
+findutils
+hwinfo
+rsync
+wget
+## Browser
+firefox
+firefox-i18n-zh-cn
+## Firewall
+firewalld
+python-pyqt5
+python-capng
