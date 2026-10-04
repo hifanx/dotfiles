@@ -1,0 +1,18 @@
+{
+  "model": "opencode-go/glm-5.3",
+  "agents": {
+    "title": {
+      "model": "opencode-go/glm-5.3-flash"
+    },
+    "plan": {
+      "model": "opencode-go/glm-5.3#high"
+    },
+    "build": {
+      "model": "opencode-go/glm-5.3-flash#max"
+    }
+  },
+  "websearch": {
+    "provider": "exa"
+  },
+  "plugins": ["./plugins/caveman/plugin.js"]
+}
