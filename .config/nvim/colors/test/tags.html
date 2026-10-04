@@ -1,0 +1,18 @@
+<!-- Treesitter demo: HTML/XML tag groups -->
+<!-- Demonstrates: @tag, @tag.builtin, @tag.attribute, @tag.delimiter -->
+
+<!doctype html>
+<html lang="en">
+  <!-- html: @tag.builtin, lang: @tag.attribute, '<', '>' and '</': @tag.delimiter -->
+  <head>
+    <meta charset="utf-8" />
+    <!-- meta: @tag, attributes: @tag.attribute -->
+    <title>Tag demo</title>
+  </head>
+  <body>
+    <h1 id="title" class="hero">HTML tag demo</h1>
+    <!-- h1: @tag, id/class: @tag.attribute -->
+    <a href="https://example.com" title="example link">Visit example.com</a>
+    <!-- 'a': @tag, href/title: @tag.attribute, angle brackets and slashes: @tag.delimiter -->
+  </body>
+</html>
