@@ -1,0 +1,40 @@
+onboarding = false
+
+[theme.custom]
+sidebar_bg = "#11111B"
+panel_bg = "transparent"
+accent = "#F9E2AF"
+
+[keys]
+prefix = "ctrl+a"
+workspace_picker = "prefix+n"
+goto = "prefix+w"
+split_vertical = "prefix+|"
+split_horizontal = "prefix+backslash"
+toggle_sidebar = "prefix+a"
+
+[ui]
+sidebar_collapsed_mode = "hidden"
+confirm_close = false
+prompt_new_tab_name = false
+tab_bar_right = [{ type = "hostname" }]
+tab_bar_right_separator = " "
+
+[experimental]
+pane_history = false
+
+[[keys.command]]
+key = "prefix+g"
+type = "popup"
+command = "lazygit"
+description = "lazygit"
+width = "90%"
+height = "85%"
+
+[[keys.command]]
+key = "prefix+d"
+type = "plugin_action"
+command = "persiyanov.reviewr.toggle"
+
+[ui.toast]
+delivery = "herdr"
