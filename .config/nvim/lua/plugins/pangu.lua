@@ -1,0 +1,5 @@
+vim.api.nvim_create_autocmd('BufWritePre', {
+    pattern = { '*.markdown', '*.md', '*.text', '*.txt', '*.wiki', '*.cnx' },
+    desc = 'Auto format text files with Pangu',
+    callback = function() vim.cmd('PanguAll') end,
+})
