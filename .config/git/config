@@ -1,0 +1,15 @@
+[user]
+	name = hifanx
+	email = 373441770@qq.com
+[core]
+	autocrlf = input
+	quotepath = off
+	editor = nvim
+[color]
+	ui = true
+[alias]
+    dlog = -c diff.external=difft log --ext-diff
+    dshow = -c diff.external=difft show --ext-diff
+    ddiff = -c diff.external=difft diff
+[commit]
+	template = /Users/sif/.config/git/gitmessage
