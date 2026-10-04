@@ -1,0 +1,106 @@
+tap "aimessoft/nipaplay-reload", "https://github.com/AimesSoft/homebrew-nipaplay-reload.git"
+tap "buo/cask-upgrade", trusted: true
+tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae", trusted: true
+tap "nikitabobko/tap", trusted: true
+# Clone of cat(1) with syntax highlighting and Git integration
+brew "bat"
+# Resource monitor. C++ version and continuation of bashtop and bpytop
+brew "btop"
+# Open-source, cross-platform JavaScript runtime environment
+brew "node"
+# See where your AI coding tokens go - by task, tool, model, and project
+brew "codeburn"
+# Diff that understands syntax
+brew "difftastic"
+# Modern, maintained replacement for ls
+brew "eza"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# GitHub command-line tool
+brew "gh"
+# Distributed revision control system
+brew "git"
+# GNU Privacy Guard (OpenPGP)
+brew "gnupg"
+# Agent multiplexer that lives in your terminal
+brew "herdr"
+# TIFF library and utilities
+brew "libtiff"
+# Tools and libraries to manipulate images in select formats
+brew "imagemagick"
+# Simple terminal UI for git commands
+brew "lazygit"
+# Mac App Store command-line interface
+brew "mas"
+# Deep clean and optimize your Mac
+brew "mole"
+# Incremental parsing library
+brew "tree-sitter"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim", args: ["HEAD"]
+# AI agent toolkit
+brew "pi-coding-agent"
+# PDF rendering library (based on the xpdf-3.0 code base)
+brew "poppler"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.14"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# 7-Zip is a file archiver with a high compression ratio
+brew "sevenzip"
+# Organize software neatly under a single directory tree (e.g. /usr/local)
+brew "stow"
+# Very fast implementation of tldr in Rust
+brew "tealdeer"
+# Blazing fast terminal file manager written in Rust, based on async I/O
+brew "yazi", args: ["HEAD"]
+# Shell extension to navigate your filesystem faster
+brew "zoxide"
+# A window border system for macOS
+brew "felixkratz/formulae/borders", trusted: true
+# Collection of apps and services for photography, design, video, web, and UX
+cask "adobe-creative-cloud"
+# AeroSpace is an i3-like tiling window manager for macOS
+cask "nikitabobko/tap/aerospace", trusted: true
+# Application launcher and productivity software
+cask "alfred"
+# Tool to flash OS images to SD cards & USB drives
+cask "balenaetcher"
+# Voice and text chat software
+cask "discord"
+# Web browser
+cask "firefox"
+cask "font-maple-mono-cn"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
+# Free and open-source painting and sketching program
+cask "krita"
+# Free cross-platform office suite, fresh version
+cask "libreoffice"
+# OpenJDK distribution from Microsoft
+cask "microsoft-openjdk"
+# Media player
+cask "movist-pro"
+cask "aimessoft/nipaplay-reload/nipaplay-reload", trusted: true
+# Knowledge base that works on top of a local folder of plain text Markdown files
+cask "obsidian"
+# Home media player
+cask "plex"
+# Instant messaging tool
+cask "qq"
+# Mesh VPN based on WireGuard
+cask "tailscale-app"
+# Messaging app with a focus on speed and security
+cask "telegram"
+# VPN and WiFi proxy
+cask "thunder"
+# AI image upscaler
+cask "upscayl"
+# Free messaging and calling application
+cask "wechat"
+# Native desktop client for WhatsApp
+cask "whatsapp"
+mas "GIPHY CAPTURE", id: 668208984
+mas "Infuse", id: 1136220934
