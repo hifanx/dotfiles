@@ -55,4 +55,20 @@ require('gitsigns').setup({
         vim.keymap.set('n', '<Leader>gd', function() gs.diffthis() end, { desc = 'Git Diff' })
         vim.keymap.set('n', '<Leader>gt', function() gs.toggle_current_line_blame() end, { desc = 'Toggle line blame' })
     end,
+    -- HACK: make gitsigns work with yadm, remove if don't use yadm anymore.
+    _on_attach_pre = function(bufnr, callback)
+        if vim.fn.executable('yadm') == 1 then
+            local filepath = vim.api.nvim_buf_get_name(bufnr)
+            -- only attach if yadm tracks this file
+            vim.fn.system({ 'yadm', 'ls-files', '--error-unmatch', filepath })
+            if vim.v.shell_error == 0 then
+                callback({
+                    gitdir = vim.fn.expand('~/.local/share/yadm/repo.git'),
+                    toplevel = vim.env.HOME,
+                })
+                return
+            end
+        end
+        callback() -- fall back to normal behavior for regular repos
+    end,
 })
