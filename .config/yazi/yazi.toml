@@ -1,0 +1,68 @@
+# A TOML linter such as https://taplo.tamasfe.dev/ can use this schema to validate your config.
+# If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
+# "$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
+
+[mgr]
+ratio = [2, 4, 3]
+sort_by = "extension"
+sort_sensitive = false
+sort_reverse = false
+sort_dir_first = true
+sort_translit = false
+linemode = "size"
+show_hidden = true
+show_symlink = true
+scrolloff = 15
+mouse_events = ["click", "scroll"]
+
+[opener]
+reveal = [{ run = "open -R %s1", desc = "reveal in finder", for = "macos" }]
+play = [{ run = 'open -a "Movist Pro" %s', desc = "Movist Pro", for = "macos" }]
+browser = [
+  { run = '''browser=$(osascript -l JavaScript -e 'ObjC.import("AppKit"); $.NSWorkspace.sharedWorkspace.URLForApplicationToOpenURL($.NSURL.URLWithString("https://example.com")).path.js') && open -a "$browser" %s''', desc = "Default browser", for = "macos" },
+]
+
+[open]
+prepend_rules = [
+  { url = "*.{html,htm}", use = [
+    "open",
+    "browser",
+    "edit",
+    "reveal",
+  ] },
+  { mime = "text/html", use = [
+    "open",
+    "browser",
+    "edit",
+    "reveal",
+  ] },
+  { mime = "text/*", use = [
+    "open",
+    "edit",
+    "reveal",
+  ] },
+  { mime = "application/{json,ndjson,javascript,wine-extension-ini}", use = [
+    "open",
+    "edit",
+    "reveal",
+  ] },
+  { mime = "inode/empty", use = [
+    "open",
+    "edit",
+    "reveal",
+  ] },
+  { mime = "video/*", use = [
+    "open",
+    "play",
+    "reveal",
+  ] },
+  { mime = "audio/*", use = [
+    "open",
+    "reveal",
+  ] },
+  { mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", use = [
+    "open",
+    "extract",
+    "reveal",
+  ] },
+]
