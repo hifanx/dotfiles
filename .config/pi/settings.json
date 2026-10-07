@@ -12,8 +12,7 @@
     "npm:@dietrichgebert/ponytail",
     "npm:pi-caveman",
     "npm:pi-system-prompt-viewer",
-    "npm:pine-of-glass",
-    "npm:pi-hashline-edit-pro"
+    "npm:pine-of-glass"
   ],
   "hideThinkingBlock": true,
   "pi-harpoon": {
