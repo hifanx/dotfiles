@@ -12,6 +12,7 @@ setopt ignoreeof
 
 # /etc/zprofile runs path_helper after .zshenv; restore command precedence.
 path=(
+    "$XDG_DATA_HOME/nvim/mason/bin"
     "$HOMEBREW_PREFIX/bin"
     "$HOMEBREW_PREFIX/sbin"
     "$CARGO_HOME/bin"
