@@ -35,9 +35,10 @@ export HOMEBREW_PREFIX="/opt/homebrew"
 export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
 export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX"
 
-# Make Homebrew, Cargo, and npm available in every shell without duplicates.
+# Make Mason, Homebrew, Cargo, and npm available in every shell without duplicates.
 typeset -U path
 path=(
+    "$XDG_DATA_HOME/nvim/mason/bin"
     "$HOMEBREW_PREFIX/bin"
     "$HOMEBREW_PREFIX/sbin"
     "$CARGO_HOME/bin"
