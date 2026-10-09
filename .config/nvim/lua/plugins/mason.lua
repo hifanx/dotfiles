@@ -33,12 +33,24 @@ local function auto_install_missing_tools()
     end
     if #to_install == 0 then return end
 
-    local show = vim.schedule_wrap(function(msg) vim.notify(msg, vim.log.levels.INFO, { title = 'Mason' }) end)
-    local show_error = vim.schedule_wrap(function(msg) vim.notify(msg, vim.log.levels.ERROR, { title = 'Mason' }) end)
+    local show = vim.schedule_wrap(
+        function(msg) vim.notify(msg, vim.log.levels.INFO, { title = 'Mason' }) end
+    )
+    local show_error = vim.schedule_wrap(
+        function(msg) vim.notify(msg, vim.log.levels.ERROR, { title = 'Mason' }) end
+    )
 
     local function do_install(p)
-        p:once('install:success', function() show(string.format('%s: successfully installed', p.name)) end)
-        p:once('install:failed', function() show_error(string.format('%s: failed to install', p.name)) end)
+        p:once(
+            'install:success',
+            function() show(string.format('%s: successfully installed', p.name)) end
+        )
+        p:once(
+            'install:failed',
+            function()
+                show_error(string.format('%s: failed to install', p.name))
+            end
+        )
         if not p:is_installing() then
             show(string.format('Installing %s', p.name))
             p:install()

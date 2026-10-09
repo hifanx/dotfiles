@@ -11,9 +11,13 @@ local indent = function()
         mixed = mixed_same_line > 0
     end
     if not mixed then return '' end
-    if mixed_same_line ~= nil and mixed_same_line > 0 then return 'MI:' .. mixed_same_line end
-    local space_indent_cnt = vim.fn.searchcount({ pattern = space_pat, max_count = 1e3 }).total
-    local tab_indent_cnt = vim.fn.searchcount({ pattern = tab_pat, max_count = 1e3 }).total
+    if mixed_same_line ~= nil and mixed_same_line > 0 then
+        return 'MI:' .. mixed_same_line
+    end
+    local space_indent_cnt =
+        vim.fn.searchcount({ pattern = space_pat, max_count = 1e3 }).total
+    local tab_indent_cnt =
+        vim.fn.searchcount({ pattern = tab_pat, max_count = 1e3 }).total
     if space_indent_cnt > tab_indent_cnt then
         return 'MI:' .. tab_indent
     else
@@ -95,7 +99,9 @@ lualine.setup({
             winbar_filename,
             {
                 navic_comp,
-                cond = function() return navic.is_available() and hide_in_width() end,
+                cond = function()
+                    return navic.is_available() and hide_in_width()
+                end,
             },
         },
     },
@@ -202,7 +208,11 @@ lualine.setup({
 })
 
 -- hides lualine on dashboard and empty page ([NO NAME])
-local function is_dashboard() return vim.fn.bufname() == '' and vim.bo.buftype == '' and vim.bo.filetype == '' end
+local function is_dashboard()
+    return vim.fn.bufname() == ''
+        and vim.bo.buftype == ''
+        and vim.bo.filetype == ''
+end
 
 vim.schedule(function()
     if is_dashboard() then lualine.hide() end
