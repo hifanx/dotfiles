@@ -44,7 +44,9 @@ local function run_with_retry(fn, max_retry)
         if ok then
             return res
         else
-            vim.schedule(function() vim.notify('retry #' .. attempt, vim.log.levels.WARN) end)
+            vim.schedule(
+                function() vim.notify('retry #' .. attempt, vim.log.levels.WARN) end
+            )
         end
     end
 

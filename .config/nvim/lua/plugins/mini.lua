@@ -1,4 +1,9 @@
-vim.keymap.set('n', '<Leader>d', function() require('mini.bufremove').delete(0, false) end, { desc = 'Delete buffer' })
+vim.keymap.set(
+    'n',
+    '<Leader>d',
+    function() require('mini.bufremove').delete(0, false) end,
+    { desc = 'Delete buffer' }
+)
 
 -- mini.ai: Extended text objects
 -- NORMAL/VISUAL MODE:
@@ -85,6 +90,5 @@ miniclue.setup({
         { mode = 'n', keys = '<Leader>f', desc = ' ' },
         { mode = 'n', keys = '<Leader>g', desc = ' ' },
         { mode = 'n', keys = '<Leader>h', desc = ' ' },
-        { mode = 'n', keys = '<Leader>o', desc = ' ' },
     },
 })

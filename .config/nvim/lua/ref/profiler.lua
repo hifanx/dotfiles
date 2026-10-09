@@ -12,7 +12,10 @@ function profiler.start(name) sections[name] = vim.uv.hrtime() end
 function profiler.stop(name)
     local start = sections[name]
     if not start then
-        vim.notify('Profiler: "' .. name .. '" was never started', vim.log.levels.WARN)
+        vim.notify(
+            'Profiler: "' .. name .. '" was never started',
+            vim.log.levels.WARN
+        )
         return
     end
     sections[name] = (vim.uv.hrtime() - start) / 1e6
@@ -42,7 +45,13 @@ function profiler.report()
     table.insert(lines, sep)
 
     vim.schedule(
-        function() vim.notify(table.concat(lines, '\n'), vim.log.levels.INFO, { title = 'Startup Profile' }) end
+        function()
+            vim.notify(
+                table.concat(lines, '\n'),
+                vim.log.levels.INFO,
+                { title = 'Startup Profile' }
+            )
+        end
     )
 end
 

@@ -73,3 +73,4 @@
 - Run `stylua .` after modifying Lua files when practical
 - Do not edit `nvim-pack-lock.json` by hand
 - Keep changes small, focused, and easy to revert
+- For teaching in `.scratch/`, begin each lesson with the full study-plan overview: planned total, each lesson's purpose, and current position. Update relevant references each lesson and explain how new code connects to later lessons.

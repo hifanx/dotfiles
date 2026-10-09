@@ -126,8 +126,18 @@ g.loaded_nvim_dir_plugin = 1 -- for now
 -- basic
 vim.keymap.set('n', '<C-c>', ':close<CR>', { desc = 'Close' })
 
-vim.keymap.set('n', 'H', ':bprev<CR>', { desc = 'Prev buffer', noremap = false })
-vim.keymap.set('n', 'L', ':bnext<CR>', { desc = 'Next buffer', noremap = false })
+vim.keymap.set(
+    'n',
+    'H',
+    ':bprev<CR>',
+    { desc = 'Prev buffer', noremap = false }
+)
+vim.keymap.set(
+    'n',
+    'L',
+    ':bnext<CR>',
+    { desc = 'Next buffer', noremap = false }
+)
 
 vim.keymap.set('n', '=', [[:vertical resize +5<CR>]])
 vim.keymap.set('n', '-', [[:vertical resize -5<CR>]])
@@ -163,9 +173,24 @@ vim.keymap.set('n', '<Esc>', ':noh<CR>', { desc = 'Clear highlights' })
 -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
 -- empty mode is same as using : :map
 -- also don't use g[j|k] when in operator pending mode, so it doesn't alter d, y or c behaviour
-vim.keymap.set({ 'n', 'x' }, 'j', 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { desc = 'Move down', expr = true })
-vim.keymap.set({ 'n', 'x' }, 'k', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { desc = 'Move up', expr = true })
-vim.keymap.set({ 'n', 'v' }, '<Up>', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { desc = 'Move up', expr = true })
+vim.keymap.set(
+    { 'n', 'x' },
+    'j',
+    'v:count || mode(1)[0:1] == "no" ? "j" : "gj"',
+    { desc = 'Move down', expr = true }
+)
+vim.keymap.set(
+    { 'n', 'x' },
+    'k',
+    'v:count || mode(1)[0:1] == "no" ? "k" : "gk"',
+    { desc = 'Move up', expr = true }
+)
+vim.keymap.set(
+    { 'n', 'v' },
+    '<Up>',
+    'v:count || mode(1)[0:1] == "no" ? "k" : "gk"',
+    { desc = 'Move up', expr = true }
+)
 vim.keymap.set(
     { 'n', 'v' },
     '<Down>',
@@ -188,11 +213,26 @@ vim.keymap.set('x', 'c', '"_c')
 
 -- don't copy the replaced text after pasting in visual mode
 -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
-vim.keymap.set('x', 'p', 'p:let @+=@0<CR>:let @"=@0<CR>', { desc = "Don't copy replaced text" })
+vim.keymap.set(
+    'x',
+    'p',
+    'p:let @+=@0<CR>:let @"=@0<CR>',
+    { desc = "Don't copy replaced text" }
+)
 
 -- commenting
-vim.keymap.set('n', 'gco', 'o<esc>Vcx<esc>:normal gcc<CR>fxa<bs>', { desc = 'Add comment below' })
-vim.keymap.set('n', 'gcO', 'O<esc>Vcx<esc>:normal gcc<CR>fxa<bs>', { desc = 'Add comment above' })
+vim.keymap.set(
+    'n',
+    'gco',
+    'o<esc>Vcx<esc>:normal gcc<CR>fxa<bs>',
+    { desc = 'Add comment below' }
+)
+vim.keymap.set(
+    'n',
+    'gcO',
+    'O<esc>Vcx<esc>:normal gcc<CR>fxa<bs>',
+    { desc = 'Add comment above' }
+)
 
 -- }}}
 -- autocmd {{{
@@ -214,7 +254,10 @@ vim.api.nvim_create_autocmd('FileType', {
 
 vim.api.nvim_create_autocmd('TextYankPost', {
     desc = 'Highlight when yanking text, cycle numbered registers',
-    group = vim.api.nvim_create_augroup('highlight_yanked_text', { clear = true }),
+    group = vim.api.nvim_create_augroup(
+        'highlight_yanked_text',
+        { clear = true }
+    ),
     callback = function()
         vim.hl.hl_op({ higroup = 'IncSearch', timeout = 300 })
         -- yank ring
@@ -237,11 +280,16 @@ vim.api.nvim_create_autocmd('FileType', {
 
 vim.api.nvim_create_autocmd('BufReadPost', {
     desc = 'Restore cursor to last edit position',
-    group = vim.api.nvim_create_augroup('restore_cursor_position', { clear = true }),
+    group = vim.api.nvim_create_augroup(
+        'restore_cursor_position',
+        { clear = true }
+    ),
     callback = function(ev)
         local mark = vim.api.nvim_buf_get_mark(ev.buf, '"')
         local lcount = vim.api.nvim_buf_line_count(ev.buf)
-        if mark[1] > 0 and mark[1] <= lcount then pcall(vim.api.nvim_win_set_cursor, 0, mark) end
+        if mark[1] > 0 and mark[1] <= lcount then
+            pcall(vim.api.nvim_win_set_cursor, 0, mark)
+        end
     end,
 })
 
@@ -274,7 +322,10 @@ vim.pack.add({
     -- }}}
 
     -- ⬇️ EDITOR
-    { src = 'https://github.com/saghen/blink.cmp.git', version = vim.version.range('1.*') },
+    {
+        src = 'https://github.com/saghen/blink.cmp.git',
+        version = vim.version.range('1.*'),
+    },
     'https://github.com/stevearc/conform.nvim.git',
     'https://github.com/ibhagwan/fzf-lua.git',
     'https://github.com/L3MON4D3/LuaSnip.git',
@@ -302,14 +353,18 @@ do
     local is_windows = vim.fn.has('win32') ~= 0
     local sep = is_windows and '\\' or '/'
     local delim = is_windows and ';' or ':'
-    local mason_bin = table.concat({ vim.fn.stdpath('data'), 'mason', 'bin' }, sep)
-    if not vim.env.PATH:find(mason_bin, 1, true) then vim.env.PATH = mason_bin .. delim .. vim.env.PATH end
+    local mason_bin =
+        table.concat({ vim.fn.stdpath('data'), 'mason', 'bin' }, sep)
+    if not vim.env.PATH:find(mason_bin, 1, true) then
+        vim.env.PATH = mason_bin .. delim .. vim.env.PATH
+    end
 end
 
 -- setup lsp attach
 -- NOTE: created once outside LspAttach so re-attaching (e.g. :LspRestart) doesn't
 -- clobber the detach handler registered for already-open buffers
-local lsp_detach_group = vim.api.nvim_create_augroup('lsp-detach', { clear = true })
+local lsp_detach_group =
+    vim.api.nvim_create_augroup('lsp-detach', { clear = true })
 
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
@@ -317,15 +372,35 @@ vim.api.nvim_create_autocmd('LspAttach', {
         local client = vim.lsp.get_client_by_id(ev.data.client_id)
         if not client then return end
 
-        vim.keymap.set('n', 'gh', vim.diagnostic.open_float, { buffer = ev.buf, desc = 'Hover diagnostic' })
+        vim.keymap.set(
+            'n',
+            'gh',
+            vim.diagnostic.open_float,
+            { buffer = ev.buf, desc = 'Hover diagnostic' }
+        )
 
         if client:supports_method('textDocument/definition') then
-            vim.keymap.set('n', 'gd', ':FzfLua lsp_definitions jump1=true<CR>', { desc = 'Go to definition' })
-            vim.keymap.set('n', 'gD', ':FzfLua lsp_definitions jump1=false<CR>', { desc = 'Peek definition' })
+            vim.keymap.set(
+                'n',
+                'gd',
+                ':FzfLua lsp_definitions jump1=true<CR>',
+                { desc = 'Go to definition' }
+            )
+            vim.keymap.set(
+                'n',
+                'gD',
+                ':FzfLua lsp_definitions jump1=false<CR>',
+                { desc = 'Peek definition' }
+            )
         end
 
         if client:supports_method('textDocument/references') then
-            vim.keymap.set('n', 'grr', ':FzfLua lsp_references<CR>', { desc = 'vim.lsp.buf.references()' })
+            vim.keymap.set(
+                'n',
+                'grr',
+                ':FzfLua lsp_references<CR>',
+                { desc = 'vim.lsp.buf.references()' }
+            )
         end
 
         if client:supports_method('textDocument/documentColor') then
@@ -341,13 +416,18 @@ vim.api.nvim_create_autocmd('LspAttach', {
             vim.keymap.set(
                 'n',
                 '<Leader>hi',
-                function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
+                function()
+                    vim.lsp.inlay_hint.enable(
+                        not vim.lsp.inlay_hint.is_enabled()
+                    )
+                end,
                 { desc = 'Toggle inlay hint' }
             )
         end
 
         if client:supports_method('textDocument/documentHighlight') then
-            local hl_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = false })
+            local hl_augroup =
+                vim.api.nvim_create_augroup('lsp-highlight', { clear = false })
             vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
                 buffer = ev.buf,
                 group = hl_augroup,
@@ -364,7 +444,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
                 group = lsp_detach_group,
                 callback = function(ev1)
                     vim.lsp.buf.clear_references()
-                    vim.api.nvim_clear_autocmds({ group = 'lsp-highlight', buffer = ev1.buf })
+                    vim.api.nvim_clear_autocmds({
+                        group = 'lsp-highlight',
+                        buffer = ev1.buf,
+                    })
                 end,
             })
         end
@@ -447,7 +530,12 @@ vim.lsp.enable(servers)
 
 require('mini.icons').setup()
 
-vim.keymap.set('n', '<leader>e', function() require('oil').toggle_float() end, { desc = 'Oil' })
+vim.keymap.set(
+    'n',
+    '<leader>e',
+    function() require('oil').toggle_float() end,
+    { desc = 'Oil' }
+)
 require('oil').setup({ -- g? to see help & keymaps
     default_file_explorer = true,
     delete_to_trash = true,
@@ -458,6 +546,14 @@ require('oil').setup({ -- g? to see help & keymaps
     float = {
         max_width = 0.6,
         max_height = 0.9,
+    },
+})
+
+require('vault').setup({
+    root = '~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian',
+    keymaps = {
+        open_home = { '<Leader>hh', desc = 'Open Home.md' },
+        save_assets = { '<Leader>p', desc = 'Paste assets' },
     },
 })
 
@@ -477,7 +573,9 @@ vim.api.nvim_create_autocmd('VimEnter', {
         end
 
         coroutine.wrap(function()
-            for _, path in ipairs(vim.api.nvim_get_runtime_file('lua/plugins/*.lua', true)) do
+            for _, path in
+                ipairs(vim.api.nvim_get_runtime_file('lua/plugins/*.lua', true))
+            do
                 not_so_fast(path)
             end
         end)()
