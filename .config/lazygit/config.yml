@@ -19,8 +19,8 @@ gui:
       - "#CDD6F4"
     searchingActiveBorderColor:
       - "#F9E2AF"
-  authorColors:
-    "*": "#B4BEFE"
+    authorColors:
+      "*": "#B4BEFE"
   showIcons: true
   nerdFontsVersion: "3"
 git:
