@@ -32,6 +32,14 @@ width = "90%"
 height = "85%"
 
 [[keys.command]]
+key = "prefix+shift+g"
+type = "popup"
+command = "yadm enter lazygit"
+description = "yadm lazygit"
+width = "90%"
+height = "85%"
+
+[[keys.command]]
 key = "prefix+d"
 type = "plugin_action"
 command = "persiyanov.reviewr.toggle"
