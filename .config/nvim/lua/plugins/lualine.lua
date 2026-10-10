@@ -54,33 +54,33 @@ local winbar_filename = {
 local function hide_in_width() return vim.fn.winwidth(0) > 80 end
 
 -- ⬇️ theme
-local c = require('palette').isekai
+local c = require('palette').kuro
 local theme = {
     normal = {
-        a = { bg = c.white, fg = c.base, gui = 'bold' },
-        b = { bg = c.none, fg = c.white },
-        c = { bg = c.none, fg = c.white, gui = 'bold' },
+        a = { bg = c.fg_95, fg = c.bg, gui = 'bold' },
+        b = { bg = c.none, fg = c.fg_95 },
+        c = { bg = c.none, fg = c.yellow, gui = 'bold' },
     },
     insert = {
-        a = { bg = c.orange, fg = c.base, gui = 'bold' },
+        a = { bg = c.orange, fg = c.bg, gui = 'bold' },
         b = { bg = c.none, fg = c.orange },
     },
     visual = {
-        a = { bg = c.green, fg = c.base, gui = 'bold' },
+        a = { bg = c.green, fg = c.bg, gui = 'bold' },
         b = { bg = c.none, fg = c.green },
     },
     replace = {
-        a = { bg = c.orange, fg = c.base, gui = 'bold' },
+        a = { bg = c.orange, fg = c.bg, gui = 'bold' },
         b = { bg = c.none, fg = c.orange },
     },
     command = {
-        a = { bg = c.red, fg = c.base, gui = 'bold' },
+        a = { bg = c.red, fg = c.bg, gui = 'bold' },
         b = { bg = c.none, fg = c.red },
     },
     inactive = {
         a = { bg = c.none, fg = c.blue, gui = 'bold' },
-        b = { bg = c.none, fg = c.overlay },
-        c = { bg = c.none, fg = c.overlay },
+        b = { bg = c.none, fg = c.fg_40 },
+        c = { bg = c.none, fg = c.fg_40 },
     },
 }
 
