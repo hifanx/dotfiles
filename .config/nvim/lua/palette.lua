@@ -33,6 +33,7 @@ M.isekai = {
 -- stylua== ignore end
 
 M.kuro = {
+    none = 'NONE',
     backdrop = '#11111B',
     bg = '#181825',
     fg_95 = '#F2F2F2',
