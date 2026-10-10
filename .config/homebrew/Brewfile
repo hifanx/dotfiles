@@ -1,6 +1,7 @@
 tap "aimessoft/nipaplay-reload", "https://github.com/AimesSoft/homebrew-nipaplay-reload.git", trusted: true
 tap "buo/cask-upgrade", trusted: true
 tap "nikitabobko/tap", trusted: true
+tap "omlahore/tap"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
@@ -29,6 +30,8 @@ brew "herdr"
 brew "libtiff"
 # Tools and libraries to manipulate images in select formats
 brew "imagemagick"
+# Lightweight and flexible command-line JSON processor
+brew "jq"
 # Simple terminal UI for git commands
 brew "lazygit"
 # Mac App Store command-line interface
@@ -55,8 +58,12 @@ brew "tealdeer"
 brew "yadm"
 # Blazing fast terminal file manager written in Rust, based on async I/O
 brew "yazi", args: ["HEAD"]
+# Process YAML, JSON, XML, CSV and properties documents from the CLI
+brew "yq"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
+# Debloat macOS: turn off Apple Intelligence, analytics, ads and pop-ups
+brew "omlahore/tap/removemacai", trusted: true
 # Collection of apps and services for photography, design, video, web, and UX
 cask "adobe-creative-cloud"
 # AeroSpace is an i3-like tiling window manager for macOS
@@ -65,6 +72,8 @@ cask "nikitabobko/tap/aerospace", trusted: true
 cask "alfred"
 # Tool to flash OS images to SD cards & USB drives
 cask "balenaetcher"
+# Image, video and clipboard optimiser
+cask "clop"
 # Voice and text chat software
 cask "discord"
 # Web browser
@@ -97,7 +106,6 @@ cask "thunder"
 cask "upscayl"
 # Free messaging and calling application
 cask "wechat"
-# Native desktop client for WhatsApp
-cask "whatsapp"
 mas "GIPHY CAPTURE", id: 668208984
+mas "HazeOver", id: 430798174
 mas "Infuse", id: 1136220934
