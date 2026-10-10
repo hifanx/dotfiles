@@ -1,18 +1,28 @@
-# Project memory
+# Zero home pollution: absolute global rule
 
-When a user settles a durable preference, convention, or direction for the current project, consider whether it belongs in that project's root `AGENTS.md`. Propose a concise, generalizable addition or revision for user approval; do not edit project memory without approval. Prefer the current project's root `AGENTS.md` over nested ones. Never put project-specific memory in this global file.
-
-Raise the proposal after completing the task, or during planning once the decision is clearly settled. If intent or scope remains uncertain, wait rather than record an assumption. Avoid duplicating existing instructions or recording one-off requests.
+- **Before every install or modification, verify all writes—including dependency and first-run effects—use appropriate XDG locations and configured variables. Stop if unverified.**
+- **No tool-specific entries directly in `$HOME`: physically absent and absent from `ls -al ~`. No symlinks, hiding or temporary entries.**
+- **Unavoidable home writes: reject tool, warn, offer verified XDG-compliant workaround or alternative. No exceptions, even explicit install requests.**
 
 # Development tools
 
-Mason in Neovim exclusively owns formatter, linter, and language-server installation and updates. Global CLI access reuses `$XDG_DATA_HOME/nvim/mason/bin` (default `~/.local/share/nvim/mason/bin`); missing tools must be provisioned through Mason, not another package manager. No duplicate installations or migration away from Neovim.
+Use Neovim Mason exclusively for formatter, linter and language-server installs and updates, including missing tools. Reuse `$XDG_DATA_HOME/nvim/mason/bin` (default `~/.local/share/nvim/mason/bin`) for global CLI access. No duplicate installs or migration away from Neovim.
 
 # Post-edit validation
 
 After code edits, before finishing:
 
-- Batch relevant formatting and available CLI diagnostics for changed files in one shell call; follow project configs, ignores, and validation commands. Avoid whole-repo formatting unless requested.
-- Use Mason formatters: `stylua`, `black`, `prettier`, `shfmt -i 2`, `taplo format`, or `google-java-format --aosp`. Run `pyright` for Python and `shellcheck` for supported shell dialects, not zsh; use `zsh -n` for zsh syntax. CLI checks only; no LSP integration.
-- Capture output and exit codes. Keep successful checks quiet; surface failures and diagnostics only. Missing tools or unsupported checks are not passes: report the gap without installing outside Mason.
-- Fix issues introduced by edits and rerun affected checks. Spend follow-up validation turns only on failures or diagnostics; after clean results, finish without a separate success-review turn. Report unrelated existing issues without broadening scope.
+- Batch relevant formatting and available CLI diagnostics for changed files in one shell call. Follow project configs, ignores and validation commands; whole-repo formatting only on request.
+- Use Mason formatters: `stylua`, `black`, `prettier`, `shfmt -i 2`, `taplo format`, or `google-java-format --aosp`. Run `pyright` (Python), `shellcheck` (supported shells, not zsh), `zsh -n` (zsh syntax). CLI only; no LSP integration.
+- Capture output and exit codes; show only failures and diagnostics. Report missing tools or unsupported checks as gaps, not passes; no installs outside Mason.
+- Fix edit-caused issues and rerun affected checks. Follow-up validation turns only for failures or diagnostics; finish when clean, without separate success review. Report unrelated existing issues without expanding scope.
+
+## Bash commands
+
+Prefer listed tools when available. Fall back silently.
+
+- `rg` over `grep`, `fd` over `find`
+- `difft` when formatting noise obscures changes; `git diff` for patches
+- **Never** use `find -exec` or `xargs` chains when `fd -x` or `rg -l | xargs` would be clearer. Prefer readable pipelines
+- `jq` for all JSON pipeline parsing, filtering or transformation; `yq` for YAML/TOML
+- **GitHub:** `gh` for PRs, issues, reviews, CI status, and releases. No github.com scraping or direct REST calls when `gh` can do it.
