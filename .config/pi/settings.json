@@ -1,9 +1,9 @@
 {
-  "lastChangelogVersion": "1.0.1",
+  "lastChangelogVersion": "1.1.0",
   "theme": "isekai",
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6.1-sol",
-  "defaultThinkingLevel": "high",
+  "defaultThinkingLevel": "max",
   "skills": ["~/.config/pi/.agents/skills"],
   "enableInstallTelemetry": false,
   "showCacheMissNotices": true,
@@ -12,10 +12,11 @@
     "npm:@dietrichgebert/ponytail",
     "npm:pi-caveman",
     "npm:pi-system-prompt-viewer",
-    "npm:pine-of-glass"
+    "npm:pine-of-glass",
+    "npm:pi-hermes-memory",
+    "npm:@juicesharp/rpiv-todo",
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:@juicesharp/rpiv-btw"
   ],
-  "hideThinkingBlock": true,
-  "pi-harpoon": {
-    "models": ["openai-codex/gpt-6.1-sol:high", "openai-codex/gpt-6-luna:max"]
-  }
+  "hideThinkingBlock": true
 }

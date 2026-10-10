@@ -1,9 +1,9 @@
 /**
  * pi-harpoon — cycle/select a curated list of model+thinking-level entries.
  *
- * Config in global settings.json:
+ * Config in <agent-dir>/pi-harpoon.json:
  *
- *   "pi-harpoon": {
+ *   {
  *     "models": ["anthropic/claude-sonnet-4-5:high", "opencode-go/glm-5.3:medium"],
  *     "keys": { "pi.harpoon.cycle": "ctrl+shift+h", "pi.harpoon.select": "ctrl+shift+j" }
  *   }
@@ -11,9 +11,8 @@
  * Entry format: "provider/model[:level]". Invalid entries are excluded and
  * reported once at startup. Successful switches are silent.
  *
- * Single file by design: only `import type` from the pi package (stripped at
- * runtime), so the pure helpers below import under plain node for the
- * assert-script test in .scratch/pi-harpoon/test.ts.
+ * Only `import type` from the pi package (stripped at runtime), so tests load
+ * this extension under plain Node: `node --test extensions/pi-harpoon/test.ts`.
  */
 
 import { existsSync, readFileSync } from "node:fs";
@@ -25,7 +24,7 @@ import type {
 } from "@earendil-works/pi-coding-agent";
 
 // ---------------------------------------------------------------------------
-// Pure helpers (tested from .scratch/pi-harpoon/test.ts)
+// Pure helpers
 // ---------------------------------------------------------------------------
 
 export const LEVELS = [
@@ -90,27 +89,26 @@ interface HarpoonConfig {
   selectKey?: string;
 }
 
-// ponytail: replicates pi's getAgentDir() (PI_CODING_AGENT_DIR env, else ~/.pi/agent)
-// so this file needs no value import from the pi package. Import getAgentDir
-// instead if the two ever drift.
-function agentSettingsPath(): string {
+// shortcut: mirrors getAgentDir() for plain-Node tests; use SDK if path rules drift.
+function configPath(): string {
   const dir =
     process.env.PI_CODING_AGENT_DIR?.replace(/^~/, homedir()) ??
     join(homedir(), ".pi", "agent");
-  return join(dir, "settings.json");
+  return join(dir, "pi-harpoon.json");
 }
 
-function readSection(): HarpoonConfig | undefined {
-  const path = agentSettingsPath();
+function readConfig(): HarpoonConfig | undefined {
+  const path = configPath();
   if (!existsSync(path)) return undefined;
   try {
-    const settings = JSON.parse(readFileSync(path, "utf-8"));
-    const section = settings["pi-harpoon"];
-    if (!section || typeof section !== "object") return undefined;
-    const keys = section.keys ?? {};
+    const config = JSON.parse(readFileSync(path, "utf-8"));
+    if (!config || typeof config !== "object" || Array.isArray(config)) {
+      return undefined;
+    }
+    const keys = config.keys ?? {};
     return {
-      models: Array.isArray(section.models)
-        ? section.models.filter((m: unknown) => typeof m === "string")
+      models: Array.isArray(config.models)
+        ? config.models.filter((m: unknown) => typeof m === "string")
         : [],
       cycleKey:
         typeof keys["pi.harpoon.cycle"] === "string"
@@ -127,7 +125,7 @@ function readSection(): HarpoonConfig | undefined {
 }
 
 export default function piHarpoon(pi: ExtensionAPI) {
-  const config = readSection();
+  const config = readConfig();
   const cycleKey = config?.cycleKey ?? DEFAULT_CYCLE_KEY;
   let entries: Entry[] = [];
 
@@ -135,8 +133,8 @@ export default function piHarpoon(pi: ExtensionAPI) {
     if (entries.length > 0) return true;
     ctx.ui.notify(
       config
-        ? "harpoon: no valid models in the 'pi-harpoon' section — fix the entries reported at startup"
-        : "harpoon: no 'pi-harpoon' section in settings.json — add one to list models",
+        ? "harpoon: no valid models in pi-harpoon.json — fix the entries reported at startup"
+        : "harpoon: no readable pi-harpoon.json — add one to list models",
       "warning",
     );
     return false;
