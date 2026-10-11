@@ -26,3 +26,11 @@ Prefer listed tools when available. Fall back silently.
 - **Never** use `find -exec` or `xargs` chains when `fd -x` or `rg -l | xargs` would be clearer. Prefer readable pipelines
 - `jq` for all JSON pipeline parsing, filtering or transformation; `yq` for YAML/TOML
 - **GitHub:** `gh` for PRs, issues, reviews, CI status, and releases. No github.com scraping or direct REST calls when `gh` can do it.
+
+# Subagents — parent only
+
+- Delegation authorized globally. Parent handles planning, explanations, and tiny edits; `worker` handles substantive implementation.
+- Use `scout` for local recon, `researcher` for web evidence, `oracle` for hard decisions; `reviewer` only when user asks for review. Skip unnecessary stages.
+- Max two concurrent read-only children; one writer per cwd/worktree, including parent.
+- Parent owns routing, decisions, validation, and final answer. Children do assigned task; no nested delegation.
+- Give children scope, paths, edit authority, checks, and expected output. Escalate unapproved decisions.
