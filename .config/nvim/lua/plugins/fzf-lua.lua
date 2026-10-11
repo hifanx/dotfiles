@@ -99,6 +99,10 @@ vim.keymap.set(
 vim.keymap.set('n', '<leader>fk', ':FzfLua keymaps<CR>', { desc = 'Keymaps' })
 vim.keymap.set('n', '<leader>fu', ':FzfLua undotree<CR>', { desc = 'Undo' })
 
+local ignore_glob = '{.git,.jj,.hg,.svn,node_modules,.venv,venv,__pycache__,'
+    .. '.cache,.pytest_cache,.mypy_cache,.ruff_cache,.next,.nuxt,.output,'
+    .. '.svelte-kit,.turbo,.parcel-cache,dist,build,coverage,target}'
+
 require('fzf-lua').setup({
     { 'border-fused', 'hide' },
     ui_select = {},
@@ -106,6 +110,20 @@ require('fzf-lua').setup({
         file_icons = 'mini',
         cwd_prompt = false,
         git_icons = false,
+    },
+    files = {
+        hidden = true,
+        fd_opts = ("--color=never --type f --type l --exclude '%s'"):format(
+            ignore_glob
+        ),
+        rg_opts = ("--color=never --files -g '!%s'"):format(ignore_glob),
+    },
+    grep = {
+        hidden = true,
+        rg_opts = (
+            '--column --line-number --no-heading --color=always --smart-case '
+            .. "--max-columns=4096 -g '!%s' -e"
+        ):format(ignore_glob),
     },
     winopts = {
         col = 0.5,
