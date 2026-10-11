@@ -1,0 +1,10 @@
+{
+  "firecrawlBaseUrl": "https://api.firecrawl.dev",
+  "searchRouting": {
+    "providers": ["firecrawl", "exa"],
+    "fallbackOn": ["transient", "quota", "network", "invalid-response"]
+  },
+  "webSearch": {
+    "allowedProviders": ["firecrawl", "exa"]
+  }
+}
