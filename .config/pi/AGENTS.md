@@ -1,8 +1,8 @@
 # Zero home pollution: absolute global rule
 
-- **Before every install or modification, verify all writes—including dependency and first-run effects—use appropriate XDG locations and configured variables. Stop if unverified.**
+- **Before every install or modification, verify all write destinations—including dependency and first-run effects. Use supported XDG locations and configured variables; native macOS `$HOME/Library` storage is allowed. Stop if unverified.**
 - **No tool-specific entries directly in `$HOME`: physically absent and absent from `ls -al ~`. No symlinks, hiding or temporary entries.**
-- **Unavoidable home writes: reject tool, warn, offer verified XDG-compliant workaround or alternative. No exceptions, even explicit install requests.**
+- **Unavoidable direct-home-root writes: reject tool, warn, offer a verified compliant workaround or alternative. No exceptions, even explicit install requests.**
 
 # Development tools
 
