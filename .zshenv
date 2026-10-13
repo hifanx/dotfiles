@@ -20,6 +20,7 @@ export NPM_CONFIG_LOGS_DIR="$HOME/.cache/npm/logs"
 export CARGO_HOME="$HOME/.local/share/cargo"
 
 # Tool configuration
+export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
 export MPLCONFIGDIR="$HOME/.cache/matplotlib"
 export EZA_CONFIG_DIR="$HOME/.config/eza"
 export TEALDEER_CONFIG_DIR="$HOME/.config/tealdeer"
