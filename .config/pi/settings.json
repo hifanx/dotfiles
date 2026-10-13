@@ -15,44 +15,9 @@
     "npm:pi-hermes-memory",
     "npm:@juicesharp/rpiv-todo",
     "npm:@juicesharp/rpiv-btw",
-    "npm:pi-subagents",
     "npm:pi-web-access",
     "npm:@narumitw/pi-usage",
     "npm:pi-zentui"
   ],
-  "hideThinkingBlock": true,
-  "subagents": {
-    "agentOverrides": {
-      "reviewer": {
-        "model": "openai-codex/gpt-6-astra",
-        "thinking": "high",
-        "inheritGlobalContext": true
-      },
-      "oracle": {
-        "model": "openai-codex/gpt-6-astra",
-        "thinking": "high",
-        "inheritGlobalContext": true
-      },
-      "scout": {
-        "model": "openai-codex/gpt-6-sol",
-        "thinking": "high",
-        "inheritGlobalContext": true
-      },
-      "worker": {
-        "model": "openai-codex/gpt-6-sol",
-        "thinking": "high",
-        "inheritGlobalContext": true
-      },
-      "researcher": {
-        "model": "openai-codex/gpt-6-sol",
-        "thinking": "high",
-        "inheritGlobalContext": true
-      },
-      "evidence-auditor": {
-        "model": "openai-codex/gpt-6-sol",
-        "thinking": "high",
-        "inheritGlobalContext": true
-      }
-    }
-  }
+  "hideThinkingBlock": true
 }
