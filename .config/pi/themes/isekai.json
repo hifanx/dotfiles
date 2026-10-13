@@ -30,7 +30,7 @@
     "crust": "#11111B"
   },
   "colors": {
-    "accent": "red",
+    "accent": "green",
     "border": "surface0",
     "borderAccent": "teal",
     "borderMuted": "base",
@@ -40,7 +40,7 @@
     "muted": "lavender",
     "dim": "overlay0",
     "text": "text",
-    "thinkingText": "subtext0",
+    "thinkingText": "overlay0",
     "selectedBg": "crust",
     "scrollbarTrack": "surface0",
     "scrollbarThumb": "",
