@@ -1,9 +1,9 @@
 onboarding = false
 
 [theme.custom]
-sidebar_bg = "#11111B"
+sidebar_bg = "transparent"
 panel_bg = "transparent"
-accent = "#F9E2AF"
+accent = "#A6E3A1"
 
 [keys]
 prefix = "ctrl+a"
