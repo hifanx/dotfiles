@@ -1,28 +1,37 @@
-# Zero home pollution: absolute global rule
+## AGENTS.md management
 
-- **Before every install or modification, verify all write destinations—including dependency and first-run effects. Use supported XDG locations and configured variables; native macOS `$HOME/Library` storage is allowed. Stop if unverified.**
-- **No tool-specific entries directly in `$HOME`: physically absent and absent from `ls -al ~`. No symlinks, hiding or temporary entries.**
-- **Unavoidable direct-home-root writes: reject tool, warn, offer a verified compliant workaround or alternative. No exceptions, even explicit install requests.**
+- Keep rules terse and single-line; preserve intent, not wording.
 
-# Development tools
+## Zero home pollution: absolute global rule
 
-Use Neovim Mason exclusively for formatter, linter and language-server installs and updates, including missing tools. Reuse `$XDG_DATA_HOME/nvim/mason/bin` (default `~/.local/share/nvim/mason/bin`) for global CLI access. No duplicate installs or migration away from Neovim.
+- Zero home pollution is highest global user policy, everywhere, without exceptions.
+- No home-root writes; verify physical absence with `ls -al ~`.
+- Verify all dependency/lifecycle writes before installs, updates, changes or runs; stop if unverified.
+- Use supported XDG paths/variables or native macOS `~/Library`.
+- Reject incompatible tools.
 
-# Post-edit validation
+## Packages
 
-After code edits, before finishing:
+- Homebrew alone manages general packages.
+- Neovim Mason alone manages linters, LSPs and formatters, including missing tools; never Homebrew.
+- Reuse `${XDG_DATA_HOME:-$HOME/.local/share}/nvim/mason/bin` globally; no duplicates.
+- `pi install` or Claude Code marketplace is allowed.
+- Never `npm install -g`.
+- No other package managers allowed.
 
-- Batch relevant formatting and available CLI diagnostics for changed files in one shell call. Follow project configs, ignores and validation commands; whole-repo formatting only on request.
-- Use Mason formatters: `stylua`, `black`, `prettier`, `shfmt -i 2`, `taplo format`, or `google-java-format --aosp`. Run `pyright` (Python), `shellcheck` (supported shells, not zsh), `zsh -n` (zsh syntax). CLI only; no LSP integration.
-- Capture output and exit codes; show only failures and diagnostics. Report missing tools or unsupported checks as gaps, not passes; no installs outside Mason.
-- Fix edit-caused issues and rerun affected checks. Follow-up validation turns only for failures or diagnostics; finish when clean, without separate success review. Report unrelated existing issues without expanding scope.
+## Validation
+
+- After code edits, batch changed-file formatting and available CLI diagnostics in one shell call.
+- Mason formatters: `stylua`, `black`, `prettier`, `shfmt -i 2`, `taplo format`, `google-java-format --aosp`.
+- Checks: `pyright` (Python), `shellcheck` (supported non-zsh shells), `zsh -n` (zsh).
+- Fix introduced issues and rerun affected checks; repeat only for failures/diagnostics.
+- Finish clean without success review.
 
 ## Bash commands
 
-Prefer listed tools when available. Fall back silently.
-
-- `rg` over `grep`, `fd` over `find`
-- `difft` when formatting noise obscures changes; `git diff` for patches
-- **Never** use `find -exec` or `xargs` chains when `fd -x` or `rg -l | xargs` would be clearer. Prefer readable pipelines
-- `jq` for all JSON pipeline parsing, filtering or transformation; `yq` for YAML/TOML
-- **GitHub:** `gh` for PRs, issues, reviews, CI status, and releases. No github.com scraping or direct REST calls when `gh` can do it.
+- Prefer listed tools; silently fall back when unavailable.
+- `rg`/`fd` over `grep`/`find`.
+- `difft` for noisy diffs; `git diff` for patches.
+- Never use `find -exec`/chained `xargs` when readable `fd -x` or `rg -l | xargs` pipelines suffice.
+- JSON: `jq`; YAML/TOML: `yq`.
+- GitHub: `gh` whenever supported, never scraping or direct REST.
