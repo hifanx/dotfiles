@@ -115,7 +115,7 @@ alias co='cd "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidi
 alias g='lazygit'
 alias ly='yadm enter lazygit'
 alias oc='opencode'
-alias ds='cd ~ && find . -type f -name ".DS_Store" -exec rm -rf {} \;'
+alias ds='find ~ -type f -name ".DS_Store" -delete'
 
 # yazi
 function y() {
