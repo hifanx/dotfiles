@@ -25,7 +25,9 @@ export MPLCONFIGDIR="$HOME/.cache/matplotlib"
 export EZA_CONFIG_DIR="$HOME/.config/eza"
 export TEALDEER_CONFIG_DIR="$HOME/.config/tealdeer"
 export PI_CODING_AGENT_DIR="$HOME/.config/pi"
+export PI_MEMORY_DIR="$PI_CODING_AGENT_DIR/memory"
 export PI_TELEMETRY=0
+export PI_WEB_ACCESS_CACHE_ROOT="$XDG_CACHE_HOME/pi-web-access"
 export LESSHISTFILE=/dev/null
 
 # Must precede /etc/zshrc_Apple_Terminal.
