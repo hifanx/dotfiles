@@ -11,8 +11,6 @@
   "tui.editor.cursorLineEnd": [],
   "tui.editor.jumpForward": [],
   "tui.editor.jumpBackward": [],
-  "tui.editor.pageUp": ["pageUp", "ctrl+u"],
-  "app.session.togglePath": ["shift+ctrl+p"],
   "tui.editor.deleteWordBackward": [],
   "tui.editor.deleteWordForward": [],
   "tui.editor.deleteToLineStart": [],
@@ -31,5 +29,7 @@
   "app.model.cycleBackward": ["ctrl+["],
   "tui.altScreen.halfPageUp": ["ctrl+u"],
   "tui.altScreen.halfPageDown": ["ctrl+d"],
-  "app.session.toggleNamedFilter": ["shift+ctrl+n"]
+  "app.session.togglePath": ["shift+ctrl+p"],
+  "app.session.toggleNamedFilter": ["shift+ctrl+n"],
+  "app.session.delete": ["ctrl+x"]
 }

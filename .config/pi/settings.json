@@ -4,7 +4,9 @@
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6.1-sol",
   "defaultThinkingLevel": "max",
-  "skills": ["~/.config/pi/.agents/skills"],
+  "skills": [
+    "~/.config/pi/.agents/skills"
+  ],
   "enableInstallTelemetry": false,
   "showCacheMissNotices": true,
   "showHardwareCursor": true,
@@ -12,12 +14,12 @@
     "npm:@dietrichgebert/ponytail",
     "npm:pi-caveman",
     "npm:pine-of-glass",
-    "npm:pi-hermes-memory",
     "npm:@juicesharp/rpiv-todo",
     "npm:@juicesharp/rpiv-btw",
     "npm:pi-web-access",
     "npm:@narumitw/pi-usage",
-    "npm:pi-zentui"
+    "npm:pi-zentui",
+    "npm:pi-memory"
   ],
   "hideThinkingBlock": true
 }
