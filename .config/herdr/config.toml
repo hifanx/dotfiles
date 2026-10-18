@@ -40,9 +40,13 @@ width = "90%"
 height = "85%"
 
 [[keys.command]]
-key = "prefix+d"
+key = "prefix+v"
 type = "plugin_action"
-command = "persiyanov.reviewr.toggle"
+command = "chmarax.herdr-nvim.toggle"
+description = "nvim sidebar"
 
-[ui.toast]
-delivery = "herdr"
+[[keys.command]]
+key = "prefix+o"
+type = "plugin_action"
+command = "chmarax.herdr-nvim.pick-file"
+description = "open file from agent output"
