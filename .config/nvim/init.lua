@@ -124,6 +124,13 @@ g.loaded_nvim_dir_plugin = 1 -- for now
 -- mappings {{{
 
 -- basic
+
+-- clear multicursors
+vim.keymap.set('n', '<C-q>', function()
+    local ns = vim.api.nvim_create_namespace('nvim.multicursor')
+    vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
+end, { desc = 'Clear multicursors' })
+
 vim.keymap.set('n', '<C-c>', ':close<CR>', { desc = 'Close' })
 
 vim.keymap.set(
@@ -335,6 +342,7 @@ vim.pack.add({
     'https://github.com/mason-org/mason.nvim.git',
     'https://github.com/smjonas/inc-rename.nvim.git',
     'https://github.com/stevearc/oil.nvim.git',
+    'https://github.com/refractalize/oil-git-status.nvim',
     'https://github.com/hotoo/pangu.vim.git',
     'https://github.com/folke/persistence.nvim.git',
     -- ⬇️ UI
@@ -549,6 +557,9 @@ require('oil').setup({ -- g? to see help & keymaps
     float = {
         max_width = 0.6,
         max_height = 0.9,
+    },
+    win_options = {
+        signcolumn = 'yes:2',
     },
 })
 
