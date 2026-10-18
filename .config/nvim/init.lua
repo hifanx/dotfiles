@@ -344,6 +344,9 @@ vim.pack.add({
     'https://github.com/brenoprata10/nvim-highlight-colors.git',
     'https://github.com/MeanderingProgrammer/render-markdown.nvim.git',
     'https://github.com/lukas-reineke/indent-blankline.nvim',
+    'https://github.com/j-hui/fidget.nvim',
+    -- ⬇️ AI
+    'https://github.com/ChmaraX/herdr-nvim',
 
     -- lsp {{{
 })
