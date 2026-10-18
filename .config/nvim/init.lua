@@ -16,7 +16,7 @@ vim.cmd('colorscheme kuro')
 -- }}}
 -- options {{{
 
-local o = vim.opt
+local o = vim.o
 local g = vim.g
 
 -- general
