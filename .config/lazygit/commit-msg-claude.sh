@@ -15,8 +15,20 @@ fail() { printf 'error: %s\n' "$*" >&2; exit 1; }
 for tool in git jq curl head iconv; do
   command -v "$tool" >/dev/null || fail "$tool is required"
 done
+
+# Credential fallback for launchers that do not load ~/.zshrc (e.g. herdr popups).
+# Preserve inherited configuration when both gateway variables are present.
+# Otherwise source ~/.config/.env; its assignments take precedence.
+# Keep this path aligned with the environment source in ~/.zshrc if it changes.
+# This executes trusted shell code under Bash strict mode; keep it compatible.
+if [ -z "${ANTHROPIC_BASE_URL:-}" ] || [ -z "${ANTHROPIC_AUTH_TOKEN:-}" ]; then
+  [ -r "$HOME/.config/.env" ] || fail 'cannot read ~/.config/.env for gateway credentials'
+  # shellcheck source=/dev/null
+  source "$HOME/.config/.env"
+fi
+
 [ -n "${ANTHROPIC_BASE_URL:-}" ] || fail 'ANTHROPIC_BASE_URL must identify your existing gateway'
-[ -n "${ANTHROPIC_AUTH_TOKEN:-}" ] || fail 'ANTHROPIC_AUTH_TOKEN must be exported for your existing gateway'
+[ -n "${ANTHROPIC_AUTH_TOKEN:-}" ] || fail 'ANTHROPIC_AUTH_TOKEN must be set for your existing gateway'
 case "$ANTHROPIC_AUTH_TOKEN" in
   *$'\r'*|*$'\n'*) fail 'invalid gateway credential' ;;
 esac
