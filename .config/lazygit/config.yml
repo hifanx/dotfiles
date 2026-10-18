@@ -40,3 +40,9 @@ customCommands:
     command: >
       bash $HOME/.config/lazygit/commit-msg-pi.sh
     output: terminal
+  - key: "<c-y>"
+    description: "Generate AI commit message (Claude Sonnet)"
+    context: "files"
+    command: >
+      bash "$HOME/.config/lazygit/commit-msg-claude.sh"
+    output: terminal
