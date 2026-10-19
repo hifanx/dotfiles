@@ -1,0 +1,53 @@
+{
+  "$schema": "https://pi.dev/schemas/models.schema.json",
+  "providers": {
+    "chatanywhere": {
+      "baseUrl": "https://api.chatanywhere.tech/v1",
+      "api": "openai-completions",
+      "apiKey": "${CHATANYWHERE_API_KEY}",
+      "compat": {
+        "supportsStore": false,
+        "supportsDeveloperRole": false,
+        "maxTokensField": "max_tokens",
+        "requiresReasoningContentOnAssistantMessages": true,
+        "thinkingFormat": "deepseek",
+        "supportsStrictMode": true
+      },
+      "models": [
+        {
+          "id": "deepseek-v4-pro",
+          "name": "DeepSeek V4 Pro",
+          "reasoning": true,
+          "thinkingLevelMap": {
+            "minimal": null,
+            "low": null,
+            "medium": null,
+            "high": "high",
+            "max": "max"
+          },
+          "input": ["text"],
+          "contextWindow": 1000000,
+          "maxTokens": 384000,
+          "compat": {
+            "supportsMidConvoSystemMessages": true
+          }
+        },
+        {
+          "id": "deepseek-v4.1-flash",
+          "name": "DeepSeek V4.1 Flash",
+          "reasoning": true,
+          "thinkingLevelMap": {
+            "minimal": null,
+            "low": "low",
+            "medium": null,
+            "high": "high",
+            "max": "max"
+          },
+          "input": ["text", "image"],
+          "contextWindow": 1000000,
+          "maxTokens": 384000
+        }
+      ]
+    }
+  }
+}

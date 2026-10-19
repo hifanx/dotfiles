@@ -3,7 +3,7 @@
   "theme": "isekai",
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6.1-sol",
-  "defaultThinkingLevel": "max",
+  "defaultThinkingLevel": "high",
   "skills": [
     "~/.config/pi/.agents/skills"
   ],
@@ -11,7 +11,15 @@
   "showCacheMissNotices": true,
   "showHardwareCursor": true,
   "packages": [
-    "npm:@dietrichgebert/ponytail",
+    {
+      "source": "npm:@dietrichgebert/ponytail",
+      "skills": [
+        "+skills/ponytail/SKILL.md",
+        "-skills/ponytail-debt/SKILL.md",
+        "-skills/ponytail-gain/SKILL.md",
+        "-skills/ponytail-audit/SKILL.md"
+      ]
+    },
     "npm:pi-caveman",
     "npm:@juicesharp/rpiv-todo",
     "npm:@juicesharp/rpiv-btw",
@@ -19,7 +27,18 @@
     "npm:@narumitw/pi-usage",
     "npm:pi-zentui",
     "npm:pi-memory",
-    "npm:pi-cc-extensions"
+    {
+      "source": "npm:pi-cc-extensions",
+      "themes": [
+        "-themes/cc-dark.json",
+        "-themes/cc-light.json"
+      ]
+    },
+    "npm:pi-mcp-adapter",
+    "npm:@tintinweb/pi-subagents"
   ],
-  "hideThinkingBlock": true
+  "hideThinkingBlock": true,
+  "extensions": [
+    "-builtin:mcp"
+  ]
 }

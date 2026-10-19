@@ -10,6 +10,10 @@
 - Use supported XDG paths/variables or native macOS `~/Library`.
 - Reject incompatible tools.
 
+## Plan mode by default
+
+- No edits without explicit approval
+
 ## Packages
 
 - Homebrew alone manages general packages.
