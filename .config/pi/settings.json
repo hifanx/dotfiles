@@ -9,18 +9,8 @@
   "showCacheMissNotices": true,
   "showHardwareCursor": true,
   "packages": [
-    {
-      "source": "npm:@dietrichgebert/ponytail",
-      "skills": [
-        "+skills/ponytail/SKILL.md",
-        "-skills/ponytail-debt/SKILL.md",
-        "-skills/ponytail-gain/SKILL.md",
-        "-skills/ponytail-audit/SKILL.md"
-      ]
-    },
+    "npm:@dietrichgebert/ponytail",
     "npm:pi-caveman",
-    "npm:@juicesharp/rpiv-todo",
-    "npm:@juicesharp/rpiv-btw",
     "npm:pi-web-access",
     "npm:@narumitw/pi-usage",
     "npm:pi-zentui",
