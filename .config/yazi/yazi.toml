@@ -25,30 +25,30 @@ browser = [
 [open]
 prepend_rules = [
   { url = "*.{html,htm}", use = [
+    "edit",
     "open",
     "browser",
-    "edit",
     "reveal",
   ] },
   { mime = "text/html", use = [
+    "edit",
     "open",
     "browser",
-    "edit",
     "reveal",
   ] },
   { mime = "text/*", use = [
-    "open",
     "edit",
+    "open",
     "reveal",
   ] },
   { mime = "application/{json,ndjson,javascript,wine-extension-ini}", use = [
-    "open",
     "edit",
+    "open",
     "reveal",
   ] },
   { mime = "inode/empty", use = [
-    "open",
     "edit",
+    "open",
     "reveal",
   ] },
   { mime = "video/*", use = [
