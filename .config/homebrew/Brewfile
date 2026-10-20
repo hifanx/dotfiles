@@ -6,10 +6,6 @@ tap "omlahore/tap"
 brew "bat"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
-# Open-source, cross-platform JavaScript runtime environment
-brew "node"
-# See where your AI coding tokens go - by task, tool, model, and project
-brew "codeburn"
 # Diff that understands syntax
 brew "difftastic"
 # Modern, maintained replacement for ls
@@ -42,6 +38,8 @@ brew "mole"
 brew "tree-sitter"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim", args: ["HEAD"]
+# Open-source, cross-platform JavaScript runtime environment
+brew "node"
 # AI agent toolkit
 brew "pi-coding-agent"
 # PDF rendering library (based on the xpdf-3.0 code base)
@@ -72,6 +70,8 @@ cask "nikitabobko/tap/aerospace", trusted: true
 cask "alfred"
 # Tool to flash OS images to SD cards & USB drives
 cask "balenaetcher"
+# Terminal-based AI coding assistant
+cask "claude-code"
 # Image, video and clipboard optimiser
 cask "clop"
 # Voice and text chat software
