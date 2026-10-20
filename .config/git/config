@@ -13,3 +13,5 @@
     ddiff = -c diff.external=difft diff
 [commit]
 	template = /Users/sif/.config/git/gitmessage
+[init]
+	defaultBranch = main
