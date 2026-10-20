@@ -4,9 +4,7 @@
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6.1-sol",
   "defaultThinkingLevel": "high",
-  "skills": [
-    "~/.config/pi/.agents/skills"
-  ],
+  "skills": ["~/.config/pi/.agents/skills"],
   "enableInstallTelemetry": false,
   "showCacheMissNotices": true,
   "showHardwareCursor": true,
@@ -26,19 +24,46 @@
     "npm:pi-web-access",
     "npm:@narumitw/pi-usage",
     "npm:pi-zentui",
-    "npm:pi-memory",
-    {
-      "source": "npm:pi-cc-extensions",
-      "themes": [
-        "-themes/cc-dark.json",
-        "-themes/cc-light.json"
-      ]
-    },
     "npm:pi-mcp-adapter",
-    "npm:@tintinweb/pi-subagents"
+    "npm:pi-subagents",
+    "npm:pi-cc-extensions"
   ],
   "hideThinkingBlock": true,
-  "extensions": [
-    "-builtin:mcp"
-  ]
+  "extensions": ["-builtin:mcp"],
+  "subagents": {
+    "defaultModel": "openai-codex/gpt-6-luna",
+    "agentOverrides": {
+      "scout": {
+        "thinking": "low",
+        "inheritGlobalContext": true
+      },
+      "worker": {
+        "thinking": "max",
+        "inheritGlobalContext": true
+      },
+      "delegate": {
+        "thinking": "high",
+        "inheritGlobalContext": true
+      },
+      "researcher": {
+        "thinking": "high",
+        "inheritGlobalContext": true
+      },
+      "reviewer": {
+        "model": "gpt-6-astra",
+        "thinking": "high",
+        "inheritGlobalContext": true
+      },
+      "evidence-auditor": {
+        "model": "inherit",
+        "thinking": "high",
+        "inheritGlobalContext": true
+      },
+      "oracle": {
+        "model": "gpt-6-astra",
+        "thinking": "high",
+        "inheritGlobalContext": true
+      }
+    }
+  }
 }
