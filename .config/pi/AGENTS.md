@@ -39,3 +39,15 @@
 - Never use `find -exec`/chained `xargs` when readable `fd -x` or `rg -l | xargs` pipelines suffice.
 - JSON: `jq`; YAML/TOML: `yq`.
 - GitHub: `gh` whenever supported, never scraping or direct REST.
+
+## Automatic delegation
+
+- Automatically invoke subagents when isolation earns overhead
+- no per-task delegation request
+- Route codebase recon to scout
+- Route external research to researcher
+- Route implementation to worker
+- Route review to reviewer
+- Route decision critique to oracle
+- Handle trivial work directly
+- Children never delegate
