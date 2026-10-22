@@ -3,7 +3,7 @@
 !.gitignore
 !settings.json
 !pi-harpoon.json
-!pi-util.json
+!pi-utils.json
 !keybindings.json
 !mcp.json
 !extensions/

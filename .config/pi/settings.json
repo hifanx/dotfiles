@@ -4,7 +4,9 @@
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6.1-sol",
   "defaultThinkingLevel": "high",
-  "skills": ["~/.config/pi/.agents/skills"],
+  "skills": [
+    "~/.config/pi/.agents/skills"
+  ],
   "enableInstallTelemetry": false,
   "showCacheMissNotices": true,
   "showHardwareCursor": true,
@@ -15,11 +17,13 @@
     "npm:@narumitw/pi-usage",
     "npm:pi-zentui",
     "npm:pi-mcp-adapter",
-    "npm:pi-subagents",
-    "npm:pi-cc-extensions"
+    "npm:pi-cc-extensions",
+    "../../git/pi-utils"
   ],
   "hideThinkingBlock": true,
-  "extensions": ["-builtin:mcp"],
+  "extensions": [
+    "-builtin:mcp"
+  ],
   "subagents": {
     "defaultModel": "openai-codex/gpt-6-luna",
     "agentOverrides": {
@@ -28,6 +32,7 @@
         "inheritGlobalContext": true
       },
       "worker": {
+        "model": "chatanywhere/deepseek-v4.1-flash",
         "thinking": "max",
         "inheritGlobalContext": true
       },
