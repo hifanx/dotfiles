@@ -79,6 +79,7 @@ cask "discord"
 # Web browser
 cask "firefox"
 cask "font-maple-mono-cn"
+cask "font-symbols-only-nerd-font"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
 # Free and open-source painting and sketching program
