@@ -563,11 +563,14 @@ require('oil').setup({ -- g? to see help & keymaps
     },
 })
 
-require('vault').setup({
-    root = '~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian',
+require('vaultpal').setup({
+    roots = {
+        '~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian',
+    },
     keymaps = {
-        open_home = { '<Leader>hh', desc = 'Open Home.md' },
-        save_assets = { '<Leader>p', desc = 'Paste assets' },
+        open_home = { '<leader>oh', desc = 'Open Home.md' },
+        save_assets = { '<leader>p', desc = 'Paste assets' },
+        open_in_obsidian = { '<leader>oo', desc = 'Open in Obsidian' },
     },
 })
 

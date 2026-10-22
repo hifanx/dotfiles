@@ -2,28 +2,33 @@
 local M = {}
 
 ---@class VaultOptions
----@field root? string Vault directory; defaults to the existing iCloud path.
----@field keymaps? table<string, string|table> home/save_png lhs or { lhs, desc = '...' }.
+---@field roots string[] Vault directories.
+---@field keymaps? table<string, string|table> action lhs or { lhs, desc = '...' }.
 
----@type string
-local root = vim.fn.expand(
-    '~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian'
-)
+---@type string[]
+local roots = {}
 
----Check whether the normalized path starts with the configured vault root.
+---Find the deepest configured vault containing path.
 ---@param path? string Defaults to the current buffer's path, or cwd for an unnamed buffer.
----@return boolean
-local function in_vault(path)
+---@return string? root
+local function vault_root(path)
     path = path or vim.api.nvim_buf_get_name(0)
     if path == '' then path = vim.fn.getcwd() end
-    return vim.fs.relpath(root, path) ~= nil
+    local found
+    for _, root in ipairs(roots) do
+        if vim.fs.relpath(root, path) and (not found or #root > #found) then
+            found = root
+        end
+    end
+    return found
 end
 
 ---Open Home.md or focus a window already displaying it.
----Warn and do nothing when the current buffer or cwd is outside the vault.
+---Warn and do nothing when the current buffer or cwd is outside every vault.
 function M.open_home()
-    if not in_vault() then
-        return vim.notify('vault: not inside the vault', vim.log.levels.WARN)
+    local root = vault_root()
+    if not root then
+        return vim.notify('vaultpal: not inside a vault', vim.log.levels.WARN)
     end
     local path = root .. '/Home.md'
 
@@ -36,6 +41,32 @@ function M.open_home()
     else
         -- no window currently displays Home.md, so open it here
         vim.cmd.edit(vim.fn.fnameescape(path))
+    end
+end
+
+---Open the current note in Obsidian.
+---Warn and do nothing when the note is unnamed, unsaved, missing, or outside every vault.
+function M.open_in_obsidian()
+    local path = vim.api.nvim_buf_get_name(0)
+    if path == '' then
+        return vim.notify('vaultpal: name the note first', vim.log.levels.WARN)
+    end
+    if not vault_root(path) then
+        return vim.notify('vaultpal: not inside a vault', vim.log.levels.WARN)
+    end
+    if vim.bo.modified then
+        return vim.notify('vaultpal: save the note first', vim.log.levels.WARN)
+    end
+    if vim.fn.filereadable(path) ~= 1 then
+        return vim.notify('vaultpal: note is not on disk', vim.log.levels.WARN)
+    end
+    local job, err =
+        vim.ui.open('obsidian://open?path=' .. vim.uri_encode(path))
+    if not job then
+        vim.notify(
+            'vaultpal: cannot open Obsidian: ' .. (err or 'unknown error'),
+            vim.log.levels.ERROR
+        )
     end
 end
 
@@ -427,7 +458,7 @@ local function convert_image(source, destination, done)
     end)
 end
 
-local function save_files(paths, stem, done)
+local function save_files(root, paths, stem, done)
     done = vim.schedule_wrap(done)
     local links, messages = {}, {}
     if #paths == 0 then return done(links, messages) end
@@ -471,7 +502,7 @@ local function save_files(paths, stem, done)
     next_file()
 end
 
-local function save_unix_image(types, stem, done, wayland)
+local function save_unix_image(root, types, stem, done, wayland)
     done = vim.schedule_wrap(done)
     local mime
     for _, candidate in ipairs({ 'image/gif', 'application/pdf', 'image/png' }) do
@@ -547,7 +578,7 @@ local function save_unix_image(types, stem, done, wayland)
                     .. tostring(close_err)
             end
             if #messages > 0 then return finish({}, messages) end
-            save_files({ temporary }, stem, finish)
+            save_files(root, { temporary }, stem, finish)
         end)
     )
     if not ok then
@@ -555,7 +586,7 @@ local function save_unix_image(types, stem, done, wayland)
     end
 end
 
-local function save_macos_image(change, stem, done)
+local function save_macos_image(root, change, stem, done)
     done = vim.schedule_wrap(done)
     local fd, temporary = vim.uv.fs_mkstemp(vim.fn.tempname() .. '-XXXXXX')
     if not fd then
@@ -633,7 +664,7 @@ local function save_macos_image(change, stem, done)
             end
             local reply = vim.trim(result.stdout or '')
             if reply == 'saved' then
-                return save_files({ temporary }, stem, finish)
+                return save_files(root, { temporary }, stem, finish)
             end
             local message = reply == 'none' and 'no image or PDF on clipboard'
                 or ('unexpected clipboard reply: ' .. reply)
@@ -650,11 +681,12 @@ function M.save_assets()
     local path = vim.api.nvim_buf_get_name(buf)
 
     if path == '' then
-        return vim.notify('vault: name the note first', vim.log.levels.WARN)
+        return vim.notify('vaultpal: name the note first', vim.log.levels.WARN)
     end
-    if vim.bo.filetype ~= 'markdown' or not in_vault(path) then
+    local root = vault_root(path)
+    if vim.bo.filetype ~= 'markdown' or not root then
         return vim.notify(
-            'vault: use a vault markdown note',
+            'vaultpal: use a vault markdown note',
             vim.log.levels.WARN
         )
     end
@@ -670,7 +702,7 @@ function M.save_assets()
     -- %^ %[ %] means match literally
     if stem:find('[#%^|%[%]\r\n]') then
         return vim.notify(
-            'vault: note name contains characters unsafe in an Obsidian embed',
+            'vaultpal: note name contains characters unsafe in an Obsidian embed',
             vim.log.levels.WARN
         )
     end
@@ -683,7 +715,7 @@ function M.save_assets()
         if #links == 0 then
             local message = #messages > 0 and table.concat(messages, '\n')
                 or 'no attachments saved'
-            return vim.notify('vault: ' .. message, vim.log.levels.WARN)
+            return vim.notify('vaultpal: ' .. message, vim.log.levels.WARN)
         end
 
         local text = table.concat(links, '\n')
@@ -694,7 +726,7 @@ function M.save_assets()
             or vim.api.nvim_buf_get_name(buf) ~= path
             or vim.api.nvim_buf_get_changedtick(buf) ~= tick
             or vim.bo[buf].filetype ~= 'markdown'
-            or not in_vault(path)
+            or vault_root(path) ~= root
         then
             message = 'saved assets; insertion skipped: note changed, unloaded, or outside vault; insert:\n'
                 .. text
@@ -716,7 +748,7 @@ function M.save_assets()
                 .. table.concat(messages, '\n')
             if level == vim.log.levels.INFO then level = vim.log.levels.WARN end
         end
-        vim.notify('vault: ' .. message, level)
+        vim.notify('vaultpal: ' .. message, level)
     end
 
     if vim.fn.has('mac') == 0 then
@@ -732,16 +764,16 @@ function M.save_assets()
         local read_files = wayland and read_wayland_files or read_x11_files
         read_files(function(paths, read_err, types)
             if not paths then return finish({}, { read_err }) end
-            if #paths > 0 then return save_files(paths, stem, finish) end
-            save_unix_image(types, stem, finish, wayland)
+            if #paths > 0 then return save_files(root, paths, stem, finish) end
+            save_unix_image(root, types, stem, finish, wayland)
         end)
         return
     end
 
     read_macos_files(function(paths, read_err, change)
         if not paths then return finish({}, { read_err }) end
-        if #paths > 0 then return save_files(paths, stem, finish) end
-        save_macos_image(change, stem, finish)
+        if #paths > 0 then return save_files(root, paths, stem, finish) end
+        save_macos_image(root, change, stem, finish)
     end)
 end
 
@@ -749,22 +781,38 @@ end
 function M.setup(opts)
     opts = opts or {}
     vim.validate('opts', opts, 'table')
-    vim.validate('root', opts.root, 'string', true)
+    vim.validate('roots', opts.roots, 'table', true)
     vim.validate('keymaps', opts.keymaps, 'table', true)
 
-    if opts.root then
-        assert(opts.root ~= '', 'vault: root must not be empty')
-        root = vim.fs.normalize(vim.fs.abspath(vim.fn.expand(opts.root)))
+    roots = {}
+    assert(vim.islist(opts.roots or {}), 'vaultpal: roots must be a list')
+    for _, root in ipairs(opts.roots or {}) do
+        assert(
+            type(root) == 'string' and root ~= '',
+            'vaultpal: root must be a non-empty string'
+        )
+        roots[#roots + 1] =
+            vim.fs.normalize(vim.fs.abspath(vim.fn.expand(root)))
+    end
+    if #roots == 0 then
+        return vim.notify(
+            'vaultpal: setup needs at least one vault root',
+            vim.log.levels.WARN
+        )
     end
 
-    if in_vault() then
-        local actions = { open_home = M.open_home, save_assets = M.save_assets }
+    if vault_root() then
+        local actions = {
+            open_home = M.open_home,
+            save_assets = M.save_assets,
+            open_in_obsidian = M.open_in_obsidian,
+        }
         for name, map in pairs(opts.keymaps or {}) do
-            assert(actions[name], 'vault: unknown keymap ' .. tostring(name))
+            assert(actions[name], 'vaultpal: unknown keymap ' .. tostring(name))
             if type(map) == 'string' then map = { map } end
             vim.validate('keymap', map, 'table')
             vim.validate('mapping', map[1], 'string')
-            assert(map[1] ~= '', 'vault: mapping must not be empty')
+            assert(map[1] ~= '', 'vaultpal: mapping must not be empty')
             vim.validate('description', map.desc, 'string', true)
             vim.keymap.set('n', map[1], actions[name], { desc = map.desc })
         end
