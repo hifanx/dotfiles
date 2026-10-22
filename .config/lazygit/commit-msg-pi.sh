@@ -3,7 +3,7 @@
 # workflow in commit-msg.sh stays untouched.
 set -eu
 
-model="openai-codex/gpt-6-luna"
+model="chatanywhere/deepseek-v4.1-flash"
 msg_file="/tmp/commit_msg.txt"
 
 # Commit prompt, copied verbatim from the OpenCode Commit agent.
@@ -64,10 +64,10 @@ echo "Generating commit message with pi ($model)..."
   echo "Recent commits:"
   git log --oneline -10
 } | pi --print --no-session --no-tools --no-extensions --no-skills \
-     --no-prompt-templates --no-themes --no-context-files \
-     --system-prompt "$body" \
-     --model "$model" --thinking max \
-     "Write a commit message for this diff." >"$msg_file"
+  --no-prompt-templates --no-themes --no-context-files \
+  --system-prompt "$body" \
+  --model "$model" --thinking max \
+  "Write a commit message for this diff." >"$msg_file"
 
 if [ ! -s "$msg_file" ]; then
   echo "error: pi produced an empty commit message" >&2
