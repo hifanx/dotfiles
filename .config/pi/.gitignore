@@ -2,13 +2,10 @@
 *
 !.gitignore
 !settings.json
-!pi-harpoon.json
 !pi-utils.json
 !keybindings.json
 !mcp.json
 !extensions/
-!extensions/pi-harpoon/
-!extensions/pi-harpoon/**
 !extensions/pi-util/
 !extensions/pi-util/**
 !themes/
