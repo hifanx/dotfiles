@@ -571,6 +571,7 @@ require('vaultpal').setup({
         open_home = { '<leader>oh', desc = 'Open Home.md' },
         save_assets = { '<leader>p', desc = 'Paste assets' },
         open_in_obsidian = { '<leader>oo', desc = 'Open in Obsidian' },
+        toggle_todo = { '<leader>ot', desc = 'Toggle todo' },
     },
 })
 

@@ -777,6 +777,31 @@ function M.save_assets()
     end)
 end
 
+function M.toggle_todo()
+    if vim.bo.filetype ~= 'markdown' or not vault_root() then return end
+
+    local line = vim.api.nvim_get_current_line()
+    local prefix, state = line:match('^(%s*[-*+]%s+%[)([ xX])%]%f[%s%z]')
+    if not prefix then
+        prefix, state = line:match('^(%s*%d+[.)]%s+%[)([ xX])%]%f[%s%z]')
+    end
+    if not prefix then return end
+
+    local cursor = vim.api.nvim_win_get_cursor(0)
+    local row = cursor[1] - 1
+
+    vim.api.nvim_buf_set_text(
+        0,
+        row,
+        #prefix,
+        row,
+        #prefix + 1,
+        { state == ' ' and 'x' or ' ' }
+    )
+
+    vim.api.nvim_win_set_cursor(0, cursor)
+end
+
 ---@param opts? VaultOptions
 function M.setup(opts)
     opts = opts or {}
@@ -806,6 +831,7 @@ function M.setup(opts)
             open_home = M.open_home,
             save_assets = M.save_assets,
             open_in_obsidian = M.open_in_obsidian,
+            toggle_todo = M.toggle_todo,
         }
         for name, map in pairs(opts.keymaps or {}) do
             assert(actions[name], 'vaultpal: unknown keymap ' .. tostring(name))

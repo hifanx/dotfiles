@@ -1,6 +1,6 @@
 vim.keymap.set(
     'n',
-    '<Leader>d',
+    '<leader>d',
     function() require('mini.bufremove').delete(0, false) end,
     { desc = 'Delete buffer' }
 )
