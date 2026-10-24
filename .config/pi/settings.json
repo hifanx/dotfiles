@@ -11,14 +11,14 @@
   "showCacheMissNotices": true,
   "showHardwareCursor": true,
   "packages": [
-    "npm:@dietrichgebert/ponytail",
-    "npm:pi-caveman",
+    "npm:pi-mcp-adapter",
     "npm:pi-web-access",
+    "npm:@dietrichgebert/ponytail",
     "npm:@narumitw/pi-usage",
     "npm:pi-zentui",
-    "npm:pi-mcp-adapter",
-    "npm:pi-cc-extensions",
-    "../../git/pi-utils"
+    "npm:@juicesharp/rpiv-todo",
+    "../../git/pi-utils",
+    "npm:pi-cc-extensions"
   ],
   "hideThinkingBlock": true,
   "extensions": [
