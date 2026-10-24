@@ -1,39 +1,37 @@
-## AGENTS.md management
-
-- Keep rules terse and single-line; preserve intent, not wording.
-
 ## Zero home pollution: absolute global rule
 
-- Zero home pollution is highest global user policy, everywhere, without exceptions.
-- No home-root writes; verify physical absence with `ls -al ~`.
-- Verify all dependency/lifecycle writes before installs, updates, changes or runs; stop if unverified.
-- Use supported XDG paths/variables or native macOS `~/Library`.
-- Reject incompatible tools.
+Zero home pollution is highest global user policy, everywhere, without exceptions.
+No home-root writes; verify physical absence with `ls -al ~`.
+Verify all dependency/lifecycle writes before installs, updates, changes or runs; stop if unverified.
+Use supported XDG paths/variables or native macOS `~/Library`.
+Reject incompatible tools.
 
 ## Plan mode by default
 
-- No edits without explicit approval
+No edits without explicit approval.
 
-## Packages
+## Operations
 
-- Homebrew alone manages general packages.
-- Neovim Mason alone manages linters, LSPs and formatters, including missing tools; never Homebrew.
-- Reuse `${XDG_DATA_HOME:-$HOME/.local/share}/nvim/mason/bin` globally; no duplicates.
-- `pi install` or Claude Code marketplace is allowed.
-- Never `npm install -g`.
-- No other package managers allowed.
+Operate in quiet mode. Do not narrate your work or explain routine steps. Minimize token usage aggressively.
+
+Only respond during the task if:
+
+- You're about to make a high-risk decision involving files, code, data loss, artifacts, or irreversible changes — ask for permission.
+- You make a moderately risky assumption — state it briefly.
+
+Otherwise, stay silent until completion.
 
 ## Validation
 
-- After code edits, batch changed-file formatting and available CLI diagnostics in one shell call.
-- Mason formatters: `stylua`, `black`, `prettier`, `shfmt -i 2`, `taplo format`, `google-java-format --aosp`.
-- Checks: `pyright` (Python), `shellcheck` (supported non-zsh shells), `zsh -n` (zsh).
-- Fix introduced issues and rerun affected checks; repeat only for failures/diagnostics.
-- Finish clean without success review.
+After edits, batch changed-file formatting and CLI diagnostics in one shell call.
+Mason formatters: `stylua`, `black`, `prettier`, `shfmt -i 2`, `taplo format`, `google-java-format --aosp`.
+Checks: `pyright` (Python), `shellcheck` (supported non-zsh shells), `zsh -n` (zsh).
+Fix introduced issues and rerun affected checks; repeat only for failures/diagnostics.
 
 ## Bash commands
 
-- Prefer listed tools; silently fall back when unavailable.
+Prefer listed tools, fallback silently:
+
 - `rg`/`fd` over `grep`/`find`.
 - `difft` for noisy diffs; `git diff` for patches.
 - Never use `find -exec`/chained `xargs` when readable `fd -x` or `rg -l | xargs` pipelines suffice.
@@ -42,12 +40,15 @@
 
 ## Automatic delegation
 
-- Automatically invoke subagents when isolation earns overhead
-- no per-task delegation request
-- Route codebase recon to scout
-- Route external research to researcher
-- Route implementation to worker
-- Route review to reviewer
-- Route decision critique to oracle
-- Handle trivial work directly
-- Children never delegate
+Automatically invoke subagents when isolation earns overhead.
+Handle trivial work directly.
+Children never delegate.
+No per-task delegation request.
+
+Route:
+
+- codebase recon to scout
+- external research to researcher
+- implementation to worker
+- review to reviewer
+- decision critique to oracle
