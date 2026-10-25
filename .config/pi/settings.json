@@ -4,26 +4,20 @@
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6.1-sol",
   "defaultThinkingLevel": "high",
-  "skills": [
-    "~/.config/pi/.agents/skills"
-  ],
+  "skills": ["~/.config/pi/.agents/skills"],
   "enableInstallTelemetry": false,
   "showCacheMissNotices": true,
   "showHardwareCursor": true,
   "packages": [
-    "npm:pi-mcp-adapter",
     "npm:pi-web-access",
     "npm:@dietrichgebert/ponytail",
     "npm:@narumitw/pi-usage",
     "npm:pi-zentui",
     "npm:@juicesharp/rpiv-todo",
-    "../../git/pi-utils",
-    "npm:pi-cc-extensions"
+    "npm:pi-cc-extensions",
+    "../../git/pi-utils"
   ],
   "hideThinkingBlock": true,
-  "extensions": [
-    "-builtin:mcp"
-  ],
   "subagents": {
     "defaultModel": "openai-codex/gpt-6-luna",
     "agentOverrides": {
