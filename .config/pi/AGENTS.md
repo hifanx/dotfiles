@@ -21,6 +21,12 @@ Only respond during the task if:
 
 Otherwise, stay silent until completion.
 
+## Context7 documentation
+
+Use Context7 MCP for library, framework, SDK, API, CLI, and cloud-service documentation.
+Resolve the library ID first, then query its documentation.
+Skip resolution when a library ID is known or provided.
+
 ## Validation
 
 After edits, batch changed-file formatting and CLI diagnostics in one shell call.
