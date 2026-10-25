@@ -18,7 +18,8 @@
             "low": null,
             "medium": null,
             "high": "high",
-            "xhigh": "max"
+            "xhigh": "high",
+            "max": "max"
           },
           "cost": {
             "input": 1.74,
@@ -34,7 +35,8 @@
               "low": "high",
               "medium": "high",
               "high": "high",
-              "xhigh": "max"
+              "xhigh": "high",
+              "max": "max"
             }
           }
         },
@@ -50,7 +52,8 @@
             "low": null,
             "medium": null,
             "high": "high",
-            "xhigh": "max"
+            "xhigh": "high",
+            "max": "max"
           },
           "cost": {
             "input": 0.14,
@@ -66,7 +69,8 @@
               "low": "high",
               "medium": "high",
               "high": "high",
-              "xhigh": "max"
+              "xhigh": "high",
+              "max": "max"
             }
           }
         }
