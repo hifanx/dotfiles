@@ -3,7 +3,7 @@
 # workflow in commit-msg.sh stays untouched.
 set -eu
 
-model="deepseek/deepseek-flash"
+model="deepseek/deepseek-flash[1m]"
 msg_file="/tmp/commit_msg.txt"
 
 # Commit prompt, copied verbatim from the OpenCode Commit agent.
