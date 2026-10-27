@@ -1,0 +1,16 @@
+-- INSERT MODE: | = cursor; pairs (), [], {}, quotes and backticks.
+--     Before          Input       After                 Use
+-- -----------------------------------------------------------------------------
+--     |               (           (|)                   Close automatically
+--     foo(|)          )           foo()|                Skip existing closer
+--     (|)             <BS>        |                     Delete empty pair
+--     {|}             <CR>        {<NL>    |<NL>}       Open multiline block
+--     "|"             (           "(|)"                 Pair inside a string
+--     |word           (           (|word                No closer before text
+--     |.name          (           (|.name               No closer before dot
+--     don|            '           don'|                 No paired apostrophe
+--
+-- <CR> expands pairs when Blink is not accepting a selected completion.
+-- OFF: macro recording/playback, Replace mode, excluded picker prompts.
+-- Comments are not excluded: check_ts is off. Use nvim-surround to wrap words.
+require('nvim-autopairs').setup()
