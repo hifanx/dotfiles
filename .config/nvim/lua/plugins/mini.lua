@@ -14,22 +14,6 @@ vim.keymap.set(
 --          Uppercase variants select including whitespace
 require('mini.ai').setup()
 
--- mini.align: Align text interactively
--- NORMAL/VISUAL MODE:
---   ga{motion} - Align (interactive)         | gaip=    | align paragraph on =
---   gA{motion} - Align with preview          | gAip,    | align paragraph on ,
---
--- MODIFIERS (during interactive align):
---   s  - change Split pattern
---   j  - change Justify side (left/center/right/none)
---   m  - change Merge delimiter
---   f  - filter lines by Lua pattern
---   i  - ignore lines by Lua pattern
---   p  - pair separator
---   t  - trim whitespace
---   <CR> - confirm
-require('mini.align').setup()
-
 local statuscolumn = require('mini.statuscolumn')
 local spec = {
     { format = 's=l', sep = ' ' },
@@ -38,21 +22,6 @@ local spec = {
     { win = 'inactive', fold = '', lnum = '', sign = '', sep = '' },
 }
 statuscolumn.setup({ content = statuscolumn.gen_content.main(spec) })
-
--- mini.surround: Surround text objects
--- NORMAL MODE:
---   sa{motion}{char} - Add surround          | saiw"    | word  -> "word"
---   sd{char}         - Delete surround       | sd"      | "word" -> word
---   sr{old}{new}     - Replace surround      | sr"'     | "word" -> 'word'
---   sf{char}         - Find right surround   | sf)      | moves to next )
---   sF{char}         - Find left surround    | sF(      | moves to prev (
---   sh               - Highlight surround    | sh"      | highlights ""
---
--- VISUAL MODE:
---   sa{char}         - Add surround to sel   | V,sa"    | word -> "word"
---
--- COMMON CHARS: ( ) [ ] { } < > " ' ` t (tag)
-require('mini.surround').setup()
 
 local miniclue = require('mini.clue')
 miniclue.setup({
@@ -93,3 +62,5 @@ miniclue.setup({
         { mode = 'n', keys = '<leader>o', desc = ' ' },
     },
 })
+
+require('mini.input').setup()

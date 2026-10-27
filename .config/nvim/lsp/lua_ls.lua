@@ -14,7 +14,7 @@ return {
         Lua = {
             format = { enable = false },
             completion = {
-                callSnippet = 'Replace',
+                callSnippet = 'Disable',
                 keywordSnippet = 'Disable',
             },
             runtime = { version = 'LuaJIT' },

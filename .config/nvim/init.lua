@@ -336,16 +336,24 @@ vim.pack.add({
     'https://github.com/stevearc/conform.nvim.git',
     'https://github.com/ibhagwan/fzf-lua.git',
     'https://github.com/L3MON4D3/LuaSnip.git',
-    'https://github.com/nvim-mini/mini.nvim.git',
     'https://github.com/nvim-treesitter/nvim-treesitter.git',
-    -- ⬇️ TOOLS
     'https://github.com/mason-org/mason.nvim.git',
+    -- ⬇️ TOOLS
     'https://github.com/smjonas/inc-rename.nvim.git',
     'https://github.com/stevearc/oil.nvim.git',
     'https://github.com/refractalize/oil-git-status.nvim',
     'https://github.com/hotoo/pangu.vim.git',
     'https://github.com/folke/persistence.nvim.git',
+    'https://github.com/kylechui/nvim-surround',
+    'https://github.com/windwp/nvim-autopairs',
+    'https://github.com/dlyongemallo/diffview-plus.nvim',
+    'https://github.com/nvim-mini/mini.ai',
+    'https://github.com/nvim-mini/mini.bufremove',
+    'https://github.com/nvim-mini/mini.statuscolumn',
+    'https://github.com/nvim-mini/mini.clue',
+    'https://github.com/nvim-mini/mini.input',
     -- ⬇️ UI
+    'https://github.com/nvim-mini/mini.icons',
     'https://github.com/lewis6991/gitsigns.nvim.git',
     'https://github.com/SmiteshP/nvim-navic.git',
     'https://github.com/nvim-lualine/lualine.nvim.git',
@@ -355,6 +363,8 @@ vim.pack.add({
     'https://github.com/j-hui/fidget.nvim',
     -- ⬇️ AI
     'https://github.com/ChmaraX/herdr-nvim',
+    -- ⬇️ ME
+    '~/git/vaultpal.nvim',
 
     -- lsp {{{
 })
@@ -537,46 +547,7 @@ local servers = {
 vim.lsp.enable(servers)
 
 -- }}}
--- {{{ eager require
-
-require('mini.icons').setup()
-
-vim.keymap.set(
-    'n',
-    '<leader>e',
-    function() require('oil').toggle_float() end,
-    { desc = 'Oil' }
-)
-require('oil').setup({ -- g? to see help & keymaps
-    default_file_explorer = true,
-    delete_to_trash = true,
-    view_options = {
-        show_hidden = true, -- but not .git ↓
-        is_always_hidden = function(name, _) return name == '.git' end,
-    },
-    float = {
-        max_width = 0.6,
-        max_height = 0.9,
-    },
-    win_options = {
-        signcolumn = 'yes:2',
-    },
-})
-
-require('vaultpal').setup({
-    roots = {
-        '~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian',
-    },
-    keymaps = {
-        open_home = { '<leader>oh', desc = 'Open Home.md' },
-        save_assets = { '<leader>p', desc = 'Paste assets' },
-        open_in_obsidian = { '<leader>oo', desc = 'Open in Obsidian' },
-        toggle_todo = { '<leader>ot', desc = 'Toggle todo' },
-    },
-})
-
--- }}}
--- {{{ not so fast
+-- {{{ load later
 
 vim.api.nvim_create_autocmd('VimEnter', {
     once = true,

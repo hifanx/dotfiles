@@ -106,6 +106,13 @@ local ignore_glob = '{.git,.jj,.hg,.svn,node_modules,.venv,venv,__pycache__,'
 require('fzf-lua').setup({
     { 'border-fused', 'hide' },
     ui_select = {},
+    keymap = {
+        builtin = {
+            true,
+            ['<C-d>'] = 'preview-half-page-down',
+            ['<C-u>'] = 'preview-half-page-up',
+        },
+    },
     defaults = {
         file_icons = 'mini',
         cwd_prompt = false,
