@@ -11,7 +11,7 @@ require('render-markdown').setup({
         right_pad = 2,
         sign = false,
         width = 'block',
-        border = 'thick',
+        border = 'thin',
 
         language_icon = true,
         language_name = false,
