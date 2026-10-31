@@ -1,36 +1,38 @@
 local M = {}
 
--- stylua== ignore start
 M.isekai = {
-    none = 'NONE',
-    white = '#FAFAFA',
-    red = '#E56B6F',
-    orange = '#F4A261',
-    yellow = '#F9E2AF',
-    green = '#A6E3A1',
-    blue = '#61AFEF',
-    member_ish = '#6F96AE',
-    keyword_ish = '#C37E7E',
-    type_ish = '#DBC588',
-    value_ish = '#6C9C6A',
-    func_ish = '#5897C2',
-    variable_ish = '#B9C3FF',
-    builtin = '#9C89B8',
-    text = '#A2ACBD',
-    visual = '#2E3C63',
-    comment = '#416086',
-    overlay = '#6B6F88',
-    surface = '#2A2B38',
-    base = '#0D1117',
-    mantle = '#080B10',
-    crust = '#020202',
-    blue_diff = '#102840',
-    green_diff = '#1E3A2A',
-    red_diff = '#3D1520',
-    orange_diff = '#362410',
-}
 
--- stylua== ignore end
+    none = 'NONE',
+    base = '#0E1116',
+    mantle = '#020409',
+
+    white = '#FAFAFA',
+    red = '#AC7D88',
+    orange = '#DE8971',
+    yellow = '#E6D9A2',
+    green = '#A2B38B',
+    cyan = '#73A9AD',
+    blue = '#6D94C5',
+    purple = '#8E7AB5',
+    red_bright = '#EC5E65',
+    orange_bright = '#FEC89A',
+    yellow_bright = '#F9E2AF',
+    green_bright = '#A6E3A1',
+    cyan_bright = '#87FEFE',
+    blue_bright = '#61AFEF',
+    purple_bright = '#CDC1FF',
+
+    text = '#CDD6F4',
+    subtext = '#A6ADC8',
+    border = '#242438',
+    comment = '#3D405B',
+    cursorline = '#15171E',
+    visual = '#20222D',
+
+    green_diff = '#12261E',
+    red_diff = '#221925',
+    blue_diff = '#132339',
+}
 
 M.kuro = {
     none = 'NONE',
