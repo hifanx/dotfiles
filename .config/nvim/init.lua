@@ -125,6 +125,30 @@ g.loaded_nvim_dir_plugin = 1 -- for now
 
 -- basic
 
+vim.keymap.set('n', '<leader>hy', function()
+    local file = vim.fn.expand('%:p')
+    if file == '' or vim.bo.buftype ~= '' or vim.fn.isdirectory(file) == 1 then
+        vim.notify('No file path to copy', vim.log.levels.WARN)
+        return
+    end
+
+    local config_home = vim.env.XDG_CONFIG_HOME
+    if not config_home or config_home == '' then config_home = '~/.config' end
+    config_home = vim.fs.normalize(config_home)
+    local config_path = vim.fs.relpath(config_home, file)
+    local app = config_path and config_path:match('^([^/]+)/')
+    local root = app and vim.fs.joinpath(config_home, app)
+        or vim.fs.root(file, '.git')
+        or vim.fn.getcwd()
+    local path = vim.fs.relpath(root, file)
+    if not path then
+        vim.notify('No containing root for this file', vim.log.levels.WARN)
+        return
+    end
+
+    vim.fn.setreg('+', path, 'v')
+end, { desc = 'Copy relative file path' })
+
 -- clear multicursors
 vim.keymap.set('n', '<C-q>', function()
     local ns = vim.api.nvim_create_namespace('nvim.multicursor')
