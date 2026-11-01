@@ -60,6 +60,7 @@ miniclue.setup({
         { mode = 'n', keys = '<Leader>g', desc = ' ' },
         { mode = 'n', keys = '<Leader>h', desc = ' ' },
         { mode = 'n', keys = '<leader>o', desc = ' ' },
+        { mode = 'n', keys = '<leader>a', desc = ' ' },
     },
 })
 

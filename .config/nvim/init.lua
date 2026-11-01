@@ -387,6 +387,7 @@ vim.pack.add({
     'https://github.com/j-hui/fidget.nvim',
     'https://github.com/sphamba/smear-cursor.nvim',
     -- ⬇️ AI
+    'https://github.com/ThorstenRhau/brygga.nvim',
     'https://github.com/ChmaraX/herdr-nvim',
     -- ⬇️ ME
     '~/git/vaultpal.nvim',
