@@ -11,7 +11,7 @@ vim.g.is_sif = (os_name == 'darwin' and hostname:find('sif') ~= nil)
 -- }}}
 -- {{{ colorscheme
 
-vim.cmd('colorscheme kuro')
+vim.cmd('colorscheme isekai')
 
 -- }}}
 -- options {{{
@@ -385,6 +385,7 @@ vim.pack.add({
     'https://github.com/MeanderingProgrammer/render-markdown.nvim.git',
     'https://github.com/lukas-reineke/indent-blankline.nvim',
     'https://github.com/j-hui/fidget.nvim',
+    'https://github.com/sphamba/smear-cursor.nvim',
     -- ⬇️ AI
     'https://github.com/ChmaraX/herdr-nvim',
     -- ⬇️ ME
