@@ -1,8 +1,8 @@
 {
   "lastChangelogVersion": "1.4.0",
   "theme": "isekai",
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-6.1-sol",
+  "defaultProvider": "claude-code",
+  "defaultModel": "claude-sonnet-5-5",
   "defaultThinkingLevel": "high",
   "skills": ["~/.config/pi/.agents/skills"],
   "enableInstallTelemetry": false,
@@ -14,7 +14,8 @@
     "npm:pi-zentui",
     "npm:@juicesharp/rpiv-todo",
     "npm:pi-cc-extensions",
-    "../../git/pi-utils"
+    "https://github.com/earendil-works/pi-claude-code",
+    "~/git/pi-utils"
   ],
   "hideThinkingBlock": true,
   "subagents": {

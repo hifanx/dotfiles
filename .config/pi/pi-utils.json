@@ -1,6 +1,9 @@
 {
   "harpoon": {
-    "models": ["openai-codex/gpt-6.1-sol:max", "openai-codex/gpt-6-luna:max"]
+    "models": [
+      "claude-code/claude-sonnet-5-5:high",
+      "claude-code/claude-opus-5-5:high"
+    ]
   },
   "keys": {
     "pi.editor.stash": "alt+s",
