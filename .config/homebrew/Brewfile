@@ -70,8 +70,6 @@ cask "alfred"
 cask "balenaetcher"
 # Terminal-based AI coding assistant
 cask "claude-code"
-# Image, video and clipboard optimiser
-cask "clop"
 # Voice and text chat software
 cask "discord"
 # Web browser
