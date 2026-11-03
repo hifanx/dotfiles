@@ -348,11 +348,10 @@ vim.api.nvim_create_autocmd({ 'InsertEnter', 'WinLeave' }, {
     callback = function() vim.opt_local.cursorline = false end,
 })
 
-vim.pack.add({
+-- }}}
 
-    -- }}}
-
-    -- ⬇️ EDITOR
+local plugins = {
+    -- ⬇️ ESSENTIALS
     {
         src = 'https://github.com/saghen/blink.cmp.git',
         version = vim.version.range('1.*'),
@@ -362,7 +361,7 @@ vim.pack.add({
     'https://github.com/L3MON4D3/LuaSnip.git',
     'https://github.com/nvim-treesitter/nvim-treesitter.git',
     'https://github.com/mason-org/mason.nvim.git',
-    -- ⬇️ TOOLS
+    -- ⬇️ EDITOR
     'https://github.com/smjonas/inc-rename.nvim.git',
     'https://github.com/stevearc/oil.nvim.git',
     'https://github.com/refractalize/oil-git-status.nvim',
@@ -389,11 +388,13 @@ vim.pack.add({
     -- ⬇️ AI
     'https://github.com/ThorstenRhau/brygga.nvim',
     'https://github.com/ChmaraX/herdr-nvim',
-    -- ⬇️ ME
-    '~/git/vaultpal.nvim',
+}
 
-    -- lsp {{{
-})
+if vim.g.is_sif then table.insert(plugins, '~/git/vaultpal.nvim') end
+
+vim.pack.add(plugins)
+
+-- lsp {{{
 
 -- add mason binaries to PATH early so LSP servers are findable on direct file open
 do
