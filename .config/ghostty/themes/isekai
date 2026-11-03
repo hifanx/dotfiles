@@ -1,0 +1,25 @@
+# isekai: ported from ~/.config/nvim/lua/palette.lua
+background = #0E1116
+foreground = #A3A7B5
+cursor-color = #A6E3A1
+cursor-text = #0E1116
+selection-background = #2B2E3B
+selection-foreground = cell-foreground
+split-divider-color = #242438
+
+palette = 0=#2B2E3B
+palette = 1=#A97A86
+palette = 2=#8B9C75
+palette = 3=#C3B48A
+palette = 4=#658BBC
+palette = 5=#917DB8
+palette = 6=#5E9397
+palette = 7=#A3A7B5
+palette = 8=#63667C
+palette = 9=#EC5E65
+palette = 10=#A6E3A1
+palette = 11=#F9E2AF
+palette = 12=#61AFEF
+palette = 13=#CDC1FF
+palette = 14=#87FEFE
+palette = 15=#D8D9E0

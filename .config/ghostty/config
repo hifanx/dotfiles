@@ -1,13 +1,11 @@
 font-family = Maple Mono CN
 font-feature = calt,cv06,ss09
 font-size = 18
-theme = Catppuccin Mocha
-background = #0E1116
+theme = isekai
 background-image = /Users/sif/Documents/3.Resources/Pictures/wallpaper/forest.jpg
 background-image-fit = cover
 background-image-opacity = 0.10
-adjust-cell-height = 10
-cursor-color = #A6E3A1
+# adjust-cell-height = 10
 cursor-style = block
 cursor-style-blink = true
 mouse-hide-while-typing = true
