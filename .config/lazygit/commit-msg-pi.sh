@@ -87,18 +87,24 @@ chore: bump react to 19.2.0
 Output only the commit message, no backticks, no explanation.
 EOF
 
+# Outside $(...): macOS bash 3.2 can't parse case patterns inside it.
+prefix_of() {
+  case "$1" in
+  .config/homebrew/*) echo brew ;;
+  .zshrc | .zshenv | .config/.p10k.zsh) echo zsh ;;
+  .local/scripts/*) echo scripts ;;
+  .config/*/*)
+    f=${1#.config/}
+    echo "${f%%/*}"
+    ;;
+  *) echo "?$1" ;;
+  esac
+}
+
 header=""
 body=$repo_body
 if [ "$(git rev-parse --absolute-git-dir)" = "$HOME/.local/share/yadm/repo.git" ]; then
-  prefixes=$(printf '%s\n' "$p" | while IFS= read -r f; do
-    case "$f" in
-      (.config/homebrew/*) echo brew ;;
-      (.zshrc | .zshenv | .config/.p10k.zsh) echo zsh ;;
-      (.local/scripts/*) echo scripts ;;
-      (.config/*/*) f=${f#.config/} && echo "${f%%/*}" ;;
-      (*) echo "?$f" ;;
-    esac
-  done | sort -u)
+  prefixes=$(printf '%s\n' "$p" | while IFS= read -r f; do prefix_of "$f"; done | sort -u)
   if printf '%s\n' "$prefixes" | grep -q '^?'; then
     echo "error: no prefix for these paths; write the message by hand:" >&2
     printf '%s\n' "$prefixes" | sed -n 's/^?/  /p' >&2
@@ -121,6 +127,7 @@ echo "Generating commit message with pi ($model)..."
 # --print: final text goes straight to stdout, no JSONL to reassemble.
 # --no-session: in-memory run, nothing lands in the session list.
 # The --no-* flags keep skills, extensions, packages, and AGENTS.md out.
+# Prompt rides in stdin: pi --print hangs given both stdin and an argument.
 {
   echo "$header"
   echo "Intent: ${intent:-(none given)}"
@@ -132,11 +139,12 @@ echo "Generating commit message with pi ($model)..."
   echo
   echo "Recent commits on these files:"
   git diff --cached --name-only -z | xargs -0 git log --format=%s -5 --
+  echo
+  echo "Write a commit message for this diff."
 } | pi --print --no-session --no-tools --no-extensions --no-skills \
   --no-prompt-templates --no-themes --no-context-files \
   --system-prompt "$body" \
-  --model "$model" --thinking high \
-  "Write a commit message for this diff." >"$msg_file"
+  --model "$model" --thinking high >"$msg_file"
 
 if [ ! -s "$msg_file" ]; then
   echo "error: pi produced an empty commit message" >&2
