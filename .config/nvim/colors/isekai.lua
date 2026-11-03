@@ -5,7 +5,7 @@ vim.g.colors_name = 'isekai' -- name used by :colorscheme
 local c = require('palette').isekai
 
 -- terminal colors.
-vim.g.terminal_color_0 = c.base
+vim.g.terminal_color_0 = c.visual
 vim.g.terminal_color_1 = c.red
 vim.g.terminal_color_2 = c.green
 vim.g.terminal_color_3 = c.yellow
@@ -18,7 +18,7 @@ vim.g.terminal_color_9 = c.red_bright
 vim.g.terminal_color_10 = c.green_bright
 vim.g.terminal_color_11 = c.yellow_bright
 vim.g.terminal_color_12 = c.blue_bright
-vim.g.terminal_color_13 = c.purple
+vim.g.terminal_color_13 = c.purple_bright
 vim.g.terminal_color_14 = c.cyan_bright
 vim.g.terminal_color_15 = c.white
 
@@ -27,7 +27,7 @@ local hl = {
     ColorColumn = { link = 'CursorLine' },
     Conceal = { link = 'NonText' },
     CurSearch = { bg = c.yellow_bright, fg = c.base },
-    Cursor = { bg = c.yellow_bright, fg = c.base },
+    Cursor = { bg = c.green_bright, fg = c.base },
     lCursor = { link = 'Cursor' },
     -- CursorIM --> Cursor
     CursorColumn = { link = 'Cursor' },
