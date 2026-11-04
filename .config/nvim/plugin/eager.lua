@@ -21,3 +21,5 @@ require('oil').setup({ -- g? to see help & keymaps
         signcolumn = 'yes:2',
     },
 })
+
+require('scratch')
