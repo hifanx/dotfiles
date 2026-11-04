@@ -1,102 +1,103 @@
+# isekai palette, from ~/.config/nvim/lua/palette.lua
 colourful: true
 
 filekinds:
-  normal: { foreground: "#CDD6F4" }
-  directory: { foreground: "#CBA6F7" }
-  symlink: { foreground: "#89B4FA" }
-  pipe: { foreground: "#6C7086" }
-  block_device: { foreground: "#EBA0AC" }
-  char_device: { foreground: "#EBA0AC" }
-  socket: { foreground: "#585B70" }
-  special: { foreground: "#CBA6F7" }
-  executable: { foreground: "#A6E3A1" }
-  mount_point: { foreground: "#74C7EC" }
+  normal: { foreground: "#A3A7B5" } # text
+  directory: { foreground: "#658BBC", is_bold: true } # blue_bright (nvim Directory)
+  symlink: { foreground: "#5E9397" } # cyan
+  pipe: { foreground: "#63667C" } # comment
+  block_device: { foreground: "#C38D76" } # orange
+  char_device: { foreground: "#C38D76" } # orange
+  socket: { foreground: "#917DB8" } # purple
+  special: { foreground: "#917DB8" } # purple
+  executable: { foreground: "#A6E3A1" } # green_bright
+  mount_point: { foreground: "#87FEFE" } # cyan_bright
 
 perms:
-  user_read: { foreground: "#CDD6F4" }
-  user_write: { foreground: "#F9E2AF" }
+  user_read: { foreground: "#C3B48A" } # yellow
+  user_write: { foreground: "#EC5E65" } # red_bright
   user_execute_file: { foreground: "#A6E3A1" }
   user_execute_other: { foreground: "#A6E3A1" }
-  group_read: { foreground: "#BAC2DE" }
-  group_write: { foreground: "#F9E2AF" }
-  group_execute: { foreground: "#A6E3A1" }
-  other_read: { foreground: "#A6ADC8" }
-  other_write: { foreground: "#F9E2AF" }
-  other_execute: { foreground: "#A6E3A1" }
-  special_user_file: { foreground: "#CBA6F7" }
-  special_other: { foreground: "#EBA0AC" }
-  attribute: { foreground: "#A6ADC8" }
+  group_read: { foreground: "#C3B48A" }
+  group_write: { foreground: "#EC5E65" }
+  group_execute: { foreground: "#8B9C75" } # green
+  other_read: { foreground: "#C3B48A" }
+  other_write: { foreground: "#EC5E65" }
+  other_execute: { foreground: "#8B9C75" }
+  special_user_file: { foreground: "#917DB8" }
+  special_other: { foreground: "#A97A86" } # red
+  attribute: { foreground: "#63667C" }
 
 size:
-  major: { foreground: "#A6ADC8" }
-  minor: { foreground: "#89DCEB" }
-  number_byte: { foreground: "#CDD6F4" }
-  number_kilo: { foreground: "#BAC2DE" }
-  number_mega: { foreground: "#89B4FA" }
-  number_giga: { foreground: "#CBA6F7" }
-  number_huge: { foreground: "#F5C2E7" }
-  unit_byte: { foreground: "#A6ADC8" }
-  unit_kilo: { foreground: "#89B4FA" }
-  unit_mega: { foreground: "#CBA6F7" }
-  unit_giga: { foreground: "#CBA6F7" }
-  unit_huge: { foreground: "#74C7EC" }
+  major: { foreground: "#8F96B0" }
+  minor: { foreground: "#5E9397" }
+  number_byte: { foreground: "#8B9C75" } # green (nvim Number)
+  number_kilo: { foreground: "#8B9C75" }
+  number_mega: { foreground: "#A6E3A1" }
+  number_giga: { foreground: "#F9E2AF" }
+  number_huge: { foreground: "#EC5E65" }
+  unit_byte: { foreground: "#63667C" }
+  unit_kilo: { foreground: "#63667C" }
+  unit_mega: { foreground: "#8F96B0" }
+  unit_giga: { foreground: "#C3B48A" }
+  unit_huge: { foreground: "#A97A86" }
 
 users:
-  user_you: { foreground: "#F9E2AF" }
-  user_root: { foreground: "#F38BA8" }
-  user_other: { foreground: "#CBA6F7" }
-  group_yours: { foreground: "#FAB387" }
-  group_other: { foreground: "#7F849C" }
-  group_root: { foreground: "#F38BA8" }
+  user_you: { foreground: "#C3B48A" } # yellow
+  user_root: { foreground: "#EC5E65" } # red_bright
+  user_other: { foreground: "#917DB8" } # purple
+  group_yours: { foreground: "#C38D76" } # orange
+  group_other: { foreground: "#63667C" }
+  group_root: { foreground: "#EC5E65" }
 
 links:
-  normal: { foreground: "#89DCEB" }
-  multi_link_file: { foreground: "#74C7EC" }
+  normal: { foreground: "#5E9397" }
+  multi_link_file: { foreground: "#87FEFE" }
 
 git:
-  new: { foreground: "#A6E3A1" }
-  modified: { foreground: "#F9E2AF" }
-  deleted: { foreground: "#F38BA8" }
-  renamed: { foreground: "#94E2D5" }
-  typechange: { foreground: "#F5C2E7" }
-  ignored: { foreground: "#7F849C" }
-  conflicted: { foreground: "#EBA0AC" }
+  new: { foreground: "#A6E3A1" } # Added
+  modified: { foreground: "#FEC89A" } # Changed (orange_bright)
+  deleted: { foreground: "#EC5E65" } # Removed
+  renamed: { foreground: "#5E9397" }
+  typechange: { foreground: "#917DB8" }
+  ignored: { foreground: "#63667C" }
+  conflicted: { foreground: "#EC5E65" }
 
 git_repo:
-  branch_main: { foreground: "#CDD6F4" }
-  branch_other: { foreground: "#CBA6F7" }
+  branch_main: { foreground: "#A3A7B5" }
+  branch_other: { foreground: "#917DB8" }
   git_clean: { foreground: "#A6E3A1" }
-  git_dirty: { foreground: "#F38BA8" }
+  git_dirty: { foreground: "#EC5E65" }
 
 security_context:
-  colon: { foreground: "#7F849C" }
-  user: { foreground: "#BAC2DE" }
-  role: { foreground: "#CBA6F7" }
-  typ: { foreground: "#585B70" }
-  range: { foreground: "#CBA6F7" }
+  colon: { foreground: "#63667C" }
+  user: { foreground: "#8F96B0" }
+  role: { foreground: "#917DB8" }
+  typ: { foreground: "#63667C" }
+  range: { foreground: "#917DB8" }
 
 file_type:
-  image: { foreground: "#F9E2AF" }
-  video: { foreground: "#F38BA8" }
-  music: { foreground: "#A6E3A1" }
-  lossless: { foreground: "#94E2D5" }
-  crypto: { foreground: "#EBA0AC" }
-  document: { foreground: "#CDD6F4" }
-  compressed: { foreground: "#F5C2E7" }
-  temp: { foreground: "#EBA0AC" }
-  compiled: { foreground: "#74C7EC" }
-  build: { foreground: "#F38BA8" }
-  source: { foreground: "#89B4FA" }
+  image: { foreground: "#C3B48A" } # yellow
+  video: { foreground: "#A97A86" } # red
+  music: { foreground: "#8B9C75" } # green
+  lossless: { foreground: "#5E9397" } # cyan
+  crypto: { foreground: "#EC5E65" }
+  document: { foreground: "#A3A7B5" }
+  compressed: { foreground: "#917DB8" } # purple
+  temp: { foreground: "#63667C" }
+  compiled: { foreground: "#C38D76" } # orange
+  build: { foreground: "#FEC89A" }
+  source: { foreground: "#658BBC" } # blue
 
-punctuation: { foreground: "#7F849C" }
-date: { foreground: "#FAB387" }
-inode: { foreground: "#A6ADC8" }
-blocks: { foreground: "#9399B2" }
-header: { foreground: "#CDD6F4" }
-octal: { foreground: "#94E2D5" }
-flags: { foreground: "#CBA6F7" }
+punctuation: { foreground: "#63667C" } # comment (nvim Delimiter)
+date: { foreground: "#658BBC" } # blue
+inode: { foreground: "#8F96B0" }
+blocks: { foreground: "#8F96B0" }
+header: { foreground: "#D8D9E0", is_underline: true } # white (nvim Title)
+octal: { foreground: "#917DB8" }
+flags: { foreground: "#917DB8" }
 
-symlink_path: { foreground: "#89DCEB" }
-control_char: { foreground: "#74C7EC" }
-broken_symlink: { foreground: "#F38BA8" }
-broken_path_overlay: { foreground: "#585B70" }
+symlink_path: { foreground: "#5E9397" }
+control_char: { foreground: "#87FEFE" }
+broken_symlink: { foreground: "#EC5E65" }
+broken_path_overlay: { foreground: "#63667C" }
