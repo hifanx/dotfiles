@@ -76,9 +76,9 @@ o.smartcase = true -- respect case if search pattern has upper case
 o.hlsearch = true -- highlight search results as you type.
 
 -- folding
-o.foldmethod = 'marker'
-o.foldmarker = '{{{,}}}' -- this is the default
-o.foldlevel = 0 -- start with all folds closed
+o.foldmethod = 'expr' -- init.lua overrides to marker via modeline
+o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+o.foldlevel = 99 -- start with all folds open
 
 -- clipboard
 vim.schedule(function() -- to avoid increasing startup-time
@@ -599,3 +599,5 @@ vim.api.nvim_create_autocmd('VimEnter', {
 })
 
 -- }}}
+
+-- vim: foldmethod=marker foldlevel=0
