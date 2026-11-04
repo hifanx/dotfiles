@@ -12,7 +12,6 @@ local ensure_installed = {
     'markdown-oxide',
     'taplo',
     'pyright',
-    'docker-language-server',
     'bash-language-server',
     -- Formatters
     'stylua',
@@ -31,7 +30,6 @@ local function auto_install_missing_tools()
     for _, name in ipairs(ensure_installed) do
         if not mr.is_installed(name) then table.insert(to_install, name) end
     end
-    if #to_install == 0 then return end
 
     local show = vim.schedule_wrap(
         function(msg) vim.notify(msg, vim.log.levels.INFO, { title = 'Mason' }) end
@@ -57,10 +55,32 @@ local function auto_install_missing_tools()
         end
     end
 
+    local function notify_outdated()
+        local outdated = {}
+        for _, p in ipairs(mr.get_installed_packages()) do
+            local current = p:get_installed_version()
+            local ok, latest = pcall(p.get_latest_version, p) -- throws on malformed purl
+            if ok and current and current ~= latest then
+                table.insert(
+                    outdated,
+                    string.format('%s %s → %s', p.name, current, latest)
+                )
+            end
+        end
+        if #outdated > 0 then
+            show(
+                'Updates available (:Mason → U):\n'
+                    .. table.concat(outdated, '\n')
+            )
+        end
+    end
+
+    -- runs once per session: refresh fetches the registry, then install missing + report updates
     mr.refresh(function()
         for _, name in ipairs(to_install) do
             do_install(mr.get_package(name))
         end
+        notify_outdated()
     end)
 end
 
