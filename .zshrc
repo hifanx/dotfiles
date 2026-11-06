@@ -17,7 +17,7 @@ path=(
     "$HOMEBREW_PREFIX/sbin"
     "$CARGO_HOME/bin"
     "$NPM_CONFIG_PREFIX/bin"
-    $path
+    "${path[@]}"
 )
 
 # Homebrew man/info setup, equivalent to brew shellenv.
@@ -29,7 +29,7 @@ export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}"
 
 # Homebrew completion functions for Tab completion.
 typeset -U fpath
-fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" $fpath)
+fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" "${fpath[@]}")
 # configure mirrors
 # export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
 # export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
@@ -111,6 +111,9 @@ alias yggdrasil="ssh root@10.0.0.2"
 alias baldur="ssh xuhaifan@10.0.0.10"
 alias idun="ssh xuhaifan@10.0.0.11"
 alias nanna="ssh xuhaifan@10.0.0.12"
+# lofn SMB shares (appdata, data, fast): nas [share...] / unas [share...]
+nas() { for s in "${@:-data}"; do osascript -e "mount volume \"smb://Lofn._smb._tcp.local/$s\"" >/dev/null && echo "/Volumes/$s"; done; }
+unas() { for s in "${@:-data}"; do diskutil unmount "/Volumes/$s"; done; }
 alias co='cd "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian"'
 alias g='lazygit'
 alias ly='yadm enter lazygit'
