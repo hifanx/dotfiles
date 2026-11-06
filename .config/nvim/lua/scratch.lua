@@ -2,6 +2,12 @@
 local dir = vim.fn.stdpath('config')
 local win
 
+-- Opaque base bg for scratch.md so markdown code blocks render against it
+local c = require('palette').isekai
+local md_ns = vim.api.nvim_create_namespace('scratch_md')
+vim.api.nvim_set_hl(md_ns, 'NormalFloat', { fg = c.text, bg = c.base })
+vim.api.nvim_set_hl(md_ns, 'FloatBorder', { fg = c.border, bg = c.base })
+
 local function save(buf)
     if vim.api.nvim_buf_is_loaded(buf) then
         vim.api.nvim_buf_call(buf, function() vim.cmd('silent! update') end)
@@ -38,12 +44,15 @@ local function toggle(name)
         )
     end
     local footer = { { ' ' .. name .. ' ', 'Comment' } }
+    local ns = name:match('%.md$') and md_ns or 0
     if win and vim.api.nvim_win_is_valid(win) then
         local shown = vim.api.nvim_win_get_buf(win)
         if shown == buf then return vim.api.nvim_win_close(win, false) end -- WinClosed saves
         save(shown)
         vim.api.nvim_win_set_config(win, { footer = footer })
-        return vim.api.nvim_win_set_buf(win, buf)
+        vim.api.nvim_win_set_buf(win, buf)
+        vim.api.nvim_win_set_hl_ns(win, ns)
+        return
     end
     local width = math.floor(vim.o.columns * 0.6)
     local height = math.floor((vim.o.lines - vim.o.cmdheight) * 0.9)
@@ -56,6 +65,7 @@ local function toggle(name)
         footer = footer,
         footer_pos = 'center',
     })
+    vim.api.nvim_win_set_hl_ns(win, ns)
     local opened = win
     vim.api.nvim_create_autocmd('WinClosed', {
         pattern = tostring(opened),

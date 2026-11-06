@@ -4,7 +4,7 @@ M.isekai = {
 
     none = 'NONE',
     base = '#0E1116',
-    mantle = '#11111B',
+    mantle = '#060809',
 
     white = '#D8D9E0',
     red = '#A97A86',
