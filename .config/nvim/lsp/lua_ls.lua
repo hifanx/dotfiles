@@ -19,7 +19,7 @@ return {
             },
             runtime = { version = 'LuaJIT' },
             diagnostics = {
-                globals = { 'vim' },
+                globals = { 'vim', 'rex' },
                 disable = { 'missing-fields' },
             },
             workspace = {
