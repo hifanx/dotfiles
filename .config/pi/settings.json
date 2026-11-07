@@ -1,10 +1,12 @@
 {
-  "lastChangelogVersion": "1.4.0",
+  "lastChangelogVersion": "1.5.0",
   "theme": "isekai",
   "defaultProvider": "claude-code",
-  "defaultModel": "claude-sonnet-5-5",
+  "defaultModel": "claude-opus-5-5",
   "defaultThinkingLevel": "high",
-  "skills": ["~/.config/pi/.agents/skills"],
+  "skills": [
+    "~/.config/pi/.agents/skills"
+  ],
   "enableInstallTelemetry": false,
   "showCacheMissNotices": true,
   "showHardwareCursor": true,
@@ -54,5 +56,8 @@
         "inheritGlobalContext": true
       }
     }
+  },
+  "extensionChangelogVersions": {
+    "{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.47.0"
   }
 }
