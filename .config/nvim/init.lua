@@ -384,10 +384,8 @@ local plugins = {
     'https://github.com/MeanderingProgrammer/render-markdown.nvim.git',
     'https://github.com/lukas-reineke/indent-blankline.nvim',
     'https://github.com/j-hui/fidget.nvim',
-    'https://github.com/sphamba/smear-cursor.nvim',
     -- ⬇️ AI
-    'https://github.com/ThorstenRhau/brygga.nvim',
-    'https://github.com/ChmaraX/herdr-nvim',
+    'https://github.com/ThorstenRhau/brygga.nvim', -- claude code /ide
 }
 
 if vim.g.is_sif then table.insert(plugins, '~/git/vaultpal.nvim') end
