@@ -4,5 +4,11 @@
 return {
     cmd = { 'taplo', 'lsp', 'stdio' },
     filetypes = { 'toml' },
-    root_markers = { '.taplo.toml', 'taplo.toml', '.git' },
+    -- Fall back to the file's dir: with no root, taplo excludes the document.
+    root_dir = function(bufnr, on_dir)
+        on_dir(
+            vim.fs.root(bufnr, { '.taplo.toml', 'taplo.toml', '.git' })
+                or vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr))
+        )
+    end,
 }
