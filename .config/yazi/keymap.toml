@@ -1,11 +1,17 @@
 [[mgr.prepend_keymap]]
-on   = ["c", "y"]
-# Puts real file objects (not paths) on the macOS pasteboard, so ⌘V attaches them in Discord/WeChat/Mail
-run  = '''shell -- osascript -l JavaScript -e 'ObjC.import("AppKit"); function run(argv) { const urls = $.NSMutableArray.array; argv.forEach(p => urls.addObject($.NSURL.fileURLWithPath(p))); const pb = $.NSPasteboard.generalPasteboard; pb.clearContents; pb.writeObjects(urls); }' %s'''
+on = ["c", "y"]
+# Copy real files onto the macOS pasteboard
+run = '''shell -- osascript -l JavaScript -e 'ObjC.import("AppKit"); function run(argv) { const urls = $.NSMutableArray.array; argv.forEach(p => urls.addObject($.NSURL.fileURLWithPath(p))); const pb = $.NSPasteboard.generalPasteboard; pb.clearContents; pb.writeObjects(urls); }' %s'''
 desc = "Copy selected files to system clipboard"
 
 [[mgr.prepend_keymap]]
-on   = ["c", "p"]
-# Copies files from the macOS pasteboard (Finder ⌘C, or c,y) into cwd; -n never overwrites existing files
-run  = '''shell -- osascript -l JavaScript -e 'ObjC.import("AppKit"); const u = $.NSPasteboard.generalPasteboard.readObjectsForClassesOptions($([$.NSURL]), $({NSPasteboardURLReadingFileURLsOnlyKey: true})); const o = []; for (let i = 0; i < u.count; i++) o.push(u.objectAtIndex(i).path.js); o.join("\n")' | while IFS= read -r f; do cp -Rn "$f" .; done'''
+on = ["c", "p"]
+# Paste files from the macOS pasteboard
+run = '''shell -- osascript -l JavaScript -e 'ObjC.import("AppKit"); const u = $.NSPasteboard.generalPasteboard.readObjectsForClassesOptions($([$.NSURL]), $({NSPasteboardURLReadingFileURLsOnlyKey: true})); const o = []; for (let i = 0; i < u.count; i++) o.push(u.objectAtIndex(i).path.js); o.join("\n")' | while IFS= read -r f; do cp -Rn "$f" .; done'''
 desc = "Paste files from system clipboard"
+
+[[mgr.prepend_keymap]]
+on = "E"
+# Eject images whose source path ends in .dmg
+run = '''shell -- hdiutil info | awk '/^image-path/{dmg=/\.dmg$/} /^\/dev\/disk[0-9]+[ \t]/ && dmg {print $1; dmg=0}' | { n=0; while read -r d; do diskutil eject "$d" >/dev/null && n=$((n+1)); done; osascript -e "display notification \"Ejected $n DMG(s)\" with title \"Yazi\""; }'''
+desc = "Eject all mounted DMGs"
