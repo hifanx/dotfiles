@@ -3,7 +3,11 @@
 # commit. Other repos: Conventional Commits. $1 is optional intent.
 set -eu
 
-model="deepseek/deepseek-v4-pro[1m]"
+# ensure API keys are present, even in non interactive shells, such as popup terminals
+# shellcheck source=/dev/null
+[ -f "$HOME/.config/.env" ] && . "$HOME/.config/.env"
+
+model="deepseek/deepseek-flash[1m]"
 msg_file="/tmp/commit_msg.txt"
 intent=${1:-}
 
