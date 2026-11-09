@@ -15,6 +15,22 @@ show_symlink = true
 scrolloff = 15
 mouse_events = ["click", "scroll"]
 
+[plugin]
+prepend_preloaders = [
+  { mime = "application/pdf", run = "native --pdf" },
+  { mime = "image/{avif,hei?,jxl}", run = "native --sips" },
+  { mime = "image/svg+xml", run = "native" },
+  { mime = "font/*", run = "native" },
+  { mime = "application/ms-opentype", run = "native" },
+]
+prepend_previewers = [
+  { mime = "application/pdf", run = "native --pdf" },
+  { mime = "image/{avif,hei?,jxl}", run = "native --sips" },
+  { mime = "image/svg+xml", run = "native" },
+  { mime = "font/*", run = "native" },
+  { mime = "application/ms-opentype", run = "native" },
+]
+
 [opener]
 reveal = [{ run = "open -R %s1", desc = "reveal in finder", for = "macos" }]
 play = [{ run = 'open -a "Movist Pro" %s', desc = "Movist Pro", for = "macos" }]
