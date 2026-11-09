@@ -16,14 +16,6 @@ brew "fzf"
 brew "gh"
 # Distributed revision control system
 brew "git"
-# GNU Privacy Guard (OpenPGP)
-brew "gnupg"
-# Agent multiplexer that lives in your terminal
-brew "herdr"
-# TIFF library and utilities
-brew "libtiff"
-# Tools and libraries to manipulate images in select formats
-brew "imagemagick"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
 # Simple terminal UI for git commands
@@ -40,8 +32,6 @@ brew "neovim", args: ["HEAD"]
 brew "node"
 # AI agent toolkit
 brew "pi-coding-agent"
-# PDF rendering library (based on the xpdf-3.0 code base)
-brew "poppler"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.14"
 # Search tool like grep and The Silver Searcher
