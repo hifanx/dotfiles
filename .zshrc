@@ -101,7 +101,6 @@ alias tt='eza -T -L 2 --icons auto --git-ignore --no-quotes'
 
 # personal aliases
 alias cdd='cd "$HOME/.dotfiles"'
-alias c="clear"
 alias bu="sudo softwareupdate -ia --verbose; brew bundle -v --global; brew cu; brew upgrade; brew autoremove; brew cleanup; brew doctor"
 alias bi="brew bundle --verbose --force cleanup --global"
 alias bd="brew bundle dump --force --global"
