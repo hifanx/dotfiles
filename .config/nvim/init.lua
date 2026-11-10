@@ -369,7 +369,7 @@ local plugins = {
     'https://github.com/folke/persistence.nvim.git',
     'https://github.com/kylechui/nvim-surround',
     'https://github.com/windwp/nvim-autopairs',
-    'https://github.com/dlyongemallo/diffview-plus.nvim',
+    'https://github.com/CoreyKaylor/diffbandit.nvim',
     'https://github.com/nvim-mini/mini.ai',
     'https://github.com/nvim-mini/mini.bufremove',
     'https://github.com/nvim-mini/mini.statuscolumn',
@@ -388,7 +388,9 @@ local plugins = {
     'https://github.com/ThorstenRhau/brygga.nvim', -- claude code /ide
 }
 
-if vim.g.is_sif then table.insert(plugins, '~/git/vaultpal.nvim') end
+if vim.g.is_sif then
+    vim.opt.rtp:prepend(vim.fn.expand('~/git/vaultpal.nvim'))
+end
 
 vim.pack.add(plugins)
 
