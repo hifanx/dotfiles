@@ -4,9 +4,18 @@ vim.loader.enable()
 require('vim._core.ui2').enable({})
 
 -- namespaced profile
+local hosts = {
+    sif = { os = 'darwin', hostname = 'sif' },
+    work = { os = 'darwin', hostname = 'cgcn04wnq9dd4' },
+    lofn = { os = 'linux', hostname = 'lofn' },
+}
 local os_name = vim.uv.os_uname().sysname:lower()
-local hostname = vim.uv.os_gethostname()
-vim.g.is_sif = (os_name == 'darwin' and hostname:find('sif') ~= nil)
+local hostname = vim.uv.os_gethostname():lower():match('^[^.]+') -- drop domain (.lan, .local)
+for profile, host in pairs(hosts) do
+    if host.os == os_name and host.hostname == hostname then
+        vim.g.profile = profile
+    end
+end
 
 -- }}}
 -- {{{ colorscheme
@@ -388,7 +397,7 @@ local plugins = {
     'https://github.com/ThorstenRhau/brygga.nvim', -- claude code /ide
 }
 
-if vim.g.is_sif then
+if vim.g.profile == 'sif' then
     vim.opt.rtp:prepend(vim.fn.expand('~/git/vaultpal.nvim'))
 end
 
@@ -559,7 +568,7 @@ vim.lsp.config('*', {
     capabilities = capabilities,
 })
 
-local servers = {
+local sif = {
     'cssls',
     'lua_ls',
     'bashls',
@@ -568,8 +577,23 @@ local servers = {
     'markdown_oxide',
     'taplo',
     'pyright',
-    'docker_language_server',
 }
+
+local lofn = {
+    'yamlls',
+    'jsonls',
+    'pyright',
+}
+
+local work = {
+    'lua_ls',
+    'yamlls',
+    'jsonls',
+    'markdown_oxide',
+    'taplo',
+}
+
+local servers = ({ sif = sif, lofn = lofn, work = work })[vim.g.profile] or {}
 
 vim.lsp.enable(servers)
 

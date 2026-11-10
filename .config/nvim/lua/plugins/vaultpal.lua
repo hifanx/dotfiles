@@ -1,4 +1,4 @@
-if not vim.g.is_sif then return end
+if vim.g.profile ~= 'sif' then return end
 --[[
 require('vaultpal').setup({
     roots = nil,

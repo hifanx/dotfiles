@@ -1,4 +1,4 @@
-local ensure_installed_ts = {
+local sif = {
     'c',
     'lua',
     'markdown',
@@ -26,6 +26,51 @@ local ensure_installed_ts = {
     'json',
     'latex',
 }
+
+local lofn = {
+    'c',
+    'lua',
+    'markdown',
+    'markdown_inline',
+    'query',
+    'vim',
+    'vimdoc',
+    'diff',
+    -- NOTE: the above are natively installed since neovim 0.13
+    'bash',
+    'python',
+    'json',
+    'toml',
+    'yaml',
+}
+
+local work = {
+    'c',
+    'lua',
+    'markdown',
+    'markdown_inline',
+    'query',
+    'vim',
+    'vimdoc',
+    'diff',
+    -- NOTE: the above are natively installed since neovim 0.13
+    'bash',
+    'gitignore',
+    'regex',
+    'toml',
+    'yaml',
+    'csv',
+    'java',
+    'python',
+    'html',
+    'css',
+    'javascript',
+    'typescript',
+    'json',
+}
+
+local ensure_installed_ts = ({ sif = sif, lofn = lofn, work = work })[vim.g.profile]
+    or {}
 
 local isnt_installed = function(lang)
     return #vim.api.nvim_get_runtime_file('parser/' .. lang .. '.*', false) == 0

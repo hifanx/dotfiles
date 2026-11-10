@@ -2,7 +2,7 @@ vim.keymap.set('n', '<leader>hm', ':Mason<CR>', { desc = 'Mason' })
 
 require('mason').setup({})
 
-local ensure_installed = {
+local sif = {
     'tree-sitter-cli',
     -- LSP servers
     'css-lsp',
@@ -18,10 +18,40 @@ local ensure_installed = {
     'prettier',
     'shfmt',
     'black',
-    'google-java-format',
     -- Linters
     'shellcheck', -- used by bashls
 }
+
+local lofn = {
+    'tree-sitter-cli',
+    -- LSP servers
+    'yaml-language-server',
+    'json-lsp',
+    'pyright',
+    -- Formatters
+    'stylua',
+    'prettier',
+    'shfmt',
+    'black',
+}
+
+local work = {
+    'tree-sitter-cli',
+    -- LSP servers
+    'lua-language-server',
+    'yaml-language-server',
+    'json-lsp',
+    'markdown-oxide',
+    'taplo',
+    -- Formatters
+    'stylua',
+    'prettier',
+    'shfmt',
+    'google-java-format',
+}
+
+local ensure_installed = ({ sif = sif, lofn = lofn, work = work })[vim.g.profile]
+    or {}
 
 local function auto_install_missing_tools()
     local mr = require('mason-registry')
