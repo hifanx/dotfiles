@@ -152,7 +152,9 @@ if [ -n "$HERDR_TAB_ID" ] || [ -n "$HERDR_SOCKET_PATH" ]; then
 fi
 
 # powerlevel10k
-[[ ! -f ~/.config/zsh/p10k.zsh ]] || source ~/.config/zsh/p10k.zsh
+# p10k configure writes to ${POWERLEVEL9K_CONFIG_FILE:-${ZDOTDIR:-~}/.p10k.zsh}; pin it.
+typeset -g POWERLEVEL9K_CONFIG_FILE="$XDG_CONFIG_HOME/zsh/p10k.zsh"
+[[ ! -f $POWERLEVEL9K_CONFIG_FILE ]] || source "$POWERLEVEL9K_CONFIG_FILE"
 
 # Re-patch Krita's bundled Python after app updates to keep ~/.matplotlib clean.
 # Run manually with: krita-fix

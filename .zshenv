@@ -1,3 +1,9 @@
+# Why this file exists (do not remove):
+# - Read by every zsh, incl. non-interactive (scripts, `zsh -c`, editors, agents);
+#   .zshrc isn't, so tools would miss these vars and pollute ~ (~/.npm, ~/.cargo, ~/.claude...).
+# - SHELL_SESSIONS_DISABLE must be set before /etc/zshrc_Apple_Terminal.
+# PATH is re-ordered in .zshrc (path_helper); HISTFILE lives there (/etc/zshrc resets it).
+
 # XDG Base Directory Specification
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
@@ -11,21 +17,20 @@ export LANG=en_US.UTF-8
 export EDITOR='nvim'
 
 # npm
-export NPM_CONFIG_PREFIX="$HOME/.local/share/npm"
-export NPM_CONFIG_CACHE="$HOME/.cache/npm"
-export NPM_CONFIG_TMP="$HOME/.cache/npm/tmp"
-export NPM_CONFIG_LOGS_DIR="$HOME/.cache/npm/logs"
+export NPM_CONFIG_PREFIX="$XDG_DATA_HOME/npm"
+export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
+export NPM_CONFIG_TMP="$XDG_CACHE_HOME/npm/tmp"
+export NPM_CONFIG_LOGS_DIR="$XDG_DATA_HOME/npm/logs"
 
 # cargo
-export CARGO_HOME="$HOME/.local/share/cargo"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
 
 # Tool configuration
 export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
-export MPLCONFIGDIR="$HOME/.cache/matplotlib"
-export EZA_CONFIG_DIR="$HOME/.config/eza"
-export TEALDEER_CONFIG_DIR="$HOME/.config/tealdeer"
-export PI_CODING_AGENT_DIR="$HOME/.config/pi"
-export PI_MEMORY_DIR="$PI_CODING_AGENT_DIR/memory"
+export MPLCONFIGDIR="$XDG_CACHE_HOME/matplotlib"
+export EZA_CONFIG_DIR="$XDG_CONFIG_HOME/eza"
+export TEALDEER_CONFIG_DIR="$XDG_CONFIG_HOME/tealdeer"
+export PI_CODING_AGENT_DIR="$XDG_CONFIG_HOME/pi"
 export PI_TELEMETRY=0
 export PI_WEB_ACCESS_CACHE_ROOT="$XDG_CACHE_HOME/pi-web-access"
 export LESSHISTFILE=/dev/null
@@ -46,6 +51,6 @@ path=(
     "$HOMEBREW_PREFIX/sbin"
     "$CARGO_HOME/bin"
     "$NPM_CONFIG_PREFIX/bin"
-    $path
+    "${path[@]}"
 )
 export PATH
