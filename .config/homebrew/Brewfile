@@ -66,14 +66,10 @@ cask "discord"
 cask "firefox"
 cask "font-maple-mono-cn"
 cask "font-symbols-only-nerd-font"
-# Terminal emulator that uses platform-native UI and GPU acceleration
-cask "ghostty"
 # Free and open-source painting and sketching program
 cask "krita"
 # Free cross-platform office suite, fresh version
 cask "libreoffice"
-# OpenJDK distribution from Microsoft
-cask "microsoft-openjdk"
 # Media player
 cask "movist-pro"
 cask "aimessoft/nipaplay-reload/nipaplay-reload", trusted: true
