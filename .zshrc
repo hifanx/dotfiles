@@ -152,7 +152,7 @@ if [ -n "$HERDR_TAB_ID" ] || [ -n "$HERDR_SOCKET_PATH" ]; then
 fi
 
 # powerlevel10k
-[[ ! -f ~/.config/.p10k.zsh ]] || source ~/.config/.p10k.zsh
+[[ ! -f ~/.config/zsh/p10k.zsh ]] || source ~/.config/zsh/p10k.zsh
 
 # Re-patch Krita's bundled Python after app updates to keep ~/.matplotlib clean.
 # Run manually with: krita-fix
