@@ -95,7 +95,7 @@ EOF
 prefix_of() {
   case "$1" in
   .config/homebrew/*) echo brew ;;
-  .zshrc | .zshenv | .config/.p10k.zsh) echo zsh ;;
+  .zshrc | .zshenv) echo zsh ;;
   .local/scripts/*) echo scripts ;;
   .config/*/*)
     f=${1#.config/}
