@@ -4,9 +4,7 @@
   "defaultProvider": "claude-code",
   "defaultModel": "claude-opus-5-5",
   "defaultThinkingLevel": "high",
-  "skills": [
-    "~/.config/pi/.agents/skills"
-  ],
+  "skills": ["~/.config/pi/.agents/skills"],
   "enableInstallTelemetry": false,
   "showCacheMissNotices": true,
   "showHardwareCursor": true,
@@ -16,6 +14,7 @@
     "npm:pi-zentui",
     "npm:@juicesharp/rpiv-todo",
     "npm:pi-cc-extensions",
+    "npm:pi-secret-shield",
     "https://github.com/earendil-works/pi-claude-code",
     "~/git/pi-utils"
   ],
