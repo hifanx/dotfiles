@@ -1,10 +1,12 @@
 {
-  "lastChangelogVersion": "1.5.0",
+  "lastChangelogVersion": "1.5.2",
   "theme": "isekai",
   "defaultProvider": "claude-code",
   "defaultModel": "claude-opus-5-5",
   "defaultThinkingLevel": "high",
-  "skills": ["~/.config/pi/.agents/skills"],
+  "skills": [
+    "~/.config/pi/.agents/skills"
+  ],
   "enableInstallTelemetry": false,
   "showCacheMissNotices": true,
   "showHardwareCursor": true,
