@@ -1,4 +1,4 @@
-# shellcheck disable=SC2296,SC1090,SC1091,SC2086,SC2016,SC2154,SC1087
+# shellcheck disable=SC2296,SC1090,SC1091,SC2086,SC2016,SC2154,SC1087,SC2034,SC2206
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -17,7 +17,7 @@ path=(
     "$HOMEBREW_PREFIX/sbin"
     "$CARGO_HOME/bin"
     "$NPM_CONFIG_PREFIX/bin"
-    "${path[@]}"
+    $path
 )
 
 # Homebrew man/info setup, equivalent to brew shellenv.
@@ -29,7 +29,7 @@ export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}"
 
 # Homebrew completion functions for Tab completion.
 typeset -U fpath
-fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" "${fpath[@]}")
+fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" $fpath)
 # configure mirrors
 # export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
 # export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
@@ -48,6 +48,10 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
+# vi mode: explicit (not via $EDITOR) and before plugins, so zsh-autocomplete binds into viins
+bindkey -v
+KEYTIMEOUT=1 # Esc switches mode instantly instead of waiting 0.4s for an Alt-chord
+
 # install plugins
 zinit ice depth=1
 zinit light romkatv/powerlevel10k
@@ -59,11 +63,10 @@ zinit light zsh-users/zsh-autosuggestions
 # zsh configuration.
 # NOTE: HISTFILE is set here, not in .zshenv, because macOS /etc/zshrc loads
 # after .zshenv and unconditionally resets it to ${ZDOTDIR:-$HOME}/.zsh_history.
-export HISTFILE="$HOME/.cache/zsh/.zsh_history"
-export ZSH_COMPDUMP="$HOME/.cache/zsh/zcompdump-$ZSH_VERSION"
-export HISTSIZE=5000
-export SAVEHIST=$HISTSIZE
-export ISTDUP=erase  # erase duplicates
+HISTFILE="$HOME/.cache/zsh/.zsh_history"
+ZSH_COMPDUMP="$HOME/.cache/zsh/zcompdump-$ZSH_VERSION"
+HISTSIZE=5000
+SAVEHIST=$HISTSIZE
 setopt appendhistory # append rather than writing
 setopt sharehistory  # for cross sessions
 setopt hist_ignore_space
