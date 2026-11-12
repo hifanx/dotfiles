@@ -5,6 +5,7 @@
 - Verify all dependency/lifecycle writes before installs, updates, changes or runs; stop if unverified
 - Use supported XDG paths/variables or native macOS `~/Library`
 - Reject incompatible tools
+- Never auto install ANYTHING without explicit approval
 
 ## Operations
 

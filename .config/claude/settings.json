@@ -20,6 +20,12 @@
       }
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "npx -y ccstatusline@latest",
+    "padding": 0,
+    "refreshInterval": 10
+  },
   "enabledPlugins": {
     "ponytail@ponytail": true,
     "mattpocock-skills@claude-plugins-official": true
@@ -36,10 +42,9 @@
   "theme": "custom:isekai",
   "editorMode": "normal",
   "autoCompactEnabled": true,
-  "statusLine": {
-    "type": "command",
-    "command": "npx -y ccstatusline@latest",
-    "padding": 0,
-    "refreshInterval": 10
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    }
   }
 }
