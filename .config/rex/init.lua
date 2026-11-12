@@ -66,6 +66,20 @@ popup('popup_yadm', 'Popup: yadm lazygit', { 'yadm', 'enter', 'lazygit' })
 popup('popup_shell', 'Popup: terminal')
 popup('popup_yazi', 'Popup: yazi', { 'yazi' })
 
+-- cheatsheet: fzf over tldr custom pages; tldr renders pages/patches, bat the rest.
+local tldr_pages = os.getenv('HOME') .. '/.config/tealdeer/pages'
+popup('popup_cheat', 'Popup: cheatsheet', {
+    'fzf',
+    '--walker=file',
+    '--walker-root=' .. tldr_pages,
+    '--delimiter=/',
+    '--with-nth=-1',
+    '--preview=case {} in *.page.md|*.patch.md) tldr --color always -f {} ;; *.md) glow -s dark -w $FZF_PREVIEW_COLUMNS {} ;; *) bat --color=always --theme=isekai --style=grid,numbers --italic-text=always --terminal-width=$FZF_PREVIEW_COLUMNS {} ;; esac',
+    '--preview-window=right,70%,wrap',
+    '--bind=enter:become(nvim {})',
+    '--bind=ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up',
+})
+
 -- toggle: hide the focused popup (it keeps running), else show the front-most hidden one.
 rex.action({
     name = 'popup_toggle',
@@ -154,6 +168,7 @@ rex.bind(leader('g'), 'popup_lazygit')
 rex.bind(leader('shift+g'), 'popup_yadm')
 rex.bind(leader('y'), 'popup_yazi')
 rex.bind(leader('t'), 'popup_shell')
+rex.bind(leader('shift+/'), 'popup_cheat')
 rex.bind(leader('m'), 'popup_toggle')
 
 -- vim: foldmethod=marker foldlevel=0
