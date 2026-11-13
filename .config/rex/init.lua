@@ -80,7 +80,9 @@ popup('popup_cheat', 'Popup: cheatsheet', {
     '--bind=ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up',
 })
 
--- toggle: hide the focused popup (it keeps running), else show the front-most hidden one.
+-- toggle: hide popups one by one (they keep running) until none is visible,
+-- then show them one by one until none is hidden, then hide again.
+local popup_showing = false
 rex.action({
     name = 'popup_toggle',
     title = 'Popup: toggle',
@@ -88,25 +90,32 @@ rex.action({
         local view, err =
             rex.call('session.view', { session_id = ctx.session_id })
         if not view then error(err, 0) end
-        local target, state
+        local hidden, visible, focused
         for _, win in ipairs(view.windows or {}) do
             if win.window_id == view.active_window_id then
                 for _, layer in ipairs(win.layers or {}) do
                     if layer.kind == 'floating' then
                         if layer.state == 'minimized' then
-                            target, state = layer.layer_id, 'normal'
+                            hidden = layer.layer_id
                         else
+                            visible = layer.layer_id
                             for _, b in ipairs(layer.blocks or {}) do
                                 if b.block_id == ctx.block_id then
-                                    target, state = layer.layer_id, 'minimized'
+                                    focused = layer.layer_id
                                 end
                             end
                         end
                     end
-                    if state == 'minimized' then break end
                 end
             end
         end
+        if not hidden then
+            popup_showing = false
+        elseif not visible then
+            popup_showing = true
+        end
+        local target = popup_showing and hidden or focused or visible
+        local state = popup_showing and 'normal' or 'minimized'
         if not target then return end
         local _, e = rex.call('session.set_layer_state', {
             session_id = ctx.session_id,
