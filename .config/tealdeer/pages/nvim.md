@@ -14,5 +14,7 @@ some*text                 ysiw'        'sometext'
 
 - Edit remote files via ssh
 
-`nvim oil-ssh://xuhaifan@10.0.0.12//home/xuhaifan/docker/compose.yml`
-`nvim scp://xuhaifan@10.0.0.12//home/xuhaifan/docker/compose.yml`
+```bash
+nvim oil-ssh://xuhaifan@10.0.0.12//home/xuhaifan/docker/compose.yml
+nvim scp://xuhaifan@10.0.0.12//home/xuhaifan/docker/compose.yml
+```
