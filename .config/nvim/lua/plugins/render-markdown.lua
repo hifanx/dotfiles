@@ -1,6 +1,7 @@
 require('render-markdown').setup({
     file_types = { 'markdown' },
     completions = { lsp = { enabled = true } },
+    bullet = { icons = { '' } },
     heading = {
         sign = false,
         position = 'inline',
@@ -19,7 +20,16 @@ require('render-markdown').setup({
         language_left = '█',
         language_right = '',
     },
-    pipe_table = { preset = 'heavy', cell = 'trimmed', style = 'full' },
-    latex = { enabled = false },
-    checkbox = { checked = { scope_highlight = '@markup.strikethrough' } },
+    pipe_table = {
+        preset = 'heavy',
+        cell = 'trimmed',
+        style = 'full',
+    },
+    checkbox = {
+        unchecked = { icon = '' },
+        checked = {
+            icon = '✔',
+            scope_highlight = '@markup.strikethrough',
+        },
+    },
 })

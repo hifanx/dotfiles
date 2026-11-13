@@ -331,7 +331,7 @@ local hl = {
     RenderMarkdownH4Bg = { link = '@markup.heading.4' },
     RenderMarkdownH5Bg = { link = '@markup.heading.5' },
     RenderMarkdownH6Bg = { link = '@markup.heading.6' },
-    RenderMarkdownCode = { bg = c.mantle },
+    RenderMarkdownCode = { bg = c.base },
     RenderMarkdownCodeInline = { fg = c.red },
     RenderMarkdownTableRow = { link = 'WinSeparator' },
     RenderMarkdownTableHead = { link = 'WinSeparator' },
