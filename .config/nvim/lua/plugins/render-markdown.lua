@@ -26,9 +26,9 @@ require('render-markdown').setup({
         style = 'full',
     },
     checkbox = {
-        unchecked = { icon = '' },
+        unchecked = { icon = '󰄱 ' },
         checked = {
-            icon = '✔',
+            icon = ' ',
             scope_highlight = '@markup.strikethrough',
         },
     },

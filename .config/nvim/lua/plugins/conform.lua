@@ -48,6 +48,7 @@ require('conform').setup({
         bash = { 'shfmt' },
         toml = { 'taplo' },
         java = { 'google-java-format' },
+        rust = { 'rustfmt' },
     },
     format_after_save = function()
         if vim.g.disable_autoformat then return end
@@ -63,5 +64,6 @@ require('conform').setup({
     formatters = {
         shfmt = { append_args = { '-i', '2' } },
         ['google-java-format'] = { append_args = { '--aosp' } },
+        rustfmt = { options = { default_edition = '2024' } },
     },
 })

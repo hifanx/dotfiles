@@ -577,6 +577,7 @@ local sif = {
     'markdown_oxide',
     'taplo',
     'pyright',
+    'rust_analyzer',
 }
 
 local lofn = {

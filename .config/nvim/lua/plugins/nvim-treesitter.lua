@@ -25,6 +25,7 @@ local sif = {
     'typescript',
     'json',
     'latex',
+    'rust',
 }
 
 local lofn = {

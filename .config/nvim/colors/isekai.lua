@@ -49,7 +49,7 @@ local hl = {
     Folded = { fg = c.comment },
     -- FoldColumn --> SignColumn
     SignColumn = { bg = c.none },
-    -- IncSearch --> Cursearch
+    -- IncSearch --> CurSearch
     -- Substitute --> Search
     LineNr = { fg = c.comment },
     -- LineNrAbove --> LineNr
@@ -125,15 +125,15 @@ local hl = {
     -- Regexp --> Constant
     -- Float --> Number
     Identifier = { fg = c.subtext },
-    Function = { fg = c.red },
-    Statement = { fg = c.blue },
+    Function = { fg = c.blue },
+    Statement = { fg = c.red },
     -- Conditional --> Statement
     -- Repeat --> Statement
     -- Label --> Statement
     Operator = { fg = c.comment },
     -- Keyword --> Statement
     -- Exception --> Statement
-    PreProc = { fg = c.orange },
+    PreProc = { fg = c.cyan },
     -- Include --> PreProc
     -- Define --> PreProc
     -- Macro --> PreProc
@@ -172,11 +172,11 @@ local hl = {
     -- DiagnosticVirtualTextInfo --> DiagnosticInfo
     -- DiagnosticVirtualTextHint --> DiagnosticHint
     -- DiagnosticVirtualTextOk --> DiagnosticOk
-    -- DiagnosticVirtualLinesError
-    -- DiagnosticVirtualLinesWarn
-    -- DiagnosticVirtualLinesInfo
-    -- DiagnosticVirtualLinesHint
-    -- DiagnosticVirtualLinesOk
+    -- DiagnosticVirtualLinesError --> DiagnosticError
+    -- DiagnosticVirtualLinesWarn --> DiagnosticWarn
+    -- DiagnosticVirtualLinesInfo --> DiagnosticInfo
+    -- DiagnosticVirtualLinesHint --> DiagnosticHint
+    -- DiagnosticVirtualLinesOk --> DiagnosticOk
     DiagnosticUnderlineError = { sp = c.red_bright, underline = true },
     DiagnosticUnderlineWarn = { sp = c.yellow_bright, underline = true },
     DiagnosticUnderlineInfo = { sp = c.blue_bright, underline = true },
@@ -198,7 +198,7 @@ local hl = {
     -- treesitter
     -- :h treesitter-highlight-groups
 
-    ['@variable'] = { fg = c.subtext },
+    ['@variable'] = { fg = c.text },
     ['@variable.builtin'] = { link = '@variable' },
     -- ['@variable.parameter'] --> @variable
     -- ['@variable.parameter.builtin'] --> Special
@@ -237,7 +237,7 @@ local hl = {
     -- ['@property'] --> Identifier
 
     -- ['@function'] --> Function
-    ['@function.builtin'] = { fg = c.red_bright },
+    ['@function.builtin'] = { fg = c.blue_bright },
     -- ['@function.call'] --> @function
     -- ['@function.macro'] --> @function
 

@@ -13,6 +13,7 @@ local sif = {
     'taplo',
     'pyright',
     'bash-language-server',
+    'rust-analyzer',
     -- Formatters
     'stylua',
     'prettier',
