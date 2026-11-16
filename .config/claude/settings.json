@@ -18,6 +18,29 @@
           }
         ]
       }
+    ],
+    "PreToolUse": [
+      {
+        "_tag": "ccstatusline-managed",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx -y ccstatusline@latest --hook"
+          }
+        ],
+        "matcher": "Skill"
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "_tag": "ccstatusline-managed",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx -y ccstatusline@latest --hook"
+          }
+        ]
+      }
     ]
   },
   "statusLine": {
@@ -28,7 +51,8 @@
   },
   "enabledPlugins": {
     "ponytail@ponytail": true,
-    "mattpocock-skills@claude-plugins-official": true
+    "mattpocock-skills@claude-plugins-official": true,
+    "context7@anthropic-plugin-directory": true
   },
   "extraKnownMarketplaces": {
     "ponytail": {
@@ -38,13 +62,21 @@
       }
     }
   },
-  "autoMemoryEnabled": true,
-  "theme": "custom:isekai",
-  "editorMode": "normal",
-  "autoCompactEnabled": true,
   "modelSettings": {
     "claude-opus-5-5": {
       "effortLevel": "high"
     }
-  }
+  },
+  "pluginConfigs": {
+    "ponytail@ponytail": {
+      "options": {
+        "ledger": false,
+        "sendNames": true
+      }
+    }
+  },
+  "autoMemoryEnabled": true,
+  "theme": "custom:isekai",
+  "editorMode": "normal",
+  "autoCompactEnabled": true
 }

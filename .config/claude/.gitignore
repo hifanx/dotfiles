@@ -1,0 +1,12 @@
+# Whitelist: ignore everything except yadm-tracked config
+/*
+!/.gitignore
+!/CLAUDE.md
+!/keybindings.json
+!/settings.json
+!/themes/
+/themes/*
+!/themes/isekai.json
+!/rules/
+/rules/*
+!/rules/context7.md
