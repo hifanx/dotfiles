@@ -38,6 +38,8 @@ brew "pi-coding-agent"
 brew "python@3.14"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# Safe, concurrent, practical language
+brew "rust"
 # 7-Zip is a file archiver with a high compression ratio
 brew "sevenzip"
 # Very fast implementation of tldr in Rust
@@ -45,7 +47,7 @@ brew "tealdeer"
 # Yet Another Dotfiles Manager
 brew "yadm"
 # Blazing fast terminal file manager written in Rust, based on async I/O
-brew "yazi", args: ["HEAD"]
+brew "yazi"
 # Process YAML, JSON, XML, CSV and properties documents from the CLI
 brew "yq"
 # Shell extension to navigate your filesystem faster
@@ -93,4 +95,3 @@ cask "upscayl"
 cask "wechat"
 mas "GIPHY CAPTURE", id: 668208984
 mas "HazeOver", id: 430798174
-mas "Infuse", id: 1136220934
