@@ -165,6 +165,8 @@ alt-j = ['join-with down', 'mode main']
 alt-k = ['join-with up', 'mode main']
 alt-l = ['join-with right', 'mode main']
 
+# find window name: aerospace list-windows --workspace 2
+# find the bundle id: aerospace list-apps
 [[on-window-detected]]
 if.app-id = 'com.macpaw.zh.CleanMyMac4'
 run = 'layout floating'
@@ -190,7 +192,15 @@ if.app-id = 'com.runningwithcrayons.Alfred'
 run = 'layout floating'
 
 [[on-window-detected]]
-if.app-name-regex-substring = 'finder'
+if.app-id = 'com.apple.DiskUtility'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.Passwords'
 run = 'layout floating'
 
 [[on-window-detected]]
@@ -199,10 +209,6 @@ run = 'layout floating'
 
 [[on-window-detected]]
 if.window-title-regex-substring = 'Alfred Preferences'
-run = 'layout floating'
-
-[[on-window-detected]]
-if.app-id = 'com.apple.Passwords'
 run = 'layout floating'
 
 [[on-window-detected]]
