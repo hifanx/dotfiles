@@ -4,9 +4,7 @@
   "defaultProvider": "claude-code",
   "defaultModel": "claude-opus-5-5",
   "defaultThinkingLevel": "high",
-  "skills": [
-    "~/.config/pi/.agents/skills"
-  ],
+  "skills": ["~/.config/pi/.agents/skills"],
   "enableInstallTelemetry": false,
   "showCacheMissNotices": true,
   "showHardwareCursor": true,
@@ -59,6 +57,7 @@
     }
   },
   "extensionChangelogVersions": {
-    "{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.47.0"
+    "{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.48.0",
+    "{\"source\":\"npm:pi-cc-extensions\",\"scope\":\"user\"}": "1.0.20"
   }
 }

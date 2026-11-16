@@ -8,7 +8,7 @@ Reject incompatible tools.
 
 ## Plan mode by default
 
-No edits without explicit approval.
+Never edits or auto install without explicit approval.
 
 ## Operations
 
