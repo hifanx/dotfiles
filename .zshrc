@@ -63,8 +63,8 @@ zinit light zsh-users/zsh-autosuggestions
 # zsh configuration.
 # NOTE: HISTFILE is set here, not in .zshenv, because macOS /etc/zshrc loads
 # after .zshenv and unconditionally resets it to ${ZDOTDIR:-$HOME}/.zsh_history.
-HISTFILE="$HOME/.cache/zsh/.zsh_history"
-ZSH_COMPDUMP="$HOME/.cache/zsh/zcompdump-$ZSH_VERSION"
+HISTFILE="$XDG_CACHE_HOME/zsh/.zsh_history"
+ZSH_COMPDUMP="$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 HISTSIZE=5000
 SAVEHIST=$HISTSIZE
 setopt appendhistory # append rather than writing
