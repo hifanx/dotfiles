@@ -6,7 +6,7 @@ require('vim._core.ui2').enable({})
 -- namespaced profile
 local hosts = {
     sif = { os = 'darwin', hostname = 'sif' },
-    work = { os = 'darwin', hostname = 'cgcn04wnq9dd4' },
+    work = { os = 'darwin', hostname = 'cgcno4wnq9dd4' },
     lofn = { os = 'linux', hostname = 'lofn' },
 }
 local os_name = vim.uv.os_uname().sysname:lower()
