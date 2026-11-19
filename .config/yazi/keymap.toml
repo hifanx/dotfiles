@@ -1,7 +1,7 @@
 [[mgr.prepend_keymap]]
 on = ["c", "y"]
 # Copy real files onto the macOS pasteboard
-run = '''shell -- osascript -l JavaScript -e 'ObjC.import("AppKit"); function run(argv) { const urls = $.NSMutableArray.array; argv.forEach(p => urls.addObject($.NSURL.fileURLWithPath(p))); const pb = $.NSPasteboard.generalPasteboard; pb.clearContents; pb.writeObjects(urls); }' %s'''
+run = '''shell -- osascript -l JavaScript -e 'ObjC.import("AppKit"); function run(argv) { const urls = $.NSMutableArray.array; argv.forEach(p => urls.addObject($.NSURL.fileURLWithPath(p))); const pb = $.NSPasteboard.generalPasteboard; pb.clearContents; pb.writeObjects(urls); delay(0.5); /* shortcut: wait for the clipboard to finish taking the files before exit; raise if large selections still truncate */ }' %s'''
 desc = "Copy selected files to system clipboard"
 
 [[mgr.prepend_keymap]]
