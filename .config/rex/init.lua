@@ -127,6 +127,75 @@ rex.action({
     end,
 })
 
+-- dock: move the focused popup into the tiled layout, right of the pane it covered.
+rex.action({
+    name = 'popup_dock',
+    title = 'Popup: dock right',
+    run = function(ctx)
+        local function window()
+            local view, err =
+                rex.call('session.view', { session_id = ctx.session_id })
+            if not view then error(err, 0) end
+            for _, win in ipairs(view.windows or {}) do
+                if win.window_id == view.active_window_id then return win end
+            end
+        end
+        local layers = window().layers or {}
+        local tiled, layer_id = {}, nil
+        for _, b in ipairs(layers[1] and layers[1].blocks or {}) do
+            tiled[b.block_id] = true
+        end
+        for _, layer in ipairs(layers) do
+            for _, b in ipairs(layer.kind == 'floating' and layer.blocks or {}) do
+                if b.block_id == ctx.block_id then layer_id = layer.layer_id end
+            end
+        end
+        if not layer_id then error('focus a popup first', 0) end
+        local function set_state(id, state)
+            rex.call('session.set_layer_state', {
+                session_id = ctx.session_id,
+                layer_id = id,
+                state = state,
+            })
+        end
+        -- minimizing a popup hands focus to the one behind it, so hide popups
+        -- front to back until focus is back on the pane they covered.
+        set_state(layer_id, 'minimized')
+        local hidden = {}
+        for i = #layers, 2, -1 do
+            if tiled[window().focused_block_id] then break end
+            local layer = layers[i]
+            if layer.layer_id ~= layer_id and layer.state ~= 'minimized' then
+                set_state(layer.layer_id, 'minimized')
+                table.insert(hidden, layer.layer_id)
+            end
+        end
+        local anchor = window().focused_block_id
+        local err
+        if tiled[anchor] then
+            _, err = rex.call('session.move_block', {
+                session_id = ctx.session_id,
+                block_id = ctx.block_id,
+                anchor_block_id = anchor,
+            })
+        else
+            err = 'no pane to dock beside'
+        end
+        if err ~= nil then
+            -- nothing docked: restore back to front to keep the stacking order.
+            table.insert(hidden, 1, layer_id)
+            for i = #hidden, 1, -1 do
+                set_state(hidden[i], 'normal')
+            end
+            error(err, 0)
+        end
+        rex.call('session.focus_block', {
+            session_id = ctx.session_id,
+            block_id = ctx.block_id,
+        })
+    end,
+})
+
 -- }}}
 
 -- general
@@ -179,5 +248,6 @@ rex.bind(leader('y'), 'popup_yazi')
 rex.bind(leader('t'), 'popup_shell')
 rex.bind(leader('shift+/'), 'popup_cheat')
 rex.bind(leader('m'), 'popup_toggle')
+rex.bind(leader('shift+m'), 'popup_dock')
 
 -- vim: foldmethod=marker foldlevel=0
