@@ -6,8 +6,8 @@
 !keybindings.json
 !mcp.json
 !extensions/
-!extensions/pi-util/
-!extensions/pi-util/**
+!extensions/pi-utils/
+!extensions/pi-utils/**
 !themes/
 !themes/**
 !AGENTS.md
