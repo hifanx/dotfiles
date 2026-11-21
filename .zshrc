@@ -134,7 +134,32 @@ function y() {
 }
 
 # fzf
+export FZF_DEFAULT_OPTS='--height 50% --layout reverse --border --info inline-right --bind ctrl-/:toggle-preview'
+export FZF_CTRL_T_COMMAND='fd --hidden --follow --exclude .git'
+export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always --line-range :300 {} 2>/dev/null || eza -T -L 2 --icons always --color always {}'"
+export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+export FZF_ALT_C_OPTS="--preview 'eza -T -L 2 --icons always --color always {}'"
+export FZF_CTRL_R_OPTS="--bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' --header 'ctrl-y: copy'"
+_fzf_compgen_path() { fd --hidden --follow --exclude .git . "$1"; } # **<Tab> uses fd
+_fzf_compgen_dir() { fd --type d --hidden --follow --exclude .git . "$1"; }
 source <(fzf --zsh)
+
+# rg live grep → bat preview → Enter opens nvim at the line
+rgv() {
+    local RG="rg --column --line-number --no-heading --color=always --smart-case"
+    fzf --ansi --disabled --query "${*:-}" --delimiter : \
+        --bind "start:reload:$RG {q} || true" --bind "change:reload:sleep 0.1; $RG {q} || true" \
+        --preview 'bat --color=always {1} --highlight-line {2}' \
+        --preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
+        --bind 'enter:become(nvim {1} +{2})'
+}
+
+# open files from vault, ~/Documents, ~/.config in nvim (Tab multi-selects)
+n() {
+    fd --type f --hidden --exclude .git --exclude .obsidian --exclude 'pi/' --exclude 'claude/' . \
+        "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian" ~/Documents ~/.config |
+        fzf --multi --preview 'bat -n --color=always {}' --bind 'enter:become(nvim {+})'
+}
 
 # zoxide
 eval "$(zoxide init --cmd cd zsh)"
