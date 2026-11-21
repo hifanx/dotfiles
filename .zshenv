@@ -19,7 +19,6 @@ export EDITOR='nvim'
 # npm
 export NPM_CONFIG_PREFIX="$XDG_DATA_HOME/npm"
 export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
-export NPM_CONFIG_TMP="$XDG_CACHE_HOME/npm/tmp"
 export NPM_CONFIG_LOGS_DIR="$XDG_DATA_HOME/npm/logs"
 
 # cargo
