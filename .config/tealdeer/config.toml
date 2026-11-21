@@ -4,10 +4,10 @@ use_pager = true
 show_title = true
 
 [style.description]
-foreground = { rgb = { r = 99, g = 102, b = 124 } } # comment = "#63667C"
+foreground = { rgb = { r = 79, g = 81, b = 98 } } # comment = "#4F5162"
 
 [style.command_name]
-foreground = { rgb = { r = 145, g = 125, b = 184 } } # purple = "#917DB8"
+foreground = { rgb = { r = 155, g = 134, b = 197 } } # purple = "#9B86C5"
 bold = true
 
 [style.example_text]
@@ -16,10 +16,10 @@ bold = true
 italic = true
 
 [style.example_code]
-foreground = { rgb = { r = 169, g = 122, b = 134 } } # red = '#A97A86'
+foreground = { rgb = { r = 182, g = 131, b = 144 } } # red = "#B68390"
 
 [style.example_variable]
-foreground = { rgb = { r = 143, g = 150, b = 176 } } # subtext = '#8F96B0',
+foreground = { rgb = { r = 143, g = 150, b = 176 } } # subtext = "#8F96B0"
 
 [updates]
 auto_update = true

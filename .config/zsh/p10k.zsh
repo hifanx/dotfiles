@@ -197,7 +197,7 @@
     # Green prompt symbol if the last command succeeded.
     typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND='#A6E3A1'
     # Red prompt symbol if the last command failed.
-    typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND='#EC5E65'
+    typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND='#ED6677'
     # Default prompt symbol.
     typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIINS_CONTENT_EXPANSION=''
     # Prompt symbol in command vi mode.
@@ -214,22 +214,22 @@
 
     ##################################[ dir: current directory ]##################################
     # Default current directory color.
-    typeset -g POWERLEVEL9K_DIR_FOREGROUND='#63667C'
+    typeset -g POWERLEVEL9K_DIR_FOREGROUND='#4F5162'
     # If directory is too long, shorten some of its segments to the shortest possible unique
     # prefix. The shortened directory can be tab-completed to the original.
     typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
     # Replace removed segment suffixes with this symbol.
     typeset -g POWERLEVEL9K_SHORTEN_DELIMITER=
     # Color of the shortened directory segments.
-    typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND='#63667C'
+    typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND='#4F5162'
     # Color of the anchor directory segments. Anchor segments are never shortened. The first
     # segment is always an anchor.
-    typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND='#63667C'
+    typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND='#4F5162'
     # Color of the last segment (current directory).
-    typeset -g POWERLEVEL9K_DIR_PATH_HIGHLIGHT_FOREGROUND='#61AFEF'
+    typeset -g POWERLEVEL9K_DIR_PATH_HIGHLIGHT_FOREGROUND='#83BCFF'
     typeset -g POWERLEVEL9K_DIR_PATH_HIGHLIGHT_BOLD=true
     # Leading directory icon uses the same accent.
-    typeset -g POWERLEVEL9K_DIR_VISUAL_IDENTIFIER_COLOR='#61AFEF'
+    typeset -g POWERLEVEL9K_DIR_VISUAL_IDENTIFIER_COLOR='#83BCFF'
     # Display anchor directory segments in bold.
     typeset -g POWERLEVEL9K_DIR_ANCHOR_BOLD=false
     # Don't shorten directories that contain any of these files. They are anchors.
@@ -410,20 +410,20 @@
         if (($1)); then
             # Styling for up-to-date Git status.
             # isekai palette
-            local meta='%F{#63667C}'       # comment
-            local clean='%F{#8B9C75}'      # green: branch
-            local ref='%F{#917DB8}'        # purple: tag / commit
-            local sync='%F{#5E9397}'       # cyan: ⇣⇡⇠⇢
+            local meta='%F{#4F5162}'       # comment
+            local clean='%F{#96A97F}'      # green: branch
+            local ref='%F{#9B86C5}'        # purple: tag / commit
+            local sync='%F{#669FA4}'       # cyan: ⇣⇡⇠⇢
             local stash='%F{#8F96B0}'      # subtext
             local staged='%F{#A6E3A1}'     # green_bright
-            local modified='%F{#FEC89A}'   # orange_bright
-            local untracked='%F{#63667C}'  # comment
-            local conflicted='%F{#EC5E65}' # red_bright
+            local modified='%F{#FFAC81}'   # orange_bright
+            local untracked='%F{#4F5162}'  # comment
+            local conflicted='%F{#ED6677}' # red_bright
             local wip='%F{#F9E2AF}'        # yellow_bright
         else
             # Styling for incomplete and stale Git status.
-            local meta='%F{#63667C}' clean='%F{#63667C}' ref='%F{#63667C}' sync='%F{#63667C}' stash='%F{#63667C}'
-            local staged='%F{#63667C}' modified='%F{#63667C}' untracked='%F{#63667C}' conflicted='%F{#63667C}' wip='%F{#63667C}'
+            local meta='%F{#4F5162}' clean='%F{#4F5162}' ref='%F{#4F5162}' sync='%F{#4F5162}' stash='%F{#4F5162}'
+            local staged='%F{#4F5162}' modified='%F{#4F5162}' untracked='%F{#4F5162}' conflicted='%F{#4F5162}' wip='%F{#4F5162}'
         fi
 
         local res
@@ -529,8 +529,8 @@
     typeset -g POWERLEVEL9K_VCS_{STAGED,UNSTAGED,UNTRACKED,CONFLICTED,COMMITS_AHEAD,COMMITS_BEHIND}_MAX_NUM=-1
 
     # Icon color.
-    typeset -g POWERLEVEL9K_VCS_VISUAL_IDENTIFIER_COLOR='#8B9C75'
-    typeset -g POWERLEVEL9K_VCS_LOADING_VISUAL_IDENTIFIER_COLOR='#63667C'
+    typeset -g POWERLEVEL9K_VCS_VISUAL_IDENTIFIER_COLOR='#96A97F'
+    typeset -g POWERLEVEL9K_VCS_LOADING_VISUAL_IDENTIFIER_COLOR='#4F5162'
     # Custom icon.
     typeset -g POWERLEVEL9K_VCS_VISUAL_IDENTIFIER_EXPANSION=
     # Custom prefix.
@@ -543,9 +543,9 @@
 
     # These settings are used for repositories other than Git or when gitstatusd fails and
     # Powerlevel10k has to fall back to using vcs_info.
-    typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND='#8B9C75'
-    typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='#8B9C75'
-    typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='#8B9C75'
+    typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND='#96A97F'
+    typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='#96A97F'
+    typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='#96A97F'
 
     ##########################[ status: exit code of the last command ]###########################
     # Enable OK_PIPE, ERROR_PIPE and ERROR_SIGNAL status states to allow us to enable, disable and
@@ -567,12 +567,12 @@
     # Status when it's just an error code (e.g., '1'). No need to show it if prompt_char is enabled as
     # it will signify error by turning red.
     typeset -g POWERLEVEL9K_STATUS_ERROR=false
-    typeset -g POWERLEVEL9K_STATUS_ERROR_FOREGROUND='#EC5E65'
+    typeset -g POWERLEVEL9K_STATUS_ERROR_FOREGROUND='#ED6677'
     typeset -g POWERLEVEL9K_STATUS_ERROR_VISUAL_IDENTIFIER_EXPANSION='✘'
 
     # Status when the last command was terminated by a signal.
     typeset -g POWERLEVEL9K_STATUS_ERROR_SIGNAL=true
-    typeset -g POWERLEVEL9K_STATUS_ERROR_SIGNAL_FOREGROUND='#EC5E65'
+    typeset -g POWERLEVEL9K_STATUS_ERROR_SIGNAL_FOREGROUND='#ED6677'
     # Use terse signal names: "INT" instead of "SIGINT(2)".
     typeset -g POWERLEVEL9K_STATUS_VERBOSE_SIGNAME=false
     typeset -g POWERLEVEL9K_STATUS_ERROR_SIGNAL_VISUAL_IDENTIFIER_EXPANSION='✘'
@@ -580,7 +580,7 @@
     # Status when some part of a pipe command fails and the overall exit status is also non-zero.
     # It may look like this: 1|0.
     typeset -g POWERLEVEL9K_STATUS_ERROR_PIPE=true
-    typeset -g POWERLEVEL9K_STATUS_ERROR_PIPE_FOREGROUND='#EC5E65'
+    typeset -g POWERLEVEL9K_STATUS_ERROR_PIPE_FOREGROUND='#ED6677'
     typeset -g POWERLEVEL9K_STATUS_ERROR_PIPE_VISUAL_IDENTIFIER_EXPANSION='✘'
 
     ###################[ command_execution_time: duration of the last command ]###################
@@ -589,7 +589,7 @@
     # Show this many fractional digits. Zero means round to seconds.
     typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=0
     # Execution time color.
-    typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND='#C3B48A'
+    typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND='#D0C093'
     # Duration format: 1d 2h 3m 4s.
     typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FORMAT='d h m s'
     # Custom icon.
@@ -601,7 +601,7 @@
     # Don't show the number of background jobs.
     typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VERBOSE=false
     # Background jobs color.
-    typeset -g POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND='#5E9397'
+    typeset -g POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND='#669FA4'
     # Custom icon.
     # typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
@@ -940,11 +940,11 @@
 
     ##################################[ context: user@hostname ]##################################
     # Context color when running with privileges.
-    typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND='#EC5E65'
+    typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND='#ED6677'
     # Context color in SSH without privileges.
-    typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_FOREGROUND='#917DB8'
+    typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_FOREGROUND='#9B86C5'
     # Default context color (no privileges, no SSH).
-    typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND='#917DB8'
+    typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND='#9B86C5'
 
     # Context format when running with privileges: bold user@hostname.
     typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE='%B%n@%m'
@@ -1674,7 +1674,7 @@
 
     ####################################[ time: current time ]####################################
     # Current time color.
-    typeset -g POWERLEVEL9K_TIME_FOREGROUND='#63667C'
+    typeset -g POWERLEVEL9K_TIME_FOREGROUND='#4F5162'
     # Format for the current time: 09:51:02. See `man 3 strftime`.
     typeset -g POWERLEVEL9K_TIME_FORMAT='%D{%H:%M:%S}'
     # If set to true, time will update when you hit enter. This way prompts for the past

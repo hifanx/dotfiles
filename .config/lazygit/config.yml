@@ -1,26 +1,26 @@
 gui:
   theme:
     activeBorderColor:
-      - "#FAB387"
+      - "#FFAC81" # orange_bright
       - bold
     inactiveBorderColor:
-      - "#A6ADC8"
+      - "#8F96B0" # subtext
     optionsTextColor:
-      - "#89B4FA"
+      - "#83BCFF" # blue_bright
     selectedLineBgColor:
-      - "#313244"
+      - "#2B2E3B" # visual
     cherryPickedCommitBgColor:
-      - "#45475A"
+      - "#242438" # border
     cherryPickedCommitFgColor:
-      - "#FAB387"
+      - "#FFAC81" # orange_bright
     unstagedChangesColor:
-      - "#F38BA8"
+      - "#ED6677" # red_bright
     defaultFgColor:
-      - "#CDD6F4"
+      - "#A3A7B5" # text
     searchingActiveBorderColor:
-      - "#F9E2AF"
+      - "#F9E2AF" # yellow_bright
     authorColors:
-      "*": "#B4BEFE"
+      "*": "#CDC1FF" # purple_bright
   showIcons: true
   nerdFontsVersion: "3"
 git:

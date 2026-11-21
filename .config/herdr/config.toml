@@ -1,13 +1,28 @@
 onboarding = false
 
 [theme]
-name = "rose-pine"
 auto_switch = false
 
-[theme.custom]
+[theme.custom] # isekai, every palette token set so no built-in theme shows through
 sidebar_bg = "transparent"
 panel_bg = "transparent"
-accent = "#A6E3A1"
+active_row_bg = "#171920" # cursorline
+selection_bg = "#2B2E3B" # visual
+accent = "#A6E3A1" # green_bright
+surface0 = "#242438" # border
+surface1 = "#2B2E3B" # visual
+surface_dim = "#242438" # border
+overlay0 = "#4F5162" # comment
+overlay1 = "#8F96B0" # subtext
+text = "#A3A7B5" # text
+subtext0 = "#8F96B0" # subtext
+mauve = "#9B86C5" # purple
+green = "#A6E3A1" # green_bright
+yellow = "#F9E2AF" # yellow_bright
+red = "#ED6677" # red_bright
+blue = "#83BCFF" # blue_bright
+teal = "#669FA4" # cyan
+peach = "#FFAC81" # orange_bright
 
 [keys]
 prefix = "ctrl+a"
