@@ -398,7 +398,7 @@ local plugins = {
 }
 
 if vim.g.profile == 'sif' then
-    vim.opt.rtp:prepend(vim.fn.expand('~/git/vaultpal.nvim'))
+    vim.opt.rtp:prepend(vim.fn.expand('/Volumes/Code/vaultpal.nvim'))
 end
 
 vim.pack.add(plugins)
