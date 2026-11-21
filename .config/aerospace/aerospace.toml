@@ -208,6 +208,10 @@ if.app-id = 'com.cisco.secureclient.gui'
 run = 'layout floating'
 
 [[on-window-detected]]
+if.app-id = 'com.movist.MovistPro'
+run = 'layout floating'
+
+[[on-window-detected]]
 if.window-title-regex-substring = '图片和视频'
 run = 'layout floating'
 
