@@ -79,8 +79,8 @@ cask "movist-pro"
 cask "aimessoft/nipaplay-reload/nipaplay-reload", trusted: true
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
-# Home media player
-cask "plex"
+# Client for Plex, Jellyfin and Emby media servers
+cask "plezy"
 # Instant messaging tool
 cask "qq"
 # Mesh VPN based on WireGuard
