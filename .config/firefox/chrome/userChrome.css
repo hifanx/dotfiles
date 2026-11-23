@@ -1,0 +1,6 @@
+/* autohide_toolbox.css is upstream verbatim; re-download to update:
+   https://raw.githubusercontent.com/MrOtherGuy/firefox-csshacks/master/chrome/autohide_toolbox.css */
+@import "autohide_toolbox.css";
+
+/* macOS: upstream suggests ~75deg instead of 82deg */
+:root{ --uc-toolbox-rotation: 75deg; }
