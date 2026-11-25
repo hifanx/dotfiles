@@ -1,3 +1,19 @@
+# Symbol layer
+
+- Layer 3
+
+`Esc  1   2   3   4   5`
+`~    !   @   +   &   %`
+
+`Tab  Q   W   E   R   T`
+`[    {   (   )   }   ]`
+
+`Ctl  A   S   D   F   G`
+`#    ^   =   _   $   *`
+
+`Sft  Z   X   C   V   B`
+`btk  <   |   -   >   \`
+
 # Linux
 
 - !$ use the last argument from the previous command
@@ -6,6 +22,7 @@
   `cd !$`
 
 - !! repeats the very last command (like up arrow + enter)
+
   `!!`
   `sudo !!`
 
