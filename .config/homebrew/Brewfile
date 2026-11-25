@@ -34,6 +34,8 @@ brew "neovim", args: ["HEAD"]
 brew "node"
 # AI agent toolkit
 brew "pi-coding-agent"
+# Fast, disk space efficient package manager
+brew "pnpm"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.14"
 # Search tool like grep and The Silver Searcher
@@ -70,6 +72,8 @@ cask "discord"
 cask "firefox"
 cask "font-maple-mono-cn"
 cask "font-symbols-only-nerd-font"
+# Chromium-based web browser
+cask "helium-browser"
 # Free and open-source painting and sketching program
 cask "krita"
 # Free cross-platform office suite, fresh version
@@ -79,8 +83,6 @@ cask "movist-pro"
 cask "aimessoft/nipaplay-reload/nipaplay-reload", trusted: true
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
-# Client for Plex, Jellyfin and Emby media servers
-cask "plezy"
 # Instant messaging tool
 cask "qq"
 # Mesh VPN based on WireGuard
@@ -95,3 +97,4 @@ cask "upscayl"
 cask "wechat"
 mas "GIPHY CAPTURE", id: 668208984
 mas "HazeOver", id: 430798174
+mas "Infuse", id: 1136220934
