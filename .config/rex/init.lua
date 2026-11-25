@@ -8,29 +8,6 @@ local function leader(key) return prefix .. '>' .. key end
 -- }}}
 -- {{{ actions
 
--- copy mode: open the focused pane's scrollback in nvim in a floating layer.
-rex.action({
-    name = 'copy_mode',
-    title = 'Copy Mode (nvim)',
-    run = function(ctx)
-        if not ctx.block_id then error('no focused pane', 0) end
-        local res, err = rex.call('session.new_layer', {
-            session_id = ctx.session_id,
-            bounds = { 0, 0, 1, 1 },
-            layout = { block = { flavor = 'com.superlogical.terminal.shell' } },
-            focus = true,
-        })
-        if not res then error(err, 0) end
-        -- Leading space keeps it out of shell history (if hist_ignore_space is set).
-        rex.block.call('com.superlogical.terminal', 'write', {
-            block_id = res.block_ids[1],
-            data = " rex capture -b '"
-                .. ctx.block_id
-                .. "' --trim --unwrap | nvim -R +'set clipboard=unnamedplus' +'normal G' -; exit\r",
-        })
-    end,
-})
-
 -- popups: 90% x 85% floating layer in the focused pane's cwd, like herdr's.
 local function popup_cwd(ctx)
     local p = ctx.block_id
@@ -43,13 +20,15 @@ local function popup_cwd(ctx)
     return p and p.foreground and p.foreground.cwd or os.getenv('HOME')
 end
 
+local popup_bounds = { 0.05, 0.075, 0.9, 0.85 }
+
 local function popup(name, title, command)
     rex.action({
         name = name,
         title = title,
         run = function(ctx)
             local _, err = rex.session.new_layer({
-                bounds = { 0.05, 0.075, 0.9, 0.85 },
+                bounds = popup_bounds,
                 layout = rex.layout.block({
                     flavor = 'com.superlogical.terminal.shell',
                     options = { cwd = popup_cwd(ctx), command = command },
@@ -127,11 +106,23 @@ rex.action({
     end,
 })
 
--- dock: move the focused popup into the tiled layout, right of the pane it covered.
+-- float/dock toggle: a tiled pane floats at args.bounds; a popup docks beside
+-- the pane it covered, on side args.direction (default right).
+local dock_dirs = {
+    left = { 'horizontal', 'before' },
+    right = { 'horizontal', 'after' },
+    up = { 'vertical', 'before' },
+    down = { 'vertical', 'after' },
+}
 rex.action({
-    name = 'popup_dock',
-    title = 'Popup: dock right',
-    run = function(ctx)
+    name = 'pane_float',
+    title = 'Pane: float / dock',
+    run = function(ctx, args)
+        args = args or {}
+        local dir = dock_dirs[args.direction or 'right']
+        if not dir then
+            error('bad direction: ' .. tostring(args.direction), 0)
+        end
         local function window()
             local view, err =
                 rex.call('session.view', { session_id = ctx.session_id })
@@ -150,7 +141,22 @@ rex.action({
                 if b.block_id == ctx.block_id then layer_id = layer.layer_id end
             end
         end
-        if not layer_id then error('focus a popup first', 0) end
+        if tiled[ctx.block_id] then
+            local r, err = rex.call('session.float_block', {
+                session_id = ctx.session_id,
+                block_id = ctx.block_id,
+                bounds = args.bounds or popup_bounds,
+            })
+            if not r then error(err, 0) end
+            rex.call('session.set_layer_state', {
+                session_id = ctx.session_id,
+                layer_id = r.layer_id,
+                state = 'normal',
+                focus = true,
+            })
+            return
+        end
+        if not layer_id then error('focus a pane first', 0) end
         local function set_state(id, state)
             rex.call('session.set_layer_state', {
                 session_id = ctx.session_id,
@@ -171,12 +177,17 @@ rex.action({
             end
         end
         local anchor = window().focused_block_id
+        -- the app doesn't redraw a block moved out of a minimized layer; unhide it
+        -- first (focus stays on the anchor).
+        set_state(layer_id, 'normal')
         local err
         if tiled[anchor] then
             _, err = rex.call('session.move_block', {
                 session_id = ctx.session_id,
                 block_id = ctx.block_id,
                 anchor_block_id = anchor,
+                direction = dir[1],
+                side = dir[2],
             })
         else
             err = 'no pane to dock beside'
@@ -197,6 +208,9 @@ rex.action({
 })
 
 -- }}}
+
+-- rex client ls
+-- rex -C <client> actions
 
 -- general
 rex.bind(leader('ctrl+a'), 'pane.send_key', { key = 'ctrl+a' })
@@ -229,6 +243,7 @@ rex.bind(leader('shift+-'), 'pane.split', { direction = 'up' })
 rex.bind(leader('shift+p'), 'pane.rename')
 rex.bind(leader('x'), 'pane.close')
 rex.bind(leader('z'), 'pane.zoom')
+rex.bind(leader('['), 'pane.copy_mode.enter')
 
 -- sticky: repeatable operations (resize, scroll)
 rex.mode('sticky', { exclusive = true })
@@ -241,13 +256,12 @@ for key, dir in pairs({ h = 'left', j = 'down', k = 'up', l = 'right' }) do
 end
 
 -- custom
-rex.bind(leader('['), 'copy_mode')
 rex.bind(leader('g'), 'popup_lazygit')
 rex.bind(leader('shift+g'), 'popup_yadm')
 rex.bind(leader('y'), 'popup_yazi')
 rex.bind(leader('t'), 'popup_shell')
 rex.bind(leader('shift+/'), 'popup_cheat')
 rex.bind(leader('m'), 'popup_toggle')
-rex.bind(leader('shift+m'), 'popup_dock')
+rex.bind(leader('shift+m'), 'pane_float', { direction = 'right' })
 
 -- vim: foldmethod=marker foldlevel=0
