@@ -32,6 +32,7 @@ require('conform').setup({
         python = { 'black' },
         markdown = { 'prettier' },
         svelte = { 'prettier' },
+        astro = { 'prettier' },
         javascript = { 'prettier' },
         typescript = { 'prettier' },
         vue = { 'prettier' },
