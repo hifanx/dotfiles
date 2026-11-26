@@ -116,37 +116,37 @@ local hl = {
     WinBarNC = { bg = c.none },
 
     -- :h group-name
-    Comment = { fg = c.comment, italic = true },
-    Constant = { fg = c.purple },
-    String = { fg = c.green },
+    Comment = { fg = c.comment },
+    Constant = { fg = c.purple, italic = true },
+    String = { fg = c.green, italic = true },
     -- Character --> Constant
-    Number = { fg = c.green },
-    Boolean = { fg = c.green },
+    Number = { fg = c.green, italic = true },
+    Boolean = { fg = c.green, italic = true },
     -- Regexp --> Constant
     -- Float --> Number
-    Identifier = { fg = c.subtext },
-    Function = { fg = c.blue },
-    Statement = { fg = c.red },
+    Identifier = { fg = c.subtext, italic = true },
+    Function = { fg = c.blue, italic = true },
+    Statement = { fg = c.red, italic = true },
     -- Conditional --> Statement
     -- Repeat --> Statement
     -- Label --> Statement
-    Operator = { fg = c.comment },
+    Operator = { fg = c.comment, italic = true },
     -- Keyword --> Statement
     -- Exception --> Statement
-    PreProc = { fg = c.cyan },
+    PreProc = { fg = c.cyan, italic = true },
     -- Include --> PreProc
     -- Define --> PreProc
     -- Macro --> PreProc
     -- PreCondit --> PreProc
-    Type = { fg = c.yellow },
+    Type = { fg = c.yellow, italic = true },
     -- StorageClass --> Type
     -- Structure --> Type
     -- Typedef --> Type
-    Special = { fg = c.purple },
-    SpecialChar = { fg = c.green_bright },
-    Tag = { fg = c.red },
-    Delimiter = { fg = c.comment },
-    SpecialComment = { fg = c.green_bright },
+    Special = { fg = c.purple, italic = true },
+    SpecialChar = { fg = c.green_bright, italic = true },
+    Tag = { fg = c.red, italic = true },
+    Delimiter = { fg = c.comment, italic = true },
+    SpecialComment = { fg = c.green_bright, italic = true },
     -- Debug --> Special
     -- Underlined --> underline
     -- Bold --> bold
@@ -198,7 +198,7 @@ local hl = {
     -- treesitter
     -- :h treesitter-highlight-groups
 
-    ['@variable'] = { fg = c.text },
+    ['@variable'] = { fg = c.text, italic = true },
     ['@variable.builtin'] = { link = '@variable' },
     -- ['@variable.parameter'] --> @variable
     -- ['@variable.parameter.builtin'] --> Special
@@ -237,14 +237,14 @@ local hl = {
     -- ['@property'] --> Identifier
 
     -- ['@function'] --> Function
-    ['@function.builtin'] = { fg = c.blue_bright },
+    ['@function.builtin'] = { fg = c.blue_bright, italic = true },
     -- ['@function.call'] --> @function
     -- ['@function.macro'] --> @function
 
     -- ['@function.method'] --> @function
     -- ['@function.method.call'] --> @function
 
-    ['@constructor'] = { fg = c.orange },
+    ['@constructor'] = { fg = c.orange, italic = true },
     -- ['@operator'] --> Operator
 
     -- ['@keyword'] --> Keyword
@@ -255,7 +255,7 @@ local hl = {
     -- ['@keyword.type'] --> @keyword
     -- ['@keyword.modifier'] --> @keyword
     -- ['@keyword.repeat'] --> @keyword
-    ['@keyword.return'] = { fg = c.red_bright },
+    ['@keyword.return'] = { fg = c.red_bright, italic = true },
     -- ['@keyword.debug'] --> @keyword
     -- ['@keyword.exception'] --> @keyword
 
