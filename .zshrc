@@ -73,11 +73,14 @@ alias ds='find ~ -type f -name ".DS_Store" -delete'
 
 # yazi: cd into the dir yazi exits in
 y() {
-    local tmp="$(mktemp -t yazi-cwd.XXXXXX)" cwd
+    local tmp cwd
+    tmp="$(mktemp -t yazi-cwd.XXXXXX)" || return
     command yazi "$@" --cwd-file="$tmp"
     IFS= read -r -d '' cwd <"$tmp"
-    [[ $cwd != "$PWD" && -d $cwd ]] && builtin cd -- "$cwd"
     command rm -f -- "$tmp"
+    if [[ $cwd != "$PWD" && -d $cwd ]]; then
+        builtin cd -- "$cwd" || return
+    fi
 }
 
 # fzf
@@ -106,8 +109,14 @@ typeset -g POWERLEVEL9K_CONFIG_FILE=$XDG_CONFIG_HOME/zsh/p10k.zsh
 # Re-patch Krita's bundled Python after app updates to keep ~/.matplotlib clean (GUI apps don't get .zshenv).
 krita-fix() {
     local f=/Applications/Krita.app/Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/sitecustomize.py
-    [[ -f $f ]] || { echo "Krita not found at expected path"; return 1; }
-    grep -q MPLCONFIGDIR "$f" && { echo "already patched"; return; }
+    [[ -f $f ]] || {
+        echo "Krita not found at expected path"
+        return 1
+    }
+    grep -q MPLCONFIGDIR "$f" && {
+        echo "already patched"
+        return
+    }
     printf '\nimport os\nos.environ.setdefault("MPLCONFIGDIR", os.path.expanduser("~/.cache/matplotlib"))\n' >>"$f"
     echo "patched"
 }
