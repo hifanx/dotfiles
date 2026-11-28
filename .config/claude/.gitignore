@@ -10,3 +10,6 @@
 !/rules/
 /rules/*
 !/rules/context7.md
+!/mods/
+/mods/*
+!/mods/user-msg-style/

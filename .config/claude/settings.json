@@ -1,7 +1,8 @@
 {
   "env": {
     "CLAUDE_CODE_SCROLL_SPEED": "3",
-    "FORCE_HYPERLINK": "1"
+    "FORCE_HYPERLINK": "1",
+    "CLAUDE_CODE_PLUGIN_DIRS": "~/.config/claude/mods/user-msg-style"
   },
   "permissions": {
     "defaultMode": "auto"
